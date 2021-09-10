@@ -12,7 +12,7 @@ library(dplyr)
 ```
 
 
-```{r}
+```{r, echo=-1}
 setwd("/Users/adityaranganath/Documents/git_repositories/icpsr_mapping_manual/tutorial_data")
 covid_data<-read_excel("Gov_Responses2Covid19_last.xlsx", sheet="Dataset")
 ```
