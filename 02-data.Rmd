@@ -1,0 +1,7 @@
+# Data
+
+The ICPSR data we will be mapping in this tutorial comes from a dataset archived on [OPENICPSR](https://www.openicpsr.org/openicpsr/). In particular, the dataset we will be using is entitled "Governments' Responses to COVID-19", which was collected by Simon Porcher, a researcher at the University of Paris. The dataset can be found [here](https://www.openicpsr.org/openicpsr/project/119061/version/V6/view), and the full citation information is below: 
+
+Porcher, Simon. Governments’ Responses to COVID-19 (Response2covid19). Ann Arbor, MI: Inter-university Consortium for Political and Social Research [distributor], 2020-11-08. [https://doi.org/10.3886/E119061V6](https://doi.org/10.3886/E119061V6). 
+
+This panel dataset provides information on public health and economic interventions initiated by national governments in response to the Covid-19 Pandemic. It provides data in monthly increments from January 2020 to October 2020 for most of the world's sovereign countries. One of the variables in the dataset is an index (computed based on other variables in the dataset), that reflects the extent of government economic interventions to provide their populations with material support during the most acute phase of the Covid-19 Pandemic. Below, we will explore how to display this country-level data on economic responses to Covid-19 on a world map. 
