@@ -3,4 +3,7 @@ motivation
 scope-and-objectives
 data
 preliminaries-and-set-up
+install-packages
+load-libraries
+set-working-directory
 tutorial

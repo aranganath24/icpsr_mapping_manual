@@ -1,2 +1,24 @@
 # Tutorial
 
+```{r, include=FALSE}
+library(tmap)
+library(sf)
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(rgeos)
+library(tidyverse)
+library(readxl)
+library(dplyr)
+```
+
+
+```{r}
+setwd("/Users/adityaranganath/Documents/git_repositories/icpsr_mapping_manual/tutorial_data")
+covid_data<-read_excel("Gov_Responses2Covid19_last.xlsx", sheet="Dataset")
+```
+
+
+```{r}
+head(covid_data)
+```
+
