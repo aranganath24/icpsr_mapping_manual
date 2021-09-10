@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Page not found | A Guide to Mapping ICPSR Data in R Studio</title>
-  <meta name="description" content="Page not found | A Guide to Mapping ICPSR Data in R Studio" />
+  <title>2 Introduction | A Guide to Mapping ICPSR Data in R Studio</title>
+  <meta name="description" content="2 Introduction | A Guide to Mapping ICPSR Data in R Studio" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Page not found | A Guide to Mapping ICPSR Data in R Studio" />
+  <meta property="og:title" content="2 Introduction | A Guide to Mapping ICPSR Data in R Studio" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Page not found | A Guide to Mapping ICPSR Data in R Studio" />
+  <meta name="twitter:title" content="2 Introduction | A Guide to Mapping ICPSR Data in R Studio" />
   
   
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-
+<link rel="prev" href="index.html"/>
+<link rel="next" href="preliminaries-and-set-up.html"/>
 <script src="libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -174,19 +174,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="page-not-found" class="section level1">
-<h1>Page not found</h1>
-<p>The page you requested cannot be found (perhaps it was moved or renamed).</p>
-<p>You may want to try searching to find the page's new location, or use
-the table of contents to find the page you are looking for.</p>
+<div id="introduction" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Introduction</h1>
+<div id="motivation" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Motivation</h2>
+<p>Many of ICSPR’s datasets are available in tabular formats that are ready to be imported into standard statistical software packages for analysis. In many cases, it is possible to visualize the data in these tabular datasets on a map (even if such visualizations are not explicitly a part of the original analysis or the replication materials provided by ICPSR). In this tutorial, we will provide a brief example-driven overview of how you can visually represent tabular information from an ICSPR dataset on a map, using packages written for the R programming language. The tutorial does not presuppose any previous experience with statistical analysis or programming.</p>
+<p>Why map ICPSR data to begin with? Students and researchers often use data archived at ICPSR as a resource for exploration and discovery. Indeed, the data that others have collected can often inspire novel questions and hypotheses. It is also the case that the social and political processes studied by the researchers who archive their data with ICPSR are intrinsically spatial; after all, these processes necessarily occur somewhere on the surface of the earth! Placing these social and political processes in their spatial context can therefore bring the data encoded in tabular datasets to life in dramatic ways, helping us to quickly notice patterns, identify puzzles, and generate hypotheses that would have otherwise remained obscure. In addition to using ICPSR data to generate ideas and explore patterns in existing data, students and researchers may want to reuse ICPSR data and incorporate them into their own ongoing research projects; in reusing this data, they may find it helpful to make publishable maps that they can use in their own papers and projects.</p>
+</div>
+<div id="scope-and-objectives" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Scope and Objectives</h2>
+<p>By working through the following code, students and researchers will learn how to spatially visualize existing ICPSR data to aid their exploration of datasets of interest, as well as create publishable maps that can be used in their papers and projects. The tutorial can be used as a self-study resource, as well as the basis for a classroom demonstration or activity.</p>
+<p>It is important to emphasize that this is not a tutorial on Geographic Information Systems (GIS) writ large, and we do not cover important GIS concepts such as map projections and coordinate reference systems. If you use advanced mapping and spatial analysis in your work, you should learn these technical foundations (which are beyond the scope of our lesson here). It is also not a tutorial on the principles of cartography, which is a complex art and science that is also beyond our scope; however, it will show you how to customize maps in R, and you can use these skills (after reading up on cartography on your own) to make maps that conform to sound cartographic design principles. Our goal here is to make a functional and informative map, not a work of art.</p>
+
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="preliminaries-and-set-up.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -217,7 +225,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/aranganath24/icpsr_mapping_manual/edit/master/%s",
+"link": "https://github.com/aranganath24/icpsr_mapping_manual/edit/master/02-introduction.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -225,7 +233,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/aranganath24/icpsr_mapping_manual/blob/master/%s",
+"link": "https://github.com/aranganath24/icpsr_mapping_manual/blob/master/02-introduction.Rmd",
 "text": null
 },
 "download": null,

@@ -1,8 +1,33 @@
 # Preliminaries and Set-Up
 
-R is an open-source programming language for statistical computing that allows you to carry out a wide range of data analysis tasks. One of the big advantages of using R is that it has a very large user community among social scientists and statisticians, who frequently publish packages (which one may think of as workbooks of sorts, containing a well-integrated set of R functions, scripts, data, and documentation) to accomplish certain tasks or implement given procedures. These packages are then shared with the broader community; at this point, anyone who needs to accomplish the tasks to which the package addresses itself can use the package in the context of their own projects. The ability to use published packages considerably simplifies the work of applied social scientists using R; it means that they rarely have to write code entirely from scratch, and can build on the code that others have published. This allows applied researchers to focus on substantive problems, without having to get too bogged down in complicated programming tasks. 
+## Data 
 
-## Install Packages
+The ICPSR data we will be mapping in this tutorial comes from a dataset archived on [OPENICPSR](https://www.openicpsr.org/openicpsr/). In particular, the dataset we will be using is entitled "Governments' Responses to COVID-19", which was collected by Simon Porcher, a researcher at the University of Paris. The dataset can be found [here](https://www.openicpsr.org/openicpsr/project/119061/version/V6/view), and the full citation information is below: 
+
+Porcher, Simon. Governments’ Responses to COVID-19 (Response2covid19). Ann Arbor, MI: Inter-university Consortium for Political and Social Research [distributor], 2020-11-08. [https://doi.org/10.3886/E119061V6](https://doi.org/10.3886/E119061V6). 
+
+This panel dataset provides information on public health and economic interventions initiated by national governments in response to the Covid-19 Pandemic. It provides data in monthly increments from January 2020 to October 2020 for most of the world's sovereign countries. One of the variables in the dataset is an index (computed based on other variables in the dataset), that reflects the extent of government economic interventions to provide their populations with material support during the most acute phase of the Covid-19 Pandemic. The tutorial will explore how to display this country-level data on economic responses to Covid-19 on a world map. 
+
+If you would like to follow along with the tutorial, please download the data above to your computer, and save it in a directory that is specifically dedicated to this tutorial. 
+
+## Install and Open R and R Studio
+
+If you haven't already, please go ahead and install R and R Studio. R and R Studio must be installed separately; you should install R first, and then R Studio. R is the bare-bones computing environment, while R Studio is a visually appealing and user-friendly interface that allows you to interact with this environment in an intuitive way. Once you have both installed, you don't need to open up R and R Studio separately; you only need to interact with R Studio (which will run R in the background). 
+
+The following subsections provide instructions on installing R and R Studio for the macOS, Windows, and Linux operating systems. These instructions are taken from the "Setup" section of the Data Carpentry Course entitled [*R for Social Scientists*(https://datacarpentry.org/r-socialsci/setup.html). 
+
+### Windows Installation Instructions
+
+
+
+
+
+
+There are a number of excellent guides to downloading R and R Studio (which also explain the relationship between the two), so we won't go over that information here. The Appendix to Garret Grolemund's book *Hands on Programming with R* provides an excellent overview of this information; you can access it [here](https://rstudio-education.github.io/hopr/). 
+
+## Install Packages 
+
+R is an open-source programming language for statistical computing that allows you to carry out a wide range of data analysis tasks. One of the big advantages of using R is that it has a very large user community among social scientists and statisticians, who frequently publish packages (which one may think of as workbooks of sorts, containing a well-integrated set of R functions, scripts, data, and documentation) to accomplish certain tasks or implement given procedures. These packages are then shared with the broader community; at this point, anyone who needs to accomplish the tasks to which the package addresses itself can use the package in the context of their own projects. The ability to use published packages considerably simplifies the work of applied social scientists using R; it means that they rarely have to write code entirely from scratch, and can build on the code that others have published. This allows applied researchers to focus on substantive problems, without having to get too bogged down in complicated programming tasks. 
 
 In the context of this tutorial, generating maps of ICPSR data in R would be relatively complex if we had to write all our code from scratch. However, because we are able to make use of mapping and visualization packages written by other researchers, the task is considerably simpler, and will not require any complicated programming. 
 

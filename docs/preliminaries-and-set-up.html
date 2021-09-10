@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>3 Preliminaries and Set-Up | A Guide to Mapping ICPSR Data in R</title>
-  <meta name="description" content="3 Preliminaries and Set-Up | A Guide to Mapping ICPSR Data in R" />
+  <title>3 Preliminaries and Set-Up | A Guide to Mapping ICPSR Data in R Studio</title>
+  <meta name="description" content="3 Preliminaries and Set-Up | A Guide to Mapping ICPSR Data in R Studio" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="3 Preliminaries and Set-Up | A Guide to Mapping ICPSR Data in R" />
+  <meta property="og:title" content="3 Preliminaries and Set-Up | A Guide to Mapping ICPSR Data in R Studio" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="3 Preliminaries and Set-Up | A Guide to Mapping ICPSR Data in R" />
+  <meta name="twitter:title" content="3 Preliminaries and Set-Up | A Guide to Mapping ICPSR Data in R Studio" />
   
   
   
@@ -31,7 +31,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="data.html"/>
+<link rel="prev" href="introduction.html"/>
 <link rel="next" href="tutorial.html"/>
 <script src="libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -137,17 +137,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Mapping ICPSR Data</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Preface</a></li>
+<li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#motivation"><i class="fa fa-check"></i><b>1.1</b> Motivation</a></li>
-<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#scope-and-objectives"><i class="fa fa-check"></i><b>1.2</b> Scope and Objectives</a></li>
+<li class="chapter" data-level="2.1" data-path="introduction.html"><a href="introduction.html#motivation"><i class="fa fa-check"></i><b>2.1</b> Motivation</a></li>
+<li class="chapter" data-level="2.2" data-path="introduction.html"><a href="introduction.html#scope-and-objectives"><i class="fa fa-check"></i><b>2.2</b> Scope and Objectives</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>2</b> Data</a></li>
 <li class="chapter" data-level="3" data-path="preliminaries-and-set-up.html"><a href="preliminaries-and-set-up.html"><i class="fa fa-check"></i><b>3</b> Preliminaries and Set-Up</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="preliminaries-and-set-up.html"><a href="preliminaries-and-set-up.html#install-packages"><i class="fa fa-check"></i><b>3.1</b> Install Packages</a></li>
-<li class="chapter" data-level="3.2" data-path="preliminaries-and-set-up.html"><a href="preliminaries-and-set-up.html#load-libraries"><i class="fa fa-check"></i><b>3.2</b> Load Libraries</a></li>
-<li class="chapter" data-level="3.3" data-path="preliminaries-and-set-up.html"><a href="preliminaries-and-set-up.html#set-working-directory"><i class="fa fa-check"></i><b>3.3</b> Set Working Directory</a></li>
+<li class="chapter" data-level="3.1" data-path="preliminaries-and-set-up.html"><a href="preliminaries-and-set-up.html#data"><i class="fa fa-check"></i><b>3.1</b> Data</a></li>
+<li class="chapter" data-level="3.2" data-path="preliminaries-and-set-up.html"><a href="preliminaries-and-set-up.html#install-and-open-r-and-r-studio"><i class="fa fa-check"></i><b>3.2</b> Install and Open R and R Studio</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="preliminaries-and-set-up.html"><a href="preliminaries-and-set-up.html#windows-installation-instructions"><i class="fa fa-check"></i><b>3.2.1</b> Windows Installation Instructions</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="preliminaries-and-set-up.html"><a href="preliminaries-and-set-up.html#install-packages"><i class="fa fa-check"></i><b>3.3</b> Install Packages</a></li>
+<li class="chapter" data-level="3.4" data-path="preliminaries-and-set-up.html"><a href="preliminaries-and-set-up.html#load-libraries"><i class="fa fa-check"></i><b>3.4</b> Load Libraries</a></li>
+<li class="chapter" data-level="3.5" data-path="preliminaries-and-set-up.html"><a href="preliminaries-and-set-up.html#set-working-directory"><i class="fa fa-check"></i><b>3.5</b> Set Working Directory</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="tutorial.html"><a href="tutorial.html"><i class="fa fa-check"></i><b>4</b> Tutorial</a></li>
 <li class="divider"></li>
@@ -161,7 +166,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Guide to Mapping ICPSR Data in R</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Guide to Mapping ICPSR Data in R Studio</a>
           </h1>
         </div>
 
@@ -171,9 +176,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="preliminaries-and-set-up" class="section level1" number="3">
 <h1><span class="header-section-number">3</span> Preliminaries and Set-Up</h1>
+<div id="data" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> Data</h2>
+<p>The ICPSR data we will be mapping in this tutorial comes from a dataset archived on <a href="https://www.openicpsr.org/openicpsr/">OPENICPSR</a>. In particular, the dataset we will be using is entitled “Governments’ Responses to COVID-19”, which was collected by Simon Porcher, a researcher at the University of Paris. The dataset can be found <a href="https://www.openicpsr.org/openicpsr/project/119061/version/V6/view">here</a>, and the full citation information is below:</p>
+<p>Porcher, Simon. Governments’ Responses to COVID-19 (Response2covid19). Ann Arbor, MI: Inter-university Consortium for Political and Social Research [distributor], 2020-11-08. <a href="https://doi.org/10.3886/E119061V6">https://doi.org/10.3886/E119061V6</a>.</p>
+<p>This panel dataset provides information on public health and economic interventions initiated by national governments in response to the Covid-19 Pandemic. It provides data in monthly increments from January 2020 to October 2020 for most of the world’s sovereign countries. One of the variables in the dataset is an index (computed based on other variables in the dataset), that reflects the extent of government economic interventions to provide their populations with material support during the most acute phase of the Covid-19 Pandemic. The tutorial will explore how to display this country-level data on economic responses to Covid-19 on a world map.</p>
+<p>If you would like to follow along with the tutorial, please download the data above to your computer, and save it in a directory that is specifically dedicated to this tutorial.</p>
+</div>
+<div id="install-and-open-r-and-r-studio" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Install and Open R and R Studio</h2>
+<p>If you haven’t already, please go ahead and install R and R Studio. R and R Studio must be installed separately; you should install R first, and then R Studio. R is the bare-bones computing environment, while R Studio is a visually appealing and user-friendly interface that allows you to interact with this environment in an intuitive way. Once you have both installed, you don’t need to open up R and R Studio separately; you only need to interact with R Studio (which will run R in the background).</p>
+<p>The following subsections provide instructions on installing R and R Studio for the macOS, Windows, and Linux operating systems. These instructions are taken from the “Setup” section of the Data Carpentry Course entitled [<em>R for Social Scientists</em>(<a href="https://datacarpentry.org/r-socialsci/setup.html" class="uri">https://datacarpentry.org/r-socialsci/setup.html</a>).</p>
+<div id="windows-installation-instructions" class="section level3" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Windows Installation Instructions</h3>
+<p>There are a number of excellent guides to downloading R and R Studio (which also explain the relationship between the two), so we won’t go over that information here. The Appendix to Garret Grolemund’s book <em>Hands on Programming with R</em> provides an excellent overview of this information; you can access it <a href="https://rstudio-education.github.io/hopr/">here</a>.</p>
+</div>
+</div>
+<div id="install-packages" class="section level2" number="3.3">
+<h2><span class="header-section-number">3.3</span> Install Packages</h2>
 <p>R is an open-source programming language for statistical computing that allows you to carry out a wide range of data analysis tasks. One of the big advantages of using R is that it has a very large user community among social scientists and statisticians, who frequently publish packages (which one may think of as workbooks of sorts, containing a well-integrated set of R functions, scripts, data, and documentation) to accomplish certain tasks or implement given procedures. These packages are then shared with the broader community; at this point, anyone who needs to accomplish the tasks to which the package addresses itself can use the package in the context of their own projects. The ability to use published packages considerably simplifies the work of applied social scientists using R; it means that they rarely have to write code entirely from scratch, and can build on the code that others have published. This allows applied researchers to focus on substantive problems, without having to get too bogged down in complicated programming tasks.</p>
-<div id="install-packages" class="section level2" number="3.1">
-<h2><span class="header-section-number">3.1</span> Install Packages</h2>
 <p>In the context of this tutorial, generating maps of ICPSR data in R would be relatively complex if we had to write all our code from scratch. However, because we are able to make use of mapping and visualization packages written by other researchers, the task is considerably simpler, and will not require any complicated programming.</p>
 <p>In this tutorial, we will use a few packages to accomplish our goal of mapping tabular ICPSR data. They are:</p>
 <ul>
@@ -196,8 +217,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-7"><a href="preliminaries-and-set-up.html#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;dplyr&quot;</span>)</span></code></pre></div>
 <p>All of the packages we need are now installed!</p>
 </div>
-<div id="load-libraries" class="section level2" number="3.2">
-<h2><span class="header-section-number">3.2</span> Load Libraries</h2>
+<div id="load-libraries" class="section level2" number="3.4">
+<h2><span class="header-section-number">3.4</span> Load Libraries</h2>
 <p>However, while our packages are installed in our R environment, they are not yet ready to use. Before we can use our packages, we must load them into our environment. You can think of the process of loading installed packages into a current R environment as analgous to opening up an application on your phone or computer after it has been installed (even if an application is installed, you can’t use it until you open it!). To load (i.e. “open”) an R package, we pass the name of the package we want to load as an argument to the <code>library</code> function. For example, if we want to load the “tmap” package into the current environment, we can type:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="preliminaries-and-set-up.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Loads &quot;tmap&quot; package</span></span>
 <span id="cb3-2"><a href="preliminaries-and-set-up.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tmap)</span></code></pre></div>
@@ -213,8 +234,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb4-8"><a href="preliminaries-and-set-up.html#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div>
 <p>At this point, the packages are loaded and ready to go! One important thing to note regarding the installation and loading of packages is that you only have to install packages once; after a package is installed, there is no need to subsequently reinstall it. However, you must load the packages you need (using the <code>library</code> function) every time you open a new R session. In other words, if you were to close R Studio at this point and open it up later, you would <strong>not</strong> need to install these packages again (Step 1a), but you <strong>would</strong> need to load the packages again (Step 1b).</p>
 </div>
-<div id="set-working-directory" class="section level2" number="3.3">
-<h2><span class="header-section-number">3.3</span> Set Working Directory</h2>
+<div id="set-working-directory" class="section level2" number="3.5">
+<h2><span class="header-section-number">3.5</span> Set Working Directory</h2>
 <p>Before we can bring in our data, we have to specify the location on our computer where the data that we want to import is saved. This step is known as setting one’s working directory. Before setting your working directory, make sure you’ve downloaded the ICPSR dataset, and have placed it in a directory (i.e. folder) on your computer that was specifically created to store this data.</p>
 <p>If you’re unfamiliar with the concept of file paths, the easiest way to set your working directory is through the R Studio menu. To do so, follow these steps:</p>
 <ul>
@@ -233,7 +254,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="tutorial.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
