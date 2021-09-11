@@ -1,11 +1,13 @@
 fig:unnamed-chunk-1
+fig:unnamed-chunk-3
+fig:unnamed-chunk-7
 preface
 introduction
 motivation
 scope-and-objectives
 preliminaries-and-set-up
 data
-install-and-open-r-and-r-studio
+installation
 windows-installation-instructions
 macos-installation-instructions
 the-r-studio-interface

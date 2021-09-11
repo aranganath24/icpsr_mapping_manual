@@ -10,7 +10,7 @@ This panel dataset provides information on public health and economic interventi
 
 If you would like to follow along with the tutorial, please download the data above to your computer, and save it in a directory that is specifically dedicated to this tutorial. 
 
-## Install and Open R and R Studio
+## R and R Studio Installation
 
 If you haven't already, please go ahead and install R and R Studio. R and R Studio must be installed separately; you should install R first, and then R Studio. R is the bare-bones computing environment, while R Studio is a visually appealing and user-friendly interface that allows you to interact with this environment in an intuitive way. Once you have both installed, you don't need to open up R and R Studio separately; you only need to interact with R Studio (which will run R in the background). 
 
@@ -38,12 +38,15 @@ The Appendix to Garret Grolemund's book *Hands on Programming with R* provides a
 
 ## The R Studio Interface 
 
-Now that you've installed and opened up R Studio, let's familiarize ourselves with the R Studio interface. When you open up R Studio, you'll see a window open that looks something like this:
+Now that we've installed and opened up R Studio, let's familiarize ourselves with the R Studio interface. When you open up R Studio, you'll see a window open that looks something like this:
 
 ```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='The R Studio Interface'}
 knitr::include_graphics('images/rstudio_window_revised.png')
 ```
 
+If your interface doesn't look exactly like this, it shouldn't be a problem; we would expect to see minor cosmetic differences across operating systems and computers (based on how they're configured). However, you should see four distinct windows within the larger R Studio interface:
+
++ The top-left window is known as the "Source." This is where you can write your R scripts (including the code associated with this tutorial), and execute those scripts. You can also type in R code into the "Console" window (bottom-left window), but it is preferable to write your code in a script within the source window. That's because scripts can be saved (while code written into the console cannot); 
 
 ## Install Packages 
 
@@ -66,7 +69,13 @@ To install a package in R, we can use the ```install.packages``` function. A fun
 install.packages("tmap")
 ```
 
-After running that line of code, the "tmap" function will effectively be downloaded to your computer. Now, let's install the other packages we mentioned above, using the same procedure: 
+After running that line of code, the "tmap" function will effectively be downloaded to your computer. Below, we can see how that line of code should look in your script, and how to run it:
+
+```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='The R Studio Interface'}
+knitr::include_graphics('images/script.png')
+```
+
+Now, let's install the other packages we mentioned above, using the same procedure: 
 
 ```{r, eval=FALSE}
 ## Installs remainder of necessary packages to complete exercise
@@ -115,6 +124,10 @@ If you're unfamiliar with the concept of file paths, the easiest way to set your
 + First, Click on the "Session" button on the R Studio menu at the top of your screen, and then scroll down to the "Set Working Directory" button in the dialog box that opens up. 
 + When you hover over this button, a subsidiary dialog box that contains a button that says "Choose Directory" will open; click this "Choose Directory" button. 
 + In the dialog box that opens up, navigate to the directory that contains the ICPSR data, select it, and click "Open". At this point, your working directory should be set!
+
+```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='Setting Working Directory Via Menus'}
+knitr::include_graphics('images/setting_wd_revised.png')
+```
 
 **Alternatively**, if you are familiar with the concept of file paths, and know the file path to the folder containing the downloaded ICPSR dataset, you can set the working directly using the ```setwd()``` function, where the argument to the function is the relevant file path enclosed in quotation marks. For example:
 
