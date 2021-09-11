@@ -36,9 +36,14 @@ The Appendix to Garret Grolemund's book *Hands on Programming with R* provides a
 + Double click the file to install R Studio
 + Open R Studio to make sure it works. 
 
-## The R Studio Environment 
+## The R Studio Interface 
 
-Now that you've installed and opened up R Studio, let's familiarize ourselves with the interface. 
+Now that you've installed and opened up R Studio, let's familiarize ourselves with the R Studio interface. When you open up R Studio, you'll see a window open that looks something like this:
+
+```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='The R Studio Interface'}
+knitr::include_graphics('images/rstudio_window_revised.png')
+```
+
 
 ## Install Packages 
 

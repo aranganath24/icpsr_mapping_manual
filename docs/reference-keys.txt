@@ -1,3 +1,4 @@
+fig:unnamed-chunk-1
 preface
 introduction
 motivation
@@ -7,7 +8,7 @@ data
 install-and-open-r-and-r-studio
 windows-installation-instructions
 macos-installation-instructions
-the-r-studio-environment
+the-r-studio-interface
 install-packages
 load-libraries
 set-working-directory
