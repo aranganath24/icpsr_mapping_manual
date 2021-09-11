@@ -24,7 +24,7 @@
 <meta name="author" content="Aditya Ranganath" />
 
 
-<meta name="date" content="2021-09-10" />
+<meta name="date" content="2021-09-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -149,10 +149,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.2" data-path="preliminaries-and-set-up.html"><a href="preliminaries-and-set-up.html#install-and-open-r-and-r-studio"><i class="fa fa-check"></i><b>3.2</b> Install and Open R and R Studio</a>
 <ul>
 <li class="chapter" data-level="3.2.1" data-path="preliminaries-and-set-up.html"><a href="preliminaries-and-set-up.html#windows-installation-instructions"><i class="fa fa-check"></i><b>3.2.1</b> Windows Installation Instructions</a></li>
+<li class="chapter" data-level="3.2.2" data-path="preliminaries-and-set-up.html"><a href="preliminaries-and-set-up.html#macos-installation-instructions"><i class="fa fa-check"></i><b>3.2.2</b> macOS Installation Instructions</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="preliminaries-and-set-up.html"><a href="preliminaries-and-set-up.html#install-packages"><i class="fa fa-check"></i><b>3.3</b> Install Packages</a></li>
-<li class="chapter" data-level="3.4" data-path="preliminaries-and-set-up.html"><a href="preliminaries-and-set-up.html#load-libraries"><i class="fa fa-check"></i><b>3.4</b> Load Libraries</a></li>
-<li class="chapter" data-level="3.5" data-path="preliminaries-and-set-up.html"><a href="preliminaries-and-set-up.html#set-working-directory"><i class="fa fa-check"></i><b>3.5</b> Set Working Directory</a></li>
+<li class="chapter" data-level="3.3" data-path="preliminaries-and-set-up.html"><a href="preliminaries-and-set-up.html#the-r-studio-environment"><i class="fa fa-check"></i><b>3.3</b> The R Studio Environment</a></li>
+<li class="chapter" data-level="3.4" data-path="preliminaries-and-set-up.html"><a href="preliminaries-and-set-up.html#install-packages"><i class="fa fa-check"></i><b>3.4</b> Install Packages</a></li>
+<li class="chapter" data-level="3.5" data-path="preliminaries-and-set-up.html"><a href="preliminaries-and-set-up.html#load-libraries"><i class="fa fa-check"></i><b>3.5</b> Load Libraries</a></li>
+<li class="chapter" data-level="3.6" data-path="preliminaries-and-set-up.html"><a href="preliminaries-and-set-up.html#set-working-directory"><i class="fa fa-check"></i><b>3.6</b> Set Working Directory</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="tutorial.html"><a href="tutorial.html"><i class="fa fa-check"></i><b>4</b> Tutorial</a></li>
 <li class="divider"></li>
@@ -186,14 +188,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="install-and-open-r-and-r-studio" class="section level2" number="3.2">
 <h2><span class="header-section-number">3.2</span> Install and Open R and R Studio</h2>
 <p>If you haven’t already, please go ahead and install R and R Studio. R and R Studio must be installed separately; you should install R first, and then R Studio. R is the bare-bones computing environment, while R Studio is a visually appealing and user-friendly interface that allows you to interact with this environment in an intuitive way. Once you have both installed, you don’t need to open up R and R Studio separately; you only need to interact with R Studio (which will run R in the background).</p>
-<p>The following subsections provide instructions on installing R and R Studio for the macOS, Windows, and Linux operating systems. These instructions are taken from the “Setup” section of the Data Carpentry Course entitled [<em>R for Social Scientists</em>(<a href="https://datacarpentry.org/r-socialsci/setup.html" class="uri">https://datacarpentry.org/r-socialsci/setup.html</a>).</p>
+<p>The following subsections provide instructions on installing R and R Studio for the macOS and Windows operating systems. These instructions are taken from the “Setup” section of the Data Carpentry Course entitled <a href="https://datacarpentry.org/r-socialsci/setup.html"><em>R for Social Scientists</em></a>. The Data Carpentry page also contains installation instructions for the Linux operating system; if you’re a Linux user, please refer to that page for instructions.</p>
+<p>The Appendix to Garret Grolemund’s book <em>Hands on Programming with R</em> provides an excellent overview of the R and R Studio installation process; you can access it <a href="https://rstudio-education.github.io/hopr/">here</a>.</p>
 <div id="windows-installation-instructions" class="section level3" number="3.2.1">
 <h3><span class="header-section-number">3.2.1</span> Windows Installation Instructions</h3>
-<p>There are a number of excellent guides to downloading R and R Studio (which also explain the relationship between the two), so we won’t go over that information here. The Appendix to Garret Grolemund’s book <em>Hands on Programming with R</em> provides an excellent overview of this information; you can access it <a href="https://rstudio-education.github.io/hopr/">here</a>.</p>
+<ul>
+<li>Download R from the <a href="https://cran.r-project.org/bin/windows/base/">CRAN website</a></li>
+<li>Run the <code>.exe</code> file that was just downloaded.</li>
+<li>Go to the <a href="https://www.rstudio.com/products/rstudio/download/#download">R Studio download page</a> and under <em>Installers</em> select the “Windows” option.</li>
+<li>Double click the file to install R Studio</li>
+<li>Open R Studio to make sure it works.</li>
+</ul>
+</div>
+<div id="macos-installation-instructions" class="section level3" number="3.2.2">
+<h3><span class="header-section-number">3.2.2</span> macOS Installation Instructions</h3>
+<ul>
+<li>Download R from the <a href="https://cran.r-project.org/bin/macosx/">CRAN website</a></li>
+<li>Select the <code>.pkg</code> file for the latest R version.</li>
+<li>Double click on the downloaded file to install R.</li>
+<li>It is also a good idea to install <a href="https://www.xquartz.org/">XQuartz</a>, which some packages require.</li>
+<li>Go to the <a href="https://www.rstudio.com/products/rstudio/download/#download">R Studio download page</a>, and under <em>Installers</em> select the “macOS” option.</li>
+<li>Double click the file to install R Studio</li>
+<li>Open R Studio to make sure it works.</li>
+</ul>
 </div>
 </div>
-<div id="install-packages" class="section level2" number="3.3">
-<h2><span class="header-section-number">3.3</span> Install Packages</h2>
+<div id="the-r-studio-environment" class="section level2" number="3.3">
+<h2><span class="header-section-number">3.3</span> The R Studio Environment</h2>
+<p>Now that you’ve installed and opened up R Studio, let’s familiarize ourselves with the interface.</p>
+</div>
+<div id="install-packages" class="section level2" number="3.4">
+<h2><span class="header-section-number">3.4</span> Install Packages</h2>
 <p>R is an open-source programming language for statistical computing that allows you to carry out a wide range of data analysis tasks. One of the big advantages of using R is that it has a very large user community among social scientists and statisticians, who frequently publish packages (which one may think of as workbooks of sorts, containing a well-integrated set of R functions, scripts, data, and documentation) to accomplish certain tasks or implement given procedures. These packages are then shared with the broader community; at this point, anyone who needs to accomplish the tasks to which the package addresses itself can use the package in the context of their own projects. The ability to use published packages considerably simplifies the work of applied social scientists using R; it means that they rarely have to write code entirely from scratch, and can build on the code that others have published. This allows applied researchers to focus on substantive problems, without having to get too bogged down in complicated programming tasks.</p>
 <p>In the context of this tutorial, generating maps of ICPSR data in R would be relatively complex if we had to write all our code from scratch. However, because we are able to make use of mapping and visualization packages written by other researchers, the task is considerably simpler, and will not require any complicated programming.</p>
 <p>In this tutorial, we will use a few packages to accomplish our goal of mapping tabular ICPSR data. They are:</p>
@@ -217,8 +242,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-7"><a href="preliminaries-and-set-up.html#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;dplyr&quot;</span>)</span></code></pre></div>
 <p>All of the packages we need are now installed!</p>
 </div>
-<div id="load-libraries" class="section level2" number="3.4">
-<h2><span class="header-section-number">3.4</span> Load Libraries</h2>
+<div id="load-libraries" class="section level2" number="3.5">
+<h2><span class="header-section-number">3.5</span> Load Libraries</h2>
 <p>However, while our packages are installed in our R environment, they are not yet ready to use. Before we can use our packages, we must load them into our environment. You can think of the process of loading installed packages into a current R environment as analgous to opening up an application on your phone or computer after it has been installed (even if an application is installed, you can’t use it until you open it!). To load (i.e. “open”) an R package, we pass the name of the package we want to load as an argument to the <code>library</code> function. For example, if we want to load the “tmap” package into the current environment, we can type:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="preliminaries-and-set-up.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Loads &quot;tmap&quot; package</span></span>
 <span id="cb3-2"><a href="preliminaries-and-set-up.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tmap)</span></code></pre></div>
@@ -234,8 +259,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb4-8"><a href="preliminaries-and-set-up.html#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div>
 <p>At this point, the packages are loaded and ready to go! One important thing to note regarding the installation and loading of packages is that you only have to install packages once; after a package is installed, there is no need to subsequently reinstall it. However, you must load the packages you need (using the <code>library</code> function) every time you open a new R session. In other words, if you were to close R Studio at this point and open it up later, you would <strong>not</strong> need to install these packages again (Step 1a), but you <strong>would</strong> need to load the packages again (Step 1b).</p>
 </div>
-<div id="set-working-directory" class="section level2" number="3.5">
-<h2><span class="header-section-number">3.5</span> Set Working Directory</h2>
+<div id="set-working-directory" class="section level2" number="3.6">
+<h2><span class="header-section-number">3.6</span> Set Working Directory</h2>
 <p>Before we can bring in our data, we have to specify the location on our computer where the data that we want to import is saved. This step is known as setting one’s working directory. Before setting your working directory, make sure you’ve downloaded the ICPSR dataset, and have placed it in a directory (i.e. folder) on your computer that was specifically created to store this data.</p>
 <p>If you’re unfamiliar with the concept of file paths, the easiest way to set your working directory is through the R Studio menu. To do so, follow these steps:</p>
 <ul>

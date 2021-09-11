@@ -6,6 +6,8 @@ preliminaries-and-set-up
 data
 install-and-open-r-and-r-studio
 windows-installation-instructions
+macos-installation-instructions
+the-r-studio-environment
 install-packages
 load-libraries
 set-working-directory
