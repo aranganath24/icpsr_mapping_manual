@@ -1,6 +1,8 @@
 fig:unnamed-chunk-1
 fig:unnamed-chunk-3
 fig:unnamed-chunk-7
+fig:unnamed-chunk-10
+fig:unnamed-chunk-11
 preface
 introduction
 motivation
@@ -15,3 +17,5 @@ install-packages
 load-libraries
 set-working-directory
 tutorial
+load-and-view-data
+icpsr-covid-19-tabular-data

@@ -24,7 +24,7 @@
 <meta name="author" content="Aditya Ranganath" />
 
 
-<meta name="date" content="2021-09-11" />
+<meta name="date" content="2021-09-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -156,7 +156,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.5" data-path="preliminaries-and-set-up.html"><a href="preliminaries-and-set-up.html#load-libraries"><i class="fa fa-check"></i><b>3.5</b> Load Libraries</a></li>
 <li class="chapter" data-level="3.6" data-path="preliminaries-and-set-up.html"><a href="preliminaries-and-set-up.html#set-working-directory"><i class="fa fa-check"></i><b>3.6</b> Set Working Directory</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="tutorial.html"><a href="tutorial.html"><i class="fa fa-check"></i><b>4</b> Tutorial</a></li>
+<li class="chapter" data-level="4" data-path="tutorial.html"><a href="tutorial.html"><i class="fa fa-check"></i><b>4</b> Tutorial</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="tutorial.html"><a href="tutorial.html#load-and-view-data"><i class="fa fa-check"></i><b>4.1</b> Load and View Data</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="tutorial.html"><a href="tutorial.html#icpsr-covid-19-tabular-data"><i class="fa fa-check"></i><b>4.1.1</b> ICPSR Covid-19 Tabular Data</a></li>
+</ul></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 </ul>
@@ -224,17 +230,28 @@ Figure 3.1: The R Studio Interface
 </div>
 <p>If your interface doesn’t look exactly like this, it shouldn’t be a problem; we would expect to see minor cosmetic differences across operating systems and computers (based on how they’re configured). However, you should see four distinct windows within the larger R Studio interface:</p>
 <ul>
-<li>The <strong>top-left</strong> window is known as the “Source.” This is where you can write your R scripts (including the code associated with this tutorial), and execute those scripts. You can also type in R code into the “Console” window (bottom-left window), but it is preferable to write your code in a script within the source window. That’s because scripts can be saved (while code written into the console cannot); writing scripts therefore allows you to keep track of what you’re doing, and facilitates the reproducibility of your work. Note that in some cases, you may not see a “Source” window when you first open R Studio. In that case, to start a new script, simply click the <code>File</code> button on the R Studio menu bar, scroll down to <code>New File</code> button, and then select <code>R Script</code> from the menu bar that opens up. Finally, it’s worth noting that the outputs of certain functions will appear in the “Source” window. In the context of our tutorial, when we want to view our tabular datasets or attribute tables (an attribute table is a table that provides information about the attributes of different geographic locations in a spatial dataset), we will use the <code>View()</code> function, which will display the relevant data within a new tab in the “Source” window.</li>
-<li>The <strong>top-right</strong> window is the “Environment/History” pane of the R Studio interface.
+<li>The <strong>top-left</strong> window is known as the <em>Source</em>.
+<ul>
+<li>The <em>Source</em> window is where you can write your R scripts (including the code associated with this tutorial), and execute those scripts. You can also type in R code into the “Console” window (bottom-left window), but it is preferable to write your code in a script within the source window. That’s because scripts can be saved (while code written into the console cannot); writing scripts therefore allows you to keep track of what you’re doing, and facilitates the reproducibility of your work. Note that in some cases, you may not see a <em>Source</em> window when you first open R Studio. In that case, to start a new script, simply click the <code>File</code> button on the R Studio menu bar, scroll down to <code>New File</code> button, and then select <code>R Script</code> from the menu bar that opens up.</li>
+<li>It’s also worth noting that the outputs of certain functions will appear in the <em>Source</em> window. In the context of our tutorial, when we want to view our tabular datasets or attribute tables (an attribute table is a table that provides information about the attributes of different geographic locations in a spatial dataset), we will use the <code>View()</code> function, which will display the relevant data within a new tab in the <em>Source</em> window.</li>
+</ul></li>
+<li>The <strong>top-right</strong> window is the <em>Environment/History</em> pane of the R Studio interface.
 <ul>
 <li>The “Environment” tab of this window provides information on the datasets you’ve loaded into R Studio, as well as objects you have defined (we’ll talk about objects more later in the tutorial).
 -The “History” tab of the window provides a record of the R commands you’ve run in a given session.</li>
 </ul></li>
-<li>The <strong>bottom-right</strong> window is the <strong><em>Files/Plots/Packages/Help/Viewer</em></strong> window.
+<li>The <strong>bottom-right</strong> window is the <em>Files/Plots/Packages/Help/Viewer</em> window.
 <ul>
-<li>The “Files” tab displays all of the files that are within your working directory (we’ll discuss the concept of a working directory below).
+<li>The “Files” tab displays your computer’s directories and file structures and allows you to navigate through them without having to leave the R environment.
 -The “Plots” tab is the tab where you can view any visualizations (including maps) that you create. Within the “Plots” tab, make note of the “Zoom” button, which you can use to enlarge your maps and visualizations if they’re too compressed in the “Plots” window. Also, note the “Export” button within the “Plots” tab (next to the “Zoom” button); you can use this button to export the displayed map to a .png or .jpeg file that can be used outside of R Studio (you can also export your visualizations programmatically, which we’ll cover how to do later in the tutorial).</li>
-<li>The</li>
+<li>The “Packages” tab provides information on which packages have been installed, as well as which packages are currently loaded (more on packages in Section 3.4)</li>
+<li>The “Help” tab displays documentation for R packages and functions. If you want to know more about how a package or function work, simply type a ? followed by the package or function’s name (no space between the question mark and the name) and relevant information will be displayed within the “Help” tab.</li>
+<li>The “Viewer” tab displays HTML output. If you write code that generates an HTML file, you can view it within the “Viewer” tab.</li>
+</ul></li>
+<li>The <strong>bottom-left</strong> window is the <em>Console/Terminal/Jobs</em> window.
+<ul>
+<li>The “Console” tab is where you can see your code execute when you run your scripts, as well as certain outputs produced by those scripts. In addition, if there are any error or warning messages, they will be printed to the “Console” tab. You can also type code directly into the console, but as we noted earlier, it is better practice to write your code in a script and then run it from there.</li>
+<li>The “Terminal” tab allows you to access the terminal (part of the Linux operating system), while the “Jobs” tab allows you to track the status of analyses running in the background. These tabs are not relevant for the tutorial.</li>
 </ul></li>
 </ul>
 </div>
@@ -250,18 +267,28 @@ Figure 3.1: The R Studio Interface
 <li><em>readxl</em>: The <em>readxl</em> package (part of a broader suite of data science packages known as the “tidyverse”) will allow us to load the tabular ICPSR dataset, which is provided as an Excel file on the ICPSR landing page, into R Studio.</li>
 <li><em>dplyr</em>: The <em>dplyr</em> package (also a part of the tidyverse) will allow us to efficiently transform the structure of the initial ICPSR dataset into a more tractable form that is conducive to mapping.</li>
 </ul>
-<p>To install a package in R, we can use the <code>install.packages</code> function. A function is essentially a programming construct that takes a specified input, runs this input (called an “argument”) through a set of procedures, and returns an output. In the code block below, the name of the package we want to install (here, “tmap”) is enclosed within quotation marks and placed within parentheses after calling the <code>install.packages</code> function:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="preliminaries-and-set-up.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Installs &quot;tmap&quot; package</span></span>
+<p>To install a package in R, we can use the <code>install.packages</code> function. A function is essentially a programming construct that takes a specified input, runs this input (called an “argument”) through a set of procedures, and returns an output. In the code block below, the name of the package we want to install (here, “tmap”) is enclosed within quotation marks and placed within parentheses after calling the <code>install.packages</code> function. Running the code below will effectively download the <em>tmap</em> package to your computer:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="preliminaries-and-set-up.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Installs &quot;tmap&quot; package</span></span>
 <span id="cb1-2"><a href="preliminaries-and-set-up.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;tmap&quot;</span>)</span></code></pre></div>
-<p>After running that line of code, the “tmap” function will effectively be downloaded to your computer. Below, we can see how that line of code should look in your script, and how to run it:</p>
+<p>To run this code in your own R session:</p>
+<ul>
+<li>First, copy the code from the codeblock above (you can copy the code to your clipboard by hovering over the top-right of the code-block and clicking the “copy” icon; you can also highlight the code and copy from the <code>Edit</code> menu of your browser).</li>
+<li>Then, start a new R script within R Studio; if you want to keep a future record of your work, you may want to save it to your computer (perhaps in the same folder to which you downloaded the tutorial data).</li>
+<li>Paste the code into the script, highlight it, and click the “Run” button that is just above the <em>Source</em> window.</li>
+<li>Alternatively, instead of copying/pasting, you can manually type in the code from the codeblock into your script.</li>
+<li>After you’ve run the code, watch the code execute in the console, and look for a message confirming that the package has been successfully installed.</li>
+</ul>
+<p>Below, we can see how that line of code should look in your script, and how to run it:</p>
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-3"></span>
 <img src="images/script.png" alt="The R Studio Interface" width="100%" />
 <p class="caption">
 Figure 3.2: The R Studio Interface
 </p>
 </div>
-<p>Now, let’s install the other packages we mentioned above, using the same procedure:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="preliminaries-and-set-up.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Installs remainder of necessary packages to complete exercise</span></span>
+<p>Please note that you can follow along with the tutorial on your own computers by transferring all of the subsequent codeblocks into your script in just this way. Run each codeblock in your R Studio environment as you go, and you should be able to replicate the entire tutorial on your computer.</p>
+<p>You’ll note that the codeblocks in the tutorial usually have a comment, prefaced by a hash (“#”). When writing code in R (or any other command-line interface) it is good practice to preface your code with brief comments that describe what a block of code is supposed to do. Writing these comments can allow someone else (or your future self) read and understand your code more easily than otherwise might be the case. The hash before the comment effectively tells R that the subsequent text is a comment, and should not be run as part of the subsequent code. If you didn’t preface the comment with a hash, R wouldn’t know to ignore the comment when executing the code, and would throw an error message.</p>
+<p>Now, let’s install the other packages we mentioned above, using the same function:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="preliminaries-and-set-up.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Installs remainder of necessary packages to complete exercise</span></span>
 <span id="cb2-2"><a href="preliminaries-and-set-up.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;sf&quot;</span>)</span>
 <span id="cb2-3"><a href="preliminaries-and-set-up.html#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;rnaturalearth&quot;</span>)</span>
 <span id="cb2-4"><a href="preliminaries-and-set-up.html#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;rnaturalearthdata&quot;</span>)</span>
@@ -273,11 +300,11 @@ Figure 3.2: The R Studio Interface
 <div id="load-libraries" class="section level2" number="3.5">
 <h2><span class="header-section-number">3.5</span> Load Libraries</h2>
 <p>However, while our packages are installed in our R environment, they are not yet ready to use. Before we can use our packages, we must load them into our environment. You can think of the process of loading installed packages into a current R environment as analgous to opening up an application on your phone or computer after it has been installed (even if an application is installed, you can’t use it until you open it!). To load (i.e. “open”) an R package, we pass the name of the package we want to load as an argument to the <code>library</code> function. For example, if we want to load the “tmap” package into the current environment, we can type:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="preliminaries-and-set-up.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Loads &quot;tmap&quot; package</span></span>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="preliminaries-and-set-up.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Loads &quot;tmap&quot; package</span></span>
 <span id="cb3-2"><a href="preliminaries-and-set-up.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tmap)</span></code></pre></div>
-<p>At this point, the full suite of the “sf” package’s functionality is available for us to use.</p>
+<p>At this point, the full suite of the <em>tmap</em> package’s functionality is available for us to use.</p>
 <p>Now, let’s go ahead and load the remainder of the packages that we’ll need:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="preliminaries-and-set-up.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Loads remainder of packages</span></span>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="preliminaries-and-set-up.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Loads remainder of packages</span></span>
 <span id="cb4-2"><a href="preliminaries-and-set-up.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
 <span id="cb4-3"><a href="preliminaries-and-set-up.html#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rnaturalearth)</span>
 <span id="cb4-4"><a href="preliminaries-and-set-up.html#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rnaturalearthdata)</span>
@@ -289,13 +316,14 @@ Figure 3.2: The R Studio Interface
 </div>
 <div id="set-working-directory" class="section level2" number="3.6">
 <h2><span class="header-section-number">3.6</span> Set Working Directory</h2>
-<p>Before we can bring in our data, we have to specify the location on our computer where the data that we want to import is saved. This step is known as setting one’s working directory. Before setting your working directory, make sure you’ve downloaded the ICPSR dataset, and have placed it in a directory (i.e. folder) on your computer that was specifically created to store this data.</p>
+<p>Before we can bring our data into R Studio and get started with the tutorial, we have to specify that data’s location on our computer. This step is known as setting one’s working directory. Before setting your working directory, make sure you’ve downloaded the ICPSR dataset, and have placed it in a directory (i.e. folder) on your computer that was specifically created to store this data (See Section 3.1 above for more on the data).</p>
 <p>If you’re unfamiliar with the concept of file paths, the easiest way to set your working directory is through the R Studio menu. To do so, follow these steps:</p>
 <ul>
-<li>First, Click on the “Session” button on the R Studio menu at the top of your screen, and then scroll down to the “Set Working Directory” button in the dialog box that opens up.</li>
-<li>When you hover over this button, a subsidiary dialog box that contains a button that says “Choose Directory” will open; click this “Choose Directory” button.</li>
+<li>First, Click on the “Session” button on the R Studio menu at the top of your screen, and then scroll down to the “Set Working Directory” button in the menu that opens up.</li>
+<li>When you hover over this button, a subsidiary menu that contains a button that says “Choose Directory” will open; click this “Choose Directory” button.</li>
 <li>In the dialog box that opens up, navigate to the directory that contains the ICPSR data, select it, and click “Open”. At this point, your working directory should be set!</li>
 </ul>
+<p>The graphic below demonstrates the process of setting one’s working directory through R Studio’s menus:</p>
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-7"></span>
 <img src="images/setting_wd_revised.png" alt="Setting Working Directory Via Menus" width="100%" />
 <p class="caption">
@@ -303,8 +331,9 @@ Figure 3.3: Setting Working Directory Via Menus
 </p>
 </div>
 <p><strong>Alternatively</strong>, if you are familiar with the concept of file paths, and know the file path to the folder containing the downloaded ICPSR dataset, you can set the working directly using the <code>setwd()</code> function, where the argument to the function is the relevant file path enclosed in quotation marks. For example:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="preliminaries-and-set-up.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Sets working directory </span></span>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="preliminaries-and-set-up.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sets working directory </span></span>
 <span id="cb5-2"><a href="preliminaries-and-set-up.html#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;/Users/adityaranganath/Documents/git_repositories/icpsr_mapping_manual/tutorial_data&quot;</span>)</span></code></pre></div>
+<p>Note that you won’t want to copy and paste the above codeblock, since your file path will be different; be sure to replace your own file path with the one given above.</p>
 
 </div>
 </div>

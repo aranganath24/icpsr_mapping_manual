@@ -24,7 +24,7 @@
 <meta name="author" content="Aditya Ranganath" />
 
 
-<meta name="date" content="2021-09-11" />
+<meta name="date" content="2021-09-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -156,7 +156,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.5" data-path="preliminaries-and-set-up.html"><a href="preliminaries-and-set-up.html#load-libraries"><i class="fa fa-check"></i><b>3.5</b> Load Libraries</a></li>
 <li class="chapter" data-level="3.6" data-path="preliminaries-and-set-up.html"><a href="preliminaries-and-set-up.html#set-working-directory"><i class="fa fa-check"></i><b>3.6</b> Set Working Directory</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="tutorial.html"><a href="tutorial.html"><i class="fa fa-check"></i><b>4</b> Tutorial</a></li>
+<li class="chapter" data-level="4" data-path="tutorial.html"><a href="tutorial.html"><i class="fa fa-check"></i><b>4</b> Tutorial</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="tutorial.html"><a href="tutorial.html#load-and-view-data"><i class="fa fa-check"></i><b>4.1</b> Load and View Data</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="tutorial.html"><a href="tutorial.html#icpsr-covid-19-tabular-data"><i class="fa fa-check"></i><b>4.1.1</b> ICPSR Covid-19 Tabular Data</a></li>
+</ul></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 </ul>
@@ -178,6 +184,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="tutorial" class="section level1" number="4">
 <h1><span class="header-section-number">4</span> Tutorial</h1>
+<div id="load-and-view-data" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Load and View Data</h2>
+<p>Now that we’ve taken care of those preliminary steps, let’s bring in the tutorial data into our R environment so that we can begin working with it. There are two pieces of data we’ll need to load:</p>
+<ul>
+<li>The ICPSR tabular dataset on government policy responses to Covid-19 (Section 4.1.1)</li>
+<li>A spatial dataset of world country boundaries; we will bring this dataset into R Studio via the <code>ne_countries</code> function of the “rnaturalearth” package (Section 4.1.2)</li>
+</ul>
+<div id="icpsr-covid-19-tabular-data" class="section level3" number="4.1.1">
+<h3><span class="header-section-number">4.1.1</span> ICPSR Covid-19 Tabular Data</h3>
+<p>When importing tabular data that you have saved on our computer into R Studio, it’s important to first understand some of the details of the data we’re trying to import. The first thing to note is the type of file we’re working with, which is indicated by the file extension; here, we can note that the ICPSR data is a .xlsx file, which means that it’s an Excel file (but note that .xlsx files can also be opened in spreadsheet software programs other than Excel). That means we’ll have to import it into R Studio using a function designed specifically to handle Excel files. To that end, we’ll use the <code>read_excel</code> function from the <em>readxl</em> package. Recall that if you want to learn more about a function or a package, simply type a question mark followed by the package or function name in the console, and relevant information will appear in the “Help” tab of the “Files/Plots/Packages/Help/Viewer” window on the bottom right of our R Studio interface. For example, if we wanted to learn more about the <code>read_excel</code>function, we would type <code>?read_excel</code> into the console.</p>
+<p>Before using the <code>read_excel</code> function to bring in the , it could be helpful to open up the data outside the R environment to see whether the dataset has any features that we have to account for when loading it into our R environment. When we first open the spreadsheet, it will look something like this:</p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-10"></span>
+<img src="images/excel_open.png" alt="ICPSR Dataset in Spreadsheet: Description Tab" width="100%" />
+<p class="caption">
+Figure 4.1: ICPSR Dataset in Spreadsheet: Description Tab
+</p>
+</div>
+<p>Note that when we open the spreadsheet, we land on its first tab (or “sheet”) which effectively functions as a data codebook, which we can look through to understand the dataset’s various variables and and assess how they were measured.</p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-11"></span>
+<img src="images/excel_tabs.png" alt="ICPSR Dataset in Spreadsheet: Dataset Tab" width="100%" />
+<p class="caption">
+Figure 4.2: ICPSR Dataset in Spreadsheet: Dataset Tab
+</p>
+</div>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="tutorial.html#cb6-1" aria-hidden="true" tabindex="-1"></a>covid_data<span class="ot">&lt;-</span><span class="fu">read_excel</span>(<span class="st">&quot;Gov_Responses2Covid19_last.xlsx&quot;</span>, <span class="at">sheet=</span><span class="st">&quot;Dataset&quot;</span>)</span></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="tutorial.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(covid_data)</span></code></pre></div>
 <pre><code>## # A tibble: 6 x 43
@@ -195,6 +225,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## #   state &lt;dbl&gt;, state_partial &lt;dbl&gt;, cash &lt;dbl&gt;, wage &lt;dbl&gt;, credit &lt;dbl&gt;, taxc &lt;dbl&gt;, taxd &lt;dbl&gt;, export &lt;dbl&gt;,
 ## #   rate &lt;dbl&gt;, Rigidity_Public_Health &lt;chr&gt;, Economic_Measures &lt;chr&gt;, population_2019 &lt;chr&gt;, continent &lt;chr&gt;</code></pre>
 
+</div>
+</div>
 </div>
             </section>
 

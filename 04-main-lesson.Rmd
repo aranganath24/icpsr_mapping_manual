@@ -11,6 +11,33 @@ library(readxl)
 library(dplyr)
 ```
 
+## Load and View Data 
+
+Now that we've taken care of those preliminary steps, let's bring in the tutorial data into our R environment so that we can begin working with it. There are two pieces of data we'll need to load:
+
+* The ICPSR tabular dataset on government policy responses to Covid-19 (Section 4.1.1)
+* A spatial dataset of world country boundaries; we will bring this dataset into R Studio via the ```ne_countries``` function of the "rnaturalearth" package (Section 4.1.2)
+
+### ICPSR Covid-19 Tabular Data
+
+When importing tabular data that you have saved on our computer into R Studio, it's important to first understand some of the details of the data we're trying to import. The first thing to note is the type of file we're working with, which is indicated by the file extension; here, we can note that the ICPSR data is a .xlsx file, which means that it's an Excel file (but note that .xlsx files can also be opened in spreadsheet software programs other than Excel). That means we'll have to import it into R Studio using a function designed specifically to handle Excel files. To that end, we'll use the ```read_excel``` function from the *readxl* package. Recall that if you want to learn more about a function or a package, simply type a question mark followed by the package or function name in the console, and relevant information will appear in the "Help" tab of the "Files/Plots/Packages/Help/Viewer" window on the bottom right of our R Studio interface. For example, if we wanted to learn more about the ```read_excel```function, we would type ```?read_excel``` into the console. 
+
+Before using the ```read_excel``` function to bring in the , it could be helpful to open up the data outside the R environment to see whether the dataset has any features that we have to account for when loading it into our R environment. When we first open the spreadsheet, it will look something like this:
+
+```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='ICPSR Dataset in Spreadsheet: Description Tab'}
+knitr::include_graphics('images/excel_open.png')
+```
+
+Note that when we open the spreadsheet, we land on its first tab (or "sheet") which effectively functions as a data codebook, which we can look through to understand the dataset's various variables and and assess how they were measured. 
+
+
+```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='ICPSR Dataset in Spreadsheet: Dataset Tab'}
+knitr::include_graphics('images/excel_tabs.png')
+```
+
+
+
+
 
 ```{r, echo=-1}
 setwd("/Users/adityaranganath/Documents/git_repositories/icpsr_mapping_manual/tutorial_data")

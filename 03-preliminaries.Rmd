@@ -46,14 +46,21 @@ knitr::include_graphics('images/rstudio_window_revised.png')
 
 If your interface doesn't look exactly like this, it shouldn't be a problem; we would expect to see minor cosmetic differences across operating systems and computers (based on how they're configured). However, you should see four distinct windows within the larger R Studio interface:
 
-- The **top-left** window is known as the "Source." This is where you can write your R scripts (including the code associated with this tutorial), and execute those scripts. You can also type in R code into the "Console" window (bottom-left window), but it is preferable to write your code in a script within the source window. That's because scripts can be saved (while code written into the console cannot); writing scripts therefore allows you to keep track of what you're doing, and facilitates the reproducibility of your work. Note that in some cases, you may not see a "Source" window when you first open R Studio. In that case, to start a new script, simply click the ```File``` button on the R Studio menu bar, scroll down to ```New File``` button, and then select ```R Script``` from the menu bar that opens up. Finally, it's worth noting that the outputs of certain functions will appear in the "Source" window. In the context of our tutorial, when we want to view our tabular datasets or attribute tables (an attribute table is a table that provides information about the attributes of different geographic locations in a spatial dataset), we will use the ```View()``` function, which will display the relevant data within a new tab in the "Source" window. 
-- The **top-right** window is the "Environment/History" pane of the R Studio interface. 
+- The **top-left** window is known as the *Source*. 
+  - The *Source* window is where you can write your R scripts (including the code associated with this tutorial), and execute those scripts. You can also type in R code into the "Console" window (bottom-left window), but it is preferable to write your code in a script within the source window. That's because scripts can be saved (while code written into the console cannot); writing scripts therefore allows you to keep track of what you're doing, and facilitates the reproducibility of your work. Note that in some cases, you may not see a *Source* window when you first open R Studio. In that case, to start a new script, simply click the ```File``` button on the R Studio menu bar, scroll down to ```New File``` button, and then select ```R Script``` from the menu bar that opens up.
+  - It's also worth noting that the outputs of certain functions will appear in the *Source* window. In the context of our tutorial, when we want to view our tabular datasets or attribute tables (an attribute table is a table that provides information about the attributes of different geographic locations in a spatial dataset), we will use the ```View()``` function, which will display the relevant data within a new tab in the *Source* window. 
+- The **top-right** window is the *Environment/History* pane of the R Studio interface. 
   - The "Environment" tab of this window provides information on the datasets you've loaded into R Studio, as well as objects you have defined (we'll talk about objects more later in the tutorial). 
   -The "History" tab of the window provides a record of the R commands you've run in a given session. 
-- The **bottom-right** window is the ***Files/Plots/Packages/Help/Viewer*** window. 
-  - The "Files" tab displays all of the files that are within your working directory (we'll discuss the concept of a working directory below). 
+- The **bottom-right** window is the *Files/Plots/Packages/Help/Viewer* window. 
+  - The "Files" tab displays your computer's directories and file structures and allows you to navigate through them without having to leave the R environment. 
   -The "Plots" tab is the tab where you can view any visualizations (including maps) that you create. Within the "Plots" tab, make note of the "Zoom" button, which you can use to enlarge your maps and visualizations if they're too compressed in the "Plots" window. Also, note the "Export" button within the "Plots" tab (next to the "Zoom" button); you can use this button to export the displayed map to a .png or .jpeg file that can be used outside of R Studio (you can also export your visualizations programmatically, which we'll cover how to do later in the tutorial).
-  - The
+  - The "Packages" tab provides information on which packages have been installed, as well as which packages are currently loaded (more on packages in Section 3.4)
+  - The "Help" tab displays documentation for R packages and functions. If you want to know more about how a package or function work, simply type a ? followed by the package or function's name (no space between the question mark and the name) and relevant information will be displayed within the "Help" tab. 
+  - The "Viewer" tab displays HTML output. If you write code that generates an HTML file, you can view it within the "Viewer" tab.
+- The **bottom-left** window is the *Console/Terminal/Jobs* window. 
+  - The "Console" tab is where you can see your code execute when you run your scripts, as well as certain outputs produced by those scripts. In addition, if there are any error or warning messages, they will be printed to the "Console" tab. You can also type code directly into the console, but as we noted earlier, it is better practice to write your code in a script and then run it from there. 
+  - The "Terminal" tab allows you to access the terminal (part of the Linux operating system), while the "Jobs" tab allows you to track the status of analyses running in the background. These tabs are not relevant for the tutorial. 
 
 ## Install Packages 
 
@@ -69,23 +76,35 @@ In this tutorial, we will use a few packages to accomplish our goal of mapping t
 + *readxl*: The *readxl* package (part of a broader suite of data science packages known as the "tidyverse") will allow us to load the tabular ICPSR dataset, which is provided as an Excel file on the ICPSR landing page, into R Studio. 
 + *dplyr*: The *dplyr* package (also a part of the tidyverse) will allow us to efficiently transform the structure of the initial ICPSR dataset into a more tractable form that is conducive to mapping. 
 
-To install a package in R, we can use the ```install.packages``` function. A function is essentially a programming construct that takes a specified input, runs this input (called an "argument") through a set of procedures, and returns an output. In the code block below, the name of the package we want to install (here, "tmap") is enclosed within quotation marks and placed within parentheses after calling the ```install.packages``` function:
+To install a package in R, we can use the ```install.packages``` function. A function is essentially a programming construct that takes a specified input, runs this input (called an "argument") through a set of procedures, and returns an output. In the code block below, the name of the package we want to install (here, "tmap") is enclosed within quotation marks and placed within parentheses after calling the ```install.packages``` function. Running the code below will effectively download the *tmap* package to your computer:
 
 ```{r, eval=FALSE}
-## Installs "tmap" package
+# Installs "tmap" package
 install.packages("tmap")
 ```
 
-After running that line of code, the "tmap" function will effectively be downloaded to your computer. Below, we can see how that line of code should look in your script, and how to run it:
+To run this code in your own R session:
+
+* First, copy the code from the codeblock above (you can copy the code to your clipboard by hovering over the top-right of the code-block and clicking the "copy" icon; you can also highlight the code and copy from the ```Edit``` menu of your browser). 
+* Then, start a new R script within R Studio; if you want to keep a future record of your work, you may want to save it to your computer (perhaps in the same folder to which you downloaded the tutorial data). 
+* Paste the code into the script, highlight it, and click the "Run" button that is just above the *Source* window.
+* Alternatively, instead of copying/pasting, you can manually type in the code from the codeblock into your script. 
+* After you've run the code, watch the code execute in the console, and look for a message confirming that the package has been successfully installed. 
+
+Below, we can see how that line of code should look in your script, and how to run it:
 
 ```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='The R Studio Interface'}
 knitr::include_graphics('images/script.png')
 ```
 
-Now, let's install the other packages we mentioned above, using the same procedure: 
+Please note that you can follow along with the tutorial on your own computers by transferring all of the subsequent codeblocks into your script in just this way. Run each codeblock in your R Studio environment as you go, and you should be able to replicate the entire tutorial on your computer. 
+
+You'll note that the codeblocks in the tutorial usually have a comment, prefaced by a hash ("#"). When writing code in R (or any other command-line interface) it is good practice to preface your code with brief comments that describe what a block of code is supposed to do. Writing these comments can allow someone else (or your future self) read and understand your code more easily than otherwise might be the case. The hash before the comment effectively tells R that the subsequent text is a comment, and should not be run as part of the subsequent code. If you didn't preface the comment with a hash, R wouldn't know to ignore the comment when executing the code, and would throw an error message. 
+
+Now, let's install the other packages we mentioned above, using the same function: 
 
 ```{r, eval=FALSE}
-## Installs remainder of necessary packages to complete exercise
+# Installs remainder of necessary packages to complete exercise
 install.packages("sf")
 install.packages("rnaturalearth")
 install.packages("rnaturalearthdata")
@@ -101,16 +120,16 @@ All of the packages we need are now installed!
 However, while our packages are installed in our R environment, they are not yet ready to use. Before we can use our packages, we must load them into our environment. You can think of the process of loading installed packages into a current R environment as analgous to opening up an application on your phone or computer after it has been installed (even if an application is installed, you can't use it until you open it!). To load (i.e. "open") an R package, we pass the name of the package we want to load as an argument to the ```library``` function. For example, if we want to load the "tmap" package into the current environment, we can type:
 
 ```{r, results=FALSE, message=FALSE}
-## Loads "tmap" package
+# Loads "tmap" package
 library(tmap)
 ```
 
-At this point, the full suite of the "sf" package's functionality is available for us to use. 
+At this point, the full suite of the *tmap* package's functionality is available for us to use. 
 
 Now, let's go ahead and load the remainder of the packages that we'll need:
 
 ```{r, results=FALSE, message=FALSE}
-## Loads remainder of packages
+# Loads remainder of packages
 library(sf)
 library(rnaturalearth)
 library(rnaturalearthdata)
@@ -124,13 +143,15 @@ At this point, the packages are loaded and ready to go! One important thing to n
 
 ## Set Working Directory 
 
-Before we can bring in our data, we have to specify the location on our computer where the data that we want to import is saved. This step is known as setting one's working directory. Before setting your working directory, make sure you've downloaded the ICPSR dataset, and have placed it in a directory (i.e. folder) on your computer that was specifically created to store this data. 
+Before we can bring our data into R Studio and get started with the tutorial, we have to specify that data's location on our computer. This step is known as setting one's working directory. Before setting your working directory, make sure you've downloaded the ICPSR dataset, and have placed it in a directory (i.e. folder) on your computer that was specifically created to store this data (See Section 3.1 above for more on the data). 
 
 If you're unfamiliar with the concept of file paths, the easiest way to set your working directory is through the R Studio menu. To do so, follow these steps: 
 
-+ First, Click on the "Session" button on the R Studio menu at the top of your screen, and then scroll down to the "Set Working Directory" button in the dialog box that opens up. 
-+ When you hover over this button, a subsidiary dialog box that contains a button that says "Choose Directory" will open; click this "Choose Directory" button. 
++ First, Click on the "Session" button on the R Studio menu at the top of your screen, and then scroll down to the "Set Working Directory" button in the menu that opens up. 
++ When you hover over this button, a subsidiary menu that contains a button that says "Choose Directory" will open; click this "Choose Directory" button. 
 + In the dialog box that opens up, navigate to the directory that contains the ICPSR data, select it, and click "Open". At this point, your working directory should be set!
+
+The graphic below demonstrates the process of setting one's working directory through R Studio's menus: 
 
 ```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='Setting Working Directory Via Menus'}
 knitr::include_graphics('images/setting_wd_revised.png')
@@ -139,7 +160,11 @@ knitr::include_graphics('images/setting_wd_revised.png')
 **Alternatively**, if you are familiar with the concept of file paths, and know the file path to the folder containing the downloaded ICPSR dataset, you can set the working directly using the ```setwd()``` function, where the argument to the function is the relevant file path enclosed in quotation marks. For example:
 
 ```{r}
-## Sets working directory 
+# Sets working directory 
 setwd("/Users/adityaranganath/Documents/git_repositories/icpsr_mapping_manual/tutorial_data")
 ```
+
+Note that you won't want to copy and paste the above codeblock, since your file path will be different; be sure to replace your own file path with the one given above. 
+
+
 
