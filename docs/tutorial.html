@@ -201,29 +201,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 Figure 4.1: ICPSR Dataset in Spreadsheet: Description Tab
 </p>
 </div>
-<p>Note that when we open the spreadsheet, we land on its first tab (or “sheet”) which effectively functions as a data codebook, which we can look through to understand the dataset’s various variables and and assess how they were measured.</p>
+<p>Note that when we open the spreadsheet, we land on its first tab (or “sheet”), which is titled “Description”. This part of the spreadsheet effectively functions as a data codebook, which we can look through to understand the dataset’s various variables and and assess how they were measured. To open up the actual dataset, we can toggle to the “Dataset” tab by pressing the corresponding button on the bottom-left of the spreadsheet (highlighted in red below):</p>
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-11"></span>
 <img src="images/excel_tabs.png" alt="ICPSR Dataset in Spreadsheet: Dataset Tab" width="100%" />
 <p class="caption">
 Figure 4.2: ICPSR Dataset in Spreadsheet: Dataset Tab
 </p>
 </div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="tutorial.html#cb6-1" aria-hidden="true" tabindex="-1"></a>covid_data<span class="ot">&lt;-</span><span class="fu">read_excel</span>(<span class="st">&quot;Gov_Responses2Covid19_last.xlsx&quot;</span>, <span class="at">sheet=</span><span class="st">&quot;Dataset&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="tutorial.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(covid_data)</span></code></pre></div>
-<pre><code>## # A tibble: 6 x 43
-##   country geoid iso   d     cases deaths school school_local domestic domestic_local travel travel_partial travel_dom
-##   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;        &lt;dbl&gt;    &lt;dbl&gt;          &lt;dbl&gt;  &lt;dbl&gt;          &lt;dbl&gt;      &lt;dbl&gt;
-## 1 Aruba   AW    ABW   43831     0      0      0            0       NA             NA     NA             NA         NA
-## 2 Aruba   AW    ABW   43832     0      0      0            0       NA             NA     NA             NA         NA
-## 3 Aruba   AW    ABW   43833     0      0      0            0       NA             NA     NA             NA         NA
-## 4 Aruba   AW    ABW   43834     0      0      0            0       NA             NA     NA             NA         NA
-## 5 Aruba   AW    ABW   43835     0      0      0            0       NA             NA     NA             NA         NA
-## 6 Aruba   AW    ABW   43836     0      0      0            0       NA             NA     NA             NA         NA
-## # … with 30 more variables: travel_dom_partial &lt;dbl&gt;, curf &lt;dbl&gt;, curf_partial &lt;dbl&gt;, mass &lt;dbl&gt;, mass_partial &lt;dbl&gt;,
-## #   elect &lt;dbl&gt;, elect_partial &lt;dbl&gt;, sport &lt;dbl&gt;, sport_partial &lt;dbl&gt;, rest &lt;dbl&gt;, rest_local &lt;dbl&gt;, testing &lt;dbl&gt;,
-## #   testing_narrow &lt;dbl&gt;, masks &lt;dbl&gt;, masks_partial &lt;dbl&gt;, surveillance &lt;dbl&gt;, surveillance_partial &lt;dbl&gt;,
-## #   state &lt;dbl&gt;, state_partial &lt;dbl&gt;, cash &lt;dbl&gt;, wage &lt;dbl&gt;, credit &lt;dbl&gt;, taxc &lt;dbl&gt;, taxd &lt;dbl&gt;, export &lt;dbl&gt;,
-## #   rate &lt;dbl&gt;, Rigidity_Public_Health &lt;chr&gt;, Economic_Measures &lt;chr&gt;, population_2019 &lt;chr&gt;, continent &lt;chr&gt;</code></pre>
+<p>The fact that the ICPSR dataset has two sheets within it is important; it means that when we load it into R, we’ll have to explicitly specify the sheet (i.e. the “Dataset” sheet) we want to import.</p>
+<p>Now, let’s go ahead and load the “Dataset” sheet of the ICPSR data file. Type the following code into your script, and run it:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="tutorial.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Imports &quot;Dataset&quot; sheet from ICPSR Excel file into R Studio, and assigns the dataset to an object called &quot;covid_data&quot;</span></span>
+<span id="cb6-2"><a href="tutorial.html#cb6-2" aria-hidden="true" tabindex="-1"></a>covid_data<span class="ot">&lt;-</span><span class="fu">read_excel</span>(<span class="st">&quot;Gov_Responses2Covid19_last.xlsx&quot;</span>, <span class="at">sheet=</span><span class="st">&quot;Dataset&quot;</span>)</span></code></pre></div>
+<p>Let’s unpack that code. As we noted above, <code>read_excel</code> is the function used to bring in Excel spreadsheet data into R. The function has two arguments; the first (“Gov_Responses2Covid19_last.xlsx”) is the name of the file we want to import, while the second (sheet=“Dataset”) specifies that we specifically want to import the the “Dataset” sheet from that Excel file. This code is then assigned, using <code>&lt;-</code> (R’s assignment operator) to a new object that we call <code>covid_data</code>. This means that the output of the code on the right hand side of the assignment operator is now assigned to the <code>covid_data</code> object. Think of this object as a container of sorts, one which holds, or “contains”, the output of the code to the right of the assignment operator. Object assignment isn’t necessary; we could have brought the data into R Studio by simply typing the code to the right of the assignment operator. However, assigning the dataset to an object allows for the more flexible and intuitive handling of data, so it is a common practice.</p>
+<p>Note that after typing the code from the previous codeblock into your R script and running it, you still won’t actually see the dataset within the R environment. There are many ways to pull up and inspect the data; in this tutorial, we’ll use the <code>View</code> function, which will bring up the data as a separate tab in the “Source” window. To display the contents of the <code>covid_data</code> object (in other words, the dataset we just imported), type and run the following code:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="tutorial.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Brings up dataset held in the &quot;covid_data&quot; object in R Studio&#39;s data viewer</span></span>
+<span id="cb7-2"><a href="tutorial.html#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(covid_data)</span></code></pre></div>
+<p>Within your R Studio environment, the result of running <code>View(covid_data)</code> will look something like this (dataset outlined in red):</p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-14"></span>
+<img src="images/viewdata.png" alt="Viewing ICPSR Dataset in R Environment" width="100%" />
+<p class="caption">
+Figure 4.3: Viewing ICPSR Dataset in R Environment
+</p>
+</div>
+<p>You can scroll up/down and across the dataset within the data viewer.</p>
 
 </div>
 </div>

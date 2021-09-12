@@ -28,24 +28,38 @@ Before using the ```read_excel``` function to bring in the , it could be helpful
 knitr::include_graphics('images/excel_open.png')
 ```
 
-Note that when we open the spreadsheet, we land on its first tab (or "sheet") which effectively functions as a data codebook, which we can look through to understand the dataset's various variables and and assess how they were measured. 
-
+Note that when we open the spreadsheet, we land on its first tab (or "sheet"), which is titled "Description". This part of the spreadsheet effectively functions as a data codebook, which we can look through to understand the dataset's various variables and and assess how they were measured. To open up the actual dataset, we can toggle to the "Dataset" tab by pressing the corresponding button on the bottom-left of the spreadsheet (highlighted in red below): 
 
 ```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='ICPSR Dataset in Spreadsheet: Dataset Tab'}
 knitr::include_graphics('images/excel_tabs.png')
 ```
 
+The fact that the ICPSR dataset has two sheets within it is important; it means that when we load it into R, we'll have to explicitly specify the sheet (i.e. the "Dataset" sheet) we want to import. 
 
-
-
+Now, let's go ahead and load the "Dataset" sheet of the ICPSR data file. Type the following code into your script, and run it:
 
 ```{r, echo=-1}
 setwd("/Users/adityaranganath/Documents/git_repositories/icpsr_mapping_manual/tutorial_data")
+# Imports "Dataset" sheet from ICPSR Excel file into R Studio, and assigns the dataset to an object called "covid_data"
 covid_data<-read_excel("Gov_Responses2Covid19_last.xlsx", sheet="Dataset")
 ```
 
+Let's unpack that code. As we noted above, ```read_excel``` is the function used to bring in Excel spreadsheet data into R. The function has two arguments; the first ("Gov_Responses2Covid19_last.xlsx") is the name of the file we want to import, while the second (sheet="Dataset") specifies that we specifically want to import the the "Dataset" sheet from that Excel file. This code is then assigned, using ```<-``` (R's assignment operator) to a new object that we call ```covid_data```. This means that the output of the code on the right hand side of the assignment operator is now assigned to the ```covid_data``` object. Think of this object as a container of sorts, one which holds, or "contains", the output of the code to the right of the assignment operator. Object assignment isn't necessary; we could have brought the data into R Studio by simply typing the code to the right of the assignment operator. However, assigning the dataset to an object allows for the more flexible and intuitive handling of data, so it is a common practice. 
+
+Note that after typing the code from the previous codeblock into your R script and running it, you still won't actually see the dataset within the R environment. There are many ways to pull up and inspect the data; in this tutorial, we'll use the ```View``` function, which will bring up the data as a separate tab in the "Source" window. To display the contents of the ```covid_data``` object (in other words, the dataset we just imported), type and run the following code: 
 
 ```{r}
-head(covid_data)
+# Brings up dataset held in the "covid_data" object in R Studio's data viewer
+View(covid_data)
 ```
+
+Within your R Studio environment, the result of running ```View(covid_data)``` will look something like this (dataset outlined in red):
+
+```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='Viewing ICPSR Dataset in R Environment'}
+knitr::include_graphics('images/viewdata.png')
+```
+
+You can scroll up/down and across the dataset within the data viewer. 
+
+
 
