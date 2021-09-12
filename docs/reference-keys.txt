@@ -7,7 +7,7 @@ motivation
 scope-and-objectives
 preliminaries-and-set-up
 data
-installation
+r-and-r-studio-installation
 windows-installation-instructions
 macos-installation-instructions
 the-r-studio-interface
