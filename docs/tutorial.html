@@ -237,6 +237,26 @@ Figure 4.3: Viewing ICPSR Dataset in R Environment
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="tutorial.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(country_boundaries)<span class="sc">+</span></span>
 <span id="cb9-2"><a href="tutorial.html#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>()</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p>We can assign this map (i.e. a visual representation of the “country_boundaries” dataset) to an object, just as we assigned the ICPSR tabular dataset to an object. Let’s call this object “worldmap.”</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="tutorial.html#cb10-1" aria-hidden="true" tabindex="-1"></a>worldmap<span class="ot">&lt;-</span><span class="fu">tm_shape</span>(country_boundaries)<span class="sc">+</span></span>
+<span id="cb10-2"><a href="tutorial.html#cb10-2" aria-hidden="true" tabindex="-1"></a>            <span class="fu">tm_polygons</span>()</span></code></pre></div>
+<p>Having assigned the map to the “worldmap” object, we can bring up the map whenever we want by simply calling the object by typing “worldmap” into the script and running it:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="tutorial.html#cb11-1" aria-hidden="true" tabindex="-1"></a>worldmap</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p>Within the R Studio interface, we can see the above map within the bottom-right window after selecting the “Plots” tab:</p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-19"></span>
+<img src="images/worldmap_window.png" alt="Map in &quot;Plots&quot; Tab" width="100%" />
+<p class="caption">
+Figure 4.4: Map in “Plots” Tab
+</p>
+</div>
+<p>We can enlarge the map in this window by clicking the “Zoom” link; this will produce an enlarged version of the map in a separate window:</p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-20"></span>
+<img src="images/zoom2.png" alt="Enlarging Map with &quot;Zoom&quot; Button" width="100%" />
+<p class="caption">
+Figure 4.5: Enlarging Map with “Zoom” Button
+</p>
+</div>
 
 </div>
 </div>
