@@ -77,7 +77,7 @@ Now that the spatial layer of country boundaries is in our R environment, let's 
 
 Let's first open up the features, and examine the dataset's visual representation. To do so, we'll have to use a mapping package called *tmap*. To bring up the features of the dataset, we have to first tell *tmap* what data we want to map; we do this by first passing the name of the object that contains the dataset (here, "country_boundaries") to the ```tm_shape``` function, and then specifying that our features (i.e. country borders) are represented as polygons through the ```tm_polygons``` function. The ```tm_polygons``` function does not require any arguments. In the *tmap* package, we can connect functions together through a plus sign (+). When we type in and run the following code, the result is a visual representation of the dataset contained in the "country_boundaries" object we defined above, i.e. a political map of the world:
 
-```{r}
+```{r, fig.asp=0.5}
 tm_shape(country_boundaries)+
   tm_polygons()
 ```
