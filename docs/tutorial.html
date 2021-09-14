@@ -257,7 +257,7 @@ Figure 4.4: Map in “Plots” Tab
 Figure 4.5: Enlarging Map with “Zoom” Button
 </p>
 </div>
-<p>We can view the attribute table that corresponds to the features displayed above by simply passing the name of the object containing the spatial dataset to the <code>View</code> function:</p>
+<p>We can view the attribute table that corresponds to the features displayed above by simply passing the name of the object containing the spatial dataset (i.e. “country_boundaries”) to the <code>View</code> function:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="tutorial.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(country_boundaries)</span></code></pre></div>
 <table style="width:100%;">
 <colgroup>
@@ -801,6 +801,7 @@ Figure 4.5: Enlarging Map with “Zoom” Button
 </tr>
 </tbody>
 </table>
+<p>In your R Studio interface, this attribute table should appear as a tab in your “Source” window, in the same location as the ICPSR Covid-19 dataset earlier. We can go ahead and scroll across and scroll up/down the attribute table to explore the information it contains. Remember that each row in the table corresponds to a country in the feature layer, which we just learned how to visualize. Every column in the table corresponds to a different attribute, or piece of country-level information.</p>
 
 </div>
 </div>
