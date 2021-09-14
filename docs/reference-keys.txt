@@ -23,3 +23,4 @@ tutorial
 load-and-view-data
 icpsr-covid-19-tabular-data
 country-boundaries-spatial-data
+editing-spatial-data
