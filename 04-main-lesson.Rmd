@@ -70,6 +70,7 @@ When working with spatial data in R, you will sometimes want to import data that
 In our case, we won't have to download and import the spatial data we need into R Studio, since there are R packages that already contain this spatial data. In particular, we'll use the ```ne_countries``` function of the *rnaturalearth* package to bring the country border dataset into our R environment. Note the two arguments we pass into the ```ne_countries``` function: the "scale" argument specifies that we want to use a medium scale when rendering the map (the other options are 'small' and 'large'), while the "returnclass" argument specifies that we want the spatial dataset in 'sf' format, which is a spatial data format that works well with the *tmap* mapping package we'll use later. As in the previous section, we'll assign the dataset to an object so that we can easily work with it later; we'll call this object "country_boundaries":
 
 ```{r}
+# Brings spatial dataset of country boundaries into R environment using the rnaturalearth package
 country_boundaries<-ne_countries(scale="medium", returnclass="sf")
 ```
 
@@ -78,6 +79,7 @@ Now that the spatial layer of country boundaries is in our R environment, let's 
 Let's first open up the features, and examine the dataset's visual representation. To do so, we'll have to use a mapping package called *tmap*. To bring up the features of the dataset, we have to first tell *tmap* what data we want to map; we do this by first passing the name of the object that contains the dataset (here, "country_boundaries") to the ```tm_shape``` function, and then specifying that our features (i.e. country borders) are represented as polygons through the ```tm_polygons``` function. The ```tm_polygons``` function does not require any arguments. In the *tmap* package, we can connect functions together through a plus sign (+). When we type in and run the following code, the result is a visual representation of the dataset contained in the "country_boundaries" object we defined above, i.e. a political map of the world:
 
 ```{r, fig.asp=0.5}
+# maps geographic features (i.e. countries) of spatial dateset
 tm_shape(country_boundaries)+
   tm_polygons()
 ```
@@ -85,6 +87,7 @@ tm_shape(country_boundaries)+
 We can assign this map (i.e. a visual representation of the "country_boundaries" dataset) to an object, just as we assigned the ICPSR tabular dataset to an object. Let's call this object "worldmap."
 
 ```{r}
+# assigns map of geographic features to a new object called "worldmap" 
 worldmap<-tm_shape(country_boundaries)+
             tm_polygons()
 ```
@@ -92,6 +95,7 @@ worldmap<-tm_shape(country_boundaries)+
 Having assigned the map to the "worldmap" object, we can bring up the map whenever we want by simply calling the object by typing "worldmap" into the script and running it:
 
 ```{r, fig.asp=0.5}
+# calls "worldmap" object to display country-level map generated from the "country_boundaries" spatial dataset's geographic features
 worldmap
 ```
 
@@ -111,6 +115,7 @@ knitr::include_graphics('images/zoom2.png')
 We can view the attribute table that corresponds to the features displayed above by simply passing the name of the object containing the spatial dataset (i.e. "country_boundaries") to the ```View``` function:
 
 ```{r}
+# View attribute table of "country_boundaries" spatial dataset
 View(country_boundaries)
 ```
 
@@ -119,6 +124,14 @@ kable(head(country_boundaries))
 ```
 
 In your R Studio interface, this attribute table should appear as a tab in your "Source" window, in the same location as the ICPSR Covid-19 dataset earlier. We can go ahead and scroll across and scroll up/down the attribute table to explore the information it contains. Remember that each row in the table corresponds to a country in the feature layer, which we just learned how to visualize. Every column in the table corresponds to a different attribute, or piece of country-level information. 
+
+## Editing Spatial Data
+
+We can edit spatial datasets in R Studio with relative ease, using commonly used R packages. Let's say, for example, that we don't want Antarctica to appear on our map (since Antarctica typically does not appear on political maps of the world). 
+
+To delete Antarctica from the map, we first need to delete the row corresponding to Antarctica from the spatial dataset ()
+
+
 
 
 
