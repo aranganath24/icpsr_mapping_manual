@@ -61,7 +61,28 @@ knitr::include_graphics('images/viewdata.png')
 
 You can scroll up/down and across the dataset within the data viewer. 
 
-### Spatial Data of Country Boundaries
+### Country Boundaries Spatial Data
+
+Now that we have our tabular data on government responses to Covid-19 loaded into R Studio, let's bring spatial data on world country borders into memory. Eventually, we'll represent the Covid-19 data on a map by joining it to the spatial data on country boundaries that we will now bring in.
+
+When working with spatial data in R, you will sometimes want to import data that you collected on your own, or data that you downloaded. There are several functions in the ```sf``` package that will allow you to easily import your external spatial data in R; if you need to do this, you should consult the package's documentation.
+
+In our case, we won't have to download and import the spatial data we need into R Studio, since there are R packages that already contain this spatial data. In particular, we'll use the ```ne_countries``` function of the *rnaturalearth* package to bring the country border dataset into our R environment. Note the two arguments we pass into the ```ne_countries``` function: the "scale" argument specifies that we want to use a medium scale when rendering the map (the other options are 'small' and 'large'), while the "returnclass" argument specifies that we want the spatial dataset in 'sf' format, which is a spatial data format that works well with the *tmap* mapping package we'll use later. As in the previous section, we'll assign the dataset to an object so that we can easily work with it later; we'll call this object "country_boundaries":
+
+```{r}
+country_boundaries<-ne_countries(scale="medium", returnclass="sf")
+```
+
+Now that the spatial layer of country boundaries is in our R environment, let's go ahead and open it up. A spatial dataset consists of features and attributes. Features are represented visually, and use geometric shapes shapes (such as lines, points, or polygons) to represent real-world phenomena in a way that corresponds to their spatial locations. An attribute refers to information about a given feature; attributes for a spatial dataset are usually presented in a table, where each row corresponds to a given feature, and columns represent various attributes. 
+
+Let's first open up the features, and examine the dataset's visual representation. To do so, we'll have to use a mapping package called *tmap*. To bring up the features of the dataset, we have to first tell *tmap* what data we want to map; we do this by first passing the name of the object that contains the dataset (here, "country_boundaries") to the ```tm_shape``` function, and then specifying that our features (i.e. country borders) are represented as polygons through the ```tm_polygons``` function. The ```tm_polygons``` function does not require any arguments. In the *tmap* package, we can connect functions together through a plus sign (+). When we type in and run the following code, the result is a visual representation of the dataset contained in the "country_boundaries" object we defined above, i.e. a political map of the world:
+
+```{r}
+tm_shape(country_boundaries)+
+  tm_polygons()
+```
+
+
 
 
 

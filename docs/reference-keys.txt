@@ -20,4 +20,4 @@ set-working-directory
 tutorial
 load-and-view-data
 icpsr-covid-19-tabular-data
-spatial-data-of-country-boundaries
+country-boundaries-spatial-data

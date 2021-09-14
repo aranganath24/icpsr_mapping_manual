@@ -24,7 +24,7 @@
 <meta name="author" content="Aditya Ranganath" />
 
 
-<meta name="date" content="2021-09-12" />
+<meta name="date" content="2021-09-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -161,7 +161,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.1" data-path="tutorial.html"><a href="tutorial.html#load-and-view-data"><i class="fa fa-check"></i><b>4.1</b> Load and View Data</a>
 <ul>
 <li class="chapter" data-level="4.1.1" data-path="tutorial.html"><a href="tutorial.html#icpsr-covid-19-tabular-data"><i class="fa fa-check"></i><b>4.1.1</b> ICPSR Covid-19 Tabular Data</a></li>
-<li class="chapter" data-level="4.1.2" data-path="tutorial.html"><a href="tutorial.html#spatial-data-of-country-boundaries"><i class="fa fa-check"></i><b>4.1.2</b> Spatial Data of Country Boundaries</a></li>
+<li class="chapter" data-level="4.1.2" data-path="tutorial.html"><a href="tutorial.html#country-boundaries-spatial-data"><i class="fa fa-check"></i><b>4.1.2</b> Country Boundaries Spatial Data</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -226,8 +226,17 @@ Figure 4.3: Viewing ICPSR Dataset in R Environment
 </div>
 <p>You can scroll up/down and across the dataset within the data viewer.</p>
 </div>
-<div id="spatial-data-of-country-boundaries" class="section level3" number="4.1.2">
-<h3><span class="header-section-number">4.1.2</span> Spatial Data of Country Boundaries</h3>
+<div id="country-boundaries-spatial-data" class="section level3" number="4.1.2">
+<h3><span class="header-section-number">4.1.2</span> Country Boundaries Spatial Data</h3>
+<p>Now that we have our tabular data on government responses to Covid-19 loaded into R Studio, let’s bring spatial data on world country borders into memory. Eventually, we’ll represent the Covid-19 data on a map by joining it to the spatial data on country boundaries that we will now bring in.</p>
+<p>When working with spatial data in R, you will sometimes want to import data that you collected on your own, or data that you downloaded. There are several functions in the <code>sf</code> package that will allow you to easily import your external spatial data in R; if you need to do this, you should consult the package’s documentation.</p>
+<p>In our case, we won’t have to download and import the spatial data we need into R Studio, since there are R packages that already contain this spatial data. In particular, we’ll use the <code>ne_countries</code> function of the <em>rnaturalearth</em> package to bring the country border dataset into our R environment. Note the two arguments we pass into the <code>ne_countries</code> function: the “scale” argument specifies that we want to use a medium scale when rendering the map (the other options are ‘small’ and ‘large’), while the “returnclass” argument specifies that we want the spatial dataset in ‘sf’ format, which is a spatial data format that works well with the <em>tmap</em> mapping package we’ll use later. As in the previous section, we’ll assign the dataset to an object so that we can easily work with it later; we’ll call this object “country_boundaries”:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="tutorial.html#cb8-1" aria-hidden="true" tabindex="-1"></a>country_boundaries<span class="ot">&lt;-</span><span class="fu">ne_countries</span>(<span class="at">scale=</span><span class="st">&quot;medium&quot;</span>, <span class="at">returnclass=</span><span class="st">&quot;sf&quot;</span>)</span></code></pre></div>
+<p>Now that the spatial layer of country boundaries is in our R environment, let’s go ahead and open it up. A spatial dataset consists of features and attributes. Features are represented visually, and use geometric shapes shapes (such as lines, points, or polygons) to represent real-world phenomena in a way that corresponds to their spatial locations. An attribute refers to information about a given feature; attributes for a spatial dataset are usually presented in a table, where each row corresponds to a given feature, and columns represent various attributes.</p>
+<p>Let’s first open up the features, and examine the dataset’s visual representation. To do so, we’ll have to use a mapping package called <em>tmap</em>. To bring up the features of the dataset, we have to first tell <em>tmap</em> what data we want to map; we do this by first passing the name of the object that contains the dataset (here, “country_boundaries”) to the <code>tm_shape</code> function, and then specifying that our features (i.e. country borders) are represented as polygons through the <code>tm_polygons</code> function. The <code>tm_polygons</code> function does not require any arguments. In the <em>tmap</em> package, we can connect functions together through a plus sign (+). When we type in and run the following code, the result is a visual representation of the dataset contained in the “country_boundaries” object we defined above, i.e. a political map of the world:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="tutorial.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(country_boundaries)<span class="sc">+</span></span>
+<span id="cb9-2"><a href="tutorial.html#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>()</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 
 </div>
 </div>
