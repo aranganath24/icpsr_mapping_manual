@@ -129,30 +129,34 @@ In your R Studio interface, this attribute table should appear as a tab in your 
 
 We can edit spatial datasets in R Studio with relative ease, using commonly used R packages. Let's say, for example, that we don't want Antarctica to appear on our map (since Antarctica typically does not appear on political maps of the world). 
 
-To delete Antarctica from the map, we first need to delete the row that corresponds to Antarctica from the spatial dataset contained in the "country_boundaries" dataset. We can do so with the following code:
+To delete Antarctica from the map, we first need to delete the row that corresponds to Antarctica from the spatial dataset contained in the "country_boundaries" object We can do so with the following code:
 
 ```{r}
 ## Deletes Antarctica from spatial dataset in "country_boundaries" object
 country_boundaries<-country_boundaries %>% filter(iso_a3 !="ATA")
 ```
 
-Let's unpack what the code above is doing. First, we have to decide whether we want to assign the edited spatial dataset to a new object, or simply update the existing "country_boundaries" object and overwrite the current version of the object. The first option is akin to doing a "save as" and creating a new document with relevant changes in word processing software, while the latter is akin to doing a "save" and appending those changes to the existing file. To keep things easy, we'll simply overwrite the current "country_boundaries" object with the changes, rather than making a new object; as a result, the name of the object to the left of the assignment operator (<-) remains "country_boundaries."
+We can translate this code into ordinary language as follows: "Take the existing country boundaries dataset (```country_boundaries``` to the left of the ```%>%``` and after the assignment operator) and then (``` %>% ```, a symbol called a pipe, which is used to chain together code) select only the countries that are not Antarctica (```filter(iso_a3 !="ATA"```). Take this new dataset, which doesn't include Antarctica, and assign it back to the existing 'country_boundaries' object (```country_boundaries<-```), which effectively replaces the previous spatial dataset in the country_boundaries object (which did include Antarctica)." 
 
-To the right of the assignment operator, we need to tell R what to assign to the amended "country_boundaries" object. We want to assign the existing country_boundaries object, sans Alaska, to the amended object. Therefore, we start by once again typing "country_boundaries" to indicate that the dataset (with Antarctica) in this existing object is our starting point. With this starting point established, we then need to indicate how we want to alter the existing object; we do this to the right of the "pipe" operator (%>%), which is used to take the output of the code on its left, and then use that output as an input to the code on its right. Here, the pipe is taking the output of the "country_dataset" object (i.e. the existing spatial dataset) on its left, and then using that output as an input to the ```filter``` function on its right. In other words, the pipe operator links the code on its two sides, and indicates that the object being passed through the ```filter``` function is the "country_boundaries" object. 
+Two things may require additional elaboration:
 
-The ```filter``` function  is a function from the *dplyr* package that allows one to select rows from a dataset by specified criteria. In our case, we want to select all rows from the dataset that are not Antarctica. Antarctica's 3 digit ISO code is ATA (this information is in the spatial dataset's attribute table), and we'll use this ISO code to specify our desired criteria. The code that reads ```filter(iso_a3!="ATA")``` is essentially our specification; it is effectively saying "select all rows in the dataset that do not have a 3 digit ISO code of ATA (which corresponds to Antarctica)." The exclamation mark followed by the equals sign (!=) is R syntax for "not equals." If we were to instead type ```filter(iso_a3=="ATA)```, the function would *only* select the Antarctica row from the dataset and discard everything else. 
+* First is the pipe, the symbol that looks like this: %>%. The pipe operator essentially takes the output of the code on its left, and then use that output as an input to the code on its right. Here, the pipe is taking the output of the Here, the pipe is taking the output of the "country_dataset" object (i.e. the existing spatial dataset) on its left, and then using that output as an input to the ```filter``` function on its right. In other words, the pipe operator links the code on its two sides, and indicates that the object being passed through the ```filter``` function is the "country_boundaries" object. 
+* The ```filter``` function  is a function from the *dplyr* package that allows one to select rows from a dataset by specified criteria. In our case, we want to select all rows from the dataset that are not Antarctica. The argument to the ```filter``` function, ```iso_a3 !="ATA"```, is essentially saying "return any records where the iso_a3 variable in the attribute table (the 3-digit ISO country code) is NOT equal to "ATA" (Antarctica's code). Note that ```!=``` is R syntax for "not equal to".^[If we were to instead type ```filter(iso_a3=="ATA)```, the function would *only* select the Antarctica row from the dataset and discard everything else.]
 
-There was a lot to unpack in that single line of code, but ultimately it is fairly intuitive. We can translate that code into ordinary language as follows: "Take the existing country boundaries dataset and then select only the countries that are not Antarctica (as indicated by the fact that their 3-digit ISO codes are NOT "ATA"). Then, take this new dataset, which doesn't include Antarctica, and assign it back to the existing 'country_boundaries' object, which effectively replaces the previous spatial dataset in the country_boundaries object (which did include Antarctica)."
+Now, let's see this change reflected in the "country_boundaries" dataset's geographic features. To do so, we must update the "worldmap" object by rerunning the object assignment (the worldmap object we defined above will not automatically reflect the edits we just made to the "country_boundaries" dataset. We need to run the code again with the edited version of the dataset "country_boundaries" object passed through the ```tm_shape``` function:
 
 ```{r}
 worldmap<-tm_shape(country_boundaries)+
-              tm_polygons()
+            tm_polygons()
 ```
 
+Now, let's view the features of the edited "country_boundaries" dataset:
 
 ```{r, fig.asp=0.5}
 worldmap
 ```
+
+As expected, Antarctica has been deleted!
 
 
 
