@@ -74,9 +74,25 @@ In our case, we won't have to download and import the spatial data we need into 
 country_boundaries<-ne_countries(scale="medium", returnclass="sf")
 ```
 
-Now that the spatial layer of country boundaries is in our R environment, let's go ahead and open it up. A spatial dataset consists of features and attributes. Features are represented visually, and use geometric shapes shapes (such as lines, points, or polygons) to represent real-world phenomena in a way that corresponds to their spatial locations. An attribute refers to information about a given feature; attributes for a spatial dataset are usually presented in a table, where each row corresponds to a given feature, and columns represent various attributes. 
+Now that we have this spatial dataset in memory and assigned to an object, let's step back and clarify what exactly a spatial dataset is. In some respects, a spatial dataset is like a typical tabular dataset. To see this, let's pass the "country_boundaries" object through the ```View()``` function to open up the dataset:
 
-Let's first open up the features, and examine the dataset's visual representation. To do so, we'll have to use a mapping package called *tmap*. To bring up the features of the dataset, we have to first tell *tmap* what data we want to map; we do this by first passing the name of the object that contains the dataset (here, "country_boundaries") to the ```tm_shape``` function, and then specifying that our features (i.e. country borders) are represented as polygons through the ```tm_polygons``` function. The ```tm_polygons``` function does not require any arguments. In the *tmap* package, we can connect functions together through a plus sign (+). When we type in and run the following code, the result is a visual representation of the dataset contained in the "country_boundaries" object we defined above, i.e. a political map of the world:
+```{r}
+View(country_boundaries)
+```
+
+By scrolling across the dataset, you'll notice that each row corresponds to a country, and that there are many columns that correspond to various country-level attributes. The key column, however, which makes this a spatial dataset (as opposed to merely a tabular one), is the information contained in a column called "geometry". This column contains geographic coordinate information that essentially defines a polygon for each country in the dataset. The "geometry" column is likely one of the last columns in the dataset, so you may have to scroll a bit to find it. Alternatively, we can use the ```relocate``` function in the *dplyr* package to make the "geometry" column the first column in the dataset within "country_boundaries", and then view this reordered dataset using the ```View``` function. The first argument passed to the ```relocate``` function ("country_boundaries") indicates the object that contains the relevant dataset, and the second argument ("geometry) indicates the name of the column we want to move to the front of the dataset. 
+
+```{r}
+View(relocate(country_boundaries, geometry))
+```
+
+After typing in that code and running it in your script, the window with the reordered dataset should appear in your source window; note the "geometry" tab:
+
+```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='Geometry Column Contains Spatial Information'}
+knitr::include_graphics('images/geometry.png')
+```
+
+We can use the information in the "geometry" tab to draw georeferenced polygons for each row in the spatial dataset, which will yield a world map! To translate the information in the geometry tab into a cartographic representation, we'll use a package called *tmap*. To bring up the features of the dataset, we have to first tell *tmap* what dataset contains the information we want to map; we do this by first passing the name of the object that contains the relevant dataset (here, "country_boundaries") to the ```tm_shape``` function, and then specifying that our features (i.e. country borders) are represented as polygons through the ```tm_polygons``` function. The ```tm_polygons``` function does not require any arguments. In the *tmap* package, we can connect functions together through a plus sign (+). When we type in and run the following code, the result is a map that is rendered based on the information in the "geometry" column:
 
 ```{r, fig.asp=0.5}
 # maps geographic features (i.e. countries) of spatial dateset
@@ -84,7 +100,7 @@ tm_shape(country_boundaries)+
   tm_polygons()
 ```
 
-We can assign this map (i.e. a visual representation of the "country_boundaries" dataset) to an object, just as we assigned the ICPSR tabular dataset to an object. Let's call this object "worldmap."
+We can assign this map to an object, just as we assigned the ICPSR tabular dataset to an object. Let's call this object "worldmap."
 
 ```{r}
 # assigns map of geographic features to a new object called "worldmap" 
@@ -92,17 +108,16 @@ worldmap<-tm_shape(country_boundaries)+
             tm_polygons()
 ```
 
-Having assigned the map to the "worldmap" object, we can bring up the map whenever we want by simply calling the object by typing "worldmap" into the script and running it:
+Having assigned the map to the "worldmap" object, we can bring up the map whenever we want by simply calling "worldmap" object: t:
 
 ```{r, fig.asp=0.5}
-# calls "worldmap" object to display country-level map generated from the "country_boundaries" spatial dataset's geographic features
+# calls "worldmap" object to display country-level map generated from the "country_boundaries" spatial dataset 
 worldmap
 ```
 
 Within the R Studio interface, we can see the above map within the bottom-right window after selecting the "Plots" tab:
 
-
-```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='Map in "Plots" Tab'}
+```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='World Map in "Plots" Tab (Rendered from Spatial Dataset'}
 knitr::include_graphics('images/worldmap_window.png')
 ```
 
@@ -112,27 +127,14 @@ We can enlarge the map in this window by clicking the "Zoom" link; this will pro
 knitr::include_graphics('images/zoom2.png')
 ```
 
-We can view the attribute table that corresponds to the features displayed above by simply passing the name of the object containing the spatial dataset (i.e. "country_boundaries") to the ```View``` function:
-
-```{r}
-# View attribute table of "country_boundaries" spatial dataset
-View(country_boundaries)
-```
-
-```{r, echo=FALSE}
-kable(head(country_boundaries))
-```
-
-In your R Studio interface, this attribute table should appear as a tab in your "Source" window, in the same location as the ICPSR Covid-19 dataset earlier. We can go ahead and scroll across and scroll up/down the attribute table to explore the information it contains. Remember that each row in the table corresponds to a country in the feature layer, which we just learned how to visualize. Every column in the table corresponds to a different attribute, or piece of country-level information. 
-
-## Editing Spatial Data
+## Edit Spatial Data
 
 We can edit spatial datasets in R Studio with relative ease, using commonly used R packages. Let's say, for example, that we don't want Antarctica to appear on our map (since Antarctica typically does not appear on political maps of the world). 
 
-To delete Antarctica from the map, we first need to delete the row that corresponds to Antarctica from the spatial dataset contained in the "country_boundaries" object We can do so with the following code:
+To delete Antarctica from the map, we first need to delete the row that corresponds to Antarctica from the spatial dataset contained in the "country_boundaries" object. We can do so with the following code:
 
 ```{r}
-## Deletes Antarctica from spatial dataset in "country_boundaries" object
+# Deletes Antarctica from spatial dataset in "country_boundaries" object
 country_boundaries<-country_boundaries %>% filter(iso_a3 !="ATA")
 ```
 
@@ -143,20 +145,35 @@ Two things may require additional elaboration:
 * First is the pipe, the symbol that looks like this: %>%. The pipe operator essentially takes the output of the code on its left, and then use that output as an input to the code on its right. Here, the pipe is taking the output of the Here, the pipe is taking the output of the "country_dataset" object (i.e. the existing spatial dataset) on its left, and then using that output as an input to the ```filter``` function on its right. In other words, the pipe operator links the code on its two sides, and indicates that the object being passed through the ```filter``` function is the "country_boundaries" object. 
 * The ```filter``` function  is a function from the *dplyr* package that allows one to select rows from a dataset by specified criteria. In our case, we want to select all rows from the dataset that are not Antarctica. The argument to the ```filter``` function, ```iso_a3 !="ATA"```, is essentially saying "return any records where the iso_a3 variable in the attribute table (the 3-digit ISO country code) is NOT equal to "ATA" (Antarctica's code). Note that ```!=``` is R syntax for "not equal to".^[If we were to instead type ```filter(iso_a3=="ATA)```, the function would *only* select the Antarctica row from the dataset and discard everything else.]
 
-Now, let's see this change reflected in the "country_boundaries" dataset's geographic features. To do so, we must update the "worldmap" object by rerunning the object assignment (the worldmap object we defined above will not automatically reflect the edits we just made to the "country_boundaries" dataset. We need to run the code again with the edited version of the dataset "country_boundaries" object passed through the ```tm_shape``` function:
+Now, let's see this change reflected in the corresponding map. To do so, we must update the "worldmap" object by rerunning the object assignment. The worldmap object we defined above will not automatically reflect the edits we just made to the "country_boundaries" dataset; we need to run the code again with the edited version of the dataset "country_boundaries" object passed through the ```tm_shape``` function:
 
 ```{r}
 worldmap<-tm_shape(country_boundaries)+
             tm_polygons()
 ```
 
-Now, let's view the features of the edited "country_boundaries" dataset:
+Now, let's view our updated map:
 
 ```{r, fig.asp=0.5}
 worldmap
 ```
 
-As expected, Antarctica has been deleted!
+As desired, Antarctica has been deleted from the spatial dataset, and therefore no longer appears on the corresponding map. 
+
+## Process ICPSR Tabular Data for Mapping
+
+In order to represent the ICPSR data on governments' economic responses to Covid-19 on a map, we must join the ICPSR dataset (contained in the "covid_data" object) to the spatial dataset (contained in the "country_boundaries" object); at that point, we'll have a new, integrated dataset that will include the country-level Covid-19 data of interest in a spatial dataset. We can then display that Covid-19 information on a map by using the ```tmap``` package. 
+Before we can take those steps, however, we need to process the ICPSR tabular data with a view towards facilitating the joining and mapping process.
+
+### Select Variables
+
+### Change class of "Economic_Measures" Index
+
+### Compute average of "Economic_Measures" index
+
+### Calculate Summary Statistics
+
+
 
 
 

@@ -24,7 +24,7 @@
 <meta name="author" content="Aditya Ranganath" />
 
 
-<meta name="date" content="2021-09-14" />
+<meta name="date" content="2021-09-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -163,7 +163,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.1.1" data-path="tutorial.html"><a href="tutorial.html#icpsr-covid-19-tabular-data"><i class="fa fa-check"></i><b>4.1.1</b> ICPSR Covid-19 Tabular Data</a></li>
 <li class="chapter" data-level="4.1.2" data-path="tutorial.html"><a href="tutorial.html#country-boundaries-spatial-data"><i class="fa fa-check"></i><b>4.1.2</b> Country Boundaries Spatial Data</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="tutorial.html"><a href="tutorial.html#editing-spatial-data"><i class="fa fa-check"></i><b>4.2</b> Editing Spatial Data</a></li>
+<li class="chapter" data-level="4.2" data-path="tutorial.html"><a href="tutorial.html#edit-spatial-data"><i class="fa fa-check"></i><b>4.2</b> Edit Spatial Data</a></li>
+<li class="chapter" data-level="4.3" data-path="tutorial.html"><a href="tutorial.html#process-icpsr-tabular-data-for-mapping"><i class="fa fa-check"></i><b>4.3</b> Process ICPSR Tabular Data for Mapping</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="tutorial.html"><a href="tutorial.html#select-variables"><i class="fa fa-check"></i><b>4.3.1</b> Select Variables</a></li>
+<li class="chapter" data-level="4.3.2" data-path="tutorial.html"><a href="tutorial.html#change-class-of-economic_measures-index"><i class="fa fa-check"></i><b>4.3.2</b> Change class of “Economic_Measures” Index</a></li>
+<li class="chapter" data-level="4.3.3" data-path="tutorial.html"><a href="tutorial.html#compute-average-of-economic_measures-index"><i class="fa fa-check"></i><b>4.3.3</b> Compute average of “Economic_Measures” index</a></li>
+<li class="chapter" data-level="4.3.4" data-path="tutorial.html"><a href="tutorial.html#calculate-summary-statistics"><i class="fa fa-check"></i><b>4.3.4</b> Calculate Summary Statistics</a></li>
+</ul></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -234,602 +241,83 @@ Figure 4.3: Viewing ICPSR Dataset in R Environment
 <p>In our case, we won’t have to download and import the spatial data we need into R Studio, since there are R packages that already contain this spatial data. In particular, we’ll use the <code>ne_countries</code> function of the <em>rnaturalearth</em> package to bring the country border dataset into our R environment. Note the two arguments we pass into the <code>ne_countries</code> function: the “scale” argument specifies that we want to use a medium scale when rendering the map (the other options are ‘small’ and ‘large’), while the “returnclass” argument specifies that we want the spatial dataset in ‘sf’ format, which is a spatial data format that works well with the <em>tmap</em> mapping package we’ll use later. As in the previous section, we’ll assign the dataset to an object so that we can easily work with it later; we’ll call this object “country_boundaries”:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="tutorial.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Brings spatial dataset of country boundaries into R environment using the rnaturalearth package</span></span>
 <span id="cb8-2"><a href="tutorial.html#cb8-2" aria-hidden="true" tabindex="-1"></a>country_boundaries<span class="ot">&lt;-</span><span class="fu">ne_countries</span>(<span class="at">scale=</span><span class="st">&quot;medium&quot;</span>, <span class="at">returnclass=</span><span class="st">&quot;sf&quot;</span>)</span></code></pre></div>
-<p>Now that the spatial layer of country boundaries is in our R environment, let’s go ahead and open it up. A spatial dataset consists of features and attributes. Features are represented visually, and use geometric shapes shapes (such as lines, points, or polygons) to represent real-world phenomena in a way that corresponds to their spatial locations. An attribute refers to information about a given feature; attributes for a spatial dataset are usually presented in a table, where each row corresponds to a given feature, and columns represent various attributes.</p>
-<p>Let’s first open up the features, and examine the dataset’s visual representation. To do so, we’ll have to use a mapping package called <em>tmap</em>. To bring up the features of the dataset, we have to first tell <em>tmap</em> what data we want to map; we do this by first passing the name of the object that contains the dataset (here, “country_boundaries”) to the <code>tm_shape</code> function, and then specifying that our features (i.e. country borders) are represented as polygons through the <code>tm_polygons</code> function. The <code>tm_polygons</code> function does not require any arguments. In the <em>tmap</em> package, we can connect functions together through a plus sign (+). When we type in and run the following code, the result is a visual representation of the dataset contained in the “country_boundaries” object we defined above, i.e. a political map of the world:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="tutorial.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># maps geographic features (i.e. countries) of spatial dateset</span></span>
-<span id="cb9-2"><a href="tutorial.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(country_boundaries)<span class="sc">+</span></span>
-<span id="cb9-3"><a href="tutorial.html#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>()</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
-<p>We can assign this map (i.e. a visual representation of the “country_boundaries” dataset) to an object, just as we assigned the ICPSR tabular dataset to an object. Let’s call this object “worldmap.”</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="tutorial.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># assigns map of geographic features to a new object called &quot;worldmap&quot; </span></span>
-<span id="cb10-2"><a href="tutorial.html#cb10-2" aria-hidden="true" tabindex="-1"></a>worldmap<span class="ot">&lt;-</span><span class="fu">tm_shape</span>(country_boundaries)<span class="sc">+</span></span>
-<span id="cb10-3"><a href="tutorial.html#cb10-3" aria-hidden="true" tabindex="-1"></a>            <span class="fu">tm_polygons</span>()</span></code></pre></div>
-<p>Having assigned the map to the “worldmap” object, we can bring up the map whenever we want by simply calling the object by typing “worldmap” into the script and running it:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="tutorial.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calls &quot;worldmap&quot; object to display country-level map generated from the &quot;country_boundaries&quot; spatial dataset&#39;s geographic features</span></span>
-<span id="cb11-2"><a href="tutorial.html#cb11-2" aria-hidden="true" tabindex="-1"></a>worldmap</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
-<p>Within the R Studio interface, we can see the above map within the bottom-right window after selecting the “Plots” tab:</p>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-19"></span>
-<img src="images/worldmap_window.png" alt="Map in &quot;Plots&quot; Tab" width="100%" />
+<p>Now that we have this spatial dataset in memory and assigned to an object, let’s step back and clarify what exactly a spatial dataset is. In some respects, a spatial dataset is like a typical tabular dataset. To see this, let’s pass the “country_boundaries” object through the <code>View()</code> function to open up the dataset:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="tutorial.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(country_boundaries)</span></code></pre></div>
+<p>By scrolling across the dataset, you’ll notice that each row corresponds to a country, and that there are many columns that correspond to various country-level attributes. The key column, however, which makes this a spatial dataset (as opposed to merely a tabular one), is the information contained in a column called “geometry”. This column contains geographic coordinate information that essentially defines a polygon for each country in the dataset. The “geometry” column is likely one of the last columns in the dataset, so you may have to scroll a bit to find it. Alternatively, we can use the <code>relocate</code> function in the <em>dplyr</em> package to make the “geometry” column the first column in the dataset within “country_boundaries”, and then view this reordered dataset using the <code>View</code> function. The first argument passed to the <code>relocate</code> function (“country_boundaries”) indicates the object that contains the relevant dataset, and the second argument ("geometry) indicates the name of the column we want to move to the front of the dataset.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="tutorial.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(<span class="fu">relocate</span>(country_boundaries, geometry))</span></code></pre></div>
+<p>After typing in that code and running it in your script, the window with the reordered dataset should appear in your source window; note the “geometry” tab:</p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-18"></span>
+<img src="images/geometry.png" alt="Geometry Column Contains Spatial Information" width="100%" />
 <p class="caption">
-Figure 4.4: Map in “Plots” Tab
+Figure 4.4: Geometry Column Contains Spatial Information
+</p>
+</div>
+<p>We can use the information in the “geometry” tab to draw georeferenced polygons for each row in the spatial dataset, which will yield a world map! To translate the information in the geometry tab into a cartographic representation, we’ll use a package called <em>tmap</em>. To bring up the features of the dataset, we have to first tell <em>tmap</em> what dataset contains the information we want to map; we do this by first passing the name of the object that contains the relevant dataset (here, “country_boundaries”) to the <code>tm_shape</code> function, and then specifying that our features (i.e. country borders) are represented as polygons through the <code>tm_polygons</code> function. The <code>tm_polygons</code> function does not require any arguments. In the <em>tmap</em> package, we can connect functions together through a plus sign (+). When we type in and run the following code, the result is a map that is rendered based on the information in the “geometry” column:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="tutorial.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># maps geographic features (i.e. countries) of spatial dateset</span></span>
+<span id="cb11-2"><a href="tutorial.html#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(country_boundaries)<span class="sc">+</span></span>
+<span id="cb11-3"><a href="tutorial.html#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>()</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p>We can assign this map to an object, just as we assigned the ICPSR tabular dataset to an object. Let’s call this object “worldmap.”</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="tutorial.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># assigns map of geographic features to a new object called &quot;worldmap&quot; </span></span>
+<span id="cb12-2"><a href="tutorial.html#cb12-2" aria-hidden="true" tabindex="-1"></a>worldmap<span class="ot">&lt;-</span><span class="fu">tm_shape</span>(country_boundaries)<span class="sc">+</span></span>
+<span id="cb12-3"><a href="tutorial.html#cb12-3" aria-hidden="true" tabindex="-1"></a>            <span class="fu">tm_polygons</span>()</span></code></pre></div>
+<p>Having assigned the map to the “worldmap” object, we can bring up the map whenever we want by simply calling “worldmap” object: t:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="tutorial.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calls &quot;worldmap&quot; object to display country-level map generated from the &quot;country_boundaries&quot; spatial dataset </span></span>
+<span id="cb13-2"><a href="tutorial.html#cb13-2" aria-hidden="true" tabindex="-1"></a>worldmap</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p>Within the R Studio interface, we can see the above map within the bottom-right window after selecting the “Plots” tab:</p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-22"></span>
+<img src="images/worldmap_window.png" alt="World Map in &quot;Plots&quot; Tab (Rendered from Spatial Dataset" width="100%" />
+<p class="caption">
+Figure 4.5: World Map in “Plots” Tab (Rendered from Spatial Dataset
 </p>
 </div>
 <p>We can enlarge the map in this window by clicking the “Zoom” link; this will produce an enlarged version of the map in a separate window:</p>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-20"></span>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-23"></span>
 <img src="images/zoom2.png" alt="Enlarging Map with &quot;Zoom&quot; Button" width="100%" />
 <p class="caption">
-Figure 4.5: Enlarging Map with “Zoom” Button
+Figure 4.6: Enlarging Map with “Zoom” Button
 </p>
 </div>
-<p>We can view the attribute table that corresponds to the features displayed above by simply passing the name of the object containing the spatial dataset (i.e. “country_boundaries”) to the <code>View</code> function:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="tutorial.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># View attribute table of &quot;country_boundaries&quot; spatial dataset</span></span>
-<span id="cb12-2"><a href="tutorial.html#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(country_boundaries)</span></code></pre></div>
-<table style="width:100%;">
-<colgroup>
-<col width="0%" />
-<col width="1%" />
-<col width="2%" />
-<col width="1%" />
-<col width="2%" />
-<col width="0%" />
-<col width="1%" />
-<col width="0%" />
-<col width="2%" />
-<col width="1%" />
-<col width="1%" />
-<col width="1%" />
-<col width="1%" />
-<col width="0%" />
-<col width="0%" />
-<col width="1%" />
-<col width="0%" />
-<col width="1%" />
-<col width="1%" />
-<col width="1%" />
-<col width="0%" />
-<col width="1%" />
-<col width="1%" />
-<col width="0%" />
-<col width="0%" />
-<col width="4%" />
-<col width="1%" />
-<col width="1%" />
-<col width="1%" />
-<col width="1%" />
-<col width="1%" />
-<col width="1%" />
-<col width="1%" />
-<col width="1%" />
-<col width="1%" />
-<col width="1%" />
-<col width="1%" />
-<col width="1%" />
-<col width="1%" />
-<col width="1%" />
-<col width="3%" />
-<col width="3%" />
-<col width="1%" />
-<col width="1%" />
-<col width="0%" />
-<col width="0%" />
-<col width="0%" />
-<col width="0%" />
-<col width="0%" />
-<col width="0%" />
-<col width="0%" />
-<col width="1%" />
-<col width="1%" />
-<col width="1%" />
-<col width="1%" />
-<col width="1%" />
-<col width="1%" />
-<col width="2%" />
-<col width="3%" />
-<col width="1%" />
-<col width="1%" />
-<col width="1%" />
-<col width="0%" />
-<col width="1%" />
-<col width="4%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="left"></th>
-<th align="right">scalerank</th>
-<th align="left">featurecla</th>
-<th align="right">labelrank</th>
-<th align="left">sovereignt</th>
-<th align="left">sov_a3</th>
-<th align="right">adm0_dif</th>
-<th align="right">level</th>
-<th align="left">type</th>
-<th align="left">admin</th>
-<th align="left">adm0_a3</th>
-<th align="right">geou_dif</th>
-<th align="left">geounit</th>
-<th align="left">gu_a3</th>
-<th align="right">su_dif</th>
-<th align="left">subunit</th>
-<th align="left">su_a3</th>
-<th align="right">brk_diff</th>
-<th align="left">name</th>
-<th align="left">name_long</th>
-<th align="left">brk_a3</th>
-<th align="left">brk_name</th>
-<th align="left">brk_group</th>
-<th align="left">abbrev</th>
-<th align="left">postal</th>
-<th align="left">formal_en</th>
-<th align="left">formal_fr</th>
-<th align="left">note_adm0</th>
-<th align="left">note_brk</th>
-<th align="left">name_sort</th>
-<th align="left">name_alt</th>
-<th align="right">mapcolor7</th>
-<th align="right">mapcolor8</th>
-<th align="right">mapcolor9</th>
-<th align="right">mapcolor13</th>
-<th align="right">pop_est</th>
-<th align="right">gdp_md_est</th>
-<th align="right">pop_year</th>
-<th align="right">lastcensus</th>
-<th align="right">gdp_year</th>
-<th align="left">economy</th>
-<th align="left">income_grp</th>
-<th align="right">wikipedia</th>
-<th align="left">fips_10</th>
-<th align="left">iso_a2</th>
-<th align="left">iso_a3</th>
-<th align="left">iso_n3</th>
-<th align="left">un_a3</th>
-<th align="left">wb_a2</th>
-<th align="left">wb_a3</th>
-<th align="right">woe_id</th>
-<th align="left">adm0_a3_is</th>
-<th align="left">adm0_a3_us</th>
-<th align="right">adm0_a3_un</th>
-<th align="right">adm0_a3_wb</th>
-<th align="left">continent</th>
-<th align="left">region_un</th>
-<th align="left">subregion</th>
-<th align="left">region_wb</th>
-<th align="right">name_len</th>
-<th align="right">long_len</th>
-<th align="right">abbrev_len</th>
-<th align="right">tiny</th>
-<th align="right">homepart</th>
-<th align="left">geometry</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">0</td>
-<td align="right">3</td>
-<td align="left">Admin-0 country</td>
-<td align="right">5</td>
-<td align="left">Netherlands</td>
-<td align="left">NL1</td>
-<td align="right">1</td>
-<td align="right">2</td>
-<td align="left">Country</td>
-<td align="left">Aruba</td>
-<td align="left">ABW</td>
-<td align="right">0</td>
-<td align="left">Aruba</td>
-<td align="left">ABW</td>
-<td align="right">0</td>
-<td align="left">Aruba</td>
-<td align="left">ABW</td>
-<td align="right">0</td>
-<td align="left">Aruba</td>
-<td align="left">Aruba</td>
-<td align="left">ABW</td>
-<td align="left">Aruba</td>
-<td align="left">NA</td>
-<td align="left">Aruba</td>
-<td align="left">AW</td>
-<td align="left">Aruba</td>
-<td align="left">NA</td>
-<td align="left">Neth.</td>
-<td align="left">NA</td>
-<td align="left">Aruba</td>
-<td align="left">NA</td>
-<td align="right">4</td>
-<td align="right">2</td>
-<td align="right">2</td>
-<td align="right">9</td>
-<td align="right">103065</td>
-<td align="right">2258.0</td>
-<td align="right">NA</td>
-<td align="right">2010</td>
-<td align="right">NA</td>
-<td align="left">6. Developing region</td>
-<td align="left">2. High income: nonOECD</td>
-<td align="right">NA</td>
-<td align="left">NA</td>
-<td align="left">AW</td>
-<td align="left">ABW</td>
-<td align="left">533</td>
-<td align="left">533</td>
-<td align="left">AW</td>
-<td align="left">ABW</td>
-<td align="right">NA</td>
-<td align="left">ABW</td>
-<td align="left">ABW</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="left">North America</td>
-<td align="left">Americas</td>
-<td align="left">Caribbean</td>
-<td align="left">Latin America &amp; Caribbean</td>
-<td align="right">5</td>
-<td align="right">5</td>
-<td align="right">5</td>
-<td align="right">4</td>
-<td align="right">NA</td>
-<td align="left">MULTIPOLYGON (((-69.89912 1…</td>
-</tr>
-<tr class="even">
-<td align="left">1</td>
-<td align="right">1</td>
-<td align="left">Admin-0 country</td>
-<td align="right">3</td>
-<td align="left">Afghanistan</td>
-<td align="left">AFG</td>
-<td align="right">0</td>
-<td align="right">2</td>
-<td align="left">Sovereign country</td>
-<td align="left">Afghanistan</td>
-<td align="left">AFG</td>
-<td align="right">0</td>
-<td align="left">Afghanistan</td>
-<td align="left">AFG</td>
-<td align="right">0</td>
-<td align="left">Afghanistan</td>
-<td align="left">AFG</td>
-<td align="right">0</td>
-<td align="left">Afghanistan</td>
-<td align="left">Afghanistan</td>
-<td align="left">AFG</td>
-<td align="left">Afghanistan</td>
-<td align="left">NA</td>
-<td align="left">Afg.</td>
-<td align="left">AF</td>
-<td align="left">Islamic State of Afghanistan</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">Afghanistan</td>
-<td align="left">NA</td>
-<td align="right">5</td>
-<td align="right">6</td>
-<td align="right">8</td>
-<td align="right">7</td>
-<td align="right">28400000</td>
-<td align="right">22270.0</td>
-<td align="right">NA</td>
-<td align="right">1979</td>
-<td align="right">NA</td>
-<td align="left">7. Least developed region</td>
-<td align="left">5. Low income</td>
-<td align="right">NA</td>
-<td align="left">NA</td>
-<td align="left">AF</td>
-<td align="left">AFG</td>
-<td align="left">004</td>
-<td align="left">004</td>
-<td align="left">AF</td>
-<td align="left">AFG</td>
-<td align="right">NA</td>
-<td align="left">AFG</td>
-<td align="left">AFG</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="left">Asia</td>
-<td align="left">Asia</td>
-<td align="left">Southern Asia</td>
-<td align="left">South Asia</td>
-<td align="right">11</td>
-<td align="right">11</td>
-<td align="right">4</td>
-<td align="right">NA</td>
-<td align="right">1</td>
-<td align="left">MULTIPOLYGON (((74.89131 37…</td>
-</tr>
-<tr class="odd">
-<td align="left">2</td>
-<td align="right">1</td>
-<td align="left">Admin-0 country</td>
-<td align="right">3</td>
-<td align="left">Angola</td>
-<td align="left">AGO</td>
-<td align="right">0</td>
-<td align="right">2</td>
-<td align="left">Sovereign country</td>
-<td align="left">Angola</td>
-<td align="left">AGO</td>
-<td align="right">0</td>
-<td align="left">Angola</td>
-<td align="left">AGO</td>
-<td align="right">0</td>
-<td align="left">Angola</td>
-<td align="left">AGO</td>
-<td align="right">0</td>
-<td align="left">Angola</td>
-<td align="left">Angola</td>
-<td align="left">AGO</td>
-<td align="left">Angola</td>
-<td align="left">NA</td>
-<td align="left">Ang.</td>
-<td align="left">AO</td>
-<td align="left">People’s Republic of Angola</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">Angola</td>
-<td align="left">NA</td>
-<td align="right">3</td>
-<td align="right">2</td>
-<td align="right">6</td>
-<td align="right">1</td>
-<td align="right">12799293</td>
-<td align="right">110300.0</td>
-<td align="right">NA</td>
-<td align="right">1970</td>
-<td align="right">NA</td>
-<td align="left">7. Least developed region</td>
-<td align="left">3. Upper middle income</td>
-<td align="right">NA</td>
-<td align="left">NA</td>
-<td align="left">AO</td>
-<td align="left">AGO</td>
-<td align="left">024</td>
-<td align="left">024</td>
-<td align="left">AO</td>
-<td align="left">AGO</td>
-<td align="right">NA</td>
-<td align="left">AGO</td>
-<td align="left">AGO</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="left">Africa</td>
-<td align="left">Africa</td>
-<td align="left">Middle Africa</td>
-<td align="left">Sub-Saharan Africa</td>
-<td align="right">6</td>
-<td align="right">6</td>
-<td align="right">4</td>
-<td align="right">NA</td>
-<td align="right">1</td>
-<td align="left">MULTIPOLYGON (((14.19082 -5…</td>
-</tr>
-<tr class="even">
-<td align="left">3</td>
-<td align="right">1</td>
-<td align="left">Admin-0 country</td>
-<td align="right">6</td>
-<td align="left">United Kingdom</td>
-<td align="left">GB1</td>
-<td align="right">1</td>
-<td align="right">2</td>
-<td align="left">Dependency</td>
-<td align="left">Anguilla</td>
-<td align="left">AIA</td>
-<td align="right">0</td>
-<td align="left">Anguilla</td>
-<td align="left">AIA</td>
-<td align="right">0</td>
-<td align="left">Anguilla</td>
-<td align="left">AIA</td>
-<td align="right">0</td>
-<td align="left">Anguilla</td>
-<td align="left">Anguilla</td>
-<td align="left">AIA</td>
-<td align="left">Anguilla</td>
-<td align="left">NA</td>
-<td align="left">Ang.</td>
-<td align="left">AI</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">U.K.</td>
-<td align="left">NA</td>
-<td align="left">Anguilla</td>
-<td align="left">NA</td>
-<td align="right">6</td>
-<td align="right">6</td>
-<td align="right">6</td>
-<td align="right">3</td>
-<td align="right">14436</td>
-<td align="right">108.9</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="left">6. Developing region</td>
-<td align="left">3. Upper middle income</td>
-<td align="right">NA</td>
-<td align="left">NA</td>
-<td align="left">AI</td>
-<td align="left">AIA</td>
-<td align="left">660</td>
-<td align="left">660</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="right">NA</td>
-<td align="left">AIA</td>
-<td align="left">AIA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="left">North America</td>
-<td align="left">Americas</td>
-<td align="left">Caribbean</td>
-<td align="left">Latin America &amp; Caribbean</td>
-<td align="right">8</td>
-<td align="right">8</td>
-<td align="right">4</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="left">MULTIPOLYGON (((-63.00122 1…</td>
-</tr>
-<tr class="odd">
-<td align="left">4</td>
-<td align="right">1</td>
-<td align="left">Admin-0 country</td>
-<td align="right">6</td>
-<td align="left">Albania</td>
-<td align="left">ALB</td>
-<td align="right">0</td>
-<td align="right">2</td>
-<td align="left">Sovereign country</td>
-<td align="left">Albania</td>
-<td align="left">ALB</td>
-<td align="right">0</td>
-<td align="left">Albania</td>
-<td align="left">ALB</td>
-<td align="right">0</td>
-<td align="left">Albania</td>
-<td align="left">ALB</td>
-<td align="right">0</td>
-<td align="left">Albania</td>
-<td align="left">Albania</td>
-<td align="left">ALB</td>
-<td align="left">Albania</td>
-<td align="left">NA</td>
-<td align="left">Alb.</td>
-<td align="left">AL</td>
-<td align="left">Republic of Albania</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">Albania</td>
-<td align="left">NA</td>
-<td align="right">1</td>
-<td align="right">4</td>
-<td align="right">1</td>
-<td align="right">6</td>
-<td align="right">3639453</td>
-<td align="right">21810.0</td>
-<td align="right">NA</td>
-<td align="right">2001</td>
-<td align="right">NA</td>
-<td align="left">6. Developing region</td>
-<td align="left">4. Lower middle income</td>
-<td align="right">NA</td>
-<td align="left">NA</td>
-<td align="left">AL</td>
-<td align="left">ALB</td>
-<td align="left">008</td>
-<td align="left">008</td>
-<td align="left">AL</td>
-<td align="left">ALB</td>
-<td align="right">NA</td>
-<td align="left">ALB</td>
-<td align="left">ALB</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="left">Europe</td>
-<td align="left">Europe</td>
-<td align="left">Southern Europe</td>
-<td align="left">Europe &amp; Central Asia</td>
-<td align="right">7</td>
-<td align="right">7</td>
-<td align="right">4</td>
-<td align="right">NA</td>
-<td align="right">1</td>
-<td align="left">MULTIPOLYGON (((20.06396 42…</td>
-</tr>
-<tr class="even">
-<td align="left">5</td>
-<td align="right">3</td>
-<td align="left">Admin-0 country</td>
-<td align="right">6</td>
-<td align="left">Finland</td>
-<td align="left">FI1</td>
-<td align="right">1</td>
-<td align="right">2</td>
-<td align="left">Country</td>
-<td align="left">Aland</td>
-<td align="left">ALD</td>
-<td align="right">0</td>
-<td align="left">Aland</td>
-<td align="left">ALD</td>
-<td align="right">0</td>
-<td align="left">Aland</td>
-<td align="left">ALD</td>
-<td align="right">0</td>
-<td align="left">Aland</td>
-<td align="left">Aland Islands</td>
-<td align="left">ALD</td>
-<td align="left">Aland</td>
-<td align="left">NA</td>
-<td align="left">Aland</td>
-<td align="left">AI</td>
-<td align="left">Åland Islands</td>
-<td align="left">NA</td>
-<td align="left">Fin.</td>
-<td align="left">NA</td>
-<td align="left">Aland</td>
-<td align="left">NA</td>
-<td align="right">4</td>
-<td align="right">1</td>
-<td align="right">4</td>
-<td align="right">6</td>
-<td align="right">27153</td>
-<td align="right">1563.0</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="left">2. Developed region: nonG7</td>
-<td align="left">1. High income: OECD</td>
-<td align="right">NA</td>
-<td align="left">NA</td>
-<td align="left">AX</td>
-<td align="left">ALA</td>
-<td align="left">248</td>
-<td align="left">248</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="right">NA</td>
-<td align="left">ALA</td>
-<td align="left">ALD</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="left">Europe</td>
-<td align="left">Europe</td>
-<td align="left">Northern Europe</td>
-<td align="left">Europe &amp; Central Asia</td>
-<td align="right">5</td>
-<td align="right">13</td>
-<td align="right">5</td>
-<td align="right">5</td>
-<td align="right">NA</td>
-<td align="left">MULTIPOLYGON (((20.61133 60…</td>
-</tr>
-</tbody>
-</table>
-<p>In your R Studio interface, this attribute table should appear as a tab in your “Source” window, in the same location as the ICPSR Covid-19 dataset earlier. We can go ahead and scroll across and scroll up/down the attribute table to explore the information it contains. Remember that each row in the table corresponds to a country in the feature layer, which we just learned how to visualize. Every column in the table corresponds to a different attribute, or piece of country-level information.</p>
 </div>
 </div>
-<div id="editing-spatial-data" class="section level2" number="4.2">
-<h2><span class="header-section-number">4.2</span> Editing Spatial Data</h2>
+<div id="edit-spatial-data" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Edit Spatial Data</h2>
 <p>We can edit spatial datasets in R Studio with relative ease, using commonly used R packages. Let’s say, for example, that we don’t want Antarctica to appear on our map (since Antarctica typically does not appear on political maps of the world).</p>
-<p>To delete Antarctica from the map, we first need to delete the row that corresponds to Antarctica from the spatial dataset contained in the “country_boundaries” object We can do so with the following code:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="tutorial.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Deletes Antarctica from spatial dataset in &quot;country_boundaries&quot; object</span></span>
-<span id="cb13-2"><a href="tutorial.html#cb13-2" aria-hidden="true" tabindex="-1"></a>country_boundaries<span class="ot">&lt;-</span>country_boundaries <span class="sc">%&gt;%</span> <span class="fu">filter</span>(iso_a3 <span class="sc">!=</span><span class="st">&quot;ATA&quot;</span>)</span></code></pre></div>
+<p>To delete Antarctica from the map, we first need to delete the row that corresponds to Antarctica from the spatial dataset contained in the “country_boundaries” object. We can do so with the following code:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="tutorial.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Deletes Antarctica from spatial dataset in &quot;country_boundaries&quot; object</span></span>
+<span id="cb14-2"><a href="tutorial.html#cb14-2" aria-hidden="true" tabindex="-1"></a>country_boundaries<span class="ot">&lt;-</span>country_boundaries <span class="sc">%&gt;%</span> <span class="fu">filter</span>(iso_a3 <span class="sc">!=</span><span class="st">&quot;ATA&quot;</span>)</span></code></pre></div>
 <p>We can translate this code into ordinary language as follows: “Take the existing country boundaries dataset (<code>country_boundaries</code> to the left of the <code>%&gt;%</code> and after the assignment operator) and then (<code>%&gt;%</code>, a symbol called a pipe, which is used to chain together code) select only the countries that are not Antarctica (<code>filter(iso_a3 !="ATA"</code>). Take this new dataset, which doesn’t include Antarctica, and assign it back to the existing ‘country_boundaries’ object (<code>country_boundaries&lt;-</code>), which effectively replaces the previous spatial dataset in the country_boundaries object (which did include Antarctica).”</p>
 <p>Two things may require additional elaboration:</p>
 <ul>
 <li>First is the pipe, the symbol that looks like this: %&gt;%. The pipe operator essentially takes the output of the code on its left, and then use that output as an input to the code on its right. Here, the pipe is taking the output of the Here, the pipe is taking the output of the “country_dataset” object (i.e. the existing spatial dataset) on its left, and then using that output as an input to the <code>filter</code> function on its right. In other words, the pipe operator links the code on its two sides, and indicates that the object being passed through the <code>filter</code> function is the “country_boundaries” object.</li>
 <li>The <code>filter</code> function is a function from the <em>dplyr</em> package that allows one to select rows from a dataset by specified criteria. In our case, we want to select all rows from the dataset that are not Antarctica. The argument to the <code>filter</code> function, <code>iso_a3 !="ATA"</code>, is essentially saying “return any records where the iso_a3 variable in the attribute table (the 3-digit ISO country code) is NOT equal to”ATA" (Antarctica’s code). Note that <code>!=</code> is R syntax for “not equal to”.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></li>
 </ul>
-<p>Now, let’s see this change reflected in the “country_boundaries” dataset’s geographic features. To do so, we must update the “worldmap” object by rerunning the object assignment (the worldmap object we defined above will not automatically reflect the edits we just made to the “country_boundaries” dataset. We need to run the code again with the edited version of the dataset “country_boundaries” object passed through the <code>tm_shape</code> function:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="tutorial.html#cb14-1" aria-hidden="true" tabindex="-1"></a>worldmap<span class="ot">&lt;-</span><span class="fu">tm_shape</span>(country_boundaries)<span class="sc">+</span></span>
-<span id="cb14-2"><a href="tutorial.html#cb14-2" aria-hidden="true" tabindex="-1"></a>            <span class="fu">tm_polygons</span>()</span></code></pre></div>
-<p>Now, let’s view the features of the edited “country_boundaries” dataset:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="tutorial.html#cb15-1" aria-hidden="true" tabindex="-1"></a>worldmap</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
-<p>As expected, Antarctica has been deleted!</p>
+<p>Now, let’s see this change reflected in the corresponding map. To do so, we must update the “worldmap” object by rerunning the object assignment. The worldmap object we defined above will not automatically reflect the edits we just made to the “country_boundaries” dataset; we need to run the code again with the edited version of the dataset “country_boundaries” object passed through the <code>tm_shape</code> function:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="tutorial.html#cb15-1" aria-hidden="true" tabindex="-1"></a>worldmap<span class="ot">&lt;-</span><span class="fu">tm_shape</span>(country_boundaries)<span class="sc">+</span></span>
+<span id="cb15-2"><a href="tutorial.html#cb15-2" aria-hidden="true" tabindex="-1"></a>            <span class="fu">tm_polygons</span>()</span></code></pre></div>
+<p>Now, let’s view our updated map:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="tutorial.html#cb16-1" aria-hidden="true" tabindex="-1"></a>worldmap</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<p>As desired, Antarctica has been deleted from the spatial dataset, and therefore no longer appears on the corresponding map.</p>
+</div>
+<div id="process-icpsr-tabular-data-for-mapping" class="section level2" number="4.3">
+<h2><span class="header-section-number">4.3</span> Process ICPSR Tabular Data for Mapping</h2>
+<p>In order to represent the ICPSR data on governments’ economic responses to Covid-19 on a map, we must join the ICPSR dataset (contained in the “covid_data” object) to the spatial dataset (contained in the “country_boundaries” object); at that point, we’ll have a new, integrated dataset that will include the country-level Covid-19 data of interest in a spatial dataset. We can then display that Covid-19 information on a map by using the <code>tmap</code> package.
+Before we can take those steps, however, we need to process the ICPSR tabular data with a view towards facilitating the joining and mapping process.</p>
+<div id="select-variables" class="section level3" number="4.3.1">
+<h3><span class="header-section-number">4.3.1</span> Select Variables</h3>
+</div>
+<div id="change-class-of-economic_measures-index" class="section level3" number="4.3.2">
+<h3><span class="header-section-number">4.3.2</span> Change class of “Economic_Measures” Index</h3>
+</div>
+<div id="compute-average-of-economic_measures-index" class="section level3" number="4.3.3">
+<h3><span class="header-section-number">4.3.3</span> Compute average of “Economic_Measures” index</h3>
+</div>
+<div id="calculate-summary-statistics" class="section level3" number="4.3.4">
+<h3><span class="header-section-number">4.3.4</span> Calculate Summary Statistics</h3>
 
+</div>
 </div>
 </div>
 
