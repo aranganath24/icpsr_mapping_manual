@@ -24,7 +24,7 @@
 <meta name="author" content="Aditya Ranganath" />
 
 
-<meta name="date" content="2021-09-15" />
+<meta name="date" content="2021-09-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -307,6 +307,25 @@ Figure 4.6: Enlarging Map with “Zoom” Button
 Before we can take those steps, however, we need to process the ICPSR tabular data with a view towards facilitating the joining and mapping process.</p>
 <div id="select-variables" class="section level3" number="4.3.1">
 <h3><span class="header-section-number">4.3.1</span> Select Variables</h3>
+<p>When working with data in R, it is often useful to get a quick sense of a given dataset’s dimensions, which we can do using the <code>dim</code> function. Below, we pass the “covid_data” object through the <code>dim</code> function:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="tutorial.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(covid_data)</span></code></pre></div>
+<pre><code>## [1] 62700    43</code></pre>
+<p>The output indicates that there are 62700 rows in the dataset, and 43 columns. This suggests that there are quite a few variables in the dataset. Given that we’re only interested in mapping (for now) the variable that represents an aggregate index (computed from other variables in the dataset) of the generosity of governments’ economic support measures in response to the pandemic, we’ll go ahead and delete superfluous columns so as to keep the size of the final (joined) dataset tractable. The name of the variable we’d like to map, and therefore keep, is “Economic_Measure” (see the dataset’s documentation for more details). In addition to keeping this variable, we also need to keep a column titled “iso”, which is the 3-digit ISO country code; this ISO code also exists in the spatial dataset to which we want to join the “Economic_Measure” variable, and so we will use these ISO codes as the joining variable.</p>
+<p>Let’s create a new object, which we’ll call “covid_data_economic”, to contain this smaller dataset comprised of the ISO code and the economic interventions index we’re interested in mapping:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="tutorial.html#cb19-1" aria-hidden="true" tabindex="-1"></a>covid_data_economic<span class="ot">&lt;-</span>covid_data <span class="sc">%&gt;%</span> </span>
+<span id="cb19-2"><a href="tutorial.html#cb19-2" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">select</span>(iso, Economic_Measures) </span></code></pre></div>
+<p>The above code can be translated as follows: “Start with the dataset in the ‘covid_data’ object (‘covid_data’), and then keep the ‘iso’ and ‘Economic_Measures’ columns but discard everything else (‘select(iso, Economic_Measures)). Assign this new 2-column dataset to a new object called ’covid_data_economic’ (‘covid_data_economic&lt;-’).” We can take a look at this smaller dataset extracted from the original dataset by passing the “covid_data_economic” object as an argument to the now-familiar <code>View</code> function:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="tutorial.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(covid_data_economic)</span></code></pre></div>
+<p>Within the “Source” window, a new tab that contains the smaller 2-column dataset that is within the “covid_data_economic” object will appear:</p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-30"></span>
+<img src="images/selection.png" alt="New Dataset Based on Selection from Original Dataset" width="100%" />
+<p class="caption">
+Figure 4.7: New Dataset Based on Selection from Original Dataset
+</p>
+</div>
+<p>Note that the original Covid-19 policy responses dataset, stored in the “covid_data” object, is unaffected by our creation of a new dataset based on the selection of these two variables. You can confirm that this original data is still stored in the “covid_data” object by opening it up:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="tutorial.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(covid_data)</span></code></pre></div>
+<p>We can go back to this initial dataset anytime, but for now we’ll set it aside and start working with our newly created dataset in the “covid_data_economic” object.</p>
 </div>
 <div id="change-class-of-economic_measures-index" class="section level3" number="4.3.2">
 <h3><span class="header-section-number">4.3.2</span> Change class of “Economic_Measures” Index</h3>

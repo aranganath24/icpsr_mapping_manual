@@ -167,7 +167,45 @@ Before we can take those steps, however, we need to process the ICPSR tabular da
 
 ### Select Variables
 
+When working with data in R, it is often useful to get a quick sense of a given dataset's dimensions, which we can do using the ```dim``` function. Below, we pass the "covid_data" object through the ```dim``` function:
+
+```{r}
+dim(covid_data)
+```
+
+The output indicates that there are 62700 rows in the dataset, and 43 columns. This suggests that there are quite a few variables in the dataset. Given that we're only interested in mapping (for now) the variable that represents an aggregate index (computed from other variables in the dataset) of the generosity of governments' economic support measures in response to the pandemic, we'll go ahead and delete superfluous columns so as to keep the size of the final (joined) dataset tractable. The name of the variable we'd like to map, and therefore keep, is "Economic_Measure" (see the dataset's documentation for more details). In addition to keeping this variable, we also need to keep a column titled "iso", which is the 3-digit ISO country code; this ISO code also exists in the spatial dataset to which we want to join the "Economic_Measure" variable, and so we will use these ISO codes as the joining variable. 
+
+Let's create a new object, which we'll call "covid_data_economic", to contain this smaller dataset comprised of the ISO code and the economic interventions index we're interested in mapping:
+
+```{r}
+covid_data_economic<-covid_data %>% 
+                      select(iso, Economic_Measures) 
+```
+
+The above code can be translated as follows: "Start with the dataset in the 'covid_data' object ('covid_data'), and then keep the 'iso' and 'Economic_Measures' columns but discard everything else ('select(iso, Economic_Measures)). Assign this new 2-column dataset to a new object called 'covid_data_economic' ('covid_data_economic<-')." We can take a look at this smaller dataset extracted from the original dataset by passing the "covid_data_economic" object as an argument to the now-familiar ```View``` function:
+
+```{r}
+View(covid_data_economic)
+```
+
+Within the "Source" window, a new tab that contains the smaller 2-column dataset that is within the "covid_data_economic" object will appear:
+
+
+```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='New Dataset Based on Selection from Original Dataset'}
+knitr::include_graphics('images/selection.png')
+```
+
+Note that the original Covid-19 policy responses dataset, stored in the "covid_data" object, is unaffected by our creation of a new dataset based on the selection of these two variables. You can confirm that this original data is still stored in the "covid_data" object by opening it up:
+
+```{r}
+View(covid_data)
+```
+
+We can go back to this initial dataset (in the "covid_data" object) anytime we might need, but for now we'll set it aside and start working with our newly created dataset in the "covid_data_economic" object. 
+
 ### Change class of "Economic_Measures" Index
+
+
 
 ### Compute average of "Economic_Measures" index
 
