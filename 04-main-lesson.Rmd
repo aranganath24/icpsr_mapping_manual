@@ -275,6 +275,8 @@ summary(covid_data_economic_avg$mean_economic)
 
 ## Join Datasets
 
+We're almost there. 
+
 ```{r}
 # Join dataset with country-level means for "Economic_Measures" index (in "covid_data_economic" object) to spatial dataset of world boundaries (in "country_boundaries" object), based on common 3-Digit ISO Codes
 worldmap_covid_data_economic<-full_join(country_boundaries, covid_data_economic_avg, by=c("iso_a3"="iso"))

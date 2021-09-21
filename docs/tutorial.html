@@ -381,6 +381,7 @@ Figure 4.8: Dataset of Country-Level Averages for “Economic_Measures” Index
 </div>
 <div id="join-datasets" class="section level2" number="4.4">
 <h2><span class="header-section-number">4.4</span> Join Datasets</h2>
+<p>We’re almost there.</p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="tutorial.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Join dataset with country-level means for &quot;Economic_Measures&quot; index (in &quot;covid_data_economic&quot; object) to spatial dataset of world boundaries (in &quot;country_boundaries&quot; object), based on common 3-Digit ISO Codes</span></span>
 <span id="cb31-2"><a href="tutorial.html#cb31-2" aria-hidden="true" tabindex="-1"></a>worldmap_covid_data_economic<span class="ot">&lt;-</span><span class="fu">full_join</span>(country_boundaries, covid_data_economic_avg, <span class="at">by=</span><span class="fu">c</span>(<span class="st">&quot;iso_a3&quot;</span><span class="ot">=</span><span class="st">&quot;iso&quot;</span>))</span></code></pre></div>
 <div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="tutorial.html#cb32-1" aria-hidden="true" tabindex="-1"></a>worldmap_covid_data_economic<span class="ot">&lt;-</span>worldmap_covid_data_economic <span class="sc">%&gt;%</span> <span class="fu">relocate</span>(name, mean_economic)</span></code></pre></div>
