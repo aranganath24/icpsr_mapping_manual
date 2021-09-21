@@ -205,11 +205,68 @@ We can go back to this initial dataset (in the "covid_data" object) anytime we m
 
 ### Change class of "Economic_Measures" Index
 
+Recall that the data we want to map is contained within the "Economic_Measures" field of the dataset in the newly created "covid_data_economic" dataset. R has six fundamental "types" of data: character, numeric, integer, logical, and complex. The code below extracts the "Econmic_Measures" column from the dataset (placing a dollar sign in between the name of an object containing a dataset, and a column containing that dataset, as in ```covid_data_economic$Economic_Measures``` is a way of isolating and extracting a column from a larger dataset), and then passes it through the ```class``` function to identify the class of the "Economic_Measures" field. 
 
+```{r}
+# Find the class of the "Economic_Measures" field
+class(covid_data_economic$Economic_Measures)
+```
+
+We can see from the above output that the class of the "Economic_Measures" variable is "character", which implies that although the information in the "Economic_Measures" variable looks like it is numeric, R is not actually reading that data as numbers. So, we have to change the way that data is encoded, and ensure that it will be interpreted numerically; the failure to do this will prevent us from making numerical calculations using this data, as well as from mapping it using *tmap*. We can essentially recode the information in the "Economic_Measures" variable as "numeric" using the following code: 
+
+```{r}
+# Changes class of "Economic_Measures" field from character to numeric
+covid_data_economic$Economic_Measures<-as.numeric(covid_data_economic$Economic_Measures)
+```
+
+In the code above, the code to the right of the assignment operator extracts  the "Economic_Measures" column from the the "covid_data_economic" dataset, and then changes its class to numeric using the ```as.numeric``` function. The assignment operator then assigns this numeric version of the "Economic_Measures" field back into the original dataset contained in the "covid_data_economic" object (the one with the character field); in performing this assignment, the "character" version of the "Economic_Measures" field is replaced with the "numeric" version. At this point, the "Economic_Measures" column in our dataset within the "covid_data_economic" object is numeric; we can confirm this by passing the column through the class function once again:
+
+```{r}
+# Find the class of the updated "Economic_Measures" field
+class(covid_data_economic$Economic_Measures)
+```
 
 ### Compute average of "Economic_Measures" index
 
+As we mentioned earlier, the ICPSR dataset on government policies with respect to Covid-19 is a time-series dataset, containing monthly observations over the course of about a year during the pandemic (January 2020 to October 2020). This means that we have to make some choices about how to represent the "Economic_Measures" index on a map. For example, do we want to pick one of the months to map? Do we want to map the change across two different months? Do we want to map the average index value across all the months in the sample? 
+
+There are of many possibilities, but let's choose to go ahead and map the average. That is, for each country, we'll average the value of the "Economic_Measures" index across all of the months in the dataset; the value that we'll eventually map will be this average value of the "Economic_Measures" index.
+
+To that end, we need to take our current "covid_data_economic", which contains monthly observations for each country, and transform it into a new dataset that contains the monthly average of the "Economic_Measures" index for each country. 
+
+The code below carries out this transformation of the data: 
+
+```{r, message=FALSE}
+# Calculate Country-Level Averages for "Economic_Measures" Index, and then assign this new dataset of country-level averages to a new object called "covid_data_economic_avg". 
+covid_data_economic_avg<-covid_data_economic %>% group_by(iso) %>% 
+                          summarize(mean_economic=mean(Economic_Measures, na.rm=FALSE))
+```
+
+Let's unpack this code, starting with the code that's to the right of the assignment operator. 
+
+* We start by calling the "covid_data_economic" object, which establishes that this is essentially the "base" dataset we wish to modify. 
+* Then (recall that the ``` %>% ``` is used to chain together code by taking the output on the left and passing it as input into the code to its right), we call the ```group_by``` function, and pass "iso" as an argument to this function; this stipulates that all observations with the same ISO code are to be considered a group, and that any subsequent calculations will therefore be performed at the country level. This step ensures that when we calculate the mean of the "Economic_Measures" variable, the function will return the mean value of this index for each individual country, rather than the mean value for the dataset as a whole. 
+* After setting the grouping variable and using another pipe (``` %>% ```) to establish that we are passing the newly grouped dataset as an input into the subsequent code, we call the ```summarize``` function. This function creates a new dataset based on the calculation of summary statistics for an existing dataset. By calling ```summarize```, we are specifying that we want to create a new dataset to hold the information on country-level averages for the "Economic_Measures" data.
+* Within the ```summarize``` function, we first need to create a name for the column that will contain the country-level averages for the "Economic_Measures" index. We'll call this variable "mean_economic", which corresponds to the very first part of the code after the parentheses. We set this variable equal to an expression that passes the "Economic_Measures" variable through the ```mean``` function. In essence, this calculates the mean of the "Economic_Measures" variable for each country (it calculates the country-level mean because we specified the grouping function, ```group_by(iso)```, in the previous line of code), and creates a column in the newly created dataset named "mean_economic" to store this information. The code that reads ```na.rm=FALSE``` simply specifies that missing data should be ignored in the calculation of the mean value of the "Economic_Measures" index. 
+* Finally, the this new dataset, consisting of two columns (one column containing ISO codes, and the other, named "mean_economic" containing the corresponding country-level mean of the "Economic_Measures" variable) is assigned to a new object called "covid_data_economic_avg". 
+
+We can translate the above code as follows: "Take the existing dataset within the 'covid_data_economic' object, and then group this dataset by the ISO country codes; then, generate a new dataset, containing one column with ISO country codes, and another column, named "mean_economic", that contains information on the country-level mean of the 'Economic_Measures' index. Finally, assign this new dataset to an object called 'covid_data_economic_avg'"
+
+To inspect this new dataset within the Source window, simply pass the object through the ```View``` function. 
+
+```{r}
+View(covid_data_economic_avg)
+```
+
+We should see something that looks like this: 
+
 ### Calculate Summary Statistics
+
+Now that we have a dataset containing the country-level average of the "Economic_Measures" index (which is the data we'd like to map), it can be useful to get a sense of how the data is distributed. We can easily do this by using the ```summary``` function, which returns a table of summary statistics for a specified variable. The following code produces summary statistics for the "mean_economic" variable within the dataset that is contained in the "covid_data_economic_average" dataset (which is written as ```covid_data_economic$mean_economic```):
+
+```{r}
+summary(covid_data_economic_avg$mean_economic)
+```
 
 
 
