@@ -239,7 +239,7 @@ The code below carries out this transformation of the data:
 ```{r, message=FALSE}
 # Calculate Country-Level Averages for "Economic_Measures" Index, and then assign this new dataset of country-level averages to a new object called "covid_data_economic_avg". 
 covid_data_economic_avg<-covid_data_economic %>% group_by(iso) %>% 
-                          summarize(mean_economic=mean(Economic_Measures, na.rm=FALSE))
+                                                summarize(mean_economic=mean(Economic_Measures, na.rm=FALSE))
 ```
 
 Let's unpack this code, starting with the code that's to the right of the assignment operator. 
@@ -260,6 +260,11 @@ View(covid_data_economic_avg)
 
 We should see something that looks like this: 
 
+
+```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='Dataset of Country-Level Averages for "Economic_Measures" Index'}
+knitr::include_graphics('images/mean_economic.png')
+```
+
 ### Calculate Summary Statistics
 
 Now that we have a dataset containing the country-level average of the "Economic_Measures" index (which is the data we'd like to map), it can be useful to get a sense of how the data is distributed. We can easily do this by using the ```summary``` function, which returns a table of summary statistics for a specified variable. The following code produces summary statistics for the "mean_economic" variable within the dataset that is contained in the "covid_data_economic_average" dataset (which is written as ```covid_data_economic$mean_economic```):
@@ -268,9 +273,28 @@ Now that we have a dataset containing the country-level average of the "Economic
 summary(covid_data_economic_avg$mean_economic)
 ```
 
+## Join Datasets
+
+```{r}
+# Join dataset with country-level means for "Economic_Measures" index (in "covid_data_economic" object) to spatial dataset of world boundaries (in "country_boundaries" object), based on common 3-Digit ISO Codes
+worldmap_covid_data_economic<-full_join(country_boundaries, covid_data_economic_avg, by=c("iso_a3"="iso"))
+```
+
+```{r}
+worldmap_covid_data_economic<-worldmap_covid_data_economic %>% relocate(name, mean_economic)
+```
+
+## Make Maps
+
+```{r}
+map1<-tm_shape(worldmap_covid_data_economic)+
+        tm_polygons(col="mean_economic", n=8, style="jenks", palette="BuGn")
+```
 
 
-
+```{r, fig.asp=0.5, message=FALSE, warning=FALSE}
+map1
+```
 
 
 

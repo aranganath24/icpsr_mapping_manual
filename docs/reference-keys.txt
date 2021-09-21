@@ -8,6 +8,7 @@ fig:unnamed-chunk-18
 fig:unnamed-chunk-22
 fig:unnamed-chunk-23
 fig:unnamed-chunk-30
+fig:unnamed-chunk-37
 preface
 introduction
 motivation
@@ -31,3 +32,5 @@ select-variables
 change-class-of-economic_measures-index
 compute-average-of-economic_measures-index
 calculate-summary-statistics
+join-datasets
+make-maps

@@ -171,6 +171,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3.3" data-path="tutorial.html"><a href="tutorial.html#compute-average-of-economic_measures-index"><i class="fa fa-check"></i><b>4.3.3</b> Compute average of “Economic_Measures” index</a></li>
 <li class="chapter" data-level="4.3.4" data-path="tutorial.html"><a href="tutorial.html#calculate-summary-statistics"><i class="fa fa-check"></i><b>4.3.4</b> Calculate Summary Statistics</a></li>
 </ul></li>
+<li class="chapter" data-level="4.4" data-path="tutorial.html"><a href="tutorial.html#join-datasets"><i class="fa fa-check"></i><b>4.4</b> Join Datasets</a></li>
+<li class="chapter" data-level="4.5" data-path="tutorial.html"><a href="tutorial.html#make-maps"><i class="fa fa-check"></i><b>4.5</b> Make Maps</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -349,7 +351,7 @@ Figure 4.7: New Dataset Based on Selection from Original Dataset
 <p>The code below carries out this transformation of the data:</p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="tutorial.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate Country-Level Averages for &quot;Economic_Measures&quot; Index, and then assign this new dataset of country-level averages to a new object called &quot;covid_data_economic_avg&quot;. </span></span>
 <span id="cb27-2"><a href="tutorial.html#cb27-2" aria-hidden="true" tabindex="-1"></a>covid_data_economic_avg<span class="ot">&lt;-</span>covid_data_economic <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(iso) <span class="sc">%&gt;%</span> </span>
-<span id="cb27-3"><a href="tutorial.html#cb27-3" aria-hidden="true" tabindex="-1"></a>                          <span class="fu">summarize</span>(<span class="at">mean_economic=</span><span class="fu">mean</span>(Economic_Measures, <span class="at">na.rm=</span><span class="cn">FALSE</span>))</span></code></pre></div>
+<span id="cb27-3"><a href="tutorial.html#cb27-3" aria-hidden="true" tabindex="-1"></a>                                                <span class="fu">summarize</span>(<span class="at">mean_economic=</span><span class="fu">mean</span>(Economic_Measures, <span class="at">na.rm=</span><span class="cn">FALSE</span>))</span></code></pre></div>
 <p>Let’s unpack this code, starting with the code that’s to the right of the assignment operator.</p>
 <ul>
 <li>We start by calling the “covid_data_economic” object, which establishes that this is essentially the “base” dataset we wish to modify.</li>
@@ -362,6 +364,12 @@ Figure 4.7: New Dataset Based on Selection from Original Dataset
 <p>To inspect this new dataset within the Source window, simply pass the object through the <code>View</code> function.</p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="tutorial.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(covid_data_economic_avg)</span></code></pre></div>
 <p>We should see something that looks like this:</p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-37"></span>
+<img src="images/mean_economic.png" alt="Dataset of Country-Level Averages for &quot;Economic_Measures&quot; Index" width="100%" />
+<p class="caption">
+Figure 4.8: Dataset of Country-Level Averages for “Economic_Measures” Index
+</p>
+</div>
 </div>
 <div id="calculate-summary-statistics" class="section level3" number="4.3.4">
 <h3><span class="header-section-number">4.3.4</span> Calculate Summary Statistics</h3>
@@ -369,8 +377,21 @@ Figure 4.7: New Dataset Based on Selection from Original Dataset
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="tutorial.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(covid_data_economic_avg<span class="sc">$</span>mean_economic)</span></code></pre></div>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s 
 ##  0.0000  0.2787  0.3930  0.3853  0.5074  0.7236      30</code></pre>
-
 </div>
+</div>
+<div id="join-datasets" class="section level2" number="4.4">
+<h2><span class="header-section-number">4.4</span> Join Datasets</h2>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="tutorial.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Join dataset with country-level means for &quot;Economic_Measures&quot; index (in &quot;covid_data_economic&quot; object) to spatial dataset of world boundaries (in &quot;country_boundaries&quot; object), based on common 3-Digit ISO Codes</span></span>
+<span id="cb31-2"><a href="tutorial.html#cb31-2" aria-hidden="true" tabindex="-1"></a>worldmap_covid_data_economic<span class="ot">&lt;-</span><span class="fu">full_join</span>(country_boundaries, covid_data_economic_avg, <span class="at">by=</span><span class="fu">c</span>(<span class="st">&quot;iso_a3&quot;</span><span class="ot">=</span><span class="st">&quot;iso&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="tutorial.html#cb32-1" aria-hidden="true" tabindex="-1"></a>worldmap_covid_data_economic<span class="ot">&lt;-</span>worldmap_covid_data_economic <span class="sc">%&gt;%</span> <span class="fu">relocate</span>(name, mean_economic)</span></code></pre></div>
+</div>
+<div id="make-maps" class="section level2" number="4.5">
+<h2><span class="header-section-number">4.5</span> Make Maps</h2>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="tutorial.html#cb33-1" aria-hidden="true" tabindex="-1"></a>map1<span class="ot">&lt;-</span><span class="fu">tm_shape</span>(worldmap_covid_data_economic)<span class="sc">+</span></span>
+<span id="cb33-2"><a href="tutorial.html#cb33-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">tm_polygons</span>(<span class="at">col=</span><span class="st">&quot;mean_economic&quot;</span>, <span class="at">n=</span><span class="dv">8</span>, <span class="at">style=</span><span class="st">&quot;jenks&quot;</span>, <span class="at">palette=</span><span class="st">&quot;BuGn&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="tutorial.html#cb34-1" aria-hidden="true" tabindex="-1"></a>map1</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
+
 </div>
 </div>
 
