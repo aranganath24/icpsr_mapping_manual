@@ -275,16 +275,49 @@ summary(covid_data_economic_avg$mean_economic)
 
 ## Join Datasets
 
-We're almost there. 
+We're almost ready to map our data. But before doing that, we will have to take our dataset of average "Economic_Measures" scores by country (contained in the "covid_data_economic_avg" object we just created), and then join this dataset to our previously discussed spatial dataset of country boundaries (contained in the "country_boundaries" object). In other words, before mapping our variable of interest, we need to bring this variable into the dataset of country boundaries. 
+
+The task of joining, or "merging" datasets is a very common procedure when working with social science data (or any data for that matter), since data is often held in many different locations; before being able to analyze it, one has to bring all of the relevant data into the same dataset. That is essentially what we're doing here.
+
+How do we join different datasets together? Associating two datasets into one larger dataset that combines information from both requires the datasets to share a common field; this common field can be used to essentially “glue” the datasets together. The International Organization for Standardization provides 3-digit country codes for each of the world’s countries that can be used to uniquely identify countries when working with country-level data. Both our spatial dataset, and our table of the "Economic_Measures" index averages, contain a field with these standardized 3-digit ISO codes (this field is labelled “iso_a3” in the spatial dataset, and “iso” in the dataset containing the "Economic_Measures" average). We we will therefore use the 3-digit country code field to join the column containing the "Economic_Measures" average to the spatial dataset. 
+
+The code below carries out this task:
 
 ```{r}
-# Join dataset with country-level means for "Economic_Measures" index (in "covid_data_economic" object) to spatial dataset of world boundaries (in "country_boundaries" object), based on common 3-Digit ISO Codes
+# Join dataset with country-level means for "Economic_Measures" index
+# (in "covid_data_economic" object) to spatial dataset of world boundaries 
+# (in "country_boundaries" object), based on common 3-Digit ISO Codes
+
 worldmap_covid_data_economic<-full_join(country_boundaries, covid_data_economic_avg, by=c("iso_a3"="iso"))
 ```
 
+* In the code above, we use the ```full_join``` function to connect our datasets together. A "full join" keeps all rows in both datasets, even if one dataset does not have certain rows (i.e. countries) that the other does not (and vice-versa). For more information on different join options, explore the documentation by inspecting the function's documentation (```?full_join```). 
+* The first argument to the full_join function is "country_boundaries", which is of course the object containing our spatial dataset. 
+* The second argument, "covid_data_economic_avg" is the tabular dataset containing information on country_level averages for the Covid economic intervention index (i.e. the data we ultimately want to map).^[It's worth noting that when we are joining a tabular dataset to a spatial dataset with a view towards visualizing the information within the tabular data on a map, the object containing the spatial dataset should be listed before the object containing the tabular dataset. If we reverse this order, we'll have to take some additional steps to get the joined dataset ready to map, and this is best avoided.] 
+* The third argument specifies the join fields, i.e. the fields within the datasets that contain the common variable that can be used to correlate the records in the two different datasets and weld them together. In our case, the join variable is of course the 3-digit country ISO code. The argument that reads ```by=c("iso_a3"="iso")``` simply indicates that we want to join the datasets based on the set of country identifiers given by the 3-digit ISO codes; because the name of the column containing the 3-digit codes is different in the two datasets, the expression in the parentheses ```"iso_a3"="iso"``` simply indicates that the column named "iso_a3" (in the spatial dataset) and the column named (iso) in the tabular dataset are equivalent to each other, and are to be used as the join fields. If they didn't have different names--for example, if the ISO codes were in a column named "iso" in *both* datasets--we could simply have written ```by=iso``` to specify the join column.
+* Finally, we take our newly created dataset, which adds the data we want to map into the spatial dataset, and assign it to a new object that we can call when building our map(s). We call this object "worldmap_covid_data_economic." 
+
+We can translate the code in the previous code block as follows: "Join the dataset in the 'covid_data_economic_avg' object to the spatial dataset in the 'country_boundaries' obejct using columns in each of the two datasets containing information on countries' 3-Digit ISO codes as the join fields (the column with ISO information in the spatial dataset is named 'iso_a3' while the column with ISO information in the tabular dataset is 'iso'). Finally, assign the joined dataset that results to a new object called 'worldmap_covid_data_economic.'"  
+
+Before proceeding, Let's take a quick look at our newly created joined dataset. To make it easy to inspect, we can move up the variables we're interested in (country name, the "mean_economic" variable, and the geometry information that makes the data spatial in nature) up to the front of the dataset:
+
 ```{r}
-worldmap_covid_data_economic<-worldmap_covid_data_economic %>% relocate(name, mean_economic)
+worldmap_covid_data_economic<-worldmap_covid_data_economic %>% relocate(name, mean_economic, geometry)
 ```
+
+After moving these variables by using the ```relocate``` function with the relevant variables as arguments, pass the name of the object containing the joined data ("worldmap_covid_data_economic"), whose variables have now been relocated, through the familiar ```View``` function:
+
+```{r}
+View(worldmap_covid_data_economic)
+```
+
+The dataset that opens up in your Source window should look something like this:
+
+```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='Spatial Dataset With Covid-19 Economic Index Data'}
+knitr::include_graphics('images/joineddataset.png')
+```
+
+Note that we now have a spatial dataset of country boundaries (as indicated by the "name" and "geometry" fields), with the data we want to map (the mean, for each country, of the Covid-19 Economic intervention index during the period under consideration) now included in a field within the spatial dataset. 
 
 ## Make Maps
 
