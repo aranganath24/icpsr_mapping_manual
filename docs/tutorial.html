@@ -24,7 +24,7 @@
 <meta name="author" content="Aditya Ranganath" />
 
 
-<meta name="date" content="2021-09-22" />
+<meta name="date" content="2021-09-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -434,14 +434,38 @@ The <code>tm_polygons</code> function can take a variety of arguments that can h
 <li><code>col="mean_economic"</code> specifies the name of the column in the spatial dataset (which has been specified with the <code>tm_shape</code> function) that contains the data we’d like to map. Recall from the previous section that the name of this column is “mean_economic.”</li>
 <li><code>n=8</code> specifies that we want the data to be partitioned into 8 bins</li>
 <li><code>style="jenks"</code> indicates that we want to set break points in the data distribution using the Jenks Natural Breaks Classification; to see other options for partitioning your data, see the function’s documentation. For more information on the Jenks Natural Breaks Classification, as well as other data partition algorithms, see <a href="https://pro.arcgis.com/en/pro-app/2.7/help/mapping/layer-properties/data-classification-methods.htm">here</a>.</li>
-<li><code>palette="BuGn"</code> specifies the color scheme we want to use to represent the data. Check out this extremely useful <a href="https://www.nceas.ucsb.edu/sites/default/files/2020-04/colorPaletteCheatsheet.pdf">guide</a> on colors and palettes in R (including information on relevant color codes).</li>
+<li><code>palette="BuGn"</code> specifies the color scheme we want to use to represent the data. Check out this extremely useful <a href="https://www.nceas.ucsb.edu/sites/default/files/2020-04/colorPaletteCheatsheet.pdf">guide</a> on colors and palettes in R (including information on relevant color codes). “BuGn” refers to a blue-green color gradient, which is used to represent variation in the data that’s being mapped.</li>
 </ul>
 <p>To see what the map looks like, simply call the object which contains it:</p>
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="tutorial.html#cb35-1" aria-hidden="true" tabindex="-1"></a>covid_economic_map</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
+<p>As in Section 4.1.2 above, we can see the map in the “Plots” tab of the bottom-right window, and can open up a larger window by clicking the “Zoom” button right below the “Plots” tab.</p>
+<p>Of course, the map we’ve just created needs a bit of work (most noticeably, the legend needs to be moved to a less distracting location), but after all of the previous work to set up our data, hopefully it feels exciting to finally see our tabular data transformed into a map!</p>
+<p>Before we work on the legend, we can see how to change certain features of the map using arguments to the <code>tm_polygons</code> function that we’ve already discussed. For instance, let’s say we want a Yellow to Red palette (“YlOrRd”; again, remember you can look up these codes at the color guide linked above), only five intervals for the data, and want the data to be partitioned across intervals equally (rather than by using the Jenks algorithm). Let’s make a new map object to contain this map, called “covid_economic_map_alternative.”</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="tutorial.html#cb36-1" aria-hidden="true" tabindex="-1"></a>covid_economic_map_alt<span class="ot">&lt;-</span><span class="fu">tm_shape</span>(worldmap_covid_data_economic)<span class="sc">+</span></span>
+<span id="cb36-2"><a href="tutorial.html#cb36-2" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">tm_polygons</span>(<span class="at">col=</span><span class="st">&quot;mean_economic&quot;</span>, <span class="at">n=</span><span class="dv">5</span>, <span class="at">style=</span><span class="st">&quot;equal&quot;</span>, <span class="at">palette=</span><span class="st">&quot;YlOrRd&quot;</span>)</span></code></pre></div>
+<p>Let’s display the map in the “covid_economic_map_alt” object; notice the change in color, the fewer number of classes, and the equal intervals in the legend:</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="tutorial.html#cb37-1" aria-hidden="true" tabindex="-1"></a>covid_economic_map_alt</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-46-1.png" width="672" /></p>
 </div>
 <div id="customize-legend" class="section level3" number="4.5.2">
 <h3><span class="header-section-number">4.5.2</span> Customize Legend</h3>
+<p>The biggest issue with the rough drafts of our map from the previous section is the position of the legend. Let’s go back to the first map we made (in the “covid_economic_map” object), and simply switch its legend position, using an argument in the <code>tm_legend</code> function:</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="tutorial.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Shift legend position</span></span>
+<span id="cb38-2"><a href="tutorial.html#cb38-2" aria-hidden="true" tabindex="-1"></a>covid_economic_map<span class="ot">&lt;-</span><span class="fu">tm_shape</span>(worldmap_covid_data_economic)<span class="sc">+</span></span>
+<span id="cb38-3"><a href="tutorial.html#cb38-3" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">tm_polygons</span>(<span class="at">col=</span><span class="st">&quot;mean_economic&quot;</span>, <span class="at">n=</span><span class="dv">8</span>, <span class="at">style=</span><span class="st">&quot;jenks&quot;</span>, <span class="at">palette=</span><span class="st">&quot;BuGn&quot;</span>)<span class="sc">+</span></span>
+<span id="cb38-4"><a href="tutorial.html#cb38-4" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">tm_legend</span>(<span class="at">position=</span><span class="fu">c</span>(<span class="st">&quot;left&quot;</span>, <span class="st">&quot;bottom&quot;</span>))</span>
+<span id="cb38-5"><a href="tutorial.html#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="do">## View Map</span></span>
+<span id="cb38-6"><a href="tutorial.html#cb38-6" aria-hidden="true" tabindex="-1"></a>covid_economic_map</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
+<p>Currently, our legend is discrete, but we may want to try using a continuous legend to better match the continuous nature of the index. We can do this by changing the “style” argument to the <code>tm_polygons</code> function:</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="tutorial.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Shift legend position</span></span>
+<span id="cb39-2"><a href="tutorial.html#cb39-2" aria-hidden="true" tabindex="-1"></a>covid_economic_map<span class="ot">&lt;-</span><span class="fu">tm_shape</span>(worldmap_covid_data_economic)<span class="sc">+</span></span>
+<span id="cb39-3"><a href="tutorial.html#cb39-3" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">tm_polygons</span>(<span class="at">col=</span><span class="st">&quot;mean_economic&quot;</span>, <span class="at">style=</span><span class="st">&quot;cont&quot;</span>, <span class="at">palette=</span><span class="st">&quot;BuGn&quot;</span>)<span class="sc">+</span></span>
+<span id="cb39-4"><a href="tutorial.html#cb39-4" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">tm_legend</span>(<span class="at">position=</span><span class="fu">c</span>(<span class="st">&quot;left&quot;</span>, <span class="st">&quot;bottom&quot;</span>))</span>
+<span id="cb39-5"><a href="tutorial.html#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="do">## View Map</span></span>
+<span id="cb39-6"><a href="tutorial.html#cb39-6" aria-hidden="true" tabindex="-1"></a>covid_economic_map</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
 </div>
 <div id="add-map-title-and-credits" class="section level3" number="4.5.3">
 <h3><span class="header-section-number">4.5.3</span> Add Map Title and Credits</h3>
