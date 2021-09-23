@@ -35,3 +35,4 @@ compute-average-of-economic_measures-index
 calculate-summary-statistics
 join-datasets
 make-maps
+make-a-preliminary-map

@@ -172,7 +172,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3.4" data-path="tutorial.html"><a href="tutorial.html#calculate-summary-statistics"><i class="fa fa-check"></i><b>4.3.4</b> Calculate Summary Statistics</a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="tutorial.html"><a href="tutorial.html#join-datasets"><i class="fa fa-check"></i><b>4.4</b> Join Datasets</a></li>
-<li class="chapter" data-level="4.5" data-path="tutorial.html"><a href="tutorial.html#make-maps"><i class="fa fa-check"></i><b>4.5</b> Make Maps</a></li>
+<li class="chapter" data-level="4.5" data-path="tutorial.html"><a href="tutorial.html#make-maps"><i class="fa fa-check"></i><b>4.5</b> Make Maps</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="tutorial.html"><a href="tutorial.html#make-a-preliminary-map"><i class="fa fa-check"></i><b>4.5.1</b> Make a Preliminary Map</a></li>
+</ul></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -413,11 +416,25 @@ Figure 4.9: Spatial Dataset With Covid-19 Economic Index Data
 </div>
 <div id="make-maps" class="section level2" number="4.5">
 <h2><span class="header-section-number">4.5</span> Make Maps</h2>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="tutorial.html#cb34-1" aria-hidden="true" tabindex="-1"></a>map1<span class="ot">&lt;-</span><span class="fu">tm_shape</span>(worldmap_covid_data_economic)<span class="sc">+</span></span>
-<span id="cb34-2"><a href="tutorial.html#cb34-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">tm_polygons</span>(<span class="at">col=</span><span class="st">&quot;mean_economic&quot;</span>, <span class="at">n=</span><span class="dv">8</span>, <span class="at">style=</span><span class="st">&quot;jenks&quot;</span>, <span class="at">palette=</span><span class="st">&quot;BuGn&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="tutorial.html#cb35-1" aria-hidden="true" tabindex="-1"></a>map1</span></code></pre></div>
+<p>We’re finally ready to represent the tabular data we started with on a map! To do so, we’ll use the <em>tmap</em> package, which we already used above to view a rendered version of our spatial dataset. Now, we’ll actually represent our data on the map features.</p>
+<div id="make-a-preliminary-map" class="section level3" number="4.5.1">
+<h3><span class="header-section-number">4.5.1</span> Make a Preliminary Map</h3>
+<p>As with anything else in R, we can assign maps created with the <em>tmap</em> package to objects, which makes it easy to subsquently work with them. We’ll create an object called “covid_economic_map” to contain the map we will build using <em>tmap</em>. We can create a rough draft of a map and assign it to an object with two relatively simple lines of code:</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="tutorial.html#cb34-1" aria-hidden="true" tabindex="-1"></a>covid_economic_map<span class="ot">&lt;-</span><span class="fu">tm_shape</span>(worldmap_covid_data_economic)<span class="sc">+</span></span>
+<span id="cb34-2"><a href="tutorial.html#cb34-2" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">tm_polygons</span>(<span class="at">col=</span><span class="st">&quot;mean_economic&quot;</span>, <span class="at">n=</span><span class="dv">8</span>, <span class="at">style=</span><span class="st">&quot;jenks&quot;</span>, <span class="at">palette=</span><span class="st">&quot;BuGn&quot;</span>)</span></code></pre></div>
+<p>In the code above that is to the right of the assignment operator, we first use <em>tmap’s</em> <code>tm_shape</code> function to specify the spatial dataset whose feature’s we’d like to display. Within <em>tmap</em>, chaining together functions requires a <code>+</code> sign, so we add a <code>+</code> before moving to another function on the next line. This is the <code>tm_polygons</code> function, which we use because our spatial dataset of country boundaries represents those boundaries as polygons.
+The <code>tm_polygons</code> function can take a variety of arguments that can help us to customize our map; we’ll introduce a few more arguments below, but if you want to see the full range of possible arguments, be sure to check out the function’s documentation (<code>?tm_polygons</code>). Now, tet’s consider the arguments that are being passed through the <code>tm_polygons</code> function:</p>
+<ul>
+<li><code>col="mean_economic"</code> specifies the name of the column in the spatial dataset (which has been specified with the <code>tm_shape</code> function) that contains the data we’d like to map. Recall from the previous section that the name of this column is “mean_economic.”</li>
+<li><code>n=8</code> specifies that we want the data to be partitioned into 8 bins</li>
+<li><code>style="jenks"</code> indicates that we want to set break points in the data distribution using the Jenks Natural Breaks Classification; to see other options for partitioning your data, see the function’s documentation. For more information on the Jenks Natural Breaks Classification, as well as other data partition algorithms, see <a href="https://pro.arcgis.com/en/pro-app/2.7/help/mapping/layer-properties/data-classification-methods.htm">here</a>.</li>
+<li><code>palette="BuGn"</code> specifies the color scheme we want to use to represent the data. Check out this extremely useful <a href="https://www.nceas.ucsb.edu/sites/default/files/2020-04/colorPaletteCheatsheet.pdf">guide</a> on colors and palettes in R (including information on relevant color codes).</li>
+</ul>
+<p>To see what the map looks like, simply call the object which contains it:</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="tutorial.html#cb35-1" aria-hidden="true" tabindex="-1"></a>covid_economic_map</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
 
+</div>
 </div>
 </div>
 
