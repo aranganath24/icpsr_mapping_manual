@@ -36,3 +36,7 @@ calculate-summary-statistics
 join-datasets
 make-maps
 make-a-preliminary-map
+customize-legend
+add-map-title-and-credits
+export-your-map
+make-a-web-map
