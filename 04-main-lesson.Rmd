@@ -346,6 +346,10 @@ To see what the map looks like, simply call the object which contains it:
 covid_economic_map
 ```
 
+
+
+
+
 ### Customize Legend
 
 ### Add Map Title and Credits
