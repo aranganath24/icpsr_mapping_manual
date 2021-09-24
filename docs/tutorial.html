@@ -24,7 +24,7 @@
 <meta name="author" content="Aditya Ranganath" />
 
 
-<meta name="date" content="2021-09-23" />
+<meta name="date" content="2021-09-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -447,25 +447,50 @@ The <code>tm_polygons</code> function can take a variety of arguments that can h
 <p>Let’s display the map in the “covid_economic_map_alt” object; notice the change in color, the fewer number of classes, and the equal intervals in the legend:</p>
 <div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="tutorial.html#cb37-1" aria-hidden="true" tabindex="-1"></a>covid_economic_map_alt</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-46-1.png" width="672" /></p>
+<p>Note that we can easily remove the map frame if we’d prefer not to have that, with the “Frame” argument to the <code>tm_layout</code> function.</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="tutorial.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Removes frame from &quot;covid_economic_map_alt&quot; map object</span></span>
+<span id="cb38-2"><a href="tutorial.html#cb38-2" aria-hidden="true" tabindex="-1"></a>covid_economic_map_alt<span class="ot">&lt;-</span>covid_economic_map_alt<span class="sc">+</span></span>
+<span id="cb38-3"><a href="tutorial.html#cb38-3" aria-hidden="true" tabindex="-1"></a>                          <span class="fu">tm_layout</span>(<span class="at">frame=</span><span class="cn">FALSE</span>)</span>
+<span id="cb38-4"><a href="tutorial.html#cb38-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-5"><a href="tutorial.html#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Views amended map object without frame:</span></span>
+<span id="cb38-6"><a href="tutorial.html#cb38-6" aria-hidden="true" tabindex="-1"></a>covid_economic_map_alt</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
 </div>
 <div id="customize-legend" class="section level3" number="4.5.2">
 <h3><span class="header-section-number">4.5.2</span> Customize Legend</h3>
-<p>The biggest issue with the rough drafts of our map from the previous section is the position of the legend. Let’s go back to the first map we made (in the “covid_economic_map” object), and simply switch its legend position, using an argument in the <code>tm_legend</code> function:</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="tutorial.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Shift legend position</span></span>
-<span id="cb38-2"><a href="tutorial.html#cb38-2" aria-hidden="true" tabindex="-1"></a>covid_economic_map<span class="ot">&lt;-</span><span class="fu">tm_shape</span>(worldmap_covid_data_economic)<span class="sc">+</span></span>
-<span id="cb38-3"><a href="tutorial.html#cb38-3" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">tm_polygons</span>(<span class="at">col=</span><span class="st">&quot;mean_economic&quot;</span>, <span class="at">n=</span><span class="dv">8</span>, <span class="at">style=</span><span class="st">&quot;jenks&quot;</span>, <span class="at">palette=</span><span class="st">&quot;BuGn&quot;</span>)<span class="sc">+</span></span>
-<span id="cb38-4"><a href="tutorial.html#cb38-4" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">tm_legend</span>(<span class="at">position=</span><span class="fu">c</span>(<span class="st">&quot;left&quot;</span>, <span class="st">&quot;bottom&quot;</span>))</span>
-<span id="cb38-5"><a href="tutorial.html#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="do">## View Map</span></span>
-<span id="cb38-6"><a href="tutorial.html#cb38-6" aria-hidden="true" tabindex="-1"></a>covid_economic_map</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
-<p>Currently, our legend is discrete, but we may want to try using a continuous legend to better match the continuous nature of the index. We can do this by changing the “style” argument to the <code>tm_polygons</code> function:</p>
+<p>The biggest issue with the rough drafts of our map from the previous section is the position of the legend. Let’s go back to the first map we made (in the “covid_economic_map” object), and simply switch its legend position, using an argument in the <code>tm_legend</code> function. We’ll also remove the map frame.</p>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="tutorial.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Shift legend position</span></span>
 <span id="cb39-2"><a href="tutorial.html#cb39-2" aria-hidden="true" tabindex="-1"></a>covid_economic_map<span class="ot">&lt;-</span><span class="fu">tm_shape</span>(worldmap_covid_data_economic)<span class="sc">+</span></span>
-<span id="cb39-3"><a href="tutorial.html#cb39-3" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">tm_polygons</span>(<span class="at">col=</span><span class="st">&quot;mean_economic&quot;</span>, <span class="at">style=</span><span class="st">&quot;cont&quot;</span>, <span class="at">palette=</span><span class="st">&quot;BuGn&quot;</span>)<span class="sc">+</span></span>
-<span id="cb39-4"><a href="tutorial.html#cb39-4" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">tm_legend</span>(<span class="at">position=</span><span class="fu">c</span>(<span class="st">&quot;left&quot;</span>, <span class="st">&quot;bottom&quot;</span>))</span>
-<span id="cb39-5"><a href="tutorial.html#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="do">## View Map</span></span>
-<span id="cb39-6"><a href="tutorial.html#cb39-6" aria-hidden="true" tabindex="-1"></a>covid_economic_map</span></code></pre></div>
+<span id="cb39-3"><a href="tutorial.html#cb39-3" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">tm_polygons</span>(<span class="at">col=</span><span class="st">&quot;mean_economic&quot;</span>, <span class="at">n=</span><span class="dv">8</span>, <span class="at">style=</span><span class="st">&quot;jenks&quot;</span>, <span class="at">palette=</span><span class="st">&quot;BuGn&quot;</span>)<span class="sc">+</span></span>
+<span id="cb39-4"><a href="tutorial.html#cb39-4" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">tm_layout</span>(<span class="at">frame=</span><span class="cn">FALSE</span>)<span class="sc">+</span></span>
+<span id="cb39-5"><a href="tutorial.html#cb39-5" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">tm_legend</span>(<span class="at">position=</span><span class="fu">c</span>(<span class="st">&quot;left&quot;</span>, <span class="st">&quot;bottom&quot;</span>))</span>
+<span id="cb39-6"><a href="tutorial.html#cb39-6" aria-hidden="true" tabindex="-1"></a><span class="do">## View Map</span></span>
+<span id="cb39-7"><a href="tutorial.html#cb39-7" aria-hidden="true" tabindex="-1"></a>covid_economic_map</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
+<p>Currently, our legend is discrete, but we may want to try using a continuous legend to better match the continuous nature of the index. We can do this by changing the “style” argument to the <code>tm_polygons</code> function. We’ll</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="tutorial.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Changes &quot;style&quot; argument parameter to &quot;cont&quot; to make continuous legend</span></span>
+<span id="cb40-2"><a href="tutorial.html#cb40-2" aria-hidden="true" tabindex="-1"></a>covid_economic_map<span class="ot">&lt;-</span><span class="fu">tm_shape</span>(worldmap_covid_data_economic)<span class="sc">+</span></span>
+<span id="cb40-3"><a href="tutorial.html#cb40-3" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">tm_polygons</span>(<span class="at">col=</span><span class="st">&quot;mean_economic&quot;</span>, <span class="at">style=</span><span class="st">&quot;cont&quot;</span>, <span class="at">palette=</span><span class="st">&quot;BuGn&quot;</span>)<span class="sc">+</span></span>
+<span id="cb40-4"><a href="tutorial.html#cb40-4" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">tm_layout</span>(<span class="at">frame=</span><span class="cn">FALSE</span>)<span class="sc">+</span></span>
+<span id="cb40-5"><a href="tutorial.html#cb40-5" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">tm_legend</span>(<span class="at">position=</span><span class="fu">c</span>(<span class="st">&quot;left&quot;</span>, <span class="st">&quot;bottom&quot;</span>))</span>
+<span id="cb40-6"><a href="tutorial.html#cb40-6" aria-hidden="true" tabindex="-1"></a><span class="do">## View Map</span></span>
+<span id="cb40-7"><a href="tutorial.html#cb40-7" aria-hidden="true" tabindex="-1"></a>covid_economic_map</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
+<p>Let’s explore some additional ways to customize our legend:</p>
+<ul>
+<li>Notice that the legend has a “Missing” category, to indicate countries for which we don’t have data on the Covid-19 economic index. Instead of labelling it “Missing” let’s label it as “No Data”.</li>
+<li>Let’s give the legend a title that describes the data: Mean of Covid Economic Intervention Index (1/1/2020 to 10/1/2020)"</li>
+<li>Finally, it’s possible to experiment with different legend orientations. Let’s flip the legend’s orientation, turning it into a horizontal rather than vertical bar.</li>
+</ul>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="tutorial.html#cb41-1" aria-hidden="true" tabindex="-1"></a>covid_economic_map<span class="ot">&lt;-</span><span class="fu">tm_shape</span>(worldmap_covid_data_economic)<span class="sc">+</span></span>
+<span id="cb41-2"><a href="tutorial.html#cb41-2" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">tm_polygons</span>(<span class="at">col=</span><span class="st">&quot;mean_economic&quot;</span>, <span class="at">n=</span><span class="dv">5</span>, <span class="at">style=</span><span class="st">&quot;cont&quot;</span>, <span class="at">palette=</span><span class="st">&quot;BuGn&quot;</span>, <span class="at">textNA=</span><span class="st">&quot;No Data&quot;</span>, </span>
+<span id="cb41-3"><a href="tutorial.html#cb41-3" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">title=</span><span class="st">&quot;Mean of Covid Economic</span><span class="sc">\n</span><span class="st">Intervention Index</span><span class="sc">\n</span><span class="st">(1/1/2020 to 10/1/2020)&quot;</span>, </span>
+<span id="cb41-4"><a href="tutorial.html#cb41-4" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">legend.is.portrait=</span><span class="cn">FALSE</span>,<span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.25</span>,<span class="fl">0.5</span>, <span class="fl">0.75</span>))<span class="sc">+</span></span>
+<span id="cb41-5"><a href="tutorial.html#cb41-5" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">tm_layout</span>(<span class="at">legend.title.size=</span><span class="fl">0.8</span>, <span class="at">legend.title.fontface=</span><span class="dv">2</span>,<span class="at">legend.outside=</span><span class="cn">TRUE</span>, </span>
+<span id="cb41-6"><a href="tutorial.html#cb41-6" aria-hidden="true" tabindex="-1"></a>                                <span class="at">legend.outside.position =</span> <span class="fu">c</span>(<span class="st">&quot;bottom&quot;</span>), <span class="at">frame=</span><span class="cn">FALSE</span>, <span class="at">legend.text.size =</span> <span class="fl">0.5</span>,</span>
+<span id="cb41-7"><a href="tutorial.html#cb41-7" aria-hidden="true" tabindex="-1"></a>                                <span class="at">legend.hist.size =</span> <span class="fl">0.5</span>)</span>
+<span id="cb41-8"><a href="tutorial.html#cb41-8" aria-hidden="true" tabindex="-1"></a>covid_economic_map</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
 </div>
 <div id="add-map-title-and-credits" class="section level3" number="4.5.3">
 <h3><span class="header-section-number">4.5.3</span> Add Map Title and Credits</h3>
