@@ -24,7 +24,7 @@
 <meta name="author" content="Aditya Ranganath" />
 
 
-<meta name="date" content="2021-09-24" />
+<meta name="date" content="2021-09-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -180,6 +180,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4.6" data-path="tutorial.html"><a href="tutorial.html#export-your-map"><i class="fa fa-check"></i><b>4.6</b> Export Your Map</a></li>
 <li class="chapter" data-level="4.7" data-path="tutorial.html"><a href="tutorial.html#make-a-web-map"><i class="fa fa-check"></i><b>4.7</b> Make a Web Map</a></li>
+<li class="chapter" data-level="4.8" data-path="tutorial.html"><a href="tutorial.html#summary"><i class="fa fa-check"></i><b>4.8</b> Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="practice-and-challenge-exercises.html"><a href="practice-and-challenge-exercises.html"><i class="fa fa-check"></i><b>5</b> Practice and Challenge Exercises</a></li>
 <li class="chapter" data-level="6" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>6</b> Conclusion</a></li>
@@ -478,12 +479,16 @@ The <code>tm_polygons</code> function can take a variety of arguments that can h
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
 <p>Let’s explore some additional ways to customize our legend:</p>
 <ul>
-<li>Notice that the legend has a “Missing” category, to indicate countries for which we don’t have data on the Covid-19 economic index. Instead of labelling it “Missing” let’s label it as “No Data”.</li>
-<li>Let’s give the legend a title that describes the data: Mean of Covid Economic Intervention Index (1/1/2020 to 10/1/2020)"</li>
-<li>Finally, it’s possible to experiment with different legend orientations. Let’s flip the legend’s orientation, turning it into a horizontal rather than vertical bar.</li>
+<li>Notice that the legend has a “Missing” category, to indicate countries for which we don’t have data on the Covid-19 economic index. Instead of labelling it “Missing” we’ll’ label it as “No Data”.</li>
+<li>Let’s give the legend a title that describes the data: Mean of Covid Economic Intervention Index (1/1/2020 to 10/1/2020)".</li>
+<li>It’s possible to experiment with different legend orientations. To see this, let’s flip the legend’s orientation, turning it into a horizontal rather than vertical bar.</li>
+<li>It’s also possible to specify our own intervals for the legend; we’ll set our legend breaks at 0, 0.25, 0.5, and 0.75.</li>
+<li>We’ll customize the size of our legend, as well as the legend’s text.</li>
+<li>We’ll alter the location of our legend.</li>
 </ul>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="tutorial.html#cb41-1" aria-hidden="true" tabindex="-1"></a>covid_economic_map<span class="ot">&lt;-</span><span class="fu">tm_shape</span>(worldmap_covid_data_economic)<span class="sc">+</span></span>
-<span id="cb41-2"><a href="tutorial.html#cb41-2" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">tm_polygons</span>(<span class="at">col=</span><span class="st">&quot;mean_economic&quot;</span>, <span class="at">n=</span><span class="dv">5</span>, <span class="at">style=</span><span class="st">&quot;cont&quot;</span>, <span class="at">palette=</span><span class="st">&quot;BuGn&quot;</span>, <span class="at">textNA=</span><span class="st">&quot;No Data&quot;</span>, </span>
+<p>The following code incorporates these changes into the previous map:</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="tutorial.html#cb41-1" aria-hidden="true" tabindex="-1"></a>covid_economic_map<span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(worldmap_covid_data_economic)<span class="sc">+</span></span>
+<span id="cb41-2"><a href="tutorial.html#cb41-2" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">tm_polygons</span>(<span class="at">col=</span><span class="st">&quot;mean_economic&quot;</span>, <span class="at">style=</span><span class="st">&quot;cont&quot;</span>, <span class="at">palette=</span><span class="st">&quot;BuGn&quot;</span>, <span class="at">textNA=</span><span class="st">&quot;No Data&quot;</span>, </span>
 <span id="cb41-3"><a href="tutorial.html#cb41-3" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">title=</span><span class="st">&quot;Mean of Covid Economic</span><span class="sc">\n</span><span class="st">Intervention Index</span><span class="sc">\n</span><span class="st">(1/1/2020 to 10/1/2020)&quot;</span>, </span>
 <span id="cb41-4"><a href="tutorial.html#cb41-4" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">legend.is.portrait=</span><span class="cn">FALSE</span>,<span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.25</span>,<span class="fl">0.5</span>, <span class="fl">0.75</span>))<span class="sc">+</span></span>
 <span id="cb41-5"><a href="tutorial.html#cb41-5" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">tm_layout</span>(<span class="at">legend.title.size=</span><span class="fl">0.8</span>, <span class="at">legend.title.fontface=</span><span class="dv">2</span>,<span class="at">legend.outside=</span><span class="cn">TRUE</span>, </span>
@@ -491,6 +496,29 @@ The <code>tm_polygons</code> function can take a variety of arguments that can h
 <span id="cb41-7"><a href="tutorial.html#cb41-7" aria-hidden="true" tabindex="-1"></a>                                <span class="at">legend.hist.size =</span> <span class="fl">0.5</span>)</span>
 <span id="cb41-8"><a href="tutorial.html#cb41-8" aria-hidden="true" tabindex="-1"></a>covid_economic_map</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
+<p>Let’s unpack this code; for the sake of completeness, we’ll go over all of the functions and arguments, rather than just the code that implements the changes mentioned above.</p>
+<p>Above, to the right of the assignment operator, we have:</p>
+<ul>
+<li><code>tm_shape(worldmap_covid_data_economic)</code> specifies the spatial dataset with the information we want to map.</li>
+<li>The <code>tm_polygons</code> function takes many arguments here:
+<ul>
+<li><code>col="mean_economic"</code> specifies the name of the column in the spatial dataset that contains the data we wish to map.</li>
+<li><code>style=cont</code> indicates that we want a continuous legend</li>
+<li><code>palette="BuGn"</code> specifies the color scheme we wish to use to represent variation in the data.</li>
+<li><code>textNA="No Data</code> indicates that we want data coded as “NA” to be labeled “No Data” in our legend; the default label is “Missing”</li>
+<li><code>title=Mean of Covid Economic\nIntervention Index\n(1/1/2020 to 10/1/2020)"</code> specifies the title of the legend. The <code>\n</code> notation is used to indicate line breaks. If these are not included, the legend title would be one line, rather than three.</li>
+<li><code>legend.is.portrait=FALSE</code> flips the legend, making its orientation horizontal rather than vertical</li>
+<li><code>breaks=c(0,0.25,0.5,0.75)</code> specifies our custom breaks (for values of the Covid economic index) in the legend.</li>
+</ul></li>
+<li>The <code>tm_layout</code> function also takes many arguments:
+<ul>
+<li><code>legend.title.size=0.8</code> sets the size of the text in the legend’s title</li>
+<li><code>legend.title.fontface=2</code> makes the legend title bold.</li>
+<li><code>legend.outside=True</code> situates the legend outside the map frame. Because the map frame is invisible (since we set <code>legend.outside=TRUE</code>), the practical effect of this is to shift the legend outside the map area. In particular, it shifts it below the map area because of the <code>legend.outside.position = c("bottom")</code> argument.</li>
+<li><code>legend.text.size=0.5</code> specifies the size of the legend text that is not part of the legend title</li>
+<li><code>legend.hist.size=0.5</code> specifies the size of the graphical part of the legend</li>
+</ul></li>
+</ul>
 </div>
 <div id="add-map-title-and-credits" class="section level3" number="4.5.3">
 <h3><span class="header-section-number">4.5.3</span> Add Map Title and Credits</h3>
@@ -501,6 +529,15 @@ The <code>tm_polygons</code> function can take a variety of arguments that can h
 </div>
 <div id="make-a-web-map" class="section level2" number="4.7">
 <h2><span class="header-section-number">4.7</span> Make a Web Map</h2>
+</div>
+<div id="summary" class="section level2" number="4.8">
+<h2><span class="header-section-number">4.8</span> Summary</h2>
+<ul>
+<li>Test
+<ul>
+<li>dd</li>
+</ul></li>
+</ul>
 
 </div>
 </div>

@@ -40,5 +40,6 @@ customize-legend
 add-map-title-and-credits
 export-your-map
 make-a-web-map
+summary
 practice-and-challenge-exercises
 conclusion

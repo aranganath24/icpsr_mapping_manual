@@ -404,14 +404,18 @@ covid_economic_map
 
 Let's explore some additional ways to customize our legend:
 
-* Notice that the legend has a "Missing" category, to indicate countries for which we don't have data on the Covid-19 economic index. Instead of labelling it "Missing" let's label it as "No Data".
-* Let's give the legend a title that describes the data: Mean of Covid Economic Intervention Index (1/1/2020 to 10/1/2020)"
-* Finally, it's possible to experiment with different legend orientations. Let's flip the legend's orientation, turning it into a horizontal rather than vertical bar.
+* Notice that the legend has a "Missing" category, to indicate countries for which we don't have data on the Covid-19 economic index. Instead of labelling it "Missing" we'll' label it as "No Data".
+* Let's give the legend a title that describes the data: Mean of Covid Economic Intervention Index (1/1/2020 to 10/1/2020)".
+* It's possible to experiment with different legend orientations. To see this, let's flip the legend's orientation, turning it into a horizontal rather than vertical bar.
+* It's also possible to specify our own intervals for the legend; we'll set our legend breaks at 0, 0.25, 0.5, and 0.75.
+* We'll customize the size of our legend, as well as the legend's text. 
+* We'll alter the location of our legend. 
 
+The following code incorporates these changes into the previous map:
 
 ```{r, fig.asp=0.5, message=FALSE, warning=FALSE}
-covid_economic_map<-tm_shape(worldmap_covid_data_economic)+
-                      tm_polygons(col="mean_economic", n=5, style="cont", palette="BuGn", textNA="No Data", 
+covid_economic_map<- tm_shape(worldmap_covid_data_economic)+
+                      tm_polygons(col="mean_economic", style="cont", palette="BuGn", textNA="No Data", 
                                   title="Mean of Covid Economic\nIntervention Index\n(1/1/2020 to 10/1/2020)", 
                                   legend.is.portrait=FALSE,breaks=c(0,0.25,0.5, 0.75))+
                       tm_layout(legend.title.size=0.8, legend.title.fontface=2,legend.outside=TRUE, 
@@ -420,11 +424,35 @@ covid_economic_map<-tm_shape(worldmap_covid_data_economic)+
 covid_economic_map
 ```
 
+Let's unpack this code; for the sake of completeness, we'll go over all of the functions and arguments, rather than just the code that implements the changes mentioned above. 
 
+Above, to the right of the assignment operator, we have:
+
+* ```tm_shape(worldmap_covid_data_economic)``` specifies the spatial dataset with the information we want to map.
+* The ```tm_polygons``` function takes many arguments here:
+  * ```col="mean_economic"``` specifies the name of the column in the spatial dataset that contains the data we wish to map. 
+  * ```style=cont``` indicates that we want a continuous legend
+  * ```palette="BuGn"``` specifies the color scheme we wish to use to represent variation in the data.
+  * ```textNA="No Data``` indicates that we want data coded as "NA" to be labeled "No Data" in our legend; the default label is "Missing"
+  * ```title=Mean of Covid Economic\nIntervention Index\n(1/1/2020 to 10/1/2020)"``` specifies the title of the legend. The ```\n``` notation is used to indicate line breaks. If these are not included, the legend title would be one line, rather than three.
+  * ```legend.is.portrait=FALSE``` flips the legend, making its orientation horizontal rather than vertical
+  * ```breaks=c(0,0.25,0.5,0.75)``` specifies our custom breaks (for values of the Covid economic index) in the legend. 
+* The ```tm_layout``` function also takes many arguments:
+  * ```legend.title.size=0.8``` sets the size of the text in the legend's title
+  * ```legend.title.fontface=2``` makes the legend title bold. 
+  * ```legend.outside=True``` situates the legend outside the map frame. Because the map frame is invisible (since we set ```legend.outside=TRUE```), the practical effect of this is to shift the legend outside the map area. In particular, it shifts it below the map area because of the ```legend.outside.position = c("bottom")``` argument. 
+  * ```legend.text.size=0.5``` specifies the size of the legend text that is not part of the legend title
+  * ```legend.hist.size=0.5``` specifies the size of the graphical part of the legend
 
 ### Add Map Title and Credits
+
 
 ## Export Your Map
 
 ## Make a Web Map 
 
+## Summary 
+
+
+* Test
+  * dd
