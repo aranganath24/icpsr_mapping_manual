@@ -176,7 +176,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="4.5.1" data-path="tutorial.html"><a href="tutorial.html#make-a-preliminary-map"><i class="fa fa-check"></i><b>4.5.1</b> Make a Preliminary Map</a></li>
 <li class="chapter" data-level="4.5.2" data-path="tutorial.html"><a href="tutorial.html#customize-legend"><i class="fa fa-check"></i><b>4.5.2</b> Customize Legend</a></li>
-<li class="chapter" data-level="4.5.3" data-path="tutorial.html"><a href="tutorial.html#add-map-title-and-credits"><i class="fa fa-check"></i><b>4.5.3</b> Add Map Title and Credits</a></li>
+<li class="chapter" data-level="4.5.3" data-path="tutorial.html"><a href="tutorial.html#add-map-title"><i class="fa fa-check"></i><b>4.5.3</b> Add Map Title</a></li>
+<li class="chapter" data-level="4.5.4" data-path="tutorial.html"><a href="tutorial.html#add-map-credits"><i class="fa fa-check"></i><b>4.5.4</b> Add Map Credits</a></li>
 </ul></li>
 <li class="chapter" data-level="4.6" data-path="tutorial.html"><a href="tutorial.html#export-your-map"><i class="fa fa-check"></i><b>4.6</b> Export Your Map</a></li>
 <li class="chapter" data-level="4.7" data-path="tutorial.html"><a href="tutorial.html#make-a-web-map"><i class="fa fa-check"></i><b>4.7</b> Make a Web Map</a></li>
@@ -519,9 +520,21 @@ The <code>tm_polygons</code> function can take a variety of arguments that can h
 <li><code>legend.hist.size=0.5</code> specifies the size of the graphical part of the legend</li>
 </ul></li>
 </ul>
+<p>The best way to get a sense of how all of these various arguments work is to try changing the values of the arguments and inspect their effect on the map’s appearance.</p>
 </div>
-<div id="add-map-title-and-credits" class="section level3" number="4.5.3">
-<h3><span class="header-section-number">4.5.3</span> Add Map Title and Credits</h3>
+<div id="add-map-title" class="section level3" number="4.5.3">
+<h3><span class="header-section-number">4.5.3</span> Add Map Title</h3>
+<p>One useful thing to keep in mind is that when adding new elements to our map, it’s not necessary to retype all of our code; thus far, that is what we’ve been doing, but it’s also possible to simply append changes to the existing object. Below, to the right of the assignment operator, we first print the name of the object we want to modify (i.e. “covid_economic_map”) and then type a “+” sign; then, we can modify the object as desired. In particular, we want to add a map title, which we will do by passing</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="tutorial.html#cb42-1" aria-hidden="true" tabindex="-1"></a>covid_economic_map<span class="ot">&lt;-</span>covid_economic_map<span class="sc">+</span></span>
+<span id="cb42-2"><a href="tutorial.html#cb42-2" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">tm_layout</span>(<span class="at">main.title=</span><span class="st">&quot;National Economic Support Measures</span><span class="sc">\n</span><span class="st">in Response to the Covid-19 Pandemic&quot;</span>, </span>
+<span id="cb42-3"><a href="tutorial.html#cb42-3" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">main.title.position=</span><span class="st">&quot;center&quot;</span>, <span class="at">attr.outside=</span><span class="cn">TRUE</span>,</span>
+<span id="cb42-4"><a href="tutorial.html#cb42-4" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">main.title.size=</span><span class="dv">1</span>, <span class="at">inner.margins=</span><span class="fu">c</span>(<span class="fl">0.06</span>,<span class="fl">0.10</span>,<span class="fl">0.10</span>,<span class="fl">0.08</span>))</span>
+<span id="cb42-5"><a href="tutorial.html#cb42-5" aria-hidden="true" tabindex="-1"></a>covid_economic_map </span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
+<p>covid_economic_map&lt;-covid_economic_map+</p>
+</div>
+<div id="add-map-credits" class="section level3" number="4.5.4">
+<h3><span class="header-section-number">4.5.4</span> Add Map Credits</h3>
 </div>
 </div>
 <div id="export-your-map" class="section level2" number="4.6">

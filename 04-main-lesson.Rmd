@@ -444,7 +444,25 @@ Above, to the right of the assignment operator, we have:
   * ```legend.text.size=0.5``` specifies the size of the legend text that is not part of the legend title
   * ```legend.hist.size=0.5``` specifies the size of the graphical part of the legend
 
-### Add Map Title and Credits
+The best way to get a sense of how all of these various arguments work is to try changing the values of the arguments and inspect their effect on the map's appearance. 
+
+### Add Map Title
+
+One useful thing to keep in mind is that when adding new elements to our map, it's not necessary to retype all of our code; thus far, that is what we've been doing, but it's also possible to simply append changes to the existing object. Below, to the right of the assignment operator, we first print the name of the object we want to modify (i.e. "covid_economic_map") and then type a "+" sign; then, we can modify the object as desired. In particular, we want to add a map title, which we will do by passing 
+
+```{r, fig.asp=0.5, message=FALSE, warning=FALSE}
+covid_economic_map<-covid_economic_map+
+                       tm_layout(main.title="National Economic Support Measures\nin Response to the Covid-19 Pandemic", 
+                                 main.title.position="center", attr.outside=TRUE,
+                                 main.title.size=1, inner.margins=c(0.06,0.10,0.10,0.08))
+covid_economic_map 
+
+```
+
+covid_economic_map<-covid_economic_map+
+                    
+
+### Add Map Credits
 
 
 ## Export Your Map
