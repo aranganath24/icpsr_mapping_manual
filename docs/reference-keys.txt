@@ -40,6 +40,7 @@ make-maps
 make-a-preliminary-map
 customize-legend
 add-map-title-and-credits
+final-map-code
 export-map
 export-map-using-tmap
 export-map-through-gui

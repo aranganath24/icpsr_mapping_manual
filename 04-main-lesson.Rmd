@@ -327,7 +327,8 @@ We're finally ready to represent the tabular data we started with on a map! To d
 
 As with anything else in R, we can assign maps created with the *tmap* package to objects, which makes it easy to subsquently work with them. We'll create an object called "covid_economic_map" to contain the map we will build using *tmap*. We can create a rough draft of a map and assign it to an object with two relatively simple lines of code:
 
-```{r}
+```{r, echo=-1}
+tmap_mode("plot")
 covid_economic_map<-tm_shape(worldmap_covid_data_economic)+
                       tm_polygons(col="mean_economic", n=8, style="jenks", palette="BuGn")
 ```
@@ -342,7 +343,8 @@ The ```tm_polygons``` function can take a variety of arguments that can help us 
 
 To see what the map looks like, simply call the object which contains it: 
 
-```{r, fig.asp=0.5, message=FALSE, warning=FALSE}
+```{r, fig.asp=0.5, message=FALSE, warning=FALSE, echo=-1}
+tmap_mode("plot")
 covid_economic_map
 ```
 
@@ -352,20 +354,23 @@ Of course, the map we've just created needs a bit of work (most noticeably, the 
 
 Before we work on the legend, we can see how to change certain features of the map using arguments to the ```tm_polygons``` function that we've already discussed. For instance, let's say we want a Yellow to Red palette ("YlOrRd"; again, remember you can look up these codes at the color guide linked above), only five intervals for the data, and want the data to be partitioned across intervals equally (rather than by using the Jenks algorithm). Let's make a new map object to contain this map, called "covid_economic_map_alternative."
 
-```{r}
+```{r, echo=-1}
+tmap_mode("plot")
 covid_economic_map_alt<-tm_shape(worldmap_covid_data_economic)+
                       tm_polygons(col="mean_economic", n=5, style="equal", palette="YlOrRd")
 ```
 
 Let's display the map in the "covid_economic_map_alt" object; notice the change in color, the fewer number of classes, and the equal intervals in the legend: 
 
-```{r, fig.asp=0.5, message=FALSE, warning=FALSE}
+```{r, fig.asp=0.5, message=FALSE, warning=FALSE, echo=-1}
+tmap_mode("plot")
 covid_economic_map_alt
 ```
 
 Note that we can easily remove the map frame if we'd prefer not to have that, with the "Frame" argument to the ```tm_layout``` function.
 
-```{r, fig.asp=0.5, message=FALSE, warning=FALSE}
+```{r, fig.asp=0.5, message=FALSE, warning=FALSE, echo=-1}
+tmap_mode("plot")
 # Removes frame from "covid_economic_map_alt" map object
 covid_economic_map_alt<-covid_economic_map_alt+
                           tm_layout(frame=FALSE)
@@ -379,7 +384,8 @@ covid_economic_map_alt
 
 The biggest issue with the rough drafts of our map from the previous section is the position of the legend. Let's go back to the first map we made (in the "covid_economic_map" object), and simply switch its legend position, using an argument in the ```tm_legend``` function. We'll also remove the map frame. 
 
-```{r, fig.asp=0.5, message=FALSE, warning=FALSE}
+```{r, fig.asp=0.5, message=FALSE, warning=FALSE, echo=-1}
+tmap_mode("plot")
 ## Shift legend position
 covid_economic_map<-tm_shape(worldmap_covid_data_economic)+
                       tm_polygons(col="mean_economic", n=8, style="jenks", palette="BuGn")+
@@ -391,8 +397,8 @@ covid_economic_map
 
 Currently, our legend is discrete, but we may want to try using a continuous legend to better match the continuous nature of the index. We can do this by changing the "style" argument to the ```tm_polygons``` function. We'll 
 
-```{r, fig.asp=0.5, message=FALSE, warning=FALSE}
-
+```{r, fig.asp=0.5, message=FALSE, warning=FALSE, echo=-1}
+tmap_mode("plot")
 ## Changes "style" argument parameter to "cont" to make continuous legend
 covid_economic_map<-tm_shape(worldmap_covid_data_economic)+
                       tm_polygons(col="mean_economic", style="cont", palette="BuGn")+
@@ -413,7 +419,8 @@ Let's explore some additional ways to customize our legend:
 
 The following code incorporates these changes into the previous map:
 
-```{r, fig.asp=0.5, message=FALSE, warning=FALSE}
+```{r, fig.asp=0.5, message=FALSE, warning=FALSE, echo=-1}
+tmap_mode("plot")
 covid_economic_map<- tm_shape(worldmap_covid_data_economic)+
                       tm_polygons(col="mean_economic", 
                                   style="cont", 
@@ -421,7 +428,7 @@ covid_economic_map<- tm_shape(worldmap_covid_data_economic)+
                                   textNA="No Data", 
                                   title="Mean of Covid\nEconomic\nIntervention Index\n(1/1/2020 to\n 10/1/2020)", 
                                   legend.is.portrait=FALSE,
-                                  breaks=c(0,0.25,0.5, 0.75))+
+                                  breaks=c(0,0.25,0.5, 0.72))+
                       tm_layout(legend.title.size=0.7, 
                                 legend.title.fontface=2,
                                 legend.outside=TRUE,
@@ -460,7 +467,8 @@ The best way to get a sense of how all of these various arguments work is to try
 
 One useful thing to keep in mind is that when adding new elements to our map, it's not necessary to retype all of our code; thus far, that is what we've been doing, but it's also possible to simply append changes to the existing object. Below, to the right of the assignment operator, we first print the name of the object we want to modify (i.e. "covid_economic_map") and then type a "+" sign; then, we can modify the object as desired. In particular, we want to add and customize a map title (which we will do by passing a few additional arguments through the now familiar ```tm_layout``` function), as well as add and customize a "Map Credits" section, which will include some basic map metadata. 
 
-```{r, message=FALSE, warning=FALSE}
+```{r, message=FALSE, warning=FALSE, echo=-1}
+tmap_mode("plot")
 covid_economic_map<-covid_economic_map+
                        tm_layout(main.title="National Economic Support Measures\nin Response to the Covid-19 Pandemic", 
                                  main.title.position="center",
@@ -490,7 +498,7 @@ Let's consider the new arguments passed through the ```tm_layout``` and ```tm_cr
 
 It's worth emphasizing that when working on your own maps, expect to engage in a lot of trial and error to customize the map's appearance to your specifications, and to determine the appropriate values for the various function arguments. In addition, there are a lot of *tmap* functions and arguments that we haven't covered; be sure to explore all the possibilities  by exploring *tmap's* documentation (```?tmap```)
 
-Final Code
+### Final Map Code
 
 For convenience, here's all of the code we used to construct the map we arrived at in the previous section, along with comments summarizing what each line is doing:
 
@@ -504,7 +512,7 @@ tm_shape(worldmap_covid_data_economic)+ # Specifies Spatial Dataset
               textNA="No Data",         # Codes "NA" values as "No Data" in the legend
               title="Mean of Covid\nEconomic\nIntervention Index\n(1/1/2020 to\n 10/1/2020)", # Sets legend title
               legend.is.portrait=FALSE, # Makes legend horizontal
-              breaks=c(0,0.25,0.5, 0.75))+ # Sets legend breaks
+              breaks=c(0,0.25,0.5, 0.72))+ # Sets legend breaks
   tm_layout(legend.title.size=0.7,      # Sets legend title size
             legend.title.fontface=2,    # Makes legend bold
             legend.outside=TRUE,        # Puts legend outside map frame
@@ -570,12 +578,28 @@ knitr::include_graphics('images/guiexport.png')
 
 ## Make a Dynamic Map 
 
+So far, we've been making static print maps, which are a powerful tool of visualization; however, it's also possible to make "dynamic" maps where you can pan across the map and zoom into areas of interest. Dynamic maps can therefore be a very useful tool for exploratory data analysis. In addition, *tmap* produces these dynamic maps as html output, which means we can embed these maps within web pages, in case that would be preferable to a static map as a mode of presentation.
+
+To build such a dynamic map, simply  build a map just as we would build a static map, and assign it to an object. Then, use the ```tmap_mode``` function to "view". At this point, display up the map object by printing its name will produce a dynamic map.
+
 ```{r, message=FALSE, warning=FALSE}
+covid_economic_webmap<-tm_shape(worldmap_covid_data_economic)+
+                        tm_polygons(col="mean_economic", n=5, style="jenks", palette="BuGn")
 tmap_mode("view")
-covid_economic_map_alt
+
+covid_economic_webmap
+```
+
+We can switch back to "plot" mode, at which point *tmap* will go back to making static maps
+
+```{r, message=FALSE, warning=FALSE }
 tmap_mode("plot")
 ```
 
-
 ## Summary 
+
+
+
+
+
 
