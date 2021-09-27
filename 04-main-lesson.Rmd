@@ -424,7 +424,8 @@ covid_economic_map<- tm_shape(worldmap_covid_data_economic)+
                                   breaks=c(0,0.25,0.5, 0.75))+
                       tm_layout(legend.title.size=0.7, 
                                 legend.title.fontface=2,
-                                legend.position = c(0, 0), 
+                                legend.outside=TRUE,
+                                legend.outside.position = c("bottom"), 
                                 frame=FALSE, 
                                 legend.text.size = 0.5,
                                 legend.width = 0.35)
@@ -458,7 +459,7 @@ The best way to get a sense of how all of these various arguments work is to try
 
 One useful thing to keep in mind is that when adding new elements to our map, it's not necessary to retype all of our code; thus far, that is what we've been doing, but it's also possible to simply append changes to the existing object. Below, to the right of the assignment operator, we first print the name of the object we want to modify (i.e. "covid_economic_map") and then type a "+" sign; then, we can modify the object as desired. In particular, we want to add and customize a map title (which we will do by passing a few additional arguments through the now familiar ```tm_layout``` function), as well as add and customize a "Map Credits" section, which will include some basic map metadata. 
 
-```{r, fig.asp=0.5, message=FALSE, warning=FALSE}
+```{r, message=FALSE, warning=FALSE}
 covid_economic_map<-covid_economic_map+
                        tm_layout(main.title="National Economic Support Measures\nin Response to the Covid-19 Pandemic", 
                                  main.title.position="center",
@@ -473,18 +474,9 @@ covid_economic_map
 
 ```
 
+Final Code
 
-
-
-
-
-
-
-
-Final code
-
-```{r, message=FALSE, warning=FALSE, fig.asp=0.5}
-
+```{r, message=FALSE, warning=FALSE}
 covid_economic_map<- tm_shape(worldmap_covid_data_economic)+
   tm_polygons(col="mean_economic", 
               style="cont", 
@@ -493,27 +485,25 @@ covid_economic_map<- tm_shape(worldmap_covid_data_economic)+
               title="Mean of Covid\nEconomic\nIntervention Index\n(1/1/2020 to\n 10/1/2020)", 
               legend.is.portrait=FALSE,
               breaks=c(0,0.25,0.5, 0.75))+
-    tm_layout(legend.title.size=0.7, 
-              legend.title.fontface=2,
-              legend.position = c(0,0), 
-              frame=FALSE, 
-              legend.text.size = 0.5,
-              legend.width=0.35,
-              main.title="National Economic Support Measures\nin Response to the Covid-19 Pandemic", 
-              main.title.position="center",
-              main.title.size=1, 
-              inner.margins=c(0.06,0.10,0.10,0.08), 
-              attr.outside = TRUE)+
-    tm_credits("Map Author: Aditya Ranganath\nDataset Author: Simon Porcher\nCRS: WGS1984\nSource: ICPSR", 
-              position=c(0.78,0), 
-              size=0.38)
+  tm_layout(legend.title.size=0.7, 
+            legend.title.fontface=2,
+            legend.outside=TRUE,
+            legend.outside.position=c("bottom"),
+            frame=FALSE, 
+            legend.text.size = 0.5,
+            legend.width=0.35,
+            main.title="National Economic Support Measures\nin Response to the Covid-19 Pandemic", 
+            main.title.position="center",
+            main.title.size=1, 
+            inner.margins=c(0.06,0.10,0.10,0.08), 
+            attr.outside = TRUE)+
+  tm_credits("Map Author: Aditya Ranganath\nDataset Author: Simon Porcher\nCRS: WGS1984\nSource: ICPSR", 
+             position=c(0.78,0), 
+             size=0.38)
 
 covid_economic_map
+
 ```
-
-
-
-
 
 ## Export Your Map
 
