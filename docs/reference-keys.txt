@@ -10,6 +10,8 @@ fig:unnamed-chunk-23
 fig:unnamed-chunk-30
 fig:unnamed-chunk-37
 fig:unnamed-chunk-42
+fig:unnamed-chunk-56
+fig:unnamed-chunk-57
 preface
 introduction
 motivation
@@ -38,8 +40,10 @@ make-maps
 make-a-preliminary-map
 customize-legend
 add-map-title-and-credits
-export-your-map
-make-a-web-map
+export-map
+export-map-using-tmap
+export-map-through-gui
+make-a-dynamic-map
 summary
 practice-and-challenge-exercises
 conclusion

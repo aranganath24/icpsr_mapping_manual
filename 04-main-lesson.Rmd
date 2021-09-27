@@ -492,41 +492,83 @@ It's worth emphasizing that when working on your own maps, expect to engage in a
 
 Final Code
 
-For convenience, here's all of the code we used to construct the map we arrived at in the previous section:
+For convenience, here's all of the code we used to construct the map we arrived at in the previous section, along with comments summarizing what each line is doing:
 
 ```{r, message=FALSE, warning=FALSE, echo=-1}
 tmap_mode("plot")
-covid_economic_map<- tm_shape(worldmap_covid_data_economic)+
-  tm_polygons(col="mean_economic", 
-              style="cont", 
-              palette="BuGn", 
-              textNA="No Data", 
-              title="Mean of Covid\nEconomic\nIntervention Index\n(1/1/2020 to\n 10/1/2020)", 
-              legend.is.portrait=FALSE,
-              breaks=c(0,0.25,0.5, 0.75))+
-  tm_layout(legend.title.size=0.7, 
-            legend.title.fontface=2,
-            legend.outside=TRUE,
-            legend.outside.position=c("bottom"),
-            frame=FALSE, 
-            legend.text.size = 0.5,
-            legend.width=0.35,
-            main.title="National Economic Support Measures\nin Response to the Covid-19 Pandemic", 
-            main.title.position="center",
-            main.title.size=1, 
-            inner.margins=c(0.06,0.10,0.10,0.08), 
-            attr.outside = TRUE)+
-  tm_credits("Map Author: Aditya Ranganath\nDataset Author: Simon Porcher\nCRS: WGS1984\nSource: ICPSR", 
-             position=c(0.78,0), 
-             size=0.38)
+covid_economic_map<-  
+tm_shape(worldmap_covid_data_economic)+ # Specifies Spatial Dataset
+  tm_polygons(col="mean_economic",      # Specifies column we want to map
+              style="cont",             # Specifies continuous legend
+              palette="BuGn",           # Specifies color palette/scheme to represent data variation
+              textNA="No Data",         # Codes "NA" values as "No Data" in the legend
+              title="Mean of Covid\nEconomic\nIntervention Index\n(1/1/2020 to\n 10/1/2020)", # Sets legend title
+              legend.is.portrait=FALSE, # Makes legend horizontal
+              breaks=c(0,0.25,0.5, 0.75))+ # Sets legend breaks
+  tm_layout(legend.title.size=0.7,      # Sets legend title size
+            legend.title.fontface=2,    # Makes legend bold
+            legend.outside=TRUE,        # Puts legend outside map frame
+            legend.outside.position=c("bottom"), # Puts legend below map frame
+            frame=FALSE,                # Makes map frame invisible                         
+            legend.text.size = 0.5,     # Sets size of legend tex
+            legend.width=0.35,          # Sets legend width
+            main.title="National Economic Support Measures\nin Response to the Covid-19 Pandemic", # Sets map title
+            main.title.position="center", # Specifies title justification
+            main.title.size=1,          # Specifies title font size
+            inner.margins=c(0.06,0.10,0.10,0.08), # Sets map margins with respect to frame
+            attr.outside = TRUE)+       # Places map credits outside frame
+  tm_credits("Map Author: Aditya Ranganath\nDataset Author: Simon Porcher\nCRS: WGS1984\nSource: ICPSR", # Sets text for map credits
+             position=c(0.78,0), # Specifies location of map credits
+             size=0.38)          # Specifies font size of credits text
 
+# Views "covid_economic_map" object
 covid_economic_map
 
 ```
 
-## Export Your Map
+## Export Map
 
-## Make a Web Map 
+Once we're done customizing our map, we can copy it to our clipboard (and paste it elsewhere), export it as an image file (i.e. png or jpeg), or export it as a PDF; we can either do this programatically using a built-in *tmap* function, or we can do it through the R Studio GUI. 
+
+### Export Map Using *tmap*
+
+To export maps programmatically, we can use the ```tmap_save``` function. The first argument to this function should be the name of map object we want to export (here, "covid_economic_map"); the second should be the file name, including the extension, of the file to which we want to save the map object. If, for example, we wanted to save a png file with the name "covid_economic_map_export", this second argument would be "covid_economic_map_export.png". This is all we need in order to export the map (which will be saved in our working directory), but the ```tmap-save``` function allows several other arguments that you can learn about by inspecting the function's documentation (```?tmap_save```). The only other arguments we'll use are the "width" and "height" arguments, which allow us to specify the dimensions of the exported map (in pixels). We'll export a map with width of 1920 pixels, and a height of 1080 pixels. 
+
+The first code block below writes our map object as a png file (with dimensions of 1920 x 1080 pixels) to our working directory; the subsequent two blocks write the map object as jpeg and PDF files, respectively. 
+
+PNG File
+```{r, warning=FALSE, message=FALSE, eval=FALSE}
+# Saves "covid_economic_map" object as png file to working directory with resolution of 1920 by 1080 pixels
+tmap_save(covid_economic_map, "covid_economic_map_export.png", width=1920, height=1080)
+```
+
+JPEG File
+```{r, warning=FALSE, message=FALSE, eval=FALSE}
+# Saves "covid_economic_map" object as jpeg file to working directory with resolution of 1920 by 1080 pixels
+tmap_save(covid_economic_map, "covid_map.jpeg", width=1920, height=1080)
+```
+
+PDF File
+```{r, warning=FALSE, message=FALSE, eval=FALSE}
+# Saves "covid_economic_map" object as pdf file to working directory with resolution of 1920 by 1080 pixels
+tmap_save(covid_economic_map, "covid_map.pdf", width=1920, height=1080)
+```
+
+Once we've exported the map in the format we'd like, we can open up the file from our working directory. The PNG file will look something like this: 
+
+```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='Map Exported as Image File'}
+knitr::include_graphics('images/pngscreenshot.png')
+```
+
+### Export Map Through GUI
+
+It's also possible to export our map in the desired file format by using the "Export" menu bar within the "Plots" tab on the bottom-right of our R Studio interface. Click the "Export" button, and select one of the three options; from there, things should be self-explantory.
+
+```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='Export Map Using R Studio GUI'}
+knitr::include_graphics('images/guiexport.png')
+```
+
+## Make a Dynamic Map 
 
 ```{r, message=FALSE, warning=FALSE}
 tmap_mode("view")
