@@ -492,15 +492,15 @@ The <code>tm_polygons</code> function can take a variety of arguments that can h
 <span id="cb41-3"><a href="tutorial.html#cb41-3" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">style=</span><span class="st">&quot;cont&quot;</span>, </span>
 <span id="cb41-4"><a href="tutorial.html#cb41-4" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">palette=</span><span class="st">&quot;BuGn&quot;</span>, </span>
 <span id="cb41-5"><a href="tutorial.html#cb41-5" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">textNA=</span><span class="st">&quot;No Data&quot;</span>, </span>
-<span id="cb41-6"><a href="tutorial.html#cb41-6" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">title=</span><span class="st">&quot;Mean of Covid Economic</span><span class="sc">\n</span><span class="st">Intervention Index</span><span class="sc">\n</span><span class="st">(1/1/2020 to 10/1/2020)&quot;</span>, </span>
+<span id="cb41-6"><a href="tutorial.html#cb41-6" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">title=</span><span class="st">&quot;Mean of Covid</span><span class="sc">\n</span><span class="st">Economic</span><span class="sc">\n</span><span class="st">Intervention Index</span><span class="sc">\n</span><span class="st">(1/1/2020 to</span><span class="sc">\n</span><span class="st"> 10/1/2020)&quot;</span>, </span>
 <span id="cb41-7"><a href="tutorial.html#cb41-7" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">legend.is.portrait=</span><span class="cn">FALSE</span>,</span>
 <span id="cb41-8"><a href="tutorial.html#cb41-8" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.25</span>,<span class="fl">0.5</span>, <span class="fl">0.75</span>))<span class="sc">+</span></span>
-<span id="cb41-9"><a href="tutorial.html#cb41-9" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">tm_layout</span>(<span class="at">legend.title.size=</span><span class="fl">0.8</span>, </span>
+<span id="cb41-9"><a href="tutorial.html#cb41-9" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">tm_layout</span>(<span class="at">legend.title.size=</span><span class="fl">0.7</span>, </span>
 <span id="cb41-10"><a href="tutorial.html#cb41-10" aria-hidden="true" tabindex="-1"></a>                                <span class="at">legend.title.fontface=</span><span class="dv">2</span>,</span>
-<span id="cb41-11"><a href="tutorial.html#cb41-11" aria-hidden="true" tabindex="-1"></a>                                <span class="at">legend.position =</span> <span class="fu">c</span>(<span class="st">&quot;left&quot;</span>, <span class="st">&quot;bottom&quot;</span>), </span>
+<span id="cb41-11"><a href="tutorial.html#cb41-11" aria-hidden="true" tabindex="-1"></a>                                <span class="at">legend.position =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), </span>
 <span id="cb41-12"><a href="tutorial.html#cb41-12" aria-hidden="true" tabindex="-1"></a>                                <span class="at">frame=</span><span class="cn">FALSE</span>, </span>
 <span id="cb41-13"><a href="tutorial.html#cb41-13" aria-hidden="true" tabindex="-1"></a>                                <span class="at">legend.text.size =</span> <span class="fl">0.5</span>,</span>
-<span id="cb41-14"><a href="tutorial.html#cb41-14" aria-hidden="true" tabindex="-1"></a>                                <span class="at">legend.hist.size =</span> <span class="fl">0.5</span>)</span>
+<span id="cb41-14"><a href="tutorial.html#cb41-14" aria-hidden="true" tabindex="-1"></a>                                <span class="at">legend.width =</span> <span class="fl">0.35</span>)</span>
 <span id="cb41-15"><a href="tutorial.html#cb41-15" aria-hidden="true" tabindex="-1"></a>covid_economic_map</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
 <p>Let’s unpack this code; for the sake of completeness, we’ll go over all of the functions and arguments, rather than just the code that implements the changes mentioned above.</p>
@@ -535,37 +535,39 @@ The <code>tm_polygons</code> function can take a variety of arguments that can h
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="tutorial.html#cb42-1" aria-hidden="true" tabindex="-1"></a>covid_economic_map<span class="ot">&lt;-</span>covid_economic_map<span class="sc">+</span></span>
 <span id="cb42-2"><a href="tutorial.html#cb42-2" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">tm_layout</span>(<span class="at">main.title=</span><span class="st">&quot;National Economic Support Measures</span><span class="sc">\n</span><span class="st">in Response to the Covid-19 Pandemic&quot;</span>, </span>
 <span id="cb42-3"><a href="tutorial.html#cb42-3" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">main.title.position=</span><span class="st">&quot;center&quot;</span>,</span>
-<span id="cb42-4"><a href="tutorial.html#cb42-4" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">main.title.size=</span><span class="dv">1</span>, <span class="at">inner.margins=</span><span class="fu">c</span>(<span class="fl">0.06</span>,<span class="fl">0.10</span>,<span class="fl">0.10</span>,<span class="fl">0.08</span>), </span>
-<span id="cb42-5"><a href="tutorial.html#cb42-5" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">attr.outside =</span> <span class="cn">TRUE</span>)<span class="sc">+</span></span>
-<span id="cb42-6"><a href="tutorial.html#cb42-6" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">tm_credits</span>(<span class="st">&quot;Author: Aditya Ranganath</span><span class="sc">\n</span><span class="st">CRS: WGS1984</span><span class="sc">\n</span><span class="st">Source: ICPSR (https://doi.org/10.3886/E119061V6)&quot;</span>, </span>
-<span id="cb42-7"><a href="tutorial.html#cb42-7" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">position=</span><span class="fu">c</span>(<span class="fl">0.78</span>,<span class="fl">0.01</span>), <span class="at">size=</span><span class="fl">0.5</span>)</span>
-<span id="cb42-8"><a href="tutorial.html#cb42-8" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb42-9"><a href="tutorial.html#cb42-9" aria-hidden="true" tabindex="-1"></a>covid_economic_map </span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-51-1.png" width="1152" /></p>
+<span id="cb42-4"><a href="tutorial.html#cb42-4" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">main.title.size=</span><span class="dv">1</span>, </span>
+<span id="cb42-5"><a href="tutorial.html#cb42-5" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">inner.margins=</span><span class="fu">c</span>(<span class="fl">0.06</span>,<span class="fl">0.10</span>,<span class="fl">0.10</span>,<span class="fl">0.08</span>), </span>
+<span id="cb42-6"><a href="tutorial.html#cb42-6" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">attr.outside =</span> <span class="cn">TRUE</span>)<span class="sc">+</span></span>
+<span id="cb42-7"><a href="tutorial.html#cb42-7" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">tm_credits</span>(<span class="st">&quot;Map Author: Aditya Ranganath</span><span class="sc">\n</span><span class="st">Dataset Author: Simon Porcher</span><span class="sc">\n</span><span class="st">CRS: WGS1984</span><span class="sc">\n</span><span class="st">Source: ICPSR&quot;</span>, </span>
+<span id="cb42-8"><a href="tutorial.html#cb42-8" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">position=</span><span class="fu">c</span>(<span class="fl">0.78</span>,<span class="dv">0</span>), <span class="at">size=</span><span class="fl">0.38</span>)</span>
+<span id="cb42-9"><a href="tutorial.html#cb42-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb42-10"><a href="tutorial.html#cb42-10" aria-hidden="true" tabindex="-1"></a>covid_economic_map </span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
+<p>Final code</p>
 <div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="tutorial.html#cb43-1" aria-hidden="true" tabindex="-1"></a>covid_economic_map<span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(worldmap_covid_data_economic)<span class="sc">+</span></span>
-<span id="cb43-2"><a href="tutorial.html#cb43-2" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">tm_polygons</span>(<span class="at">col=</span><span class="st">&quot;mean_economic&quot;</span>, </span>
-<span id="cb43-3"><a href="tutorial.html#cb43-3" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">style=</span><span class="st">&quot;cont&quot;</span>, </span>
-<span id="cb43-4"><a href="tutorial.html#cb43-4" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">palette=</span><span class="st">&quot;BuGn&quot;</span>, </span>
-<span id="cb43-5"><a href="tutorial.html#cb43-5" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">textNA=</span><span class="st">&quot;No Data&quot;</span>, </span>
-<span id="cb43-6"><a href="tutorial.html#cb43-6" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">title=</span><span class="st">&quot;Mean of Covid Economic</span><span class="sc">\n</span><span class="st">Intervention Index</span><span class="sc">\n</span><span class="st">(1/1/2020 to 10/1/2020)&quot;</span>, </span>
-<span id="cb43-7"><a href="tutorial.html#cb43-7" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">legend.is.portrait=</span><span class="cn">FALSE</span>,</span>
-<span id="cb43-8"><a href="tutorial.html#cb43-8" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.25</span>,<span class="fl">0.5</span>, <span class="fl">0.75</span>))<span class="sc">+</span></span>
-<span id="cb43-9"><a href="tutorial.html#cb43-9" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">tm_layout</span>(<span class="at">legend.title.size=</span><span class="fl">0.8</span>, </span>
-<span id="cb43-10"><a href="tutorial.html#cb43-10" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">legend.title.fontface=</span><span class="dv">2</span>,</span>
-<span id="cb43-11"><a href="tutorial.html#cb43-11" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">legend.position =</span> <span class="fu">c</span>(<span class="st">&quot;left&quot;</span>, <span class="st">&quot;bottom&quot;</span>), </span>
-<span id="cb43-12"><a href="tutorial.html#cb43-12" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">frame=</span><span class="cn">FALSE</span>, </span>
-<span id="cb43-13"><a href="tutorial.html#cb43-13" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">legend.text.size =</span> <span class="fl">0.5</span>,</span>
-<span id="cb43-14"><a href="tutorial.html#cb43-14" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">legend.hist.size =</span> <span class="fl">0.5</span>,</span>
-<span id="cb43-15"><a href="tutorial.html#cb43-15" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">main.title=</span><span class="st">&quot;National Economic Support Measures</span><span class="sc">\n</span><span class="st">in Response to the Covid-19 Pandemic&quot;</span>, </span>
-<span id="cb43-16"><a href="tutorial.html#cb43-16" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">main.title.position=</span><span class="st">&quot;center&quot;</span>,</span>
-<span id="cb43-17"><a href="tutorial.html#cb43-17" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">main.title.size=</span><span class="dv">1</span>, <span class="at">inner.margins=</span><span class="fu">c</span>(<span class="fl">0.06</span>,<span class="fl">0.10</span>,<span class="fl">0.10</span>,<span class="fl">0.08</span>), </span>
-<span id="cb43-18"><a href="tutorial.html#cb43-18" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">attr.outside =</span> <span class="cn">TRUE</span>)<span class="sc">+</span></span>
-<span id="cb43-19"><a href="tutorial.html#cb43-19" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">tm_credits</span>(<span class="st">&quot;Author: Aditya Ranganath</span><span class="sc">\n</span><span class="st">CRS: WGS1984</span><span class="sc">\n</span><span class="st">Source: ICPSR (https://doi.org/10.3886/E119061V6)&quot;</span>, </span>
-<span id="cb43-20"><a href="tutorial.html#cb43-20" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">position=</span><span class="fu">c</span>(<span class="fl">0.78</span>,<span class="fl">0.01</span>), </span>
-<span id="cb43-21"><a href="tutorial.html#cb43-21" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">size=</span><span class="fl">0.5</span>)</span>
-<span id="cb43-22"><a href="tutorial.html#cb43-22" aria-hidden="true" tabindex="-1"></a>covid_economic_map</span></code></pre></div>
+<span id="cb43-2"><a href="tutorial.html#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">col=</span><span class="st">&quot;mean_economic&quot;</span>, </span>
+<span id="cb43-3"><a href="tutorial.html#cb43-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">style=</span><span class="st">&quot;cont&quot;</span>, </span>
+<span id="cb43-4"><a href="tutorial.html#cb43-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">palette=</span><span class="st">&quot;BuGn&quot;</span>, </span>
+<span id="cb43-5"><a href="tutorial.html#cb43-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">textNA=</span><span class="st">&quot;No Data&quot;</span>, </span>
+<span id="cb43-6"><a href="tutorial.html#cb43-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">title=</span><span class="st">&quot;Mean of Covid</span><span class="sc">\n</span><span class="st">Economic</span><span class="sc">\n</span><span class="st">Intervention Index</span><span class="sc">\n</span><span class="st">(1/1/2020 to</span><span class="sc">\n</span><span class="st"> 10/1/2020)&quot;</span>, </span>
+<span id="cb43-7"><a href="tutorial.html#cb43-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">legend.is.portrait=</span><span class="cn">FALSE</span>,</span>
+<span id="cb43-8"><a href="tutorial.html#cb43-8" aria-hidden="true" tabindex="-1"></a>              <span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.25</span>,<span class="fl">0.5</span>, <span class="fl">0.75</span>))<span class="sc">+</span></span>
+<span id="cb43-9"><a href="tutorial.html#cb43-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(<span class="at">legend.title.size=</span><span class="fl">0.7</span>, </span>
+<span id="cb43-10"><a href="tutorial.html#cb43-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">legend.title.fontface=</span><span class="dv">2</span>,</span>
+<span id="cb43-11"><a href="tutorial.html#cb43-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">legend.position =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>), </span>
+<span id="cb43-12"><a href="tutorial.html#cb43-12" aria-hidden="true" tabindex="-1"></a>            <span class="at">frame=</span><span class="cn">FALSE</span>, </span>
+<span id="cb43-13"><a href="tutorial.html#cb43-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">legend.text.size =</span> <span class="fl">0.5</span>,</span>
+<span id="cb43-14"><a href="tutorial.html#cb43-14" aria-hidden="true" tabindex="-1"></a>            <span class="at">legend.width=</span><span class="fl">0.35</span>,</span>
+<span id="cb43-15"><a href="tutorial.html#cb43-15" aria-hidden="true" tabindex="-1"></a>            <span class="at">main.title=</span><span class="st">&quot;National Economic Support Measures</span><span class="sc">\n</span><span class="st">in Response to the Covid-19 Pandemic&quot;</span>, </span>
+<span id="cb43-16"><a href="tutorial.html#cb43-16" aria-hidden="true" tabindex="-1"></a>            <span class="at">main.title.position=</span><span class="st">&quot;center&quot;</span>,</span>
+<span id="cb43-17"><a href="tutorial.html#cb43-17" aria-hidden="true" tabindex="-1"></a>            <span class="at">main.title.size=</span><span class="dv">1</span>, <span class="at">inner.margins=</span><span class="fu">c</span>(<span class="fl">0.06</span>,<span class="fl">0.10</span>,<span class="fl">0.10</span>,<span class="fl">0.08</span>), </span>
+<span id="cb43-18"><a href="tutorial.html#cb43-18" aria-hidden="true" tabindex="-1"></a>            <span class="at">attr.outside =</span> <span class="cn">TRUE</span>)<span class="sc">+</span></span>
+<span id="cb43-19"><a href="tutorial.html#cb43-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_credits</span>(<span class="st">&quot;Map Author: Aditya Ranganath</span><span class="sc">\n</span><span class="st">Dataset Author: Simon Porcher</span><span class="sc">\n</span><span class="st">CRS: WGS1984</span><span class="sc">\n</span><span class="st">Source: ICPSR&quot;</span>, </span>
+<span id="cb43-20"><a href="tutorial.html#cb43-20" aria-hidden="true" tabindex="-1"></a>            <span class="at">position=</span><span class="fu">c</span>(<span class="fl">0.78</span>,<span class="dv">0</span>), </span>
+<span id="cb43-21"><a href="tutorial.html#cb43-21" aria-hidden="true" tabindex="-1"></a>            <span class="at">size=</span><span class="fl">0.38</span>)</span>
+<span id="cb43-22"><a href="tutorial.html#cb43-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-23"><a href="tutorial.html#cb43-23" aria-hidden="true" tabindex="-1"></a>covid_economic_map</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
-<p>r</p>
 </div>
 </div>
 <div id="export-your-map" class="section level2" number="4.6">
@@ -576,12 +578,6 @@ The <code>tm_polygons</code> function can take a variety of arguments that can h
 </div>
 <div id="summary" class="section level2" number="4.8">
 <h2><span class="header-section-number">4.8</span> Summary</h2>
-<ul>
-<li>Test
-<ul>
-<li>dd</li>
-</ul></li>
-</ul>
 
 </div>
 </div>

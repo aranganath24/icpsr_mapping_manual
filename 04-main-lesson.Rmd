@@ -419,15 +419,15 @@ covid_economic_map<- tm_shape(worldmap_covid_data_economic)+
                                   style="cont", 
                                   palette="BuGn", 
                                   textNA="No Data", 
-                                  title="Mean of Covid Economic\nIntervention Index\n(1/1/2020 to 10/1/2020)", 
+                                  title="Mean of Covid\nEconomic\nIntervention Index\n(1/1/2020 to\n 10/1/2020)", 
                                   legend.is.portrait=FALSE,
                                   breaks=c(0,0.25,0.5, 0.75))+
-                      tm_layout(legend.title.size=0.8, 
+                      tm_layout(legend.title.size=0.7, 
                                 legend.title.fontface=2,
-                                legend.position = c("left", "bottom"), 
+                                legend.position = c(0, 0), 
                                 frame=FALSE, 
                                 legend.text.size = 0.5,
-                                legend.hist.size = 0.5)
+                                legend.width = 0.35)
 covid_economic_map
 ```
 
@@ -441,16 +441,16 @@ Above, to the right of the assignment operator, we have:
   * ```style=cont``` indicates that we want a continuous legend
   * ```palette="BuGn"``` specifies the color scheme we wish to use to represent variation in the data.
   * ```textNA="No Data``` indicates that we want data coded as "NA" to be labeled "No Data" in our legend; the default label is "Missing"
-  * ```title=Mean of Covid Economic\nIntervention Index\n(1/1/2020 to 10/1/2020)"``` specifies the title of the legend. The ```\n``` notation is used to indicate line breaks. If these are not included, the legend title would be one line, rather than three.
+  * ```title="Mean of Covid\nEconomic\nIntervention Index\n(1/1/2020 to\n 10/1/2020)"``` specifies the title of the legend. The ```\n``` notation is used to indicate line breaks. If these are not included, the legend title would not contain line breaks, and would be one line. .
   * ```legend.is.portrait=FALSE``` flips the legend, making its orientation horizontal rather than vertical
   * ```breaks=c(0,0.25,0.5,0.75)``` specifies our custom breaks (for values of the Covid economic index) in the legend. 
 * The ```tm_layout``` function also takes many arguments:
-  * ```legend.title.size=0.8``` sets the size of the text in the legend's title
+  * ```legend.title.size=0.7``` sets the size of the text in the legend's title
   * ```legend.title.fontface=2``` makes the legend title bold. 
-  * ```legend.position = c("left", "bottom")``` positions the legend at the bottom-left of the map
+  * ```legend.position = c(0, 0)``` positions the legend at the bottom-left of the map
   * ```frame=FALSE``` removes the frame from the map
   * ```legend.text.size=0.5``` specifies the size of the legend text that is not part of the legend title
-  * ```legend.hist.size=0.5``` specifies the size of the graphical part of the legend
+  * ```legend.width=0.5``` specifies the width of the legend
 
 The best way to get a sense of how all of these various arguments work is to try changing the values of the arguments and inspect their effect on the map's appearance. 
 
@@ -462,10 +462,12 @@ One useful thing to keep in mind is that when adding new elements to our map, it
 covid_economic_map<-covid_economic_map+
                        tm_layout(main.title="National Economic Support Measures\nin Response to the Covid-19 Pandemic", 
                                  main.title.position="center",
-                                 main.title.size=1, inner.margins=c(0.06,0.10,0.10,0.08), 
+                                 main.title.size=1, 
+                                 inner.margins=c(0.06,0.10,0.10,0.08), 
                                  attr.outside = TRUE)+
-                        tm_credits("Author: Aditya Ranganath\nCRS: WGS1984\nSource: ICPSR (https://doi.org/10.3886/E119061V6)", 
-                                   position=c(0.78,0.01), size=0.5)
+                        tm_credits("Map Author: Aditya Ranganath\nDataset Author: Simon Porcher\nCRS: WGS1984\nSource: ICPSR", 
+                                   position=c(0.78,0), 
+                                   size=0.38)
   
 covid_economic_map 
 
@@ -473,33 +475,45 @@ covid_economic_map
 
 
 
-```{r, fig.asp=0.5, message=FALSE, warning=FALSE}
+
+
+
+
+
+
+Final code
+
+```{r, message=FALSE, warning=FALSE, fig.asp=0.5}
+
 covid_economic_map<- tm_shape(worldmap_covid_data_economic)+
-                      tm_polygons(col="mean_economic", 
-                                  style="cont", 
-                                  palette="BuGn", 
-                                  textNA="No Data", 
-                                  title="Mean of Covid Economic\nIntervention Index\n(1/1/2020 to 10/1/2020)", 
-                                  legend.is.portrait=FALSE,
-                                  breaks=c(0,0.25,0.5, 0.75))+
-                        tm_layout(legend.title.size=0.8, 
-                                  legend.title.fontface=2,
-                                  legend.position = c("left", "bottom"), 
-                                  frame=FALSE, 
-                                  legend.text.size = 0.5,
-                                  legend.hist.size = 0.5,
-                                  main.title="National Economic Support Measures\nin Response to the Covid-19 Pandemic", 
-                                 main.title.position="center",
-                                 main.title.size=1, inner.margins=c(0.06,0.10,0.10,0.08), 
-                                 attr.outside = TRUE)+
-                    tm_credits("Author: Aditya Ranganath\nCRS: WGS1984\nSource: ICPSR (https://doi.org/10.3886/E119061V6)", 
-                                 position=c(0.78,0.01), 
-                                 size=0.5)
+  tm_polygons(col="mean_economic", 
+              style="cont", 
+              palette="BuGn", 
+              textNA="No Data", 
+              title="Mean of Covid\nEconomic\nIntervention Index\n(1/1/2020 to\n 10/1/2020)", 
+              legend.is.portrait=FALSE,
+              breaks=c(0,0.25,0.5, 0.75))+
+    tm_layout(legend.title.size=0.7, 
+              legend.title.fontface=2,
+              legend.position = c(0,0), 
+              frame=FALSE, 
+              legend.text.size = 0.5,
+              legend.width=0.35,
+              main.title="National Economic Support Measures\nin Response to the Covid-19 Pandemic", 
+              main.title.position="center",
+              main.title.size=1, 
+              inner.margins=c(0.06,0.10,0.10,0.08), 
+              attr.outside = TRUE)+
+    tm_credits("Map Author: Aditya Ranganath\nDataset Author: Simon Porcher\nCRS: WGS1984\nSource: ICPSR", 
+              position=c(0.78,0), 
+              size=0.38)
+
 covid_economic_map
 ```
 
 
-r
+
+
 
 ## Export Your Map
 
@@ -507,6 +521,3 @@ r
 
 ## Summary 
 
-
-* Test
-  * dd
