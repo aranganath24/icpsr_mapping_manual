@@ -24,7 +24,7 @@
 <meta name="author" content="Aditya Ranganath" />
 
 
-<meta name="date" content="2021-09-26" />
+<meta name="date" content="2021-09-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -522,10 +522,11 @@ The <code>tm_polygons</code> function can take a variety of arguments that can h
 <ul>
 <li><code>legend.title.size=0.7</code> sets the size of the text in the legend’s title</li>
 <li><code>legend.title.fontface=2</code> makes the legend title bold.</li>
-<li><code>legend.position = c(0, 0)</code> positions the legend at the bottom-left of the map</li>
-<li><code>frame=FALSE</code> removes the frame from the map</li>
+<li><code>legend.outside=TRUE</code> specifies the legend is to be situated outside the (invisible) map frame; this prevents the legend from blocking out portions of the map itself</li>
+<li><code>legend.outside.position = c("bottom")</code> positions the legend below the southern border of the (invisible) map frame</li>
+<li><code>frame=FALSE</code> makes the map frame invisible, so that we don’t see a border surrounding the countries</li>
 <li><code>legend.text.size=0.5</code> specifies the size of the legend text that is not part of the legend title</li>
-<li><code>legend.width=0.5</code> specifies the width of the legend</li>
+<li><code>legend.width=0.35</code> specifies the width of the legend</li>
 </ul></li>
 </ul>
 <p>The best way to get a sense of how all of these various arguments work is to try changing the values of the arguments and inspect their effect on the map’s appearance.</p>
@@ -545,7 +546,26 @@ The <code>tm_polygons</code> function can take a variety of arguments that can h
 <span id="cb42-10"><a href="tutorial.html#cb42-10" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb42-11"><a href="tutorial.html#cb42-11" aria-hidden="true" tabindex="-1"></a>covid_economic_map </span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
+<p>Let’s consider the new arguments passed through the <code>tm_layout</code> and <code>tm_credits</code> function:</p>
+<ul>
+<li><code>tm_layout</code>
+<ul>
+<li><code>main.title="National Economic Support Measures\nin Response to the Covid-19 Pandemic"</code> specifies the title for the map as a whole. As before <code>\n</code> specifies line breaks.</li>
+<li><code>main.title.position="center"</code> specifies the justification of the title</li>
+<li><code>main.title.size=1</code> specifies the font size of the title</li>
+<li><code>inner.margins=c(0.06,0.10,0.10,0.08)</code> establishes the size of the margins within the map frame. It’s most noticeable impact in this context is to regulate the whitespace between the title and the map features.</li>
+<li><code>attr.outside = TRUE</code>, in this context, places the map credits (one of the map’s attributes), outside the map frame</li>
+</ul></li>
+<li>The <code>tm_credits</code> function is a function used to choose the content and appearance of the map’s credits section.
+<ul>
+<li><code>"Map Author: Aditya Ranganath\nDataset Author: Simon Porcher\nCRS: WGS1984\nSource: ICPSR</code> is the text of the credits section; as before, <code>\n</code> specifies line breaks</li>
+<li><code>position=c(0.78,0)</code> specifies the location of the credits</li>
+<li><code>size=0.38</code> specifies the size of the text in the credits section</li>
+</ul></li>
+</ul>
+<p>It’s worth emphasizing that when working on your own maps, expect to engage in a lot of trial and error to customize the map’s appearance to your specifications, and to determine the appropriate values for the various function arguments. In addition, there are a lot of <em>tmap</em> functions and arguments that we haven’t covered; be sure to explore all the possibilities by exploring <em>tmap’s</em> documentation (<code>?tmap</code>)</p>
 <p>Final Code</p>
+<p>For convenience, here’s all of the code we used to construct the map we arrived at in the previous section:</p>
 <div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="tutorial.html#cb43-1" aria-hidden="true" tabindex="-1"></a>covid_economic_map<span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(worldmap_covid_data_economic)<span class="sc">+</span></span>
 <span id="cb43-2"><a href="tutorial.html#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">col=</span><span class="st">&quot;mean_economic&quot;</span>, </span>
 <span id="cb43-3"><a href="tutorial.html#cb43-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">style=</span><span class="st">&quot;cont&quot;</span>, </span>

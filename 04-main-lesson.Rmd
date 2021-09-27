@@ -448,10 +448,11 @@ Above, to the right of the assignment operator, we have:
 * The ```tm_layout``` function also takes many arguments:
   * ```legend.title.size=0.7``` sets the size of the text in the legend's title
   * ```legend.title.fontface=2``` makes the legend title bold. 
-  * ```legend.position = c(0, 0)``` positions the legend at the bottom-left of the map
-  * ```frame=FALSE``` removes the frame from the map
+  * ```legend.outside=TRUE``` specifies the legend is to be situated outside the (invisible) map frame; this prevents the legend from blocking out portions of the map itself
+  * ```legend.outside.position = c("bottom")``` positions the legend below the southern border of the (invisible) map frame
+  * ```frame=FALSE``` makes the map frame invisible, so that we don't see a border surrounding the countries
   * ```legend.text.size=0.5``` specifies the size of the legend text that is not part of the legend title
-  * ```legend.width=0.5``` specifies the width of the legend
+  * ```legend.width=0.35``` specifies the width of the legend
 
 The best way to get a sense of how all of these various arguments work is to try changing the values of the arguments and inspect their effect on the map's appearance. 
 
@@ -474,7 +475,24 @@ covid_economic_map
 
 ```
 
+Let's consider the new arguments passed through the ```tm_layout``` and ```tm_credits``` function:
+
+* ```tm_layout```
+  * ```main.title="National Economic Support Measures\nin Response to the Covid-19 Pandemic"``` specifies the title for the map as a whole. As before ```\n``` specifies line breaks. 
+  * ```main.title.position="center"``` specifies the justification of the title
+  * ```main.title.size=1``` specifies the font size of the title
+  * ```inner.margins=c(0.06,0.10,0.10,0.08)``` establishes the size of the margins within the map frame. It's most noticeable impact in this context is to regulate the whitespace between the title and the map features. 
+  * ```attr.outside = TRUE```, in this context, places the map credits (one of the map's attributes), outside the map frame
+* The ```tm_credits``` function is a function used to choose the content and appearance of the map's credits section.
+  * ```"Map Author: Aditya Ranganath\nDataset Author: Simon Porcher\nCRS: WGS1984\nSource: ICPSR``` is the text of the credits section; as before, ```\n``` specifies line breaks
+  *  ```position=c(0.78,0)``` specifies the location of the credits
+  * ```size=0.38``` specifies the size of the text in the credits section
+
+It's worth emphasizing that when working on your own maps, expect to engage in a lot of trial and error to customize the map's appearance to your specifications, and to determine the appropriate values for the various function arguments. In addition, there are a lot of *tmap* functions and arguments that we haven't covered; be sure to explore all the possibilities  by exploring *tmap's* documentation (```?tmap```)
+
 Final Code
+
+For convenience, here's all of the code we used to construct the map we arrived at in the previous section:
 
 ```{r, message=FALSE, warning=FALSE}
 covid_economic_map<- tm_shape(worldmap_covid_data_economic)+
@@ -508,6 +526,7 @@ covid_economic_map
 ## Export Your Map
 
 ## Make a Web Map 
+
 
 ## Summary 
 
