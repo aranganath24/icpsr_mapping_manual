@@ -494,7 +494,8 @@ Final Code
 
 For convenience, here's all of the code we used to construct the map we arrived at in the previous section:
 
-```{r, message=FALSE, warning=FALSE}
+```{r, message=FALSE, warning=FALSE, echo=-1}
+tmap_mode("plot")
 covid_economic_map<- tm_shape(worldmap_covid_data_economic)+
   tm_polygons(col="mean_economic", 
               style="cont", 
@@ -526,6 +527,12 @@ covid_economic_map
 ## Export Your Map
 
 ## Make a Web Map 
+
+```{r, message=FALSE, warning=FALSE}
+tmap_mode("view")
+covid_economic_map_alt
+tmap_mode("plot")
+```
 
 
 ## Summary 
