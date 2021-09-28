@@ -13,6 +13,7 @@ fig:unnamed-chunk-42
 fig:unnamed-chunk-56
 fig:unnamed-chunk-57
 fig:unnamed-chunk-59
+fig:unnamed-chunk-61
 preface
 introduction
 motivation
@@ -37,7 +38,7 @@ change-class-of-economic_measures-index
 compute-average-of-economic_measures-index
 calculate-summary-statistics
 join-datasets
-make-maps
+make-a-print-map
 make-a-preliminary-map
 customize-legend
 add-map-title-and-credits
@@ -47,5 +48,7 @@ export-map-using-tmap
 export-map-through-gui
 make-a-dynamic-map
 summary
+print-map-script
+dynamic-map-script
 practice-and-challenge-exercises
 conclusion

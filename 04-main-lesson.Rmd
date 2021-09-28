@@ -22,7 +22,7 @@ Now that we've taken care of those preliminary steps, let's bring in the tutoria
 
 When importing tabular data that you have saved on our computer into R Studio, it's important to first understand some of the details of the data we're trying to import. The first thing to note is the type of file we're working with, which is indicated by the file extension; here, we can note that the ICPSR data is a .xlsx file, which means that it's an Excel file (but note that .xlsx files can also be opened in spreadsheet software programs other than Excel). That means we'll have to import it into R Studio using a function designed specifically to handle Excel files. To that end, we'll use the ```read_excel``` function from the *readxl* package. Recall that if you want to learn more about a function or a package, simply type a question mark followed by the package or function name in the console, and relevant information will appear in the "Help" tab of the "Files/Plots/Packages/Help/Viewer" window on the bottom right of our R Studio interface. For example, if we wanted to learn more about the ```read_excel```function, we would type ```?read_excel``` into the console. 
 
-Before using the ```read_excel``` function to bring in the , it could be helpful to open up the data outside the R environment to see whether the dataset has any features that we have to account for when loading it into our R environment. When we first open the spreadsheet, it will look something like this:
+Before using the ```read_excel``` function to bring in the data, it could be helpful to open up the data outside the R environment to see whether the dataset has any features that we have to account for when loading it into our R environment. When we first open the spreadsheet, it will look something like this:
 
 ```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='ICPSR Dataset in Spreadsheet: Description Tab'}
 knitr::include_graphics('images/excel_open.png')
@@ -319,7 +319,7 @@ knitr::include_graphics('images/joineddataset.png')
 
 Note that we now have a spatial dataset of country boundaries (as indicated by the "name" and "geometry" fields), with the data we want to map (the mean, for each country, of the Covid-19 Economic intervention index during the period under consideration) now included in a field within the spatial dataset. 
 
-## Make Maps
+## Make a Print Map
 
 We're finally ready to represent the tabular data we started with on a map! To do so, we'll use the *tmap* package, which we already used above to view a rendered version of our spatial dataset. Now, we'll actually represent our data on the map features.  
 
@@ -327,7 +327,7 @@ We're finally ready to represent the tabular data we started with on a map! To d
 
 As with anything else in R, we can assign maps created with the *tmap* package to objects, which makes it easy to subsquently work with them. We'll create an object called "covid_economic_map" to contain the map we will build using *tmap*. We can create a rough draft of a map and assign it to an object with two relatively simple lines of code:
 
-```{r, echo=-1}
+```{r, echo=-1, message=FALSE}
 tmap_mode("plot")
 covid_economic_map<-tm_shape(worldmap_covid_data_economic)+
                       tm_polygons(col="mean_economic", n=8, style="jenks", palette="BuGn")
@@ -354,17 +354,17 @@ Of course, the map we've just created needs a bit of work (most noticeably, the 
 
 Before we work on the legend, we can see how to change certain features of the map using arguments to the ```tm_polygons``` function that we've already discussed. For instance, let's say we want a Yellow to Red palette ("YlOrRd"; again, remember you can look up these codes at the color guide linked above), only five intervals for the data, and want the data to be partitioned across intervals equally (rather than by using the Jenks algorithm). Let's make a new map object to contain this map, called "covid_economic_map_alternative."
 
-```{r, echo=-1}
+```{r, echo=-1, message=FALSE}
 tmap_mode("plot")
-covid_economic_map_alt<-tm_shape(worldmap_covid_data_economic)+
-                      tm_polygons(col="mean_economic", n=5, style="equal", palette="YlOrRd")
+covid_economic_map_alternative<-tm_shape(worldmap_covid_data_economic)+
+                                  tm_polygons(col="mean_economic", n=5, style="equal", palette="YlOrRd")
 ```
 
 Let's display the map in the "covid_economic_map_alt" object; notice the change in color, the fewer number of classes, and the equal intervals in the legend: 
 
 ```{r, fig.asp=0.5, message=FALSE, warning=FALSE, echo=-1}
 tmap_mode("plot")
-covid_economic_map_alt
+covid_economic_map_alternative
 ```
 
 Note that we can easily remove the map frame if we'd prefer not to have that, with the "Frame" argument to the ```tm_layout``` function.
@@ -372,11 +372,11 @@ Note that we can easily remove the map frame if we'd prefer not to have that, wi
 ```{r, fig.asp=0.5, message=FALSE, warning=FALSE, echo=-1}
 tmap_mode("plot")
 # Removes frame from "covid_economic_map_alt" map object
-covid_economic_map_alt<-covid_economic_map_alt+
-                          tm_layout(frame=FALSE)
+covid_economic_map_alternative<-covid_economic_map_alternative+
+                                  tm_layout(frame=FALSE)
 
 # Views amended map object without frame:
-covid_economic_map_alt
+covid_economic_map_alternative
 ```
 
 
@@ -531,7 +531,6 @@ tm_shape(worldmap_covid_data_economic)+ # Specifies Spatial Dataset
 
 # Views "covid_economic_map" object
 covid_economic_map
-
 ```
 
 ## Export Map
@@ -603,6 +602,19 @@ knitr::include_graphics('images/dynamic.png')
 
 It's possible to customize dynamic maps to some degree, but not to the same extent as static maps. Consult *tmap's* documentation for additional guidance. 
 
+It's possible to export dynamic maps as html files. To do so, we use the same ```tmap_save``` function as before, but simply specify an html extension. The html file will be written to your working directory:
+
+```{r, message=FALSE, eval=FALSE}
+# Writes dynamic map to disk as html file
+tmap_save(covid_economic_webmap, "covid_economic_webmap.html")
+```
+
+Once it's been saved, we can open up the interactive map in a web browser of choice:
+
+```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='Saved Interactive Map Open in Browser'}
+knitr::include_graphics('images/webmap_browser.png')
+```
+
 We can switch back to "plot" mode, at which point *tmap* will go back to making static maps.  
 
 ```{r, message=FALSE, warning=FALSE }
@@ -612,6 +624,113 @@ tmap_mode("plot")
 We can toggle back and forth between "plot" mode and "view" mode as necessary, depending on whether we want to make a static or dynamic map.
 
 ## Summary 
+
+After working through the tutorial, it can be useful to see the essential steps required to generate our final print (i.e. static) map in a single script; note that the script below presupposes that we are in the correct working directory (i.e. the working directory which contains the ICPSR data we downloaded as an Excel file).
+
+### Print Map Script
+
+```{r, message=FALSE, warning=FALSE, echo=c(-1,-2)}
+tmap_mode("plot")
+setwd("/Users/adityaranganath/Documents/git_repositories/icpsr_mapping_manual/tutorial_data")
+# Imports "Dataset" sheet from ICPSR Excel file into R Studio, and assigns the dataset to an object called "covid_data"
+covid_data<-read_excel("Gov_Responses2Covid19_last.xlsx", sheet="Dataset")
+
+# Brings spatial dataset of country boundaries into R environment using the rnaturalearth package
+country_boundaries<-ne_countries(scale="medium", returnclass="sf")
+
+# Deletes Antarctica from spatial dataset in "country_boundaries" object
+country_boundaries<-country_boundaries %>% filter(iso_a3 !="ATA")
+
+# Selects "iso" and "Economic_Measures" variables from ICPSR Dataset, and assigns this new dataset to "covid_data_economic" object
+covid_data_economic<-covid_data %>% 
+                      select(iso, Economic_Measures) 
+
+# Changes class of "Economic_Measures" field from character to numeric
+covid_data_economic$Economic_Measures<-as.numeric(covid_data_economic$Economic_Measures)
+
+# Calculate Country-Level Averages for "Economic_Measures" Index, and then assign this new dataset of country-level averages to a new object called "covid_data_economic_avg". 
+covid_data_economic_avg<-covid_data_economic %>% group_by(iso) %>% 
+                                                summarize(mean_economic=mean(Economic_Measures, na.rm=FALSE))
+
+# Join dataset with country-level means for "Economic_Measures" index (in "covid_data_economic" object) to spatial dataset of world boundaries (in "country_boundaries" object), based on common 3-Digit ISO Codes
+
+worldmap_covid_data_economic<-full_join(country_boundaries, covid_data_economic_avg, by=c("iso_a3"="iso"))
+
+# Make static map and assigns to object called "covid_economic_map"
+
+covid_economic_map<-  
+tm_shape(worldmap_covid_data_economic)+ # Specifies Spatial Dataset
+  tm_polygons(col="mean_economic",      # Specifies column we want to map
+              style="cont",             # Specifies continuous legend
+              palette="BuGn",           # Specifies color palette/scheme to represent data variation
+              textNA="No Data",         # Codes "NA" values as "No Data" in the legend
+              title="Mean of Covid\nEconomic\nIntervention Index\n(1/1/2020 to\n 10/1/2020)", # Sets legend title
+              legend.is.portrait=FALSE, # Makes legend horizontal
+              breaks=c(0,0.25,0.5, 0.72))+ # Sets legend breaks
+  tm_layout(legend.title.size=0.7,      # Sets legend title size
+            legend.title.fontface=2,    # Makes legend bold
+            legend.outside=TRUE,        # Puts legend outside map frame
+            legend.outside.position=c("bottom"), # Puts legend below map frame
+            frame=FALSE,                # Makes map frame invisible                         
+            legend.text.size = 0.5,     # Sets size of legend tex
+            legend.width=0.35,          # Sets legend width
+            main.title="National Economic Support Measures\nin Response to the Covid-19 Pandemic", # Sets map title
+            main.title.position="center", # Specifies title justification
+            main.title.size=1,          # Specifies title font size
+            inner.margins=c(0.06,0.10,0.10,0.08), # Sets map margins with respect to frame
+            attr.outside = TRUE)+       # Places map credits outside frame
+  tm_credits("Map Author: Aditya Ranganath\nDataset Author: Simon Porcher\nCRS: WGS1984\nSource: ICPSR", # Sets text for map credits
+             position=c(0.78,0), # Specifies location of map credits
+             size=0.38)          # Specifies font size of credits text
+
+# Views "covid_economic_map" object
+covid_economic_map
+
+```
+
+### Dynamic Map Script
+
+Our discussion of dynamic webmaps was of course considerably shorter than our discussion of print maps in R, so the corresponding script is naturally  shorter. The following script goes from reading in the ICPSR dataset to producing a dynamic webmap of the country-level average of the Covid-19 economic intervention index. Note that many of the steps involved are exactly the same as the process of making the print map:
+
+```{r, message=FALSE, warning=FALSE, echo=c(-1,-2)}
+tmap_mode("plot")
+setwd("/Users/adityaranganath/Documents/git_repositories/icpsr_mapping_manual/tutorial_data")
+
+# Imports "Dataset" sheet from ICPSR Excel file into R Studio, and assigns the dataset to an object called "covid_data"
+covid_data<-read_excel("Gov_Responses2Covid19_last.xlsx", sheet="Dataset")
+
+# Brings spatial dataset of country boundaries into R environment using the rnaturalearth package
+country_boundaries<-ne_countries(scale="medium", returnclass="sf")
+
+# Deletes Antarctica from spatial dataset in "country_boundaries" object
+country_boundaries<-country_boundaries %>% filter(iso_a3 !="ATA")
+
+# Selects "iso" and "Economic_Measures" variables from ICPSR Dataset, and assigns this new dataset to "covid_data_economic" object
+covid_data_economic<-covid_data %>% 
+                      select(iso, Economic_Measures) 
+
+# Changes class of "Economic_Measures" field from character to numeric
+covid_data_economic$Economic_Measures<-as.numeric(covid_data_economic$Economic_Measures)
+
+# Calculate Country-Level Averages for "Economic_Measures" Index, and then assign this new dataset of country-level averages to a new object called "covid_data_economic_avg". 
+covid_data_economic_avg<-covid_data_economic %>% group_by(iso) %>% 
+                                                summarize(mean_economic=mean(Economic_Measures, na.rm=FALSE))
+
+# Join dataset with country-level means for "Economic_Measures" index (in "covid_data_economic" object) to spatial dataset of world boundaries (in "country_boundaries" object), based on common 3-Digit ISO Codes; then relocate "name" and "mean_economic" fields to the beginning of the dataset so that they're displayed on the map
+worldmap_covid_data_economic<-full_join(country_boundaries, covid_data_economic_avg, by=c("iso_a3"="iso")) %>% 
+                              relocate(name, mean_economic)
+
+# Make map and assigns to object called "covid_economic_webmap"
+covid_economic_webmap<-tm_shape(worldmap_covid_data_economic)+
+                        tm_polygons(col="mean_economic", n=5, style="jenks", palette="BuGn")
+
+# Set tmap mode to "view
+tmap_mode("view")
+
+# display map object in view mode
+covid_economic_webmap
+
+```
 
 
 
