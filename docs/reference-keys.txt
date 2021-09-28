@@ -12,6 +12,7 @@ fig:unnamed-chunk-37
 fig:unnamed-chunk-42
 fig:unnamed-chunk-56
 fig:unnamed-chunk-57
+fig:unnamed-chunk-59
 preface
 introduction
 motivation
