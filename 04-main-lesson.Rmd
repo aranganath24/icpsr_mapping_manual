@@ -94,7 +94,8 @@ knitr::include_graphics('images/geometry.png')
 
 We can use the information in the "geometry" tab to draw georeferenced polygons for each row in the spatial dataset, which will yield a world map! To translate the information in the geometry tab into a cartographic representation, we'll use a package called *tmap*. To bring up the features of the dataset, we have to first tell *tmap* what dataset contains the information we want to map; we do this by first passing the name of the object that contains the relevant dataset (here, "country_boundaries") to the ```tm_shape``` function, and then specifying that our features (i.e. country borders) are represented as polygons through the ```tm_polygons``` function. The ```tm_polygons``` function does not require any arguments. In the *tmap* package, we can connect functions together through a plus sign (+). When we type in and run the following code, the result is a map that is rendered based on the information in the "geometry" column:
 
-```{r, fig.asp=0.5}
+```{r, fig.asp=0.5, echo=-1}
+tmap_mode("plot")
 # maps geographic features (i.e. countries) of spatial dateset
 tm_shape(country_boundaries)+
   tm_polygons()
@@ -110,7 +111,8 @@ worldmap<-tm_shape(country_boundaries)+
 
 Having assigned the map to the "worldmap" object, we can bring up the map whenever we want by simply calling "worldmap" object: t:
 
-```{r, fig.asp=0.5}
+```{r, fig.asp=0.5, echo=-1}
+tmap_mode("plot")
 # calls "worldmap" object to display country-level map generated from the "country_boundaries" spatial dataset 
 worldmap
 ```
@@ -154,7 +156,8 @@ worldmap<-tm_shape(country_boundaries)+
 
 Now, let's view our updated map:
 
-```{r, fig.asp=0.5}
+```{r, fig.asp=0.5, echo=-1}
+tmap_mode("plot")
 worldmap
 ```
 
