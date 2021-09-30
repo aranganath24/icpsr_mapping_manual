@@ -16,6 +16,16 @@ What spatial patterns do you notice in this map? Are there any patterns of clust
 
 Use the same dataset we used in Section 4, but this time please make an interactive map of the country-level average of the "Rigidity_Public_Health" variable. 
 
+## Practice Exercise 3
+
+Refer to the following [dataset](https://www.openicpsr.org/openicpsr/project/121001/version/V1/view?path=/openicpsr/121001/fcr:versions/V1/Index_IPR_Agriculture.xlsx&type=file), entitled "Worldwide Index of IPRs [Intellectual Property Rights] in Agriculture, 1961-2018", which is archived on ICPSR and authored by Mercedes Campi.
+
+Download the dataset, and make a map that shows country-level variation in the "Total_Index" variable in the year 2018. 
+
+## Sample Code
+
+The sample code in this section assumes you've already loaded all of the packages discussed in the tutorial, and have correctly set your working directory to the directory in which the dataset(s) are located. 
+
 ### Sample Code for Exercise 2
 
 ```{r, include=FALSE}
@@ -68,6 +78,58 @@ tmap_mode("view")
 covid_PH_webmap
 ```
 
-## Practice Exercise 3
+### Sample Code for Exercise 3
+
+```{r, message=FALSE, warning=FALSE, echo=c(-1,-2)}
+tmap_mode("plot")
+setwd("/Users/adityaranganath/Documents/git_repositories/icpsr_mapping_manual/tutorial_data")
+
+#Load Tabular Data
+IPR_data<-read_excel("Index_IPR_Agriculture.xlsx", sheet="Total_Index")
+View(IPR_data)
+
+# Load Spatial Data
+country_boundaries<-ne_countries(scale="medium", returnclass="sf")
+View(country_boundaries)
+
+# Delete Antarctica
+country_boundaries<-country_boundaries %>% filter(iso_a3 !="ATA")
+
+# Check class of Index
+class(IPR_data$`Total Index`)
+
+# Select 2015 Observations
+IPR_data_2018<-IPR_data %>% filter(year==2018)
+View(IPR_data_2018)
+
+# Join Datasets
+worldmap_IPR_2018<-full_join(country_boundaries, IPR_data_2018, by=c("iso_a3"="Country_code")) %>% 
+                    relocate(Country, 'Total Index')
+View(worldmap_IPR_2018)
+
+# Make Map
+IPR_2018_map<-tm_shape(worldmap_IPR_2018)+
+                tm_polygons(col="Total Index",
+                            n=6, 
+                            style="jenks", 
+                            palette="PuBu",
+                            title="Agriculture IPR\nIndex, 2018")+
+                tm_layout(frame=FALSE,
+                          legend.outside=TRUE,
+                          legend.outside.position=c("bottom"),
+                          main.title = "Strength of Intellectual Property Protection in Agriculture, 2018",
+                          main.title.position = "Center",
+                          main.title.size=1,
+                          inner.margins=c(0.06,0.10,0.10,0.08),
+                          attr.outside=TRUE)+
+                tm_credits("Map Author: YOUR NAME\nDataset Author: Mercedes Campi\nCRS:WGS84\nSource:ICPSR",
+                           position=c(0.78,0),
+                           size=0.38)
+# Open Map Object
+
+IPR_2018_map
+
+```
+
 
 
