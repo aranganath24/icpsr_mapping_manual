@@ -50,5 +50,9 @@ make-a-dynamic-map
 summary
 print-map-script
 dynamic-map-script
-practice-and-challenge-exercises
+practice-exercises
+practice-exercise-1
+practice-exercise-2
+sample-code-for-exercise-2
+practice-exercise-3
 conclusion

@@ -1,1 +1,73 @@
-# Practice and Challenge Exercises
+# Practice Exercises
+
+In this section you'll have the opportunity to apply what you learned in Section 4, and practice some of your skills. The following three exercises are arrayed in order of ascending difficulty. 
+
+## Practice Exercise 1
+
+Modify the map we made in Section 4 in the following ways:
+
+* Change the color scheme. What rationale informed your choice of this color scheme? 
+* Change the legend breaks. Why did you chose the legend breaks that you did? 
+* Replace your name with the current name in the "Map Credits" section. 
+
+What spatial patterns do you notice in this map? Are there any patterns of clustering or dispersion that you find interesting? Do you notice anything surprising or unexpected? And, what future research questions might this map suggest? 
+
+## Practice Exercise 2
+
+Use the same dataset we used in Section 4, but this time please make an interactive map of the country-level average of the "Rigidity_Public_Health" variable. 
+
+### Sample Code for Exercise 2
+
+```{r, include=FALSE}
+library(tmap)
+library(sf)
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(rgeos)
+library(tidyverse)
+library(readxl)
+library(dplyr)
+```
+
+```{r, message=FALSE, warning=FALSE, echo=c(-1,-2)}
+tmap_mode("plot")
+setwd("/Users/adityaranganath/Documents/git_repositories/icpsr_mapping_manual/tutorial_data")
+
+# Imports "Dataset" sheet from ICPSR Excel file into R Studio, and assigns the dataset to an object called "covid_data"
+covid_data<-read_excel("Gov_Responses2Covid19_last.xlsx", sheet="Dataset")
+
+# Brings spatial dataset of country boundaries into R environment using the rnaturalearth package
+country_boundaries<-ne_countries(scale="medium", returnclass="sf")
+
+# Deletes Antarctica from spatial dataset in "country_boundaries" object
+country_boundaries<-country_boundaries %>% filter(iso_a3 !="ATA")
+
+# Selects "iso" and "Rigidity_Public_Health" variables from ICPSR Dataset, and assigns this new dataset to "covid_data_public_health" object
+covid_data_public_health<-covid_data %>% 
+  select(iso, Rigidity_Public_Health) 
+
+# Changes class of "Rigidity_Public_Health" field from character to numeric
+covid_data_public_health$Rigidity_Public_Health<-as.numeric(covid_data_public_health$Rigidity_Public_Health)
+
+# Calculate Country-Level Averages for "Rigidity_Public_Health" Index, and then assign this new dataset of country-level averages to a new object called "covid_data_PH_avg". 
+covid_data_PH_avg<-covid_data_public_health %>% group_by(iso) %>% 
+                                            summarize(mean_public_health=mean(Rigidity_Public_Health, na.rm=FALSE))
+
+# Join dataset with country-level means for "Rigidity_Public_Health" index (in "covid_data_PH_avg" object) to spatial dataset of world boundaries (in "country_boundaries" object), based on common 3-Digit ISO Codes; then relocate "name" and "mean_economic" fields to the beginning of the dataset so that they're displayed on the map
+worldmap_covid_data_PH<-full_join(country_boundaries, covid_data_PH_avg, by=c("iso_a3"="iso")) %>% 
+                                relocate(name, mean_public_health)
+
+# Make map and assigns to object called "covid_PH_webmap"
+covid_PH_webmap<-tm_shape(worldmap_covid_data_PH)+
+                            tm_polygons(col="mean_public_health", n=5, style="jenks", palette="Oranges")
+
+# Set tmap mode to "view
+tmap_mode("view")
+
+# display map object in view mode
+covid_PH_webmap
+```
+
+## Practice Exercise 3
+
+
