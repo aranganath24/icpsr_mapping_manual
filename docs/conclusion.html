@@ -24,7 +24,7 @@
 <meta name="author" content="Aditya Ranganath" />
 
 
-<meta name="date" content="2021-09-30" />
+<meta name="date" content="2021-10-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -212,7 +212,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.4.2" data-path="practice-exercises.html"><a href="practice-exercises.html#sample-code-for-exercise-3"><i class="fa fa-check"></i><b>5.4.2</b> Sample Code for Exercise 3</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>6</b> Conclusion</a></li>
+<li class="chapter" data-level="6" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>6</b> Conclusion</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="conclusion.html"><a href="conclusion.html#wrapping-up"><i class="fa fa-check"></i><b>6.1</b> Wrapping Up</a></li>
+<li class="chapter" data-level="6.2" data-path="conclusion.html"><a href="conclusion.html#useful-reading-and-resources"><i class="fa fa-check"></i><b>6.2</b> Useful Reading and Resources</a></li>
+<li class="chapter" data-level="6.3" data-path="conclusion.html"><a href="conclusion.html#references"><i class="fa fa-check"></i><b>6.3</b> References</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 </ul>
@@ -234,7 +239,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="conclusion" class="section level1" number="6">
 <h1><span class="header-section-number">6</span> Conclusion</h1>
+<p>Congratulations on finishing the tutorial and the exercises! This section concludes and offers suggestions on further reading and useful resources to consult.</p>
+<div id="wrapping-up" class="section level2" number="6.1">
+<h2><span class="header-section-number">6.1</span> Wrapping Up</h2>
+<p>We started the tutorial with a tabular dataset archived on ICPSR.The dataset provides crossnational information on governments’ public health and economic policies in response to the Covid-19 pandemic. When we first opened the dataset after downloading it from the ICPSR landing page, it looked something like this:</p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-68"></span>
+<img src="images/excel_dataset.png" alt="The Original ICSPR Dataset in Excel" width="100%" />
+<p class="caption">
+Figure 6.1: The Original ICSPR Dataset in Excel
+</p>
+</div>
+<p>There were no maps or visualizations provided with the original ICPSR dataset, but with a bit of work in R Studio, we used the information in the dataset to generate and export a map that looked something like this:</p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-69"></span>
+<img src="images/covid_economic_map_export.png" alt="Map Based on Variable in ICPSR Dataset" width="100%" />
+<p class="caption">
+Figure 6.2: Map Based on Variable in ICPSR Dataset
+</p>
+</div>
+<p>This illustrates an important point: when exploring ICPSR data, we’re not limited to the materials provided by the author of a given dataset. We have the power to take this archived data, and represent it in novel ways that might further our understanding. In the most general terms, this tutorial was fundamentally about how to go about this process, and thereby help archived datasets come “alive.” More specifically, we learned about this general process by learning about how to create maps from ICPSR data. Every dataset has its idiosyncrasies, but the general workflow we developed here is quite portable; as Practice Exercise 3 demonstrated, the workflow and code we developed in the tutorial can, with a bit of tinkering, be adapted to different datasets as well.</p>
+</div>
+<div id="useful-reading-and-resources" class="section level2" number="6.2">
+<h2><span class="header-section-number">6.2</span> Useful Reading and Resources</h2>
+<p>The maps we generated were fairly basic, and could be refined or made made more aesthetically pleasing. They could also be made more sophisticated, through techniques like inserting inset maps. If you would like to further develop your spatial visualization and mapping skills, an excellent place to start is with the free and open-source book by Lovelace, Nowosad, and Muenchow (2021), entitled <a href="https://geocompr.robinlovelace.net/index.html"><em>Geocomputation with R</em></a>. The book is more than an introduction to making maps; it’s a comprehensive guide to spatial analysis and Geographic Information Systems more generally.</p>
+<p>Finally, our focus in this tutorial was on mapping international variables contained in ICPSR datasets. Of course, ICPSR has data at different geographic scales, and has a particularly large collection of United States-specific data. If you’re interested in making a map of US-specific ICPSR data, the <em>usaboundaries</em> package allows you to import a variety of spatial datasets corresponding to different US geographic divisions (i.e. state, county, zip codes etc.). You could join tabular ICPSR data to these spatial datasets in order to visualize them on a map, using a process that is similar to the one presented in this tutorial. Documentation for the <em>usaboundaries</em> package is available <a href="https://cran.r-project.org/web/packages/USAboundaries/USAboundaries.pdf">here</a>.</p>
+</div>
+<div id="references" class="section level2" number="6.3">
+<h2><span class="header-section-number">6.3</span> References</h2>
 
+</div>
 </div>
 
 

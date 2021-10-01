@@ -14,6 +14,8 @@ fig:unnamed-chunk-56
 fig:unnamed-chunk-57
 fig:unnamed-chunk-59
 fig:unnamed-chunk-61
+fig:unnamed-chunk-68
+fig:unnamed-chunk-69
 preface
 introduction
 motivation
@@ -58,3 +60,6 @@ sample-code
 sample-code-for-exercise-2
 sample-code-for-exercise-3
 conclusion
+wrapping-up
+useful-reading-and-resources
+references

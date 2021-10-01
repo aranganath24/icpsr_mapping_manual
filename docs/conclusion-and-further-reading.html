@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>6 Conclusion and Further Reading | A Guide to Mapping ICPSR Data in R Studio</title>
+  <meta name="description" content="6 Conclusion and Further Reading | A Guide to Mapping ICPSR Data in R Studio" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="6 Conclusion and Further Reading | A Guide to Mapping ICPSR Data in R Studio" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="6 Conclusion and Further Reading | A Guide to Mapping ICPSR Data in R Studio" />
+  
+  
+  
+
+<meta name="author" content="Aditya Ranganath" />
+
+
+<meta name="date" content="2021-10-01" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="practice-exercises.html"/>
+
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.0.3/leaflet.js"></script>
+<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.0.3/leaflet-providers-plugin.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Mapping ICPSR Data</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Preface</a></li>
+<li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="introduction.html"><a href="introduction.html#motivation"><i class="fa fa-check"></i><b>2.1</b> Motivation</a></li>
+<li class="chapter" data-level="2.2" data-path="introduction.html"><a href="introduction.html#scope-and-objectives"><i class="fa fa-check"></i><b>2.2</b> Scope and Objectives</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="preliminaries-and-set-up.html"><a href="preliminaries-and-set-up.html"><i class="fa fa-check"></i><b>3</b> Preliminaries and Set-Up</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="preliminaries-and-set-up.html"><a href="preliminaries-and-set-up.html#data"><i class="fa fa-check"></i><b>3.1</b> Data</a></li>
+<li class="chapter" data-level="3.2" data-path="preliminaries-and-set-up.html"><a href="preliminaries-and-set-up.html#r-and-r-studio-installation"><i class="fa fa-check"></i><b>3.2</b> R and R Studio Installation</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="preliminaries-and-set-up.html"><a href="preliminaries-and-set-up.html#windows-installation-instructions"><i class="fa fa-check"></i><b>3.2.1</b> Windows Installation Instructions</a></li>
+<li class="chapter" data-level="3.2.2" data-path="preliminaries-and-set-up.html"><a href="preliminaries-and-set-up.html#macos-installation-instructions"><i class="fa fa-check"></i><b>3.2.2</b> macOS Installation Instructions</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="preliminaries-and-set-up.html"><a href="preliminaries-and-set-up.html#the-r-studio-interface"><i class="fa fa-check"></i><b>3.3</b> The R Studio Interface</a></li>
+<li class="chapter" data-level="3.4" data-path="preliminaries-and-set-up.html"><a href="preliminaries-and-set-up.html#install-packages"><i class="fa fa-check"></i><b>3.4</b> Install Packages</a></li>
+<li class="chapter" data-level="3.5" data-path="preliminaries-and-set-up.html"><a href="preliminaries-and-set-up.html#load-libraries"><i class="fa fa-check"></i><b>3.5</b> Load Libraries</a></li>
+<li class="chapter" data-level="3.6" data-path="preliminaries-and-set-up.html"><a href="preliminaries-and-set-up.html#set-working-directory"><i class="fa fa-check"></i><b>3.6</b> Set Working Directory</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="tutorial.html"><a href="tutorial.html"><i class="fa fa-check"></i><b>4</b> Tutorial</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="tutorial.html"><a href="tutorial.html#load-and-view-data"><i class="fa fa-check"></i><b>4.1</b> Load and View Data</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="tutorial.html"><a href="tutorial.html#icpsr-covid-19-tabular-data"><i class="fa fa-check"></i><b>4.1.1</b> ICPSR Covid-19 Tabular Data</a></li>
+<li class="chapter" data-level="4.1.2" data-path="tutorial.html"><a href="tutorial.html#country-boundaries-spatial-data"><i class="fa fa-check"></i><b>4.1.2</b> Country Boundaries Spatial Data</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="tutorial.html"><a href="tutorial.html#edit-spatial-data"><i class="fa fa-check"></i><b>4.2</b> Edit Spatial Data</a></li>
+<li class="chapter" data-level="4.3" data-path="tutorial.html"><a href="tutorial.html#process-icpsr-tabular-data-for-mapping"><i class="fa fa-check"></i><b>4.3</b> Process ICPSR Tabular Data for Mapping</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="tutorial.html"><a href="tutorial.html#select-variables"><i class="fa fa-check"></i><b>4.3.1</b> Select Variables</a></li>
+<li class="chapter" data-level="4.3.2" data-path="tutorial.html"><a href="tutorial.html#change-class-of-economic_measures-index"><i class="fa fa-check"></i><b>4.3.2</b> Change class of “Economic_Measures” Index</a></li>
+<li class="chapter" data-level="4.3.3" data-path="tutorial.html"><a href="tutorial.html#compute-average-of-economic_measures-index"><i class="fa fa-check"></i><b>4.3.3</b> Compute average of “Economic_Measures” index</a></li>
+<li class="chapter" data-level="4.3.4" data-path="tutorial.html"><a href="tutorial.html#calculate-summary-statistics"><i class="fa fa-check"></i><b>4.3.4</b> Calculate Summary Statistics</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="tutorial.html"><a href="tutorial.html#join-datasets"><i class="fa fa-check"></i><b>4.4</b> Join Datasets</a></li>
+<li class="chapter" data-level="4.5" data-path="tutorial.html"><a href="tutorial.html#make-a-print-map"><i class="fa fa-check"></i><b>4.5</b> Make a Print Map</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="tutorial.html"><a href="tutorial.html#make-a-preliminary-map"><i class="fa fa-check"></i><b>4.5.1</b> Make a Preliminary Map</a></li>
+<li class="chapter" data-level="4.5.2" data-path="tutorial.html"><a href="tutorial.html#customize-legend"><i class="fa fa-check"></i><b>4.5.2</b> Customize Legend</a></li>
+<li class="chapter" data-level="4.5.3" data-path="tutorial.html"><a href="tutorial.html#add-map-title-and-credits"><i class="fa fa-check"></i><b>4.5.3</b> Add Map Title and Credits</a></li>
+<li class="chapter" data-level="4.5.4" data-path="tutorial.html"><a href="tutorial.html#final-map-code"><i class="fa fa-check"></i><b>4.5.4</b> Final Map Code</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="tutorial.html"><a href="tutorial.html#export-map"><i class="fa fa-check"></i><b>4.6</b> Export Map</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="tutorial.html"><a href="tutorial.html#export-map-using-tmap"><i class="fa fa-check"></i><b>4.6.1</b> Export Map Using <em>tmap</em></a></li>
+<li class="chapter" data-level="4.6.2" data-path="tutorial.html"><a href="tutorial.html#export-map-through-gui"><i class="fa fa-check"></i><b>4.6.2</b> Export Map Through GUI</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="tutorial.html"><a href="tutorial.html#make-a-dynamic-map"><i class="fa fa-check"></i><b>4.7</b> Make a Dynamic Map</a></li>
+<li class="chapter" data-level="4.8" data-path="tutorial.html"><a href="tutorial.html#summary"><i class="fa fa-check"></i><b>4.8</b> Summary</a>
+<ul>
+<li class="chapter" data-level="4.8.1" data-path="tutorial.html"><a href="tutorial.html#print-map-script"><i class="fa fa-check"></i><b>4.8.1</b> Print Map Script</a></li>
+<li class="chapter" data-level="4.8.2" data-path="tutorial.html"><a href="tutorial.html#dynamic-map-script"><i class="fa fa-check"></i><b>4.8.2</b> Dynamic Map Script</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="practice-exercises.html"><a href="practice-exercises.html"><i class="fa fa-check"></i><b>5</b> Practice Exercises</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="practice-exercises.html"><a href="practice-exercises.html#practice-exercise-1"><i class="fa fa-check"></i><b>5.1</b> Practice Exercise 1</a></li>
+<li class="chapter" data-level="5.2" data-path="practice-exercises.html"><a href="practice-exercises.html#practice-exercise-2"><i class="fa fa-check"></i><b>5.2</b> Practice Exercise 2</a></li>
+<li class="chapter" data-level="5.3" data-path="practice-exercises.html"><a href="practice-exercises.html#practice-exercise-3"><i class="fa fa-check"></i><b>5.3</b> Practice Exercise 3</a></li>
+<li class="chapter" data-level="5.4" data-path="practice-exercises.html"><a href="practice-exercises.html#sample-code"><i class="fa fa-check"></i><b>5.4</b> Sample Code</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="practice-exercises.html"><a href="practice-exercises.html#sample-code-for-exercise-2"><i class="fa fa-check"></i><b>5.4.1</b> Sample Code for Exercise 2</a></li>
+<li class="chapter" data-level="5.4.2" data-path="practice-exercises.html"><a href="practice-exercises.html#sample-code-for-exercise-3"><i class="fa fa-check"></i><b>5.4.2</b> Sample Code for Exercise 3</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="conclusion-and-further-reading.html"><a href="conclusion-and-further-reading.html"><i class="fa fa-check"></i><b>6</b> Conclusion and Further Reading</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Guide to Mapping ICPSR Data in R Studio</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="conclusion-and-further-reading" class="section level1" number="6">
+<h1><span class="header-section-number">6</span> Conclusion and Further Reading</h1>
+<p>We started the tutorial with a tabular dataset archived on ICPSR.The dataset provides crossnational information on governments’ public health and economic policies in response to the Covid-19 pandemic. When we first opened the dataset after downloading it from the ICPSR landing page, it looked something like this:</p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-68"></span>
+<img src="images/excel_dataset.png" alt="The Original ICSPR Dataset in Excel" width="100%" />
+<p class="caption">
+Figure 6.1: The Original ICSPR Dataset in Excel
+</p>
+</div>
+<p>There were no maps or visualizations provided with the original ICPSR dataset, but with a bit of work in R Studio, we used the information in the dataset to generate and export a map that looked something like this:</p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-69"></span>
+<img src="images/covid_economic_map_export.png" alt="Map Based on Variable in ICPSR Dataset" width="100%" />
+<p class="caption">
+Figure 6.2: Map Based on Variable in ICPSR Dataset
+</p>
+</div>
+<p>This illustrates an important point: when exploring ICPSR data, we’re not limited to the materials provided by the author of a given dataset. We have the power to take this archived data, and represent it in novel ways that might further our understanding. In the most general terms, this tutorial was fundamentally about how to go about this process, and thereby help archived datasets come “alive.” More specifically, we learned about this general process by learning about how to create maps from ICPSR data. Every dataset has its idiosyncrasies, but the general workflow we developed here is quite portable; as Practice Exercise 3 demonstrated, the workflow and code we developed in the tutorial can, with a bit of tinkering, be adapted to different datasets as well.</p>
+<p>The maps we generated were fairly basic, and could be refined or made made more aesthetically pleasing. They could also be made more sophisticated, through techniques like inserting inset maps. If you would like to further develop your spatial visualization and mapping skills, an excellent place to start is with the free and open-source book by Lovelace, Nowosad, and Muenchow (2021), entitled <a href="https://geocompr.robinlovelace.net/index.html"><em>Geocomputation with R</em></a>. The book is more than an introduction to making maps; it’s a comprehensive guide to spatial analysis and Geographic Information Systems more generally.</p>
+<p>Finally, our focus in this tutorial was on mapping international variables contained in ICPSR datasets. Of course, ICPSR has data at different geographic scales, and has a particularly large collection of United States-specific data. If you’re interested in making a map of US-specific ICPSR data, the <em>usaboundaries</em> package allows you to import a variety of spatial datasets corresponding to different US geographic divisions (i.e. state, county, zip codes etc.). You could join tabular ICPSR data to these spatial datasets in order to visualize them on a map, using a process that is similar to the one presented in this tutorial. Documentation for the <em>usaboundaries</em> package is available <a href="https://cran.r-project.org/web/packages/USAboundaries/USAboundaries.pdf">here</a>.</p>
+<p><strong>References</strong></p>
+
+</div>
+
+
+
+
+
+
+
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="practice-exercises.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/aranganath24/icpsr_mapping_manual/edit/master/06-conclusion.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/aranganath24/icpsr_mapping_manual/blob/master/06-conclusion.Rmd",
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
