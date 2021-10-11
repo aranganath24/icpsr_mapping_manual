@@ -110,7 +110,6 @@ install.packages("rnaturalearth")
 install.packages("rnaturalearthdata")
 install.packages("rgeos")
 install.packages("readxl")
-install.packages("dplyr")
 ```
 
 All of the packages we need are now installed!
@@ -134,7 +133,6 @@ library(sf)
 library(rnaturalearth)
 library(rnaturalearthdata)
 library(rgeos)
-library(tidyverse)
 library(readxl)
 library(dplyr)
 ```
