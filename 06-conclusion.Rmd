@@ -26,6 +26,23 @@ Finally, our focus in this tutorial was on mapping international variables conta
 
 ## References
 
+Bivand, Roger and Colin Rundel. 2020. "rgeos: Interface to Geometry Engine-Open Source ('GEOS')". *R Package Version 0.5-5.* [https://CRAN.R-project.org/package=rgeos](https://CRAN.R-project.org/package=rgeos). 
+
+Pebesma, Edzer. 2018. "Simple Features for R: Standardized Support for Spatial Vector Data." *The R Journal* 10(1): 439-446. [https://doi.org/10.32614/RJ-2018-009](https://doi.org/10.32614/RJ-2018-009).  
+
+South, Andy. 2017. "rnaturalearth: World Map Data from Natural Earth." *R Package Version 0.1.0*   [https://CRAN.R-project.org/package=rnaturalearth](  https://CRAN.R-project.org/package=rnaturalearth)
+
+South, Andy. 2017."rnaturalearthdata: World Vector Map Data from Natural Earth Used in 'rnaturalearth.' *R Package version 0.1.0.* [0.1.0. https://CRAN.R-project.org/package=rnaturalearthdata](0.1.0. https://CRAN.R-project.org/package=rnaturalearthdata). 
+
+Tennekes, Martijn. 2018. "tmap: Thematic Maps in R." *Journal of Statistical Software* 84(6): 1-39. [https://doi.org/10.18637/jss.v084.i06](https://doi.org/10.18637/jss.v084.i06). 
+
+Wickham, Hadley and Jennifer Bryan. 2019. "readxl: Read Excel Files." *R Package version 1.3.1* [  https://CRAN.R-project.org/package=readxl](https://CRAN.R-project.org/package=readxl) 
+
+Wickham, Hadley, Romain Francois, and Lionel Henry. 2020. "dplyr: A Grammar of Data Manipulation." *R Package version 1.0.2.* [https://CRAN.R-project.org/package=dplyr](https://CRAN.R-project.org/package=dplyr). 
+
+
+
+
 
 
 
