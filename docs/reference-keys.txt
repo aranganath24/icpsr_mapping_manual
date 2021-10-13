@@ -50,8 +50,8 @@ export-map-using-tmap
 export-map-through-gui
 make-a-dynamic-map
 summary
-print-map-script
-dynamic-map-script
+print-map-summary-script
+dynamic-map-summary-script
 practice-exercises
 practice-exercise-1
 practice-exercise-2
