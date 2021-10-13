@@ -13,10 +13,10 @@ library(dplyr)
 
 ## Load and View Data 
 
-Now that we've taken care of those preliminary steps, let's bring the tutorial data into our R environment so that we can begin working with it. There are two pieces of data we'll need to load:
+Now that we've taken care of those preliminary steps, let's bring the tutorial data into our R environment and begin working with it. There are two pieces of data we'll need to load:
 
-* The ICPSR tabular dataset on government policy responses to Covid-19 (see Section 4.1.1)
-* A spatial dataset of world country boundaries; we will bring this dataset into R Studio via the ```ne_countries``` function of the "rnaturalearth" package (Section 4.1.2)
+* The ICPSR tabular dataset on government policy responses to Covid-19 (which we've already introduced)
+* A spatial dataset of world country boundaries; we will bring this dataset into R Studio via the ```ne_countries``` function of the "rnaturalearth" package (see Section 4.1.2 below)
 
 ### ICPSR Covid-19 Tabular Data
 
@@ -62,40 +62,42 @@ The code above successfully imported the data into R Studio; however, in order t
 To understand the concept of an object, consider the following simple example
 
 ```{r}
+# assign value 5 to new object named x
 x<-5
 ```
 
 In the code above, we use R's assignment operator, ```<-```, to assign the value 5 to an object named "x." Now that an object named "x" has been created and assigned the value 5, printing "x" in our console (or printing it in our script and running it) will return the value 5: 
 
 ```{r}
+# View contents of object x
 x
 ```
 
 More generally, the process of assignment effectively equates the output created by the code on the right side of the assignment operator (```<-) to an object with a name that is specified on the left side of the assignment operator. Whenever we want to look at the contents of an object (i.e. the output created by the code to the right side of the assignment operator), we simply print the name of the object in the R console (or print the name and run it within a script). 
 
-While the example above was very simple, we can assign virtually any data structure (such as datasets, maps, graphs) to an object in R. Indeed, we'll use the basic principle of object assignment introduced above to assign our ICPSR dataset of interest to an object, which we will call "covid_data" (note that object names are arbitrary and could be virtually anything, but it is good practice for object names to describe the values/data assigned to them):
+While the example above was very simple, we can assign virtually any data structure (such as datasets, maps, graphs) to an object in R. Indeed, we'll use the basic principle of object assignment introduced above to assign our ICPSR dataset of interest to an object, which we will call "covid_data" (note that object names are arbitrary and could be virtually anything, but it is good practice for object names to describe the contents of the object):
 
 ```{r, echo=-1}
 setwd("/Users/adityaranganath/Documents/git_repositories/icpsr_mapping_manual/tutorial_data")
-# Imports "Dataset" sheet from ICPSR Excel file into R Studio, and assigns the dataset to a variable called "covid_data"
+# Imports "Dataset" sheet from ICPSR Excel file into R Studio, and assigns the dataset to an object named "covid_data"
 covid_data<-read_excel("Gov_Responses2Covid19_last.xlsx", sheet="Dataset")
 ```
 
-The code above imports the data of interest using the code we used above (```read_excel("Gov_Responses2Covid19_last.xlsx", sheet="Dataset")```, but then takes the additional step of assigning the value of this expression (i.e. the imported ICPSR dataset) on the right side of the assignment operator to an object named ```covid_data```. In other words, the code assigns the output of the expression that results from running ```read_excel("Gov_Responses2Covid19_last.xlsx", sheet="Dataset")``` (i.e. the ICPSR dataset) to an object named ```covid_data```. 
+The code above imports the data of interest using the code we used above (```read_excel("Gov_Responses2Covid19_last.xlsx", sheet="Dataset")```, but then takes the additional step of assigning the result of this expression (i.e. the imported ICPSR dataset) on the right side of the assignment operator to an object named ```covid_data```. In other words, the code assigns the output of the expression that results from running ```read_excel("Gov_Responses2Covid19_last.xlsx", sheet="Dataset")``` (i.e. the ICPSR dataset) to an object named ```covid_data```. 
 
 We can confirm that the ICPSR dataset we imported has been assigned to an object named "covid_data" by typing and running ```covid_data``` in our script (or simply typing it into the console), and seeing that it prints the ICPSR dataset to our console:
 
 ```{r}
-# Prints value of "covid_data" object to the console
+# Prints contents of "covid_data" object to the console
 covid_data
 ```
 
-In short, once we've created an object by assigning a value to an object name with the assignment operator (```<-```), we can reference this value by the object's name. For example, in this case, we can refer to the ICPSR Covid-19 data that has been assigned to the ```covid_data``` object as ```covid_data``` within our scripts and documentation. In other words, due to the assignment operation, R is able to recognize that whenever we mention ```covid_data```, we are referring to the underlying value that has been assigned to the ```covid_data``` object (i.e. the ICPSR dataset). Throughout the tutorial, we'll sometimes use object names to refer to the values that they have been assigned; for instance, when we refer to the ```covid_data``` object, we are using it as shorthand for the ICPSR Covid-19 policy responses dataset that has been assigned to this object. 
+In short, once we've created an object through the assignment process discussed above, we can reference an object's contents by the object's name. For example, in this case, we can refer to the ICPSR Covid-19 data that has been assigned to the ```covid_data``` object as ```covid_data``` within our scripts and documentation. In other words, due to the assignment operation, R is able to recognize that whenever we mention ```covid_data```, we are referring to the underlying contents that have been assigned to the ```covid_data``` object (i.e. the ICPSR dataset). Throughout the tutorial, we'll sometimes use object names to refer to the  ontents that they have been assigned; for instance, when we refer to the ```covid_data``` object, we are using it as shorthand for the ICPSR Covid-19 policy responses dataset that has been assigned to this object. 
 
 When we print ```covid_data``` in our console (or run it from our script), R will print only a snapshot of the ```covid_data``` object to the console. However, when doing empirical work, it's usually useful to inspect the entire dataset of interest. We can do so using the ```View``` function. In this case, to inspect the ICPSR dataset that we loaded into R Studio and assigned to ```covid_data```, we can pass ```covid_data``` as an argument to the ```View``` function:
 
 ```{r}
-# Opens "covid_data" in R Studio's data viewer
+# Opens "covid_data" object in R Studio's data viewer
 View(covid_data)
 ```
 
@@ -116,7 +118,7 @@ When working with spatial data in R, we will sometimes want to import data that 
 In our case, however, we won't have to download and import the spatial data we need into R Studio from our computer's local drive. That is because there are R packages that already provide this spatial data, and allow us to directly load it into memory. In particular, we'll use the ```ne_countries``` function of the *rnaturalearth* package to bring a spatial dataset of country borders into our R environment, and then assign it to an object named "country_boundaries":
 
 ```{r}
-# Brings spatial dataset of country boundaries into R environment using the rnaturalearth package
+# Brings spatial dataset of country boundaries into R environment using the rnaturalearth package, and then assigns this dataset to an object named "country_boundaries"
 country_boundaries<-ne_countries(scale="medium", returnclass="sf")
 ```
 
@@ -125,13 +127,14 @@ Note the two arguments we pass into the ```ne_countries``` function: the "scale"
 Now that we have this spatial dataset in memory and assigned to a new object named "country_boundaries", let's step back and clarify what exactly a spatial dataset is. In some respects, a spatial dataset is like a typical tabular dataset. To see this, let's pass "country_boundaries" to the ```View()``` function to open up the dataset:
 
 ```{r}
+# Opens contents of "country_boundaries" object in R Studio's data viewer
 View(country_boundaries)
 ```
 
 By scrolling across the dataset, we'll note that each row corresponds to a country, and that there are many columns that correspond to various country-level attributes. The crucial column, however, which makes this a spatial dataset (as opposed to merely a tabular one), is the information contained in a column called "geometry". This column contains geographic coordinate information that essentially defines a polygon for each country in the dataset. The "geometry" column is likely one of the last columns in the dataset, so we may have to scroll a bit to find it. Alternatively, we can use the ```relocate``` function in the *dplyr* package to make the "geometry" column the first column in "country_boundaries", and then view this reordered dataset using the ```View``` function. 
 
 ```{r}
-# Move "geometry" column to the beginning of the "country_boundaries" dataset
+# Moves "geometry" column to the beginning of the "country_boundaries" dataset
 View(relocate(country_boundaries, geometry))
 ```
 
@@ -145,7 +148,7 @@ We can use the information in the "geometry" column to draw georeferenced polygo
 
 ```{r, fig.asp=0.5, echo=-1}
 tmap_mode("plot")
-# maps geographic features (i.e. countries) of "country_boundaries"
+# maps geographic features (i.e. countries) of "country_boundaries" using tmap package functions
 tm_shape(country_boundaries)+
   tm_polygons()
 ```
@@ -153,7 +156,7 @@ tm_shape(country_boundaries)+
 We can assign this map rendered from the spatial to a distinct object, just as we assigned the tabular ICPSR dataset and the spatial dataset to distinct objects ("covid_data" and "country_boundaries", respectively). Let's call this object "worldmap"; the code below performs this assignment: 
 
 ```{r}
-# assigns map of geographic features to a new object called "worldmap" 
+# assigns map of geographic features rendered from "country_boundaries" to a new object called "worldmap" 
 worldmap<-tm_shape(country_boundaries)+
             tm_polygons()
 ```
@@ -162,7 +165,7 @@ Having assigned the map to the "worldmap" object, we can bring up the map whenev
 
 ```{r, fig.asp=0.5, echo=-1}
 tmap_mode("plot")
-# calls "worldmap" object to display country-level map generated from the "country_boundaries" spatial dataset 
+# displays contents of "worldmap" object (i.e. a country-level map generated from the "country_boundaries" spatial dataset)
 worldmap
 ```
 
@@ -196,9 +199,10 @@ Two things may require additional elaboration:
 * First is the pipe, the symbol that looks like this: %>%. The pipe operator essentially takes the output of the code on its left, and then use that output as an input to the code on its right. Here, the pipe takes the "country_boundaries" object on its left, and then feeds this data into the ```filter``` function on its right. In other words, the pipe operator links the code on its two sides, and establishes that the data to be "filtered" within the ```filter``` function is "country_boundaries."
 * The ```filter``` function  is a function from the *dplyr* package that allows one to select rows from a dataset using specified criteria. In our case, we want to select all rows from the dataset that are not Antarctica. The argument passed to the ```filter``` function, ```iso_a3 !="ATA"```, is essentially saying "return any records where the iso_a3 variable in the attribute table (the 3-digit ISO country code) is NOT equal to "ATA" (Antarctica's code). Note that ```!=``` is R syntax for "not equal to".^[If we were to instead type ```filter(iso_a3=="ATA)```, the function would *only* select the Antarctica row from the dataset and discard everything else.]
 
-Now, let's see this change reflected in the corresponding map. To do so, we must update the "worldmap" object by rerunning the object assignment. That is, "worldmap" will not automatically reflect the edits we just made to the "country_boundaries" dataset. We need to run the code again (with the new version of "country_boundaries" passed through the ```tm_shape``` function) and then assign the revised map to "worldmap", which effectively replaces the previous map (the one with Antarctica):
+Now, let's see this change reflected in the corresponding map. To do so, we must update the "worldmap" object by rerunning the object assignment. That is, "worldmap" will not automatically reflect the edits we just made to the "country_boundaries" dataset. We need to run the code again (with the new version of "country_boundaries" passed through the ```tm_shape``` function) and then assign the revised map to "worldmap", which effectively overwrites the previous map (the one with Antarctica):
 
 ```{r}
+# Makes a new map based on the edited "country_boundaries" dataset, and assigns this new map to the "worldmap" object (thereby overwriting the map with Antarctica that was previously assigned to "worldmap")
 worldmap<-tm_shape(country_boundaries)+
             tm_polygons()
 ```
@@ -207,6 +211,7 @@ Now, let's view our updated map:
 
 ```{r, fig.asp=0.5, echo=-1}
 tmap_mode("plot")
+# Display contents of updated "worldmap" object
 worldmap
 ```
 
@@ -223,6 +228,7 @@ Before we can take those steps, however, we need to process the ICPSR tabular da
 When working with data in R, it is often useful to get a quick sense of a given dataset's dimensions, which we can do using the ```dim``` function. Below, we pass "covid_data"  to the ```dim``` function:
 
 ```{r}
+# ascertain dimensions of "covid_data" object
 dim(covid_data)
 ```
 
@@ -231,6 +237,7 @@ The output indicates that there are 62700 rows in the dataset, and 43 columns. T
 Let's create this smaller dataset, comprised of the ISO code and the economic intervention index of interest, and assign it to an object named "covid_data_economic": 
 
 ```{r}
+# Select "iso" and "Economic_Measures" columns from "covid_data" dataset, and assign the dataset created through this selection to the "covid_data_economic" object
 covid_data_economic<-covid_data %>% 
                       select(iso, Economic_Measures) 
 ```
@@ -238,6 +245,7 @@ covid_data_economic<-covid_data %>%
 The above code can be translated as follows: "Start with ```covid_data```, and then keep the 'iso' and 'Economic_Measures' columns but discard everything else (````select(iso, Economic_Measures)```). Assign this new 2-column dataset to a new object called 'covid_data_economic' (```covid_data_economic<-```)." We can take a look at this smaller dataset that was extracted from the original dataset by passing the "covid_data_economic" object as an argument to the now-familiar ```View``` function:
 
 ```{r}
+# View contents of "covid_data_economic" object in R Studio data viewer
 View(covid_data_economic)
 ```
 
@@ -247,9 +255,10 @@ Within the "Source" window, a new tab that contains the smaller 2-column that's 
 knitr::include_graphics('images/selection.png')
 ```
 
-Note that the original Covid-19 policy responses dataset, that we previously assigned to the "covid_data" object, is unaffected by our creation and assignment of a new dataset based on the selection of these two variables. We can confirm that this original data ("covid_data") remains unaffect by inspecting it through a call to the ```View``` function:
+Note that the original Covid-19 policy responses dataset, that we previously assigned to the "covid_data" object, is unaffected by our creation and assignment of a new dataset based on the selection of these two variables. We can confirm that this original data ("covid_data") remains unaffected by inspecting it through a call to the ```View``` function:
 
 ```{r}
+# View contents of "covid_data" object in R Studio data viewer
 View(covid_data)
 ```
 
@@ -260,21 +269,21 @@ We can go back to the "covid_data" dataset anytime we need, but for now we'll se
 Recall that the data we want to map is contained within the "Economic_Measures" column in "covid_data_economic". R has six fundamental "types" of data: character, numeric, integer, logical, and complex. The code below extracts the "Econmic_Measures" column from the dataset (placing a dollar sign in between the name of the object to which a dataset has been assigned, and a column within that dataset, as in ```covid_data_economic$Economic_Measures```, is a way of isolating and extracting a column from a larger dataset), and then passes it to the ```class``` function to identify the class of the data in the "Economic_Measures" field. 
 
 ```{r}
-# Find the class of the "Economic_Measures" field
+# Find the class of the "Economic_Measures" field within the "covid_data_economic" dataset
 class(covid_data_economic$Economic_Measures)
 ```
 
 We can see from the above output that the class of the "Economic_Measures" variable is "character", which implies that although the information in the "Economic_Measures" variable looks like it is numeric, R is not actually reading those data as numbers. So, we have to change the way in which that data is encoded, and ensure that it will be interpreted numerically; the failure to do this will prevent us from making numerical calculations using the information in this colum, as well as from mapping it using *tmap*. We can essentially recode the information in the "Economic_Measures" variable as "numeric" using the following code: 
 
 ```{r}
-# Changes class of "Economic_Measures" field from character to numeric
+# Changes class of "Economic_Measures" field in "covid_data_economic" object from character to numeric
 covid_data_economic$Economic_Measures<-as.numeric(covid_data_economic$Economic_Measures)
 ```
 
 In the code above, the code to the right of the assignment operator extracts  the "Economic_Measures" column from the the "covid_data_economic" dataset (```covid_data_economic$Economic_Measures```), and then changes this column's class to numeric by passing it to the ```as.numeric``` function. The assignment operator then replaces the old version of the "Economic_Measures" column (encoded as character) within "covid_data_economic", with this new (numeric) version of the "Economic_Measures" column. At this point, the "Economic_Measures" column in ```covid_data_economic```  is numeric; we can confirm this by passing the column through the ```class``` function once again:
 
 ```{r}
-# Find the class of the updated "Economic_Measures" field
+# Checks the class of the updated "Economic_Measures" field
 class(covid_data_economic$Economic_Measures)
 ```
 
@@ -302,6 +311,7 @@ We can translate the above code as follows: "Take the existing 'covid_data_econo
 To inspect this new dataset within the Source window, simply pass ```covid_data_economic_avg``` to the ```View``` function. 
 
 ```{r}
+# Views contents of "covid_data_economic_avg" dataset in R Studio data viewer
 View(covid_data_economic_avg)
 ```
 
@@ -316,7 +326,7 @@ knitr::include_graphics('images/mean_economic.png')
 Now that we have a dataset containing the country-level average of the "Economic_Measures" index (which is the data we'd like to map), it can be useful to get a sense of how the data is distributed. We can easily do this by using the ```summary``` function, which returns a table of summary statistics for a specified variable. The following code produces summary statistics for the "mean_economic" variable within ```covid_data_economic_average``` (which is written as ```covid_data_economic$mean_economic```):
 
 ```{r}
-# Produces table of summary statistics for "mean_economic" variable within "covid_data_economic"
+# Produces table of summary statistics for "mean_economic" variable contained in "covid_data_economic" dataset
 summary(covid_data_economic_avg$mean_economic)
 ```
 
@@ -329,8 +339,7 @@ The task of joining, or "merging" datasets is a very common procedure when worki
 How do we join different datasets together? Associating two datasets into one larger dataset that combines information from both requires the datasets to share a common field; this common field can be used to essentially “glue” the datasets together. The International Organization for Standardization provides 3-digit country codes for each of the world’s countries that can be used to uniquely identify countries when working with country-level data. Both our spatial dataset, and our table of the "Economic_Measures" index averages, contain fields with these standardized 3-digit ISO codes (this field is labelled “iso_a3” in the spatial dataset, and “iso” in the dataset containing the "Economic_Measures" average). We will therefore use the fields containing these 3-digit country codes to join ```covid_data_economic_avg``` to ```country_boundaries```:  
 
 ```{r}
-# Join dataset with country-level means for "Economic_Measures" index (in "covid_data_economic" object) to spatial dataset of world boundaries  (in "country_boundaries" object), based on common 3-Digit ISO Codes and assign this dataset to an object named "covid_economic_spatial_dataset"
-
+# Join dataset with country-level means for the "Economic_Measures" index (i.e. "covid_data_economic") to spatial dataset of world boundaries  (i.e. "country_boundaries"), based on common 3-Digit ISO Codes; then, assign this dataset to an object named "covid_economic_spatial_dataset"
 covid_economic_spatial_dataset<-full_join(country_boundaries, covid_data_economic_avg, by=c("iso_a3"="iso"))
 ```
 
@@ -346,12 +355,14 @@ We can translate the code in the previous code block as follows: "Join ```covid_
 Before proceeding, let's take a quick look at our newly created joined dataset. To make it easy to inspect, we can move up the variables we're interested in (country name, the "mean_economic" variable, and the geometry information that makes the data spatial in nature) up to the front of the dataset:
 
 ```{r}
+# Bring the "name", "mean_economic", and "geometry" fields/columns in "covid_economic_spatial_dataset" to the front of the dataset
 covid_economic_spatial_dataset<-covid_economic_spatial_dataset %>% relocate(name, mean_economic, geometry)
 ```
 
 After moving these variables by using the ```relocate``` function with the relevant variables as arguments, pass ```worldmap_covid_data_economic```, whose variables have now been relocated, to the familiar ```View``` function:
 
 ```{r}
+# View the contents of the "covid_economic_spatial_dataset" in the R Studio data viewer
 View(covid_economic_spatial_dataset)
 ```
 
@@ -373,6 +384,7 @@ Recall that as with with anything else in R, we can assign maps created with the
 
 ```{r, echo=-1, message=FALSE}
 tmap_mode("plot")
+# Creates map based on the data contained within the "mean_economic" field of "covid_economic"spatial_dataset", and assigns this map to a new object called "covid_economic_map"
 covid_economic_map<-tm_shape(covid_economic_spatial_dataset)+
                       tm_polygons(col="mean_economic", n=8, style="jenks", palette="BuGn")
 ```
@@ -389,6 +401,7 @@ To see what the map looks like, simply print ```covid_economic_map``` and run it
 
 ```{r, fig.asp=0.5, message=FALSE, warning=FALSE, echo=-1}
 tmap_mode("plot")
+# display contents of "covid_economic_map"
 covid_economic_map
 ```
 
@@ -400,6 +413,7 @@ But before we work on the legend, let's see how to change certain features of th
 
 ```{r, echo=-1, message=FALSE}
 tmap_mode("plot")
+# Modifies the appearance of "covid_economic_map" and assigns this modified map to a new object named "covid_economic_map_alternative"
 covid_economic_map_alternative<-tm_shape(covid_economic_spatial_dataset)+
                                   tm_polygons(col="mean_economic", n=5, style="equal", palette="YlOrRd")
 ```
@@ -408,6 +422,7 @@ Let's display this map and view its appearance; notice the change in color, the 
 
 ```{r a, fig.asp=0.5, message=FALSE, warning=FALSE, echo=-1}
 tmap_mode("plot")
+# Displays contents of "covid_economic_map_alternative"
 covid_economic_map_alternative
 ```
 
@@ -415,12 +430,12 @@ Note that we can easily remove the map frame if we'd prefer not to have that, by
 
 ```{r b, fig.asp=0.5, message=FALSE, warning=FALSE, echo=-1}
 tmap_mode("plot")
-# Removes frame from "covid_economic_map_alt" map object
+# Removes frame from "covid_economic_map_alternative" map
 covid_economic_map_alternative<-tm_shape(covid_economic_spatial_dataset)+
                                  tm_polygons(col="mean_economic", n=5, style="equal", palette="YlOrRd")+
                                  tm_layout(frame=FALSE)
 
-# Views amended map object without frame:
+# Displays amended contents of "covid_economic_map_alternative" object (i.e. map without a frame)
 covid_economic_map_alternative
 ```
 
@@ -430,12 +445,13 @@ The biggest issue with the rough drafts of our map from the previous section is 
 
 ```{r c, fig.asp=0.5, message=FALSE, warning=FALSE, echo=-1}
 tmap_mode("plot")
-## Shift legend position
+# Shifts legend position using the "tm_legend" function, and assigns amended map to "covid_economic_map"
 covid_economic_map<-tm_shape(covid_economic_spatial_dataset)+
                       tm_polygons(col="mean_economic", n=8, style="jenks", palette="BuGn")+
                       tm_layout(frame=FALSE)+
                       tm_legend(position=c("left", "bottom"))
-## View Map
+
+# Views amended contents of  "covid_economic_map"
 covid_economic_map
 ```
 
@@ -443,12 +459,13 @@ Currently, our legend is discrete, but we may want to try using a continuous leg
 
 ```{r d, fig.asp=0.5, message=FALSE, warning=FALSE, echo=-1}
 tmap_mode("plot")
-## Changes "style" argument parameter to "cont" to make continuous legend
+# Changes "style" argument parameter within "tm_polygons" function to "cont" to make continuous legend and assigns amended map to "covid_economic_map" (thereby overwriting the previous contents of "covid_economic_map)
 covid_economic_map<-tm_shape(covid_economic_spatial_dataset)+
                       tm_polygons(col="mean_economic", style="cont", palette="BuGn")+
                       tm_layout(frame=FALSE)+
                       tm_legend(position=c("left", "bottom"))
-## View Map
+
+# Display amended map
 covid_economic_map
 ```
 
@@ -465,6 +482,7 @@ The following code incorporates these changes into the previous map:
 
 ```{r e, fig.asp=0.5, message=FALSE, warning=FALSE, echo=-1}
 tmap_mode("plot")
+# Adds additional customizations to legend and assigns amended map to "covid_economic_map" (thereby overwriting the object's previous contents)
 covid_economic_map<- tm_shape(covid_economic_spatial_dataset)+
                       tm_polygons(col="mean_economic", 
                                   style="cont", 
@@ -480,6 +498,8 @@ covid_economic_map<- tm_shape(covid_economic_spatial_dataset)+
                                 frame=FALSE, 
                                 legend.text.size = 0.5,
                                 legend.width = 0.35)
+
+# Displays updated contents of "covid_economic_map"
 covid_economic_map
 ```
 
@@ -513,6 +533,7 @@ One useful thing to keep in mind is that when adding new elements to our map, it
 
 ```{r f, message=FALSE, warning=FALSE, echo=-1}
 tmap_mode("plot")
+# Adds map credits and title to existing "covid_economic_map" object, and then assigns this amended map back to "covid_economic_map" (thereby overwriting the map that was previously assigned to this object)
 covid_economic_map<-covid_economic_map+
                        tm_layout(main.title="National Economic Support Measures\nin Response to the Covid-19 Pandemic", 
                                  main.title.position="center",
@@ -522,7 +543,8 @@ covid_economic_map<-covid_economic_map+
                         tm_credits("Map Author: Aditya Ranganath\nDataset Author: Simon Porcher\nCRS: WGS1984\nSource: ICPSR", 
                                    position=c(0.78,0), 
                                    size=0.38)
-  
+
+# Display the amended "covid_economic_map" object
 covid_economic_map 
 
 ```
@@ -589,19 +611,19 @@ The first code block below writes ```covid_economic_map``` as a png file (with d
 
 PNG File
 ```{r h, warning=FALSE, message=FALSE, eval=FALSE}
-# Saves "covid_economic_map" object as png file to working directory with resolution of 1920 by 1080 pixels
+# Saves contents of "covid_economic_map" object as png file to working directory with resolution of 1920 by 1080 pixels
 tmap_save(covid_economic_map, "covid_economic_map_export.png", width=1920, height=1080)
 ```
 
 JPEG File
 ```{r, warning=FALSE, message=FALSE, eval=FALSE}
-# Saves "covid_economic_map" object as jpeg file to working directory with resolution of 1920 by 1080 pixels
+# Saves contents of "covid_economic_map" object as jpeg file to working directory with resolution of 1920 by 1080 pixels
 tmap_save(covid_economic_map, "covid_map.jpeg", width=1920, height=1080)
 ```
 
 PDF File
 ```{r, warning=FALSE, message=FALSE, eval=FALSE}
-# Saves "covid_economic_map" object as pdf file to working directory with resolution of 1920 by 1080 pixels
+# Saves contents of "covid_economic_map" object as pdf file to working directory with resolution of 1920 by 1080 pixels
 tmap_save(covid_economic_map, "covid_map.pdf", width=1920, height=1080)
 ```
 
@@ -649,7 +671,7 @@ It's possible to customize dynamic maps to some degree, but not to the same exte
 It's possible to export dynamic maps as html files. To do so, we use the same ```tmap_save``` function as before, but instead specify an html extension. The html file will be written to your working directory:
 
 ```{r, message=FALSE, eval=FALSE}
-# Writes dynamic map to disk as html file
+# Writes contents of "covid_economic_webmap" (i.e. the dynamic map) to disk as html file
 tmap_save(covid_economic_webmap, "covid_economic_webmap.html")
 ```
 
@@ -662,6 +684,7 @@ knitr::include_graphics('images/webmap_browser.png')
 We can switch back to "plot" mode, at which point *tmap* will go back to making static maps.  
 
 ```{r, message=FALSE, warning=FALSE }
+# Switch back to plot mode
 tmap_mode("plot")
 ```
 
@@ -697,11 +720,9 @@ covid_data_economic_avg<-covid_data_economic %>% group_by(iso) %>%
                                                 summarize(mean_economic=mean(Economic_Measures, na.rm=FALSE))
 
 # Joins dataset containing information on country-level means for "Economic_Measures" index (in "covid_data_economic" object) to spatial dataset of world boundaries (in "country_boundaries" object), based on common 3-Digit ISO Codes and assigns the dataset that results from this join to "covid_economic_spatial_dataset"
-
 covid_economic_spatial_dataset<-full_join(country_boundaries, covid_data_economic_avg, by=c("iso_a3"="iso"))
 
 # Make static map using data in "covid_economic_spatial_dataset" and assigns the map to object called "covid_economic_map"
-
 covid_economic_map<-  
 tm_shape(covid_economic_spatial_dataset)+ # Specifies Spatial Dataset containing data we want to map
   tm_polygons(col="mean_economic",      # Specifies column we want to map
@@ -739,7 +760,6 @@ Our discussion of dynamic webmaps was of course considerably shorter than our di
 ```{r, message=FALSE, warning=FALSE, echo=c(-1,-2)}
 tmap_mode("plot")
 setwd("/Users/adityaranganath/Documents/git_repositories/icpsr_mapping_manual/tutorial_data")
-
 # Imports "Dataset" sheet from ICPSR Excel file into R Studio, and assigns the dataset to an object called "covid_data"
 covid_data<-read_excel("Gov_Responses2Covid19_last.xlsx", sheet="Dataset")
 
