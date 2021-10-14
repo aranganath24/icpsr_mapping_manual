@@ -32,6 +32,8 @@ Bivand, Roger and Colin Rundel. 2020. "rgeos: Interface to Geometry Engine-Open 
 
 Campi, Mercedes and Alessandro Nuvolari. 2020. "Worldwide Index of IPRs in Agriculture (1961-2018): Index_IPR_Agriculture.xlsx." Ann Arbor, MI: Inter-university Consortium for Political and Social Research. [https://doi.org/10.3886/E121001V1-43940](https://doi.org/10.3886/E121001V1-43940). 
 
+Esri. n.d. "Data Classification Methods." Accessed September 28, 2021. [https://pro.arcgis.com/en/pro-app/2.7/help/mapping/layer-properties/data-classification-methods.htm](https://pro.arcgis.com/en/pro-app/2.7/help/mapping/layer-properties/data-classification-methods.htm) 
+
 Frazier, Melanie. “R Color Cheatsheet.” Accessed September 28, 2021. https://www.nceas.ucsb.edu/sites/default/files/2020-04/colorPaletteCheatsheet.pdf.
 
 Grolemund, Garrett. *Hands-on Programming With R*. [https://rstudio-education.github.io/hopr/](https://rstudio-education.github.io/hopr/. )
