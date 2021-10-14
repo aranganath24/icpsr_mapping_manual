@@ -56,10 +56,11 @@ practice-exercises
 practice-exercise-1
 practice-exercise-2
 practice-exercise-3
-sample-code
+sample-code-for-practice-exercises
 sample-code-for-exercise-2
 sample-code-for-exercise-3
 conclusion
 wrapping-up
 useful-reading-and-resources
+final-considerations
 references

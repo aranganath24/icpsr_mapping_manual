@@ -54,17 +54,17 @@ If your interface doesn't look exactly like this, it shouldn't be a problem; we 
   -The "History" tab of the window provides a record of the R commands we've run in a given session. 
 - The **bottom-right** window is the *Files/Plots/Packages/Help/Viewer* window. 
   - The "Files" tab displays our computer's directories and file structures and allows us to navigate through them without having to leave the R environment. 
-  - The "Plots" tab is the tab where we can view any visualizations (including maps) that we create. Within the "Plots" tab, make note of the "Zoom" button, which we can use to enlarge our maps and visualizations if they're too compressed in the "Plots" window. Also, note the "Export" button within the "Plots" tab (next to the "Zoom" button); we can use this button to export the displayed map to a .png or .jpeg file that can be used outside of R Studio (we can also export your visualizations programmatically; we'll cover how to do so later in the tutorial).
+  - The "Plots" tab is the tab where we can view any visualizations (including maps) that we create. Within the "Plots" tab, make note of the "Zoom" button, which we can use to enlarge the display of our maps and visualizations if they're too compressed in the "Plots" window. Also, note the "Export" button within the "Plots" tab (next to the "Zoom" button); we can use this button to export the displayed map to a .png or .jpeg file that can be used outside of R Studio (we can also export our visualizations programmatically; we'll cover how to do so later in the tutorial).
   - The "Packages" tab provides information on which packages have been installed, as well as which packages are currently loaded (more on packages in Section 3.4)
   - The "Help" tab displays documentation for R packages and functions. If we want to know more about how a package or function work, we can simply type a "?" followed by the package or function's name (no space between the question mark and the name) and relevant information will be displayed within the "Help" tab. 
-  - The "Viewer" tab displays HTML output. If we write code that generates an HTML file, we can view it within the "Viewer" tab. This will be relevant in the context of creating and viewing dynamic maps, which we'll cover in the tutorial. 
+  - The "Viewer" tab displays HTML output. If we write code that generates an HTML file, we can view it within the "Viewer" tab. This will be relevant in the context of creating and viewing dynamic maps, which we'll cover in Section 4.7 of the tutorial. 
 - The **bottom-left** window is the *Console/Terminal/Jobs* window. 
-  - The "Console" tab is where we can see our code execute when we run your scripts, as well as certain outputs produced by those scripts. In addition, if there are any error or warning messages, they will be printed to the "Console" tab. We can also type code directly into the console, but as we noted earlier, it is better practice to write our code in a script and then run it from there. 
+  - The "Console" tab is where we can see our code execute when we run our scripts, as well as certain outputs produced by those scripts. In addition, if there are any error or warning messages, they will be printed to the "Console" tab. We can also type code directly into the console, but as we noted earlier, it is better practice to write our code in a script and then run it from there. 
   - The "Terminal", "R Markdown" and "Jobs" tabs  are not relevant for the tutorial. 
 
 ## Install Packages 
 
-R is an open-source programming language for statistical computing that allows users to carry out a wide range of data analysis tasks. One of the big advantages of using R is that it has a very large user community among social scientists and statisticians, who frequently publish packages (which one might think of as workbooks of sorts, containing a well-integrated set of R functions, scripts, data, and documentation) that facilitate certain tasks or implement given procedures. These packages are then shared with the broader community; at this point, anyone who needs to accomplish the tasks to which the package addresses itself can use the package in the context of their own projects. The ability to use published packages considerably simplifies the work of applied social scientists using R; it means that they rarely have to write code entirely from scratch, and can build on the code that others have published in the form of packages. This allows applied researchers to focus on substantive problems, without having to get too bogged down in complicated programming tasks. 
+R is an open-source programming language for statistical computing that allows users to carry out a wide range of data analysis and visualization tasks (among other things). One of the big advantages of using R is that it has a very large user community among social scientists and statisticians, who frequently publish R packages. One might think of packages as workbooks of sorts, which contain a well-integrated set of R functions, scripts, data, and documentation; these "workbooks" are designed to facilitate certain tasks or implement given procedures. These packages are then shared with the broader community, and at this point, anyone who needs to accomplish the tasks to which the package addresses itself can use the package in the context of their own projects. The ability to use published packages considerably simplifies the work of applied social scientists using R; it means that they rarely have to write code entirely from scratch, and can build on the code that others have published in the form of packages. This allows applied researchers to focus on substantive problems, without having to get too bogged down in complicated programming tasks. 
 
 In the context of this tutorial, generating maps of ICPSR data in R would be relatively complex if we had to write all our code from scratch. However, because we are able to make use of mapping and visualization packages written by other researchers, the task is considerably simpler, and will not require any complicated programming. 
 
@@ -76,7 +76,7 @@ In this tutorial, we will use a few packages to accomplish our goal of mapping t
 + *readxl*: The *readxl* package (part of a broader suite of data science packages known as the "tidyverse") will allow us to load the tabular ICPSR dataset, which is provided as an Excel file on the ICPSR landing page, into R Studio. 
 + *dplyr*: The *dplyr* package (also a part of the tidyverse) will allow us to efficiently transform the structure of the initial ICPSR dataset into a more tractable form that is conducive to mapping. 
 
-To install a package in R, we can use the ```install.packages``` function. A function is essentially a programming construct that takes a specified input, runs this input (called an "argument") through a set of procedures, and returns an output. In the code block below, the name of the package we want to install (here, "tmap") is enclosed within quotation marks and placed within parentheses after printing ```install.packages``` Running the code below will effectively download the *tmap* package to your computer:
+To install a package in R, we can use the ```install.packages``` function. A function is essentially a programming construct that takes a specified input, runs this input (called an "argument") through a set of procedures, and returns an output. In the code block below, the name of the package we want to install (here, "tmap") is enclosed within quotation marks and placed within parentheses after printing ```install.packages``` Running the code below will effectively download the *tmap* package to our computer:
 
 ```{r, eval=FALSE}
 # Installs "tmap" package
@@ -86,20 +86,20 @@ install.packages("tmap")
 To run this code in your own R session:
 
 * First, copy the code from the codeblock above (you can copy the code to your clipboard by hovering over the top-right of the code-block and clicking the "copy" icon; you can also highlight the code and copy from the ```Edit``` menu of your browser). 
-* Then, start a new R script within R Studio; if you want to keep a future record of your work, you may want to save it to your computer (perhaps in the same folder to which you downloaded the tutorial data). 
+* Then, start a new R script within R Studio; if you want to keep a future record of your work, you may want to save this script to your computer (perhaps in the same folder to which you downloaded the tutorial data). We can save our scripts via the R Studio "File" menu.
 * Paste the code into the script, highlight it, and click the "Run" button that is just above the *Source* window.
-* Alternatively, instead of copying/pasting, you can manually type in the code from the codeblock into your script. 
+* Alternatively, instead of copying/pasting, you can manually type in the code from the codeblock into your script (manually typing in the code is slower, but often a better way to learn than copy/pasting). 
 * After you've run the code, watch the code execute in the console, and look for a message confirming that the package has been successfully installed. 
 
 Below, we can see how that line of code should look in your script, and how to run it:
 
-```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='The R Studio Interface'}
+```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='Installing tmap in R Script'}
 knitr::include_graphics('images/script.png')
 ```
 
 Please note that you can follow along with the tutorial on your own computers by transferring all of the subsequent codeblocks into your script in just this way. Run each codeblock in your R Studio environment as you go, and you should be able to replicate the entire tutorial on your computer. 
 
-Note that the codeblocks in the tutorial usually have a comment, prefaced by a hash ("#"). When writing code in R (or any other command-line interface) it is good practice to preface one's code with brief comments that describe what a block of code is supposed to do. Writing these comments can allow someone else (or your future self) to read and quickly understand the code more easily than otherwise might be the case. The hash before the comment effectively tells R that the subsequent text is a comment, and should be ignored when running code. If one does not preface the comment with a hash, R wouldn't know to ignore the comment when executing the code, and would throw an error message.
+Note that the codeblocks in the tutorial usually have a comment, prefaced by a hash ("#"). When writing code in R (or any other command-line interface) it is good practice to preface one's code with brief comments that describe what a block of code is doing. Writing these comments can allow someone else (or your future self) to read and quickly understand the code more easily than otherwise might be the case. The hash before the comment effectively tells R that the subsequent text is a comment, and should be ignored when running a script If one does not preface the comment with a hash, R wouldn't know to ignore the comment, and would throw an error message.
 
 Now, let's install the other packages we mentioned above, using the same function: 
 
@@ -116,7 +116,7 @@ All of the packages we need are now installed!
 
 ## Load Libraries 
 
-However, while our packages are installed, they are not yet ready to use. Before we can use our packages, we must load them into our environment. We can think of the process of loading installed packages into a current R environment as analgous to opening up an application on your phone or computer after it has been installed (even if an application is installed, you can't use it until you open it!). To load (i.e. "open") an R package, we pass the name of the package we want to load as an argument to the ```library``` function. For example, if we want to load the "tmap" package into the current environment, we can type:
+However, while our packages are installed, they are not yet ready to use. Before we can use our packages, we must load them into our environment. We can think of the process of loading installed packages into a current R environment as analogous to opening up an application on your phone or computer after it has been installed (even after an application has been installed, you can't use it until you open it!). To load (i.e. "open") an R package, we pass the name of the package we want to load as an argument to the ```library``` function. For example, if we want to load the "tmap" package into the current environment, we can type:
 
 ```{r, results=FALSE, message=FALSE}
 # Loads "tmap" package
@@ -162,7 +162,6 @@ knitr::include_graphics('images/setting_wd_revised.png')
 setwd("/Users/adityaranganath/Documents/git_repositories/icpsr_mapping_manual/tutorial_data")
 ```
 
-Note that you won't want to copy and paste the above codeblock, since your file path will be different; be sure to replace your own file path with the one given above. 
-
+Note that you won't want to copy and paste the above codeblock, since your file path will be different; be sure to replace the file path above with your own. 
 
 

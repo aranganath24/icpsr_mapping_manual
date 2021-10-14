@@ -206,7 +206,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.1" data-path="practice-exercises.html"><a href="practice-exercises.html#practice-exercise-1"><i class="fa fa-check"></i><b>5.1</b> Practice Exercise 1</a></li>
 <li class="chapter" data-level="5.2" data-path="practice-exercises.html"><a href="practice-exercises.html#practice-exercise-2"><i class="fa fa-check"></i><b>5.2</b> Practice Exercise 2</a></li>
 <li class="chapter" data-level="5.3" data-path="practice-exercises.html"><a href="practice-exercises.html#practice-exercise-3"><i class="fa fa-check"></i><b>5.3</b> Practice Exercise 3</a></li>
-<li class="chapter" data-level="5.4" data-path="practice-exercises.html"><a href="practice-exercises.html#sample-code"><i class="fa fa-check"></i><b>5.4</b> Sample Code</a>
+<li class="chapter" data-level="5.4" data-path="practice-exercises.html"><a href="practice-exercises.html#sample-code-for-practice-exercises"><i class="fa fa-check"></i><b>5.4</b> Sample Code for Practice Exercises</a>
 <ul>
 <li class="chapter" data-level="5.4.1" data-path="practice-exercises.html"><a href="practice-exercises.html#sample-code-for-exercise-2"><i class="fa fa-check"></i><b>5.4.1</b> Sample Code for Exercise 2</a></li>
 <li class="chapter" data-level="5.4.2" data-path="practice-exercises.html"><a href="practice-exercises.html#sample-code-for-exercise-3"><i class="fa fa-check"></i><b>5.4.2</b> Sample Code for Exercise 3</a></li>
@@ -216,7 +216,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="6.1" data-path="conclusion.html"><a href="conclusion.html#wrapping-up"><i class="fa fa-check"></i><b>6.1</b> Wrapping Up</a></li>
 <li class="chapter" data-level="6.2" data-path="conclusion.html"><a href="conclusion.html#useful-reading-and-resources"><i class="fa fa-check"></i><b>6.2</b> Useful Reading and Resources</a></li>
-<li class="chapter" data-level="6.3" data-path="conclusion.html"><a href="conclusion.html#references"><i class="fa fa-check"></i><b>6.3</b> References</a></li>
+<li class="chapter" data-level="6.3" data-path="conclusion.html"><a href="conclusion.html#final-considerations"><i class="fa fa-check"></i><b>6.3</b> Final Considerations</a></li>
+<li class="chapter" data-level="6.4" data-path="conclusion.html"><a href="conclusion.html#references"><i class="fa fa-check"></i><b>6.4</b> References</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -298,21 +299,21 @@ Figure 3.1: The R Studio Interface
 <li>The <strong>bottom-right</strong> window is the <em>Files/Plots/Packages/Help/Viewer</em> window.
 <ul>
 <li>The “Files” tab displays our computer’s directories and file structures and allows us to navigate through them without having to leave the R environment.</li>
-<li>The “Plots” tab is the tab where we can view any visualizations (including maps) that we create. Within the “Plots” tab, make note of the “Zoom” button, which we can use to enlarge our maps and visualizations if they’re too compressed in the “Plots” window. Also, note the “Export” button within the “Plots” tab (next to the “Zoom” button); we can use this button to export the displayed map to a .png or .jpeg file that can be used outside of R Studio (we can also export your visualizations programmatically; we’ll cover how to do so later in the tutorial).</li>
+<li>The “Plots” tab is the tab where we can view any visualizations (including maps) that we create. Within the “Plots” tab, make note of the “Zoom” button, which we can use to enlarge the display of our maps and visualizations if they’re too compressed in the “Plots” window. Also, note the “Export” button within the “Plots” tab (next to the “Zoom” button); we can use this button to export the displayed map to a .png or .jpeg file that can be used outside of R Studio (we can also export our visualizations programmatically; we’ll cover how to do so later in the tutorial).</li>
 <li>The “Packages” tab provides information on which packages have been installed, as well as which packages are currently loaded (more on packages in Section 3.4)</li>
 <li>The “Help” tab displays documentation for R packages and functions. If we want to know more about how a package or function work, we can simply type a “?” followed by the package or function’s name (no space between the question mark and the name) and relevant information will be displayed within the “Help” tab.</li>
-<li>The “Viewer” tab displays HTML output. If we write code that generates an HTML file, we can view it within the “Viewer” tab. This will be relevant in the context of creating and viewing dynamic maps, which we’ll cover in the tutorial.</li>
+<li>The “Viewer” tab displays HTML output. If we write code that generates an HTML file, we can view it within the “Viewer” tab. This will be relevant in the context of creating and viewing dynamic maps, which we’ll cover in Section 4.7 of the tutorial.</li>
 </ul></li>
 <li>The <strong>bottom-left</strong> window is the <em>Console/Terminal/Jobs</em> window.
 <ul>
-<li>The “Console” tab is where we can see our code execute when we run your scripts, as well as certain outputs produced by those scripts. In addition, if there are any error or warning messages, they will be printed to the “Console” tab. We can also type code directly into the console, but as we noted earlier, it is better practice to write our code in a script and then run it from there.</li>
+<li>The “Console” tab is where we can see our code execute when we run our scripts, as well as certain outputs produced by those scripts. In addition, if there are any error or warning messages, they will be printed to the “Console” tab. We can also type code directly into the console, but as we noted earlier, it is better practice to write our code in a script and then run it from there.</li>
 <li>The “Terminal”, “R Markdown” and “Jobs” tabs are not relevant for the tutorial.</li>
 </ul></li>
 </ul>
 </div>
 <div id="install-packages" class="section level2" number="3.4">
 <h2><span class="header-section-number">3.4</span> Install Packages</h2>
-<p>R is an open-source programming language for statistical computing that allows users to carry out a wide range of data analysis tasks. One of the big advantages of using R is that it has a very large user community among social scientists and statisticians, who frequently publish packages (which one might think of as workbooks of sorts, containing a well-integrated set of R functions, scripts, data, and documentation) that facilitate certain tasks or implement given procedures. These packages are then shared with the broader community; at this point, anyone who needs to accomplish the tasks to which the package addresses itself can use the package in the context of their own projects. The ability to use published packages considerably simplifies the work of applied social scientists using R; it means that they rarely have to write code entirely from scratch, and can build on the code that others have published in the form of packages. This allows applied researchers to focus on substantive problems, without having to get too bogged down in complicated programming tasks.</p>
+<p>R is an open-source programming language for statistical computing that allows users to carry out a wide range of data analysis and visualization tasks (among other things). One of the big advantages of using R is that it has a very large user community among social scientists and statisticians, who frequently publish R packages. One might think of packages as workbooks of sorts, which contain a well-integrated set of R functions, scripts, data, and documentation; these “workbooks” are designed to facilitate certain tasks or implement given procedures. These packages are then shared with the broader community, and at this point, anyone who needs to accomplish the tasks to which the package addresses itself can use the package in the context of their own projects. The ability to use published packages considerably simplifies the work of applied social scientists using R; it means that they rarely have to write code entirely from scratch, and can build on the code that others have published in the form of packages. This allows applied researchers to focus on substantive problems, without having to get too bogged down in complicated programming tasks.</p>
 <p>In the context of this tutorial, generating maps of ICPSR data in R would be relatively complex if we had to write all our code from scratch. However, because we are able to make use of mapping and visualization packages written by other researchers, the task is considerably simpler, and will not require any complicated programming.</p>
 <p>In this tutorial, we will use a few packages to accomplish our goal of mapping tabular ICPSR data. They are:</p>
 <ul>
@@ -322,26 +323,26 @@ Figure 3.1: The R Studio Interface
 <li><em>readxl</em>: The <em>readxl</em> package (part of a broader suite of data science packages known as the “tidyverse”) will allow us to load the tabular ICPSR dataset, which is provided as an Excel file on the ICPSR landing page, into R Studio.</li>
 <li><em>dplyr</em>: The <em>dplyr</em> package (also a part of the tidyverse) will allow us to efficiently transform the structure of the initial ICPSR dataset into a more tractable form that is conducive to mapping.</li>
 </ul>
-<p>To install a package in R, we can use the <code>install.packages</code> function. A function is essentially a programming construct that takes a specified input, runs this input (called an “argument”) through a set of procedures, and returns an output. In the code block below, the name of the package we want to install (here, “tmap”) is enclosed within quotation marks and placed within parentheses after printing <code>install.packages</code> Running the code below will effectively download the <em>tmap</em> package to your computer:</p>
+<p>To install a package in R, we can use the <code>install.packages</code> function. A function is essentially a programming construct that takes a specified input, runs this input (called an “argument”) through a set of procedures, and returns an output. In the code block below, the name of the package we want to install (here, “tmap”) is enclosed within quotation marks and placed within parentheses after printing <code>install.packages</code> Running the code below will effectively download the <em>tmap</em> package to our computer:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="preliminaries-and-set-up.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Installs &quot;tmap&quot; package</span></span>
 <span id="cb1-2"><a href="preliminaries-and-set-up.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;tmap&quot;</span>)</span></code></pre></div>
 <p>To run this code in your own R session:</p>
 <ul>
 <li>First, copy the code from the codeblock above (you can copy the code to your clipboard by hovering over the top-right of the code-block and clicking the “copy” icon; you can also highlight the code and copy from the <code>Edit</code> menu of your browser).</li>
-<li>Then, start a new R script within R Studio; if you want to keep a future record of your work, you may want to save it to your computer (perhaps in the same folder to which you downloaded the tutorial data).</li>
+<li>Then, start a new R script within R Studio; if you want to keep a future record of your work, you may want to save this script to your computer (perhaps in the same folder to which you downloaded the tutorial data). We can save our scripts via the R Studio “File” menu.</li>
 <li>Paste the code into the script, highlight it, and click the “Run” button that is just above the <em>Source</em> window.</li>
-<li>Alternatively, instead of copying/pasting, you can manually type in the code from the codeblock into your script.</li>
+<li>Alternatively, instead of copying/pasting, you can manually type in the code from the codeblock into your script (manually typing in the code is slower, but often a better way to learn than copy/pasting).</li>
 <li>After you’ve run the code, watch the code execute in the console, and look for a message confirming that the package has been successfully installed.</li>
 </ul>
 <p>Below, we can see how that line of code should look in your script, and how to run it:</p>
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-3"></span>
-<img src="images/script.png" alt="The R Studio Interface" width="100%" />
+<img src="images/script.png" alt="Installing tmap in R Script" width="100%" />
 <p class="caption">
-Figure 3.2: The R Studio Interface
+Figure 3.2: Installing tmap in R Script
 </p>
 </div>
 <p>Please note that you can follow along with the tutorial on your own computers by transferring all of the subsequent codeblocks into your script in just this way. Run each codeblock in your R Studio environment as you go, and you should be able to replicate the entire tutorial on your computer.</p>
-<p>Note that the codeblocks in the tutorial usually have a comment, prefaced by a hash (“#”). When writing code in R (or any other command-line interface) it is good practice to preface one’s code with brief comments that describe what a block of code is supposed to do. Writing these comments can allow someone else (or your future self) to read and quickly understand the code more easily than otherwise might be the case. The hash before the comment effectively tells R that the subsequent text is a comment, and should be ignored when running code. If one does not preface the comment with a hash, R wouldn’t know to ignore the comment when executing the code, and would throw an error message.</p>
+<p>Note that the codeblocks in the tutorial usually have a comment, prefaced by a hash (“#”). When writing code in R (or any other command-line interface) it is good practice to preface one’s code with brief comments that describe what a block of code is doing. Writing these comments can allow someone else (or your future self) to read and quickly understand the code more easily than otherwise might be the case. The hash before the comment effectively tells R that the subsequent text is a comment, and should be ignored when running a script If one does not preface the comment with a hash, R wouldn’t know to ignore the comment, and would throw an error message.</p>
 <p>Now, let’s install the other packages we mentioned above, using the same function:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="preliminaries-and-set-up.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Installs remainder of necessary packages to complete exercise</span></span>
 <span id="cb2-2"><a href="preliminaries-and-set-up.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;sf&quot;</span>)</span>
@@ -353,7 +354,7 @@ Figure 3.2: The R Studio Interface
 </div>
 <div id="load-libraries" class="section level2" number="3.5">
 <h2><span class="header-section-number">3.5</span> Load Libraries</h2>
-<p>However, while our packages are installed, they are not yet ready to use. Before we can use our packages, we must load them into our environment. We can think of the process of loading installed packages into a current R environment as analgous to opening up an application on your phone or computer after it has been installed (even if an application is installed, you can’t use it until you open it!). To load (i.e. “open”) an R package, we pass the name of the package we want to load as an argument to the <code>library</code> function. For example, if we want to load the “tmap” package into the current environment, we can type:</p>
+<p>However, while our packages are installed, they are not yet ready to use. Before we can use our packages, we must load them into our environment. We can think of the process of loading installed packages into a current R environment as analogous to opening up an application on your phone or computer after it has been installed (even after an application has been installed, you can’t use it until you open it!). To load (i.e. “open”) an R package, we pass the name of the package we want to load as an argument to the <code>library</code> function. For example, if we want to load the “tmap” package into the current environment, we can type:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="preliminaries-and-set-up.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Loads &quot;tmap&quot; package</span></span>
 <span id="cb3-2"><a href="preliminaries-and-set-up.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tmap)</span></code></pre></div>
 <p>At this point, the full suite of the <em>tmap</em> package’s functionality is available for us to use.</p>
@@ -386,7 +387,7 @@ Figure 3.3: Setting Working Directory Via Menus
 <p><strong>Alternatively</strong>, if you are familiar with the concept of file paths, and know the file path to the folder containing the downloaded ICPSR dataset, you can set the working directly using the <code>setwd()</code> function, where the argument to the function is the relevant file path enclosed in quotation marks. For example:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="preliminaries-and-set-up.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sets working directory </span></span>
 <span id="cb5-2"><a href="preliminaries-and-set-up.html#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;/Users/adityaranganath/Documents/git_repositories/icpsr_mapping_manual/tutorial_data&quot;</span>)</span></code></pre></div>
-<p>Note that you won’t want to copy and paste the above codeblock, since your file path will be different; be sure to replace your own file path with the one given above.</p>
+<p>Note that you won’t want to copy and paste the above codeblock, since your file path will be different; be sure to replace the file path above with your own.</p>
 
 </div>
 </div>
