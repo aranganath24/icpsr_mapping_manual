@@ -26,6 +26,11 @@ The choropleth maps we generated were fairly basic, and could be refined or made
 
 Finally, our focus in this tutorial was on generated choropleth world maps using ICPSR datasets. Of course, ICPSR has data at different geographic scales, and has a particularly large collection of United States-specific data. If you're interested in making a map of US-specific ICPSR data, the *usaboundaries* package allows you to import a variety of spatial datasets corresponding to different US geographic divisions (i.e. state, county, zip codes etc.). You could join tabular ICPSR data to these spatial datasets in order to visualize them on a map, using a process that is similar to the one presented in this tutorial. Documentation for the *usaboundaries* package is available [here](https://cran.r-project.org/web/packages/USAboundaries/USAboundaries.pdf). It's important to note, however, that in certain cases, particularly when working with spatial data at finer scales, privacy and disclosure concerns (that do not arise in the context of aggregate global data) might become salient. It is therefore important to be sensitive to the ethical issues that might arise in the context of a given spatial project. If you would like to learn more about such issues, Haley et al (2016) provide a useful guide in the context of a discussion of geographically-explicit health data in public health studies. 
 
+## Acknowledgement
+
+The repository used to initially create this teaching resource was generated from a bookdown template that is available here: 
+[https://github.com/jtr13/bookdown-template](https://github.com/jtr13/bookdown-template). 
+
 ## References
 
 Bivand, Roger and Colin Rundel. 2020. "rgeos: Interface to Geometry Engine-Open Source ('GEOS')". *R Package Version 0.5-5.* [https://CRAN.R-project.org/package=rgeos](https://CRAN.R-project.org/package=rgeos). 
