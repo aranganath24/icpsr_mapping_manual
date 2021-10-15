@@ -217,7 +217,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.1" data-path="conclusion.html"><a href="conclusion.html#wrapping-up"><i class="fa fa-check"></i><b>6.1</b> Wrapping Up</a></li>
 <li class="chapter" data-level="6.2" data-path="conclusion.html"><a href="conclusion.html#useful-reading-and-resources"><i class="fa fa-check"></i><b>6.2</b> Useful Reading and Resources</a></li>
 <li class="chapter" data-level="6.3" data-path="conclusion.html"><a href="conclusion.html#final-considerations"><i class="fa fa-check"></i><b>6.3</b> Final Considerations</a></li>
-<li class="chapter" data-level="6.4" data-path="conclusion.html"><a href="conclusion.html#references"><i class="fa fa-check"></i><b>6.4</b> References</a></li>
+<li class="chapter" data-level="6.4" data-path="conclusion.html"><a href="conclusion.html#acknowledgement"><i class="fa fa-check"></i><b>6.4</b> Acknowledgement</a></li>
+<li class="chapter" data-level="6.5" data-path="conclusion.html"><a href="conclusion.html#references"><i class="fa fa-check"></i><b>6.5</b> References</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -267,8 +268,13 @@ Figure 6.2: Map Based on Variable in ICPSR Dataset
 <h2><span class="header-section-number">6.3</span> Final Considerations</h2>
 <p>Finally, our focus in this tutorial was on generated choropleth world maps using ICPSR datasets. Of course, ICPSR has data at different geographic scales, and has a particularly large collection of United States-specific data. If you’re interested in making a map of US-specific ICPSR data, the <em>usaboundaries</em> package allows you to import a variety of spatial datasets corresponding to different US geographic divisions (i.e. state, county, zip codes etc.). You could join tabular ICPSR data to these spatial datasets in order to visualize them on a map, using a process that is similar to the one presented in this tutorial. Documentation for the <em>usaboundaries</em> package is available <a href="https://cran.r-project.org/web/packages/USAboundaries/USAboundaries.pdf">here</a>. It’s important to note, however, that in certain cases, particularly when working with spatial data at finer scales, privacy and disclosure concerns (that do not arise in the context of aggregate global data) might become salient. It is therefore important to be sensitive to the ethical issues that might arise in the context of a given spatial project. If you would like to learn more about such issues, Haley et al (2016) provide a useful guide in the context of a discussion of geographically-explicit health data in public health studies.</p>
 </div>
-<div id="references" class="section level2" number="6.4">
-<h2><span class="header-section-number">6.4</span> References</h2>
+<div id="acknowledgement" class="section level2" number="6.4">
+<h2><span class="header-section-number">6.4</span> Acknowledgement</h2>
+<p>The repository used to initially create this teaching resource was generated from a bookdown template that is available here:
+<a href="https://github.com/jtr13/bookdown-template">https://github.com/jtr13/bookdown-template</a>.</p>
+</div>
+<div id="references" class="section level2" number="6.5">
+<h2><span class="header-section-number">6.5</span> References</h2>
 <p>Bivand, Roger and Colin Rundel. 2020. “rgeos: Interface to Geometry Engine-Open Source (‘GEOS’)”. <em>R Package Version 0.5-5.</em> <a href="https://CRAN.R-project.org/package=rgeos">https://CRAN.R-project.org/package=rgeos</a>.</p>
 <p>Campi, Mercedes and Alessandro Nuvolari. 2020. “Worldwide Index of IPRs in Agriculture (1961-2018): Index_IPR_Agriculture.xlsx.” Ann Arbor, MI: Inter-university Consortium for Political and Social Research. <a href="https://doi.org/10.3886/E121001V1-43940">https://doi.org/10.3886/E121001V1-43940</a>.</p>
 <p>Esri. n.d. “Data Classification Methods.” Accessed September 28, 2021. <a href="https://pro.arcgis.com/en/pro-app/2.7/help/mapping/layer-properties/data-classification-methods.htm">https://pro.arcgis.com/en/pro-app/2.7/help/mapping/layer-properties/data-classification-methods.htm</a></p>
