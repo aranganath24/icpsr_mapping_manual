@@ -1,6 +1,6 @@
 # Practice Exercises
 
-In this section you'll have the opportunity to apply what you learned in Section 4, and practice some of your skills. The following three exercises are arrayed in order of ascending difficulty. 
+In this section you'll have the opportunity to apply what you learned in the tutorial provided in Section 4, and practice some of your skills. The following three exercises are arrayed in order of increasing difficulty. 
 
 ## Practice Exercise 1
 
@@ -16,13 +16,15 @@ What spatial patterns do you notice in this map? Are there any patterns of clust
 
 Use the same dataset we used in Section 4, but this time please make an interactive map of the country-level average of the "Rigidity_Public_Health" variable. 
 
+What spatial patterns do you notice in this map? Are there any patterns of clustering or dispersion that you find interesting? Do you notice anything surprising or unexpected? And, what future research questions might this map suggest? 
+
 ## Practice Exercise 3
 
-Refer to the following [dataset](https://www.openicpsr.org/openicpsr/project/121001/version/V1/view?path=/openicpsr/121001/fcr:versions/V1/Index_IPR_Agriculture.xlsx&type=file), entitled "Worldwide Index of IPRs [Intellectual Property Rights] in Agriculture, 1961-2018", which is archived on ICPSR and authored by Mercedes Campi.
+Refer to the following [dataset](https://www.openicpsr.org/openicpsr/project/121001/version/V1/view?path=/openicpsr/121001/fcr:versions/V1/Index_IPR_Agriculture.xlsx&type=file), entitled "Worldwide Index of IPRs [Intellectual Property Rights] in Agriculture, 1961-2018", which is archived on ICPSR and authored by Mercedes Campi amd Alessandro Nuvolari.
 
 Download the dataset, and make a map that shows country-level variation in the "Total_Index" variable in the year 2018. 
 
-## Sample Code
+## Sample Code for Practice Exercises
 
 The sample code in this section assumes you've already loaded all of the packages discussed in the tutorial, and have correctly set your working directory to the directory in which the dataset(s) are located. 
 
@@ -43,35 +45,35 @@ library(dplyr)
 tmap_mode("plot")
 setwd("/Users/adityaranganath/Documents/git_repositories/icpsr_mapping_manual/tutorial_data")
 
-# Imports "Dataset" sheet from ICPSR Excel file into R Studio, and assigns the dataset to an object called "covid_data"
+# Import "Dataset" sheet from ICPSR Excel file into R Studio, and assign the dataset to an object called "covid_data"
 covid_data<-read_excel("Gov_Responses2Covid19_last.xlsx", sheet="Dataset")
 
-# Brings spatial dataset of country boundaries into R environment using the rnaturalearth package
+# Brings spatial dataset of country boundaries into R environment using the rnaturalearth package and assigns it to object named "country_boundaries"
 country_boundaries<-ne_countries(scale="medium", returnclass="sf")
 
-# Deletes Antarctica from spatial dataset in "country_boundaries" object
+# Deletes Antarctica from "country_boundaries" object
 country_boundaries<-country_boundaries %>% filter(iso_a3 !="ATA")
 
-# Selects "iso" and "Rigidity_Public_Health" variables from ICPSR Dataset, and assigns this new dataset to "covid_data_public_health" object
+# Selects "iso" and "Rigidity_Public_Health" variables from ICPSR Covid Dataset, and assigns this dataset to new object named "covid_data_public_health" 
 covid_data_public_health<-covid_data %>% 
-  select(iso, Rigidity_Public_Health) 
+                          select(iso, Rigidity_Public_Health) 
 
-# Changes class of "Rigidity_Public_Health" field from character to numeric
+# Changes class of "Rigidity_Public_Health" field in "covid_data_public_health" from character to numeric
 covid_data_public_health$Rigidity_Public_Health<-as.numeric(covid_data_public_health$Rigidity_Public_Health)
 
-# Calculate Country-Level Averages for "Rigidity_Public_Health" Index, and then assign this new dataset of country-level averages to a new object called "covid_data_PH_avg". 
+# Calculates country-level averages for "Rigidity_Public_Health" index, and then assigns this dataset of country-level averages to a new object called "covid_data_PH_avg". 
 covid_data_PH_avg<-covid_data_public_health %>% group_by(iso) %>% 
                                             summarize(mean_public_health=mean(Rigidity_Public_Health, na.rm=FALSE))
 
-# Join dataset with country-level means for "Rigidity_Public_Health" index (in "covid_data_PH_avg" object) to spatial dataset of world boundaries (in "country_boundaries" object), based on common 3-Digit ISO Codes; then relocate "name" and "mean_economic" fields to the beginning of the dataset so that they're displayed on the map
+# Join dataset with country-level means for "Rigidity_Public_Health" index ("covid_data_PH_avg" ) to spatial dataset of world boundaries ("country_boundaries"), based on common 3-Digit ISO Codes; then relocate "name" and "mean_economic" fields to the beginning of the dataset so that they're displayed on the map
 worldmap_covid_data_PH<-full_join(country_boundaries, covid_data_PH_avg, by=c("iso_a3"="iso")) %>% 
-                                relocate(name, mean_public_health)
+                                  relocate(name, mean_public_health)
 
-# Make map and assigns to object called "covid_PH_webmap"
+# Make map and assign to new object called "covid_PH_webmap"
 covid_PH_webmap<-tm_shape(worldmap_covid_data_PH)+
-                            tm_polygons(col="mean_public_health", n=5, style="jenks", palette="Oranges")
+                  tm_polygons(col="mean_public_health", n=5, style="jenks", palette="Oranges")
 
-# Set tmap mode to "view
+# Set tmap mode to "view"
 tmap_mode("view")
 
 # display map object in view mode
@@ -84,31 +86,32 @@ covid_PH_webmap
 tmap_mode("plot")
 setwd("/Users/adityaranganath/Documents/git_repositories/icpsr_mapping_manual/tutorial_data")
 
-#Load Tabular Data
+# Load Tabular Data and assign to object named "IPR_data" 
 IPR_data<-read_excel("Index_IPR_Agriculture.xlsx", sheet="Total_Index")
 View(IPR_data)
 
-# Load Spatial Data
+# Load Spatial Data and assign to object named "country_boundaries" 
 country_boundaries<-ne_countries(scale="medium", returnclass="sf")
 View(country_boundaries)
 
-# Delete Antarctica
+# Delete Antarctica from "country_boundaries" 
 country_boundaries<-country_boundaries %>% filter(iso_a3 !="ATA")
 
-# Check class of Index
+# Check class of Index field in "IPR_data" and confirm it's numeric
 class(IPR_data$`Total Index`)
 
-# Select 2015 Observations
+# Select 2018 Observations from "IPR_data" and assign to new object named "IPR_data_2018"
 IPR_data_2018<-IPR_data %>% filter(year==2018)
-View(IPR_data_2018)
 
-# Join Datasets
-worldmap_IPR_2018<-full_join(country_boundaries, IPR_data_2018, by=c("iso_a3"="Country_code")) %>% 
-                    relocate(Country, 'Total Index')
-View(worldmap_IPR_2018)
+# View "IPR_data_2018" in R Studio Data Viewer
+View(IPR_data_2018) 
 
-# Make Map
-IPR_2018_map<-tm_shape(worldmap_IPR_2018)+
+# Join "Datasets"IPR_data-2018" to "country_boundaries" based on common ISO codes, and then assign the product of the join to a new object named "spatial_IPR_2018."
+spatial_IPR_2018<-full_join(country_boundaries, IPR_data_2018, by=c("iso_a3"="Country_code")) %>% 
+                  relocate(Country, 'Total Index')
+
+# Make map of variation in agricultural IPR index in 2018, and assign to new object named "IPR_2018_map"
+IPR_2018_map<-tm_shape(spatial_IPR_2018)+
                 tm_polygons(col="Total Index",
                             n=6, 
                             style="jenks", 
@@ -125,7 +128,7 @@ IPR_2018_map<-tm_shape(worldmap_IPR_2018)+
                 tm_credits("Map Author: YOUR NAME\nDataset Author: Mercedes Campi\nCRS:WGS84\nSource:ICPSR",
                            position=c(0.78,0),
                            size=0.38)
-# Open Map Object
+# Open "IPR_2018_map" 
 
 IPR_2018_map
 
