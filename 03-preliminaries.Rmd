@@ -2,7 +2,7 @@
 
 ## Data 
 
-The ICPSR data we will be mapping in this tutorial comes from a dataset archived on [OPENICPSR](https://www.openicpsr.org/openicpsr/). In particular, the dataset we will be working with is entitled "Governments' Responses to COVID-19", and was collected by Simon Porcher, a researcher at the University of Paris. The dataset's ICPSR landing page can be found [here](https://www.openicpsr.org/openicpsr/project/119061/version/V6/view), and the full citation information is below: 
+The ICPSR data we will be mapping in this tutorial comes from a dataset archived on [openICPSR](https://www.openicpsr.org/openicpsr/). In particular, the dataset we will be working with is entitled "Governments' Responses to COVID-19", and was collected by Simon Porcher, a researcher at the University of Paris. The dataset's ICPSR landing page can be found [here](https://www.openicpsr.org/openicpsr/project/119061/version/V6/view), and the full citation information is below: 
 
 Porcher, Simon. Governments’ Responses to COVID-19 (Response2covid19). Ann Arbor, MI: Inter-university Consortium for Political and Social Research [distributor], 2020-11-08. [https://doi.org/10.3886/E119061V6](https://doi.org/10.3886/E119061V6). 
 
