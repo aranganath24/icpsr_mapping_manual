@@ -54,7 +54,7 @@ As we noted above, ```read_excel``` is the function used to bring in Excel sprea
 
 If the importing process is successful, we will see the dataset print out into our R console. It will look something like this: 
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, comment=""}
 setwd("/Users/adityaranganath/Documents/git_repositories/icpsr_mapping_manual/tutorial_data")
 # Loads ICPSR data into R Studio
 read_excel("Gov_Responses2Covid19_last.xlsx", sheet="Dataset")
@@ -92,7 +92,7 @@ The code above imports the dataset of interest using the code we used above (```
 
 We can confirm that the ICPSR dataset we imported has been assigned to an object named ```covid_data``` by typing and running ```covid_data``` in our script (or simply typing it into the console), and seeing that it prints the ICPSR dataset to our console:
 
-```{r}
+```{r, comment=""}
 # Prints contents of "covid_data" object to the console
 covid_data
 ```
@@ -151,7 +151,7 @@ knitr::include_graphics('images/geometry.png')
 
 We can use the information in the "geometry" column to draw georeferenced polygons for each row in the spatial dataset, which will yield a world map! To translate the information in the geometry tab into a cartographic representation, we'll use a package called *tmap*. In particular, we'll use the ```tm_shape``` and ```tm_polygons``` functions from *tmap*, which are connected by a plus sign (+). The argument passed to the ```tm_shape``` function is the name of the object associated with the spatial dataset (```country_boundaries```, defined above). In addition, the ```tm_polygons``` function indicates that the spatial data is to be represented using polygons (as opposed to alternatives such as lines or points), and does not require any arguments. When we type in and run the following code from our script, the result is a map that is rendered based on the information in the "geometry" column of ```country_boundaries```:
 
-```{r, fig.asp=0.5, echo=-1}
+```{r, fig.asp=0.5, echo=-1, message=FALSE}
 tmap_mode("plot")
 # maps geographic features (i.e. countries) of "country_boundaries" using tmap package functions
 tm_shape(country_boundaries)+
@@ -168,7 +168,7 @@ worldmap<-tm_shape(country_boundaries)+
 
 Having assigned the map to the ```worldmap``` object, we can bring up the map whenever we want by simply calling the ```worldmap``` object (i.e. printing ```worldmap``` and running it from our script)
 
-```{r, fig.asp=0.5, echo=-1}
+```{r, fig.asp=0.5, echo=-1, message=FALSE}
 tmap_mode("plot")
 # displays contents of "worldmap" object (i.e. a country-level map generated from the "country_boundaries" spatial dataset)
 worldmap
@@ -214,7 +214,7 @@ worldmap<-tm_shape(country_boundaries)+
 
 Now, let's view our updated map:
 
-```{r, fig.asp=0.5, echo=-1}
+```{r, fig.asp=0.5, echo=-1, message=FALSE}
 tmap_mode("plot")
 # Display contents of updated "worldmap" object
 worldmap
@@ -232,7 +232,7 @@ Before we can take those steps, however, we need to process the ICPSR tabular da
 
 When working with data in R, it is often useful to get a quick sense of a given dataset's dimensions, which we can do using the ```dim``` function. Below, we pass ```covid_data```  to the ```dim``` function:
 
-```{r}
+```{r, comment=""}
 # ascertain dimensions of "covid_data" object
 dim(covid_data)
 ```
@@ -249,7 +249,7 @@ covid_data_economic<-covid_data %>%
 
 The above code can be translated as follows: "Start with ```covid_data```, and then (``` %>% ```) keep the 'iso' and 'Economic_Measures' columns but discard everything else (````select(iso, Economic_Measures)```). Assign this new 2-column dataset to a new object called ```covid_data_economic``` (```covid_data_economic<-```)." We can take a look at this smaller dataset that was extracted from the original dataset by passing the ```covid_data_economic``` object as an argument to the now-familiar ```View``` function:
 
-```{r}
+```{r, comment=""}
 # View contents of "covid_data_economic" object in R Studio data viewer
 View(covid_data_economic)
 ```
@@ -273,7 +273,7 @@ We can go back to the ```covid_data``` dataset anytime we need, but for now we'l
 
 Recall that the data we want to map is contained within the "Economic_Measures" column of ```covid_data_economic```. R has six fundamental "types" of data: character, numeric, integer, logical, and complex. The code below extracts the "Economic_Measures" column from the dataset (placing a dollar sign in between the name of the object to which a dataset has been assigned, and the name of a column within that dataset, as in ```covid_data_economic$Economic_Measures```, is a way of isolating and extracting a column from a larger dataset), and then passes it to the ```class``` function to identify the class of the data in the "Economic_Measures" field. 
 
-```{r}
+```{r, comment=""}
 # Find the class of the "Economic_Measures" field within the "covid_data_economic" dataset
 class(covid_data_economic$Economic_Measures)
 ```
@@ -289,7 +289,7 @@ covid_data_economic$Economic_Measures<-as.numeric(covid_data_economic$Economic_M
 
 In the code above, the expression to the right of the assignment operator extracts  the "Economic_Measures" column from the the ```covid_data_economic``` dataset (```covid_data_economic$Economic_Measures```), and then changes this column's class to numeric by passing it as an argument to the ```as.numeric``` function. The assignment operator then replaces the old version of the "Economic_Measures" column (encoded as character) within ```covid_data_economic```, with this new (numeric) version of the "Economic_Measures" column. At this point, the "Economic_Measures" column in ```covid_data_economic```  is numeric; we can confirm this by passing that column through the ```class``` function once again:
 
-```{r}
+```{r, comment=""}
 # Checks the class of the updated "Economic_Measures" field
 class(covid_data_economic$Economic_Measures)
 ```
@@ -332,7 +332,7 @@ knitr::include_graphics('images/mean_economic.png')
 
 Now that we have a new dataset (```covid_data_economic_avg```) containing the country-level average of the "Economic_Measures" index, it can be useful to get a sense of how this data (which is the data we'd like to map) is distributed. We can easily do this by using the ```summary``` function, which returns a table of summary statistics for a specified variable. The following code produces summary statistics for the "mean_economic" variable contained in ```covid_data_economic_average``` (which is referred to as ```covid_data_economic$mean_economic```):
 
-```{r}
+```{r, comment=""}
 # Produces table of summary statistics for "mean_economic" variable contained in "covid_data_economic" dataset
 summary(covid_data_economic_avg$mean_economic)
 ```
