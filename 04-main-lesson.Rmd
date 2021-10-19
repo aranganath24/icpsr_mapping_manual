@@ -64,7 +64,7 @@ Note that when printing a dataset to the console, R Studio will only display the
 
 The code above successfully imported the data into R Studio; however, in order to easily work with the data in a scripting environment, we need to assign the data to something called an object. 
 
-To understand the concept of object assignment, consider the following simple example
+To understand the concept of object assignment, consider the following simple example: 
 
 ```{r}
 # assign value 5 to new object named x
@@ -73,7 +73,7 @@ x<-5
 
 In the code above, we use R's assignment operator, ```<-```, to assign the value 5 to an object named "x." Now that an object named "x" has been created and assigned the value 5, printing "x" in our console (or printing "x" in our script and running it) will return the value 5: 
 
-```{r}
+```{r, comment=""}
 # View contents of object x
 x
 ```
