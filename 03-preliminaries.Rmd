@@ -40,7 +40,7 @@ The Appendix to Garret Grolemund's book *Hands on Programming with R* provides a
 
 Now that we've installed and opened up R Studio, let's familiarize ourselves with the R Studio interface. When we open up R Studio, we'll see a window open that looks something like this:
 
-```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='The R Studio Interface'}
+```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='The R Studio Interface', fig.alt='R Studio Opened up On Desktop with Clean Interface Displayed'}
 knitr::include_graphics('images/rstudio_window_revised.png')
 ```
 
