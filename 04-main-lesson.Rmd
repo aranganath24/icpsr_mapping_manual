@@ -30,13 +30,13 @@ As a result, we'll have to import this dataset into R Studio using a function de
 
 Before using the ```read_excel``` function to bring the data into our R Studio environment, it could be helpful to inspect the data outside of the R environment, and determine whether the dataset has any features that we have to account for when loading it into our R environment. When we open the downloaded spreadsheet, it will look something like this:
 
-```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='ICPSR Dataset in Spreadsheet: Description Tab'}
+```{r, echo=FALSE, results='asis', out.width='100%', fig.cap="ICPSR dataset in spreadsheet with description tab open", fig.alt="Screenshot of dataset's description tab opened in spreadsheet software; several variable definitions and descriptions are visible"}
 knitr::include_graphics('images/excel_open.png')
 ```
 
 Note that immediately after opening the spreadsheet, we will land on its first tab (or "sheet"), which is titled "Description". This part of the spreadsheet effectively functions as a data codebook, which we can look through to understand the dataset's various variables and and assess how they were measured. To open up the actual dataset, we can toggle to the "Dataset" tab by pressing the corresponding button on the bottom-left of the spreadsheet (highlighted in red below): 
 
-```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='ICPSR Dataset in Spreadsheet: Dataset Tab'}
+```{r, echo=FALSE, results='asis', out.width='100%', fig.cap="ICPSR dataset open in spreadsheet software with dataset tab open", fig.alt="Screenshot of  dataset open in spreadsheet software with data displayed; dataset tab is active with with red box drawn around tabs on bottom of spreadsheet to show how to toggle between different sheets in spreadsheet software"}
 knitr::include_graphics('images/excel_tabs.png')
 ```
 
@@ -108,7 +108,7 @@ View(covid_data)
 
 This will open up the dataset in R Studio's data viewer within a separate tab in the "Source" window. Within your R Studio environment, the result of running ```View(covid_data)``` will look something like this (dataset outlined in red):
 
-```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='Viewing ICPSR Dataset in R Studio Data Viewer'}
+```{r, echo=FALSE, results='asis', out.width='100%', fig.cap="Viewing ICPSR Dataset in R Studio Data Viewer", fig.alt="Screenshot of R Studio interface with covid_data object's contents displayed in R Studio Data Viewer; data viewer is outlined with a red rectangle"}
 knitr::include_graphics('images/viewdata.png')
 ```
 
@@ -145,7 +145,7 @@ View(relocate(country_boundaries, geometry))
 
 The first argument passed to the ```relocate``` function (```country_boundaries```) indicates the object we want to manipulate using the ```relocate``` function, while the second argument (```geometry```) indicates the name of the column in ```country_boundaries``` that we want to move up to the front of the dataset. Once that column relocation has taken place, the ```View``` function brings up the amended dataset as a new tab in the source window. It will look something like this (note the "geometry" column): 
 
-```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='Geometry Column Contains Spatial Information'}
+```{r, echo=FALSE, results='asis', out.width='100%', fig.cap="Geometry Column Contains Spatial Information", fig.alt="Screenshot of spatial dataset in R Studio data viewer with geometry column moved to the front of the dataset; a red rectangle is drawn around the geometry column"}
 knitr::include_graphics('images/geometry.png')
 ```
 
@@ -166,7 +166,7 @@ worldmap<-tm_shape(country_boundaries)+
             tm_polygons()
 ```
 
-Having assigned the map to the ```worldmap``` object, we can bring up the map whenever we want by simply calling the ```worldmap``` object (i.e. printing ```worldmap``` and running it from our script)
+Having assigned the map to the ```worldmap``` object, we can bring up the map whenever we want by simply calling the ```worldmap``` object (i.e. printing ```worldmap``` and running it from our script):
 
 ```{r, fig.asp=0.5, echo=-1, message=FALSE}
 tmap_mode("plot")
@@ -176,13 +176,13 @@ worldmap
 
 Within the R Studio interface, we can see the above map within the bottom-right window after selecting the "Plots" tab:
 
-```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='World Map in "Plots" Tab (Rendered from Spatial Dataset)'}
+```{r, echo=FALSE, results='asis', out.width='100%', fig.cap="World Map in 'Plots' Tab (Rendered from Spatial Dataset)", fig.alt="Screen shot of world map rendered from spatial dataset displayed in R Studio's Plots tab; the map is bordered with a bounding box, and all countries are displayed in grey"}
 knitr::include_graphics('images/worldmap_window.png')
 ```
 
 We can enlarge the map in this window by clicking the "Zoom" link; this will produce an enlarged version of the map in a separate window:
 
-```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='Enlarging Map with "Zoom" Button'}
+```{r, echo=FALSE, results='asis', out.width='100%', fig.cap="Enlarging Map with 'Zoom' Button", fig.alt="Screen shot that shows enlarged world map rendered from spatial dataset in R Studio's zoom window; the zoom button is highlighted in red"}
 knitr::include_graphics('images/zoom2.png')
 ```
 
@@ -256,7 +256,7 @@ View(covid_data_economic)
 
 Within the "Source" window, a new tab that contains the smaller 2-column dataset that's been assigned to ```covid_data_economic``` will appear in the data viewer:
 
-```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='New Dataset Based on Selection from Original Dataset'}
+```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='New Dataset Based on Selection from Original Dataset', fig.alt='Screenshot of contents of covid_data_economic object displayed in R Studio data viewer; the object is a two column dataset with one column containing information on ISO codes and the other containing the Economic_Measures data, i.e. the Covid economic index'}
 knitr::include_graphics('images/selection.png')
 ```
 
@@ -324,7 +324,7 @@ View(covid_data_economic_avg)
 
 We should see something that looks like this: 
 
-```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='Dataset of Country-Level Averages for "Economic_Measures" Index'}
+```{r, echo=FALSE, results='asis', out.width='100%', fig.cap="Dataset of Country-Level Averages for 'Economic_Measures' Index",fig.alt="Screenshot that shows contents of covid_data_economic_avg object in R Studio's data viewer; the object is a two-column dataset with one column containing 3-Digit ISO codes and the other containing the country level average of the Covid economic index; the column containing the country-level average is named mean_economic; the dataset in the data viewer is highlighted by a red rectangle" }
 knitr::include_graphics('images/mean_economic.png')
 ```
 
@@ -375,7 +375,7 @@ View(covid_economic_spatial_dataset)
 
 The dataset that opens up in your Source window should look something like this:
 
-```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='Spatial Dataset With Covid-19 Economic Index Data'}
+```{r, echo=FALSE, results='asis', out.width='100%', fig.cap="Spatial Dataset With Covid-19 Economic Index Data", fig.alt="Screen shot with joined dataset displayed in R Studio data viewer; the first three columns are highlighted with a red rectangle. The first column contains country names, the second column contains the country-level average of the covid-economic index, and the third column contains geometry information that can be used to render countries as polygons using mapping tools"}
 knitr::include_graphics('images/joineddataset.png')
 ```
 
@@ -637,7 +637,7 @@ tmap_save(covid_economic_map, "covid_map.pdf", width=1920, height=1080)
 
 Once we've exported the map to our working directly in the format we'd like, we can open up the file on our computer. The PNG file will look something like this: 
 
-```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='Map Exported as Image File'}
+```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='Map Exported as Image File', fig.alt='Screenshot of final covid_economic_map object as PNG image file that was exported from R Studio'}
 knitr::include_graphics('images/pngscreenshot.png')
 ```
 
@@ -645,7 +645,7 @@ knitr::include_graphics('images/pngscreenshot.png')
 
 It's also possible to export our map in the desired file format by using the "Export" menu bar within the "Plots" tab on the bottom-right of our R Studio interface. Click the "Export" button, and select one of the three options; from there, things should be self-explantory.
 
-```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='Export Map Using R Studio GUI'}
+```{r, echo=FALSE, results='asis', out.width='100%', fig.cap="Export Map Using R Studio GUI", fig.alt="Screenshot demonstrating how to export map as image file using R Studio's GUI; red rectangle around the export button located in the bottom-right of the R Studio interface"}
 knitr::include_graphics('images/exportalt.png')
 ```
 
@@ -669,7 +669,7 @@ covid_economic_webmap
 \
 Within our R Studio interface, the dynamic map appears in the "Viewer" tab on the bottom-left window. To open the interactive map up in a larger window, click "Zoom". Note that when we click on a country, the mean value of the index will pop out; we can also pan around the map and zoom into and out of areas of interest by clicking the large "+" and "-" buttons:
 
-```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='Dynamic Map Within R Studio Interace'}
+```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='Dynamic Map Within R Studio Interace', fig.alt='Screenshot that demonstrates how to view and zoom in/out of dynamic maps within R Studio interface; the viewer button that opens the window in which dynamic maps can be displayed, as well as the zoom button that allows one to zoom in and out are highlighted in red on the bottom-right of the R Studio window' }
 knitr::include_graphics('images/dynamic.png')
 ```
 
@@ -684,7 +684,7 @@ tmap_save(covid_economic_webmap, "covid_economic_webmap.html")
 
 Once it's been saved, we can open up the interactive map in a web browser of choice:
 
-```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='Saved Interactive Map Open in Browser'}
+```{r, echo=FALSE, results='asis', out.width='100%', fig.cap="Saved Interactive Map Open in Browser", fig.alt="Screenshot of webmap exported as html opened up in browser; cursor is over the United States, which opens up a dialog box showing the USA's value for the average covid economic index, which is 0.71. The map uses a light green to dark green color scheme to show variation in the index. The legend is on the top-right"}
 knitr::include_graphics('images/webmap_browser.png')
 ```
 

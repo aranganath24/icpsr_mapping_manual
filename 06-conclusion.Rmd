@@ -6,14 +6,14 @@ Congratulations on finishing the tutorial and the exercises! This section conclu
 
 We started the tutorial with a tabular dataset archived on ICPSR. That dataset provides crossnational information on governments' public health and economic policies in response to the Covid-19 pandemic. When we first opened the dataset after downloading it from the ICPSR landing page, it looked something like this:
 
-```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='The Original ICSPR Dataset in Excel'}
+```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='The Original ICSPR Dataset in Excel', fig.alt='Screenshot of original ICPSR dataset displayed in spreadsheet software with the dataset tab open and showing rows and columns of data'}
 knitr::include_graphics('images/excel_dataset.png')
 ```
 
 There were no maps or visualizations provided with the original ICPSR dataset, but with a bit of work in R Studio, we used the information in the dataset to generate and export a choropleth map that looked something like this: 
 
-```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='Map Based on Variable in ICPSR Dataset'}
-knitr::include_graphics('images/covid_economic_map_export.png')
+```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='Map Based on Variable in ICPSR Dataset', fig.alt="Screenshot of map created and exported in tutorial; map is titled 'National Economic Support Measures in Response to the Covid-19 Pandemic'; the color scheme ranges from light green to represent low values, moving to darker shades of green as values for the variable increase; countries with no data are shaded grey; the legend, with values ranging from 0 to 0.72 is on the bottom-left of the map, and the map credits are printed on the bottom-right of the map below Australia and New Zealand"}
+knitr::include_graphics('images/pngscreenshot.png')
 ```
 
 This illustrates an important point: when exploring ICPSR data, we're not limited to the materials provided by the author of a given dataset. We have the power to take this archived data, and represent it in novel ways that might further our understanding of the topics that we're interested in. In the most general terms, this tutorial was fundamentally about how to go about this process in the context of spatial visualization. More specifically, we learned more about how to put archived ICPSR data stored in tabular datasets into geographic context by representing the information they contain on a map. Every dataset has its idiosyncrasies, but the general workflow we developed here is quite portable; as Practice Exercise 3 demonstrated, the workflow and code we developed in the tutorial can, with a bit of tinkering, be adapted to other ICPSR datasets as well.
