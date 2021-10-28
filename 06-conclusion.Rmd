@@ -12,8 +12,8 @@ knitr::include_graphics('images/excel_dataset.png')
 
 There were no maps or visualizations provided with the original ICPSR dataset, but with a bit of work in R Studio, we used the information in the dataset to generate and export a choropleth map that looked something like this: 
 
-```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='Map Based on Variable in ICPSR Dataset', fig.alt="Screenshot of map created and exported in tutorial; map is titled 'National Economic Support Measures in Response to the Covid-19 Pandemic'; the color scheme ranges from light green to represent low values, moving to darker shades of green as values for the variable increase; countries with no data are shaded grey; the legend, with values ranging from 0 to 0.72 is on the bottom-left of the map, and the map credits are printed on the bottom-right of the map below Australia and New Zealand"}
-knitr::include_graphics('images/pngscreenshot.png')
+```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='Map Based on Variable in ICPSR Dataset', fig.alt="Screenshot of map created and exported in tutorial; the appearance of the map is identical to the one generated in Section 4.5.4 of the tutorial. It is a choropleth world map showing variation in the country-level average of the covid economic intervention index; green color scheme ranging from lighter shades of green to represent lower values of the index and darker shades of green to represent higher values; countries without data are filled in with grey. The map legend is a horizontal bar that displays values using a continuous color gradient with custom-chosen numbers arrayed below the gradient to help inform the viewer about the data distribution. The legend is displayed on the bottom-left of the map below and to the left of South America and is titled 'Mean of Covid Economic Intervention Index (1/1/2020 to 10/1/2020)'; the legend title is in bold and placed over the horizontal legend bar. There is no map frame surrounding the map. The map's title is 'Scope of National Economic Support Measures in Response to the Covid-19 Pandemic', which is split into two lines and centered at the top of the map above the northern-most countries. The map credits are split across four lines, and printed on the bottom-right of the map below Australia and New Zealand."}
+knitr::include_graphics('images/covid_economic_map_export.png')
 ```
 
 This illustrates an important point: when exploring ICPSR data, we're not limited to the materials provided by the author of a given dataset. We have the power to take this archived data, and represent it in novel ways that might further our understanding of the topics that we're interested in. In the most general terms, this tutorial was fundamentally about how to go about this process in the context of spatial visualization. More specifically, we learned more about how to put archived ICPSR data stored in tabular datasets into geographic context by representing the information they contain on a map. Every dataset has its idiosyncrasies, but the general workflow we developed here is quite portable; as Practice Exercise 3 demonstrated, the workflow and code we developed in the tutorial can, with a bit of tinkering, be adapted to other ICPSR datasets as well.
@@ -39,6 +39,8 @@ Campi, Mercedes and Alessandro Nuvolari. 2020. "Worldwide Index of IPRs in Agric
 
 Esri. n.d. "Data Classification Methods." Accessed September 28, 2021. [https://pro.arcgis.com/en/pro-app/2.7/help/mapping/layer-properties/data-classification-methods.htm](https://pro.arcgis.com/en/pro-app/2.7/help/mapping/layer-properties/data-classification-methods.htm) 
 
+Esri ArcGIS Developer. n.d. "Class breaks vs continuous color." Accessed October 28, 2021. [https://developers.arcgis.com/javascript/latest/visualization/best-practices/classed-vs-continuous/](https://developers.arcgis.com/javascript/latest/visualization/best-practices/classed-vs-continuous/). 
+
 Frazier, Melanie. “R Color Cheatsheet.” Accessed September 28, 2021. https://www.nceas.ucsb.edu/sites/default/files/2020-04/colorPaletteCheatsheet.pdf.
 
 Grolemund, Garrett. *Hands-on Programming With R*. [https://rstudio-education.github.io/hopr/](https://rstudio-education.github.io/hopr/. )
@@ -53,7 +55,7 @@ Pebesma, Edzer. 2018. "Simple Features for R: Standardized Support for Spatial V
 
 Porcher, Simon. 2020. "Governments’ Responses to COVID-19 (Response2covid19)". Ann Arbor, MI: Inter-university Consortium for Political and Social Research [distributor]. [https://doi.org/10.3886/E119061V6](https://doi.org/10.3886/E119061V6). 
 
-"R For Social Scientists: Setup." 2018-2021. *Data Carpentry*. https://datacarpentry.org/r-socialsci/setup.html. 
+"R For Social Scientists: Setup." 2018-2021. *Data Carpentry*. https://datacarpentry.org/r-socialsci/setup.html.
 
 South, Andy. 2017. "rnaturalearth: World Map Data from Natural Earth." *R Package Version 0.1.0*   [https://CRAN.R-project.org/package=rnaturalearth](  https://CRAN.R-project.org/package=rnaturalearth)
 

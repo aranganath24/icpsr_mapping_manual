@@ -41,6 +41,8 @@ library(readxl)
 library(dplyr)
 ```
 
+The code below results in a dynamic webmap that represents cross-national variation in the scope of countries' public health interventions (as measured by cross-national variation country-level average of the "Rigidity_Public_Health" variable), during the January to October 2020 time frame. The map uses a light orange to dark red color scheme in which lighter shades of orange represent low values of the index, and progressively darker shades of orange and red represent higher values of the index. Oceans in the dynamic map are represented with the color grey (a lighter shade of grey than what is used for countries without data), and the legend is located on the top-right of the map (above and to the right of Russia). The plus/minus buttons located on the top-left of the map can be used to zoom in and out of the map. 
+
 ```{r, message=FALSE, warning=FALSE, echo=c(-1,-2)}
 tmap_mode("plot")
 setwd("/Users/adityaranganath/Documents/git_repositories/icpsr_mapping_manual/tutorial_data")
@@ -82,7 +84,7 @@ covid_PH_webmap
 
 ### Sample Code for Exercise 3
 
-```{r, message=FALSE, warning=FALSE, echo=c(-1,-2)}
+```{r, message=FALSE, warning=FALSE, echo=c(-1,-2), fig.alt="Choropleth world map showing cross-national variation in IPR index in 2018; light to dark-blue color scheme with lighter shades of blue representing lower values of the index and darker shades of blue representing higher values; countries without data are filled in with grey. The map legend is a vertical bar that displays values using discrete color categories with 6 break points and intervals defined by the Jenks algorithm. The legend is displayed on the bottom-left of the map below and to the left of South America. There is no map frame surrounding the map. The legend is titled 'Agriculture IPR Index, 2018', and this title is placed over the vertical legend bar. The map's main title is 'Strength of Intellectual Property Protection in Agriculture, 2018', and is displayed in one line at the top of the map above the northern-most countries. The map map credits are split across four lines, and printed on the bottom-right of the map below Australia and New Zealand."}
 tmap_mode("plot")
 setwd("/Users/adityaranganath/Documents/git_repositories/icpsr_mapping_manual/tutorial_data")
 
