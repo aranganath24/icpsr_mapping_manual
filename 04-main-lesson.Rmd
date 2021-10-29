@@ -30,13 +30,13 @@ As a result, we'll have to import this dataset into R Studio using a function de
 
 Before using the ```read_excel``` function to bring the data into our R Studio environment, it could be helpful to inspect the data outside of the R environment, and determine whether the dataset has any features that we have to account for when loading it into our R environment. When we open the downloaded spreadsheet, it will look something like this:
 
-```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='ICPSR Dataset in Spreadsheet: Description Tab'}
+```{r, echo=FALSE, results='asis', out.width='100%', fig.cap="ICPSR dataset in spreadsheet with description tab open", fig.alt="Screenshot of dataset's description tab opened in spreadsheet software; several variable definitions and descriptions are visible"}
 knitr::include_graphics('images/excel_open.png')
 ```
 
 Note that immediately after opening the spreadsheet, we will land on its first tab (or "sheet"), which is titled "Description". This part of the spreadsheet effectively functions as a data codebook, which we can look through to understand the dataset's various variables and and assess how they were measured. To open up the actual dataset, we can toggle to the "Dataset" tab by pressing the corresponding button on the bottom-left of the spreadsheet (highlighted in red below): 
 
-```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='ICPSR Dataset in Spreadsheet: Dataset Tab'}
+```{r, echo=FALSE, results='asis', out.width='100%', fig.cap="ICPSR dataset open in spreadsheet software with dataset tab open", fig.alt="Screenshot of  dataset open in spreadsheet software with data displayed; dataset tab is active with with red box drawn around tabs on bottom of spreadsheet to show how to toggle between different sheets in spreadsheet software"}
 knitr::include_graphics('images/excel_tabs.png')
 ```
 
@@ -108,7 +108,7 @@ View(covid_data)
 
 This will open up the dataset in R Studio's data viewer within a separate tab in the "Source" window. Within your R Studio environment, the result of running ```View(covid_data)``` will look something like this (dataset outlined in red):
 
-```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='Viewing ICPSR Dataset in R Studio Data Viewer'}
+```{r, echo=FALSE, results='asis', out.width='100%', fig.cap="Viewing ICPSR Dataset in R Studio Data Viewer", fig.alt="Screenshot of R Studio interface with covid_data object's contents displayed in R Studio Data Viewer; data viewer is outlined with a red rectangle"}
 knitr::include_graphics('images/viewdata.png')
 ```
 
@@ -145,13 +145,13 @@ View(relocate(country_boundaries, geometry))
 
 The first argument passed to the ```relocate``` function (```country_boundaries```) indicates the object we want to manipulate using the ```relocate``` function, while the second argument (```geometry```) indicates the name of the column in ```country_boundaries``` that we want to move up to the front of the dataset. Once that column relocation has taken place, the ```View``` function brings up the amended dataset as a new tab in the source window. It will look something like this (note the "geometry" column): 
 
-```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='Geometry Column Contains Spatial Information'}
+```{r, echo=FALSE, results='asis', out.width='100%', fig.cap="Geometry Column Contains Spatial Information", fig.alt="Screenshot of spatial dataset in R Studio data viewer with geometry column moved to the front of the dataset; a red rectangle is drawn around the geometry column"}
 knitr::include_graphics('images/geometry.png')
 ```
 
 We can use the information in the "geometry" column to draw georeferenced polygons for each row in the spatial dataset, which will yield a world map! To translate the information in the geometry tab into a cartographic representation, we'll use a package called *tmap*. In particular, we'll use the ```tm_shape``` and ```tm_polygons``` functions from *tmap*, which are connected by a plus sign (+). The argument passed to the ```tm_shape``` function is the name of the object associated with the spatial dataset (```country_boundaries```, defined above). In addition, the ```tm_polygons``` function indicates that the spatial data is to be represented using polygons (as opposed to alternatives such as lines or points), and does not require any arguments. When we type in and run the following code from our script, the result is a map that is rendered based on the information in the "geometry" column of ```country_boundaries```:
 
-```{r, fig.asp=0.5, echo=-1, message=FALSE}
+```{r, fig.asp=0.5, echo=-1, message=FALSE, fig.alt="World map with countries colored gray; map is bordered with map frame"}
 tmap_mode("plot")
 # maps geographic features (i.e. countries) of "country_boundaries" using tmap package functions
 tm_shape(country_boundaries)+
@@ -166,9 +166,9 @@ worldmap<-tm_shape(country_boundaries)+
             tm_polygons()
 ```
 
-Having assigned the map to the ```worldmap``` object, we can bring up the map whenever we want by simply calling the ```worldmap``` object (i.e. printing ```worldmap``` and running it from our script)
+Having assigned the map to the ```worldmap``` object, we can bring up the map whenever we want by simply calling the ```worldmap``` object (i.e. printing ```worldmap``` and running it from our script):
 
-```{r, fig.asp=0.5, echo=-1, message=FALSE}
+```{r, fig.asp=0.5, echo=-1, message=FALSE, fig.alt="World map with countries colored gray; map is bordered with map frame"}
 tmap_mode("plot")
 # displays contents of "worldmap" object (i.e. a country-level map generated from the "country_boundaries" spatial dataset)
 worldmap
@@ -176,13 +176,13 @@ worldmap
 
 Within the R Studio interface, we can see the above map within the bottom-right window after selecting the "Plots" tab:
 
-```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='World Map in "Plots" Tab (Rendered from Spatial Dataset)'}
+```{r, echo=FALSE, results='asis', out.width='100%', fig.cap="World Map in 'Plots' Tab (Rendered from Spatial Dataset)", fig.alt="Screen shot of world map rendered from spatial dataset displayed in R Studio's Plots tab; the map is bordered with a bounding box, and all countries are displayed in gray"}
 knitr::include_graphics('images/worldmap_window.png')
 ```
 
 We can enlarge the map in this window by clicking the "Zoom" link; this will produce an enlarged version of the map in a separate window:
 
-```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='Enlarging Map with "Zoom" Button'}
+```{r, echo=FALSE, results='asis', out.width='100%', fig.cap="Enlarging Map with 'Zoom' Button", fig.alt="Screen shot that shows enlarged world map rendered from spatial dataset in R Studio's zoom window; the zoom button is highlighted in red"}
 knitr::include_graphics('images/zoom2.png')
 ```
 
@@ -214,7 +214,7 @@ worldmap<-tm_shape(country_boundaries)+
 
 Now, let's view our updated map:
 
-```{r, fig.asp=0.5, echo=-1, message=FALSE}
+```{r, fig.asp=0.5, echo=-1, message=FALSE, fig.alt="World map without Antarctica; countries are colored gray; map is bordered with map frame"}
 tmap_mode("plot")
 # Display contents of updated "worldmap" object
 worldmap
@@ -256,7 +256,7 @@ View(covid_data_economic)
 
 Within the "Source" window, a new tab that contains the smaller 2-column dataset that's been assigned to ```covid_data_economic``` will appear in the data viewer:
 
-```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='New Dataset Based on Selection from Original Dataset'}
+```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='New Dataset Based on Selection from Original Dataset', fig.alt='Screenshot of contents of covid_data_economic object displayed in R Studio data viewer; the object is a two column dataset with one column containing information on ISO codes and the other containing the Economic_Measures data, i.e. the Covid economic index'}
 knitr::include_graphics('images/selection.png')
 ```
 
@@ -303,14 +303,14 @@ There are of many possibilities, but let's choose to go ahead and map the countr
 ```{r, message=FALSE}
 # Creates new dataset of country-level averages for "Economic_Measures" index, and then assigns this new dataset to a  new object that is named "covid_data_economic_avg". 
 covid_data_economic_avg<-covid_data_economic %>% group_by(iso) %>% 
-                                                summarize(mean_economic=mean(Economic_Measures, na.rm=FALSE))
+                                                summarize(mean_economic=mean(Economic_Measures, na.rm=TRUE))
 ```
 
 Let's unpack the code above, starting with the expression that's to the right of the assignment operator. 
 
 * We start by calling the ```covid_data_economic``` object, which establishes that this is essentially the "base" dataset we wish to modify. 
 * Then (recall that the ``` %>% ``` is used to chain together code by taking the output on the left and passing it as input into the code to its right), we call the ```group_by``` function, and pass ```iso``` as an argument to this function; this stipulates that all observations with the same ISO code are to be considered a group, and that any subsequent calculations will therefore be performed at the country level. This step ensures that when we calculate the mean of the "Economic_Measures" variable, the function will return the mean value of this index for each individual country, rather than the mean value for the dataset as a whole. 
-* After setting the grouping variable and using another pipe (``` %>% ```) to establish that we are passing the newly grouped dataset as an input into the subsequent code, we call the ```summarize``` function. This function is used to create a new dataset that summarizes an existing dataset with relevant summary statistics (such as the mean or standard deviation). In particular, within the ```summarize``` function, we first need to create a name for the column that will contain the country-level averages for the "Economic_Measures" index in the new dataset. We'll call this variable "mean_economic", which corresponds to the very first part of the argument to the ```summarize``` function. We then set this variable equal to an expression that passes the "Economic_Measures" variable to the ```mean``` function. In essence, this expression calculates the mean of the "Economic_Measures" variable for each country (it calculates the country-level mean because we specified the grouping function, ```group_by(iso)```, in the previous line of code), and creates a column in the newly created dataset named "mean_economic" to store this information. The code that reads ```na.rm=FALSE``` simply stipulates that missing data should be ignored in the calculation of the mean value of the "Economic_Measures" index. 
+* After setting the grouping variable and using another pipe (``` %>% ```) to establish that we are passing the newly grouped dataset as an input into the subsequent code, we call the ```summarize``` function. This function is used to create a new dataset that summarizes an existing dataset with relevant summary statistics (such as the mean or standard deviation). In particular, within the ```summarize``` function, we first need to create a name for the column that will contain the country-level averages for the "Economic_Measures" index in the new dataset. We'll call this variable "mean_economic", which corresponds to the very first part of the argument to the ```summarize``` function. We then set this variable equal to an expression that passes the "Economic_Measures" variable to the ```mean``` function. In essence, this expression calculates the mean of the "Economic_Measures" variable for each country (it calculates the country-level mean because we specified the grouping function, ```group_by(iso)```, in the previous line of code), and creates a column in the newly created dataset named "mean_economic" to store this information. The code that reads ```na.rm=TRUE``` simply stipulates that missing data should be ignored in the calculation of the mean value of the "Economic_Measures" index. 
 * Finally, this new dataset, consisting of two columns (one column containing ISO codes, and the other, named "mean_economic" containing the corresponding country-level mean of the "Economic_Measures" variable) is assigned to a new object called ```covid_data_economic_avg```. 
 
 We can translate the above code as follows: "Take the existing ```covid_data_economic``` dataset, and then group this dataset by the ISO country codes; then, generate a new dataset, containing one column with ISO country codes, and another column, named "mean_economic", that contains information on the country-level mean of the 'Economic_Measures' index from the ```covid_data_economic``` dataset. Finally, assign this new dataset to an object called ```covid_data_economic_avg```". 
@@ -324,7 +324,7 @@ View(covid_data_economic_avg)
 
 We should see something that looks like this: 
 
-```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='Dataset of Country-Level Averages for "Economic_Measures" Index'}
+```{r, echo=FALSE, results='asis', out.width='100%', fig.cap="Dataset of Country-Level Averages for 'Economic_Measures' Index",fig.alt="Screenshot that shows contents of covid_data_economic_avg object in R Studio's data viewer; the object is a two-column dataset with one column containing 3-Digit ISO codes and the other containing the country level average of the Covid economic index; the column containing the country-level average is named mean_economic; the dataset in the data viewer is highlighted by a red rectangle" }
 knitr::include_graphics('images/mean_economic.png')
 ```
 
@@ -375,7 +375,7 @@ View(covid_economic_spatial_dataset)
 
 The dataset that opens up in your Source window should look something like this:
 
-```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='Spatial Dataset With Covid-19 Economic Index Data'}
+```{r, echo=FALSE, results='asis', out.width='100%', fig.cap="Spatial Dataset With Covid-19 Economic Index Data", fig.alt="Screen shot with joined dataset displayed in R Studio data viewer; the first three columns are highlighted with a red rectangle. The first column contains country names, the second column contains the country-level average of the covid-economic index, and the third column contains geometry information that can be used to render countries as polygons using mapping tools"}
 knitr::include_graphics('images/joineddataset.png')
 ```
 
@@ -407,7 +407,7 @@ Now, let's consider the arguments that were passed to the ```tm_polygons``` func
 
 To see what the map looks like, simply print ```covid_economic_map``` and run it in the script:
 
-```{r, fig.asp=0.5, message=FALSE, warning=FALSE, echo=-1}
+```{r, fig.asp=0.5, message=FALSE, warning=FALSE, fig.alt="Choropleth world map showing variation in country-level average of covid economic intervention index; green color scheme ranging from lighter shades of green to represent lower values of the index and darker shades of green to represent higher values; countries without data are filled in with gray The map legend is on the top right of the map superimposed over the Asia pacific, with some countries obscured by the legend. The legend is vertically oriented, and presents 8 discrete class breaks in the data. The map is bounded by a map frame that is drawn around it", echo=-1}
 tmap_mode("plot")
 # display contents of "covid_economic_map"
 covid_economic_map
@@ -428,7 +428,7 @@ covid_economic_map_alternative<-tm_shape(covid_economic_spatial_dataset)+
 
 Let's display this map and view its appearance; notice the change in color, the fewer number of classes, and the equal intervals in the legend: 
 
-```{r a, fig.asp=0.5, message=FALSE, warning=FALSE, echo=-1}
+```{r a, fig.asp=0.5, message=FALSE, warning=FALSE, echo=-1, fig.alt="Choropleth world map showing variation in country-level average of covid economic intervention index; yellow to dark red color scheme ranging from lighter shades of yellow to represent lower values of the index and darker shades of red to represent higher values; countries without data are filled in with gray The map legend is on the top right of the map superimposed over the Asia pacific, with some countries obscured by the legend. The legend is vertically oriented, and presents 5 discrete class breaks in the data. The map is bounded by a map frame that is drawn around it"}
 tmap_mode("plot")
 # Displays contents of "covid_economic_map_alternative"
 covid_economic_map_alternative
@@ -436,7 +436,7 @@ covid_economic_map_alternative
 
 Also, that depending on our preferences, we can easily remove the map frame, by using the "Frame" argument within the ```tm_layout``` function: 
 
-```{r b, fig.asp=0.5, message=FALSE, warning=FALSE, echo=-1}
+```{r b, fig.asp=0.5, message=FALSE, warning=FALSE, echo=-1, fig.alt="Choropleth world map showing variation in country-level average of covid economic intervention index; yellow to dark red color scheme ranging from lighter shades of yellow to represent lower values of the index and darker shades of red to represent higher values; countries without data are filled in with gray The map legend is on the top right of the map superimposed over the Asia pacific, with some countries obscured by the legend. The legend is vertically oriented, and presents 5 discrete class breaks in the data. The map is not bounded by a map frame that is drawn around it"}
 tmap_mode("plot")
 # Removes frame from "covid_economic_map_alternative" map
 covid_economic_map_alternative<-tm_shape(covid_economic_spatial_dataset)+
@@ -451,7 +451,7 @@ covid_economic_map_alternative
 
 The biggest issue with the rough drafts of our map from the previous subsection is the position of the legend. Let's go back to the first map we made (```covid_economic_map```), and simply switch its legend position, by specifying ```position=c("left","bottom")``` withing the ```tm_legend``` function: 
 
-```{r c, fig.asp=0.5, message=FALSE, warning=FALSE, echo=-1}
+```{r c, fig.asp=0.5, message=FALSE, warning=FALSE, echo=-1, fig.alt="Choropleth world map showing variation in country-level average of covid economic intervention index; green color scheme ranging from lighter shades of green to represent lower values of the index and darker shades of green to represent higher values; countries without data are filled in with gray The map legend is on the bottom-left of the map, positioned to the left of South America. The legend is vertically oriented, and displays 8 discrete intervals for the data. There is no map frame drawn around the map."}
 tmap_mode("plot")
 # Shifts legend position using the "tm_legend" function, and assigns amended map to "covid_economic_map"
 covid_economic_map<-tm_shape(covid_economic_spatial_dataset)+
@@ -463,9 +463,9 @@ covid_economic_map<-tm_shape(covid_economic_spatial_dataset)+
 covid_economic_map
 ```
 
-Currently, our legend is discrete, but we may want to try using a continuous legend to better match the continuous nature of the index. We can do this by setting ```style="cont``` within the ```tm_polygons``` function:
+Currently, our legend is discrete, but we may want to try using a continuous legend to better match the continuous nature of the index (for more on discrete breaks vs continuous gradients, see [here](https://developers.arcgis.com/javascript/latest/visualization/best-practices/classed-vs-continuous/). We can do this by setting ```style="cont``` within the ```tm_polygons``` function:
 
-```{r d, fig.asp=0.5, message=FALSE, warning=FALSE, echo=-1}
+```{r d, fig.asp=0.5, message=FALSE, warning=FALSE, echo=-1, fig.alt="Choropleth world map showing variation in country-level average of covid economic intervention index; green color gradient ranging from lighter shades of green (at the top of the legend bar) to represent lower values of the index and darker shades of green (at the bottom of the legend bar) to represent higher values. Countries without data are filled in with gray The map legend is a vertical bar that displays values using a continuous gradient, with the default-chosen numbers 0, 0.2, 0.4., and 0.6 arrayed next to the gradient to help inform the viewer about the data distribution. The legend is displayed on the bottom-left of the map next to South America, with the legend title positioned over the vertical color gradient. There is no map frame surrounding the map"}
 tmap_mode("plot")
 # Changes "style" argument parameter within "tm_polygons" function to "cont" to make continuous legend and assigns amended map to "covid_economic_map" (thereby overwriting the previous contents of "covid_economic_map)
 covid_economic_map<-tm_shape(covid_economic_spatial_dataset)+
@@ -488,7 +488,7 @@ Let's explore some additional ways to customize our legend:
 
 The following code incorporates these changes into the previous map:
 
-```{r e, fig.asp=0.5, message=FALSE, warning=FALSE, echo=-1}
+```{r e, fig.asp=0.5, message=FALSE, warning=FALSE, echo=-1, fig.alt="Choropleth world map showing variation in country-level average of covid economic intervention index; green color scheme ranging from lighter shades of green to represent lower values of the index and darker shades of green to represent higher values; countries without data are filled in with gray The map legend is a horizontal bar that displays values using a continuous color gradient with custom-chosen numbers arrayed below the gradient to help inform the viewer about the data distribution. The legend is displayed on the bottom-left of the map below and to the left of South America and is titled 'Mean of Covid Economic Intervention Index (1/1/2020 to 10/1/2020)'; the legend title is in bold and placed over the horizontal legend bar. There is no map frame surrounding the map."}
 tmap_mode("plot")
 # Adds additional customizations to legend and assigns amended map to "covid_economic_map" (thereby overwriting the object's previous contents)
 covid_economic_map<- tm_shape(covid_economic_spatial_dataset)+
@@ -539,11 +539,11 @@ The best way to get a sense of how all of these various arguments work is to cha
 
 One useful thing to keep in mind is that when adding new elements to our map, it's not necessary to retype all of our code; thus far, that is what we've been doing, but it's also possible to simply append changes to an existing object. Below, to the right of the assignment operator, we first print the name of the object we want to modify (i.e. ```covid_economic_map```) and then type a "+" sign; then, we can modify the object as desired through the use of relevant functions, and then save those changes by assigning the map back to ```covid_economic_map```. In particular, we want to add and customize a map title (which we will do by passing a few additional arguments to the now-familiar ```tm_layout``` function), as well as add and customize a "Map Credits" section, which will include some basic map metadata. 
 
-```{r f, message=FALSE, warning=FALSE, echo=-1}
+```{r f, message=FALSE, warning=FALSE, echo=-1, fig.alt="Choropleth world map showing variation in country-level average of covid economic intervention index; green color scheme ranging from lighter shades of green to represent lower values of the index and darker shades of green to represent higher values; countries without data are filled in with gray The map legend is a horizontal bar that displays values using a continuous color gradient with custom-chosen numbers arrayed below the gradient to help inform the viewer about the data distribution. The legend is displayed on the bottom-left of the map below and to the left of South America and is titled 'Mean of Covid Economic Intervention Index (1/1/2020 to 10/1/2020)'; the legend title is in bold and placed over the horizontal legend bar. There is no map frame surrounding the map. The map's title is 'Scope of National Economic Support Measures in Response to the Covid-19 Pandemic', which is split into two lines and centered at the top of the map above the northern-most countries. The map credits are split across four lines, and printed on the bottom-right of the map below Australia and New Zealand."}
 tmap_mode("plot")
 # Adds map credits and title to existing "covid_economic_map" object, and then assigns this amended map back to "covid_economic_map" (thereby overwriting the map that was previously assigned to this object)
 covid_economic_map<-covid_economic_map+
-                       tm_layout(main.title="National Economic Support Measures\nin Response to the Covid-19 Pandemic", 
+                       tm_layout(main.title="Scope of National Economic Support Measures\nin Response to the Covid-19 Pandemic", 
                                  main.title.position="center",
                                  main.title.size=1, 
                                  inner.margins=c(0.06,0.10,0.10,0.08), 
@@ -560,7 +560,7 @@ covid_economic_map
 Let's consider the new arguments passed through the ```tm_layout``` and ```tm_credits``` function:
 
 * ```tm_layout```
-  * ```main.title="National Economic Support Measures\nin Response to the Covid-19 Pandemic"``` specifies the title for the map as a whole. As before ```\n``` specifies line breaks. 
+  * ```main.title="Scope of National Economic Support Measures\nin Response to the Covid-19 Pandemic"``` specifies the title for the map as a whole. As before ```\n``` specifies line breaks. 
   * ```main.title.position="center"``` specifies the justification of the title
   * ```main.title.size=1``` specifies the font size of the title
   * ```inner.margins=c(0.06,0.10,0.10,0.08)``` establishes the size of the margins within the map frame. Its most noticeable impact in this context is to regulate the whitespace between the title and the map features. 
@@ -576,7 +576,7 @@ It's worth emphasizing that when working on your these maps, a lot of trial-and-
 
 For convenience, here's all of the code that we used to construct the map we arrived at in the previous section, along with comments summarizing what each line is doing:
 
-```{r g, message=FALSE, warning=FALSE, echo=-1}
+```{r g, message=FALSE, warning=FALSE, echo=-1, fig.alt="Choropleth world map showing variation in country-level average of covid economic intervention index; green color scheme ranging from lighter shades of green to represent lower values of the index and darker shades of green to represent higher values; countries without data are filled in with gray The map legend is a horizontal bar that displays values using a continuous color gradient with custom-chosen numbers arrayed below the gradient to help inform the viewer about the data distribution. The legend is displayed on the bottom-left of the map below and to the left of South America and is titled 'Mean of Covid Economic Intervention Index (1/1/2020 to 10/1/2020)'; the legend title is in bold and placed over the horizontal legend bar. There is no map frame surrounding the map. The map's title is 'Scope of National Economic Support Measures in Response to the Covid-19 Pandemic', which is split into two lines and centered at the top of the map above the northern-most countries. The map credits are split across four lines, and printed on the bottom-right of the map below Australia and New Zealand."}
 tmap_mode("plot")
 covid_economic_map<-                      # assigns map to object named "covid_econonmic_map"
 tm_shape(covid_economic_spatial_dataset)+ # Specifies Spatial Dataset
@@ -594,7 +594,7 @@ tm_shape(covid_economic_spatial_dataset)+ # Specifies Spatial Dataset
             frame=FALSE,                # Makes map frame invisible                         
             legend.text.size = 0.5,     # Sets size of legend tex
             legend.width=0.35,          # Sets legend width
-            main.title="National Economic Support Measures\nin Response to the Covid-19 Pandemic", # Sets map title
+            main.title="Scope of National Economic Support Measures\nin Response to the Covid-19 Pandemic", # Sets map title
             main.title.position="center", # Specifies title justification
             main.title.size=1,          # Specifies title font size
             inner.margins=c(0.06,0.10,0.10,0.08), # Sets map margins with respect to frame
@@ -637,15 +637,15 @@ tmap_save(covid_economic_map, "covid_map.pdf", width=1920, height=1080)
 
 Once we've exported the map to our working directly in the format we'd like, we can open up the file on our computer. The PNG file will look something like this: 
 
-```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='Map Exported as Image File'}
-knitr::include_graphics('images/pngscreenshot.png')
+```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='Map Exported as Image File', fig.alt='Screenshot of final covid_economic_map object as PNG image file that was exported from R Studio; appearance of the map is the same as the map created and described in Section 4.5.4'}
+knitr::include_graphics('images/covid_economic_map_export.png')
 ```
 
 ### Export Map Through GUI
 
 It's also possible to export our map in the desired file format by using the "Export" menu bar within the "Plots" tab on the bottom-right of our R Studio interface. Click the "Export" button, and select one of the three options; from there, things should be self-explantory.
 
-```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='Export Map Using R Studio GUI'}
+```{r, echo=FALSE, results='asis', out.width='100%', fig.cap="Export Map Using R Studio GUI", fig.alt="Screenshot demonstrating how to export map as image file using R Studio's GUI; red rectangle around the export button located in the bottom-right of the R Studio interface"}
 knitr::include_graphics('images/exportalt.png')
 ```
 
@@ -653,7 +653,7 @@ knitr::include_graphics('images/exportalt.png')
 
 So far, we've been making static print maps, which are a powerful tool of visualization; however, it's also possible to make "dynamic" (or interactive) maps where you can pan across the map and zoom into areas of interest. Dynamic maps can therefore be a very useful tool for exploratory data analysis. In addition, *tmap* produces these dynamic maps as html output, which means we can embed these maps within web pages, which can be useful if a project involves a web-hosting component. 
 
-To build such a dynamic map, simply  build a map in tmap (just as we would build a static map) and assign it to an object. Then, use the ```tmap_mode``` function to set *tmap* to ```view``` mode. At this point, if we  display  the map object by printing its name, *tmap* will generate and display a dynamic map.
+To build such a dynamic map, simply  build a map in tmap (just as we would build a static map) and assign it to an object. Then, use the ```tmap_mode``` function to set *tmap* to ```view``` mode. At this point, if we  display  the map object by printing its name, *tmap* will generate and display a dynamic map. As with the static maps created above, the dynamic map created by the code below uses a light green to dark green color scheme to show variation in the index, with lighter shades of green representing lower values of the mean economic policy intervention index, and darker shades of green representing higher values of the index. Oceans in the dynamic map are shown in gray (a lighter shade of gray than what is used for countries without data), and the vertically-oriented legend with discrete class breaks is located on the top-right of the map (above and to the right of Russia). The plus/minus buttons on the top-left of the map can be used to zoom in and out of the map.  
 
 ```{r, message=FALSE, warning=FALSE}
 
@@ -669,7 +669,7 @@ covid_economic_webmap
 \
 Within our R Studio interface, the dynamic map appears in the "Viewer" tab on the bottom-left window. To open the interactive map up in a larger window, click "Zoom". Note that when we click on a country, the mean value of the index will pop out; we can also pan around the map and zoom into and out of areas of interest by clicking the large "+" and "-" buttons:
 
-```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='Dynamic Map Within R Studio Interace'}
+```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='Dynamic Map Within R Studio Interace', fig.alt='Screenshot that demonstrates how to view and zoom in/out of dynamic maps within R Studio interface; the viewer button that opens the window in which dynamic maps can be displayed, as well as the zoom button that allows one to zoom in and out are highlighted in red on the bottom-right of the R Studio window' }
 knitr::include_graphics('images/dynamic.png')
 ```
 
@@ -684,7 +684,7 @@ tmap_save(covid_economic_webmap, "covid_economic_webmap.html")
 
 Once it's been saved, we can open up the interactive map in a web browser of choice:
 
-```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='Saved Interactive Map Open in Browser'}
+```{r, echo=FALSE, results='asis', out.width='100%', fig.cap="Saved Interactive Map Open in Browser", fig.alt="Screenshot of webmap exported as html opened up in browser; cursor is over the United States, which opens up a dialog box showing the USA's value for the average covid economic index, which is 0.71. The map uses a light green to dark green color scheme to show variation in the index, with lighter shades of green representing lower values of the index, and darker shades of green representing higher values of the index. The legend is vertically oriented and positioned on the top-right of the map, with discrete class breaks."}
 knitr::include_graphics('images/webmap_browser.png')
 ```
 
@@ -705,7 +705,8 @@ Note that the summary scripts below presuppose that we are in the correct workin
 
 ### Print Map Summary Script
 
-```{r, message=FALSE, warning=FALSE, echo=c(-1,-2)}
+```{r, message=FALSE, warning=FALSE, echo=c(-1,-2,-3), fig.alt="Reproduces map created in lesson and generated through summary script. Choropleth world map showing variation in country-level average of covid economic intervention index; green color scheme ranging from lighter shades of green to represent lower values of the index and darker shades of green to represent higher values; countries without data are filled in with gray The map legend is a horizontal bar that displays values using a continuous color gradient with custom-chosen numbers arrayed below the gradient to help inform the viewer about the data distribution. The legend is displayed on the bottom-left of the map below and to the left of South America and is titled 'Mean of Covid Economic Intervention Index (1/1/2020 to 10/1/2020)'; the legend title is in bold and placed over the horizontal legend bar. There is no map frame surrounding the map. The map's title is 'Scope of National Economic Support Measures in Response to the Covid-19 Pandemic', which is split into two lines and centered at the top of the map above the northern-most countries. The map map credits are split across four lines, and printed on the bottom-right of the map below Australia and New Zealand. "}
+
 tmap_mode("plot")
 setwd("/Users/adityaranganath/Documents/git_repositories/icpsr_mapping_manual/tutorial_data")
 # Imports "Dataset" sheet from ICPSR Excel file into R Studio, and assigns the dataset to an object called "covid_data"
@@ -726,7 +727,7 @@ covid_data_economic$Economic_Measures<-as.numeric(covid_data_economic$Economic_M
 
 # Calculates Country-Level Averages for "Economic_Measures" Index, and then assigns this dataset of country-level averages to a new object called "covid_data_economic_avg". 
 covid_data_economic_avg<-covid_data_economic %>% group_by(iso) %>% 
-                                                summarize(mean_economic=mean(Economic_Measures, na.rm=FALSE))
+                                                summarize(mean_economic=mean(Economic_Measures, na.rm=TRUE))
 
 # Joins dataset containing information on country-level means for "Economic_Measures" index (in "covid_data_economic" object) to spatial dataset of world boundaries (in "country_boundaries" object), based on common 3-Digit ISO Codes and assigns the dataset that results from this join to "covid_economic_spatial_dataset"
 covid_economic_spatial_dataset<-full_join(country_boundaries, covid_data_economic_avg, by=c("iso_a3"="iso"))
@@ -748,7 +749,7 @@ tm_shape(covid_economic_spatial_dataset)+ # Specifies Spatial Dataset containing
             frame=FALSE,                # Makes map frame invisible                         
             legend.text.size = 0.5,     # Sets size of legend tex
             legend.width=0.35,          # Sets legend width
-            main.title="National Economic Support Measures\nin Response to the Covid-19 Pandemic", # Sets map title
+            main.title="Scope of National Economic Support Measures\nin Response to the Covid-19 Pandemic", # Sets map title
             main.title.position="center", # Specifies title justification
             main.title.size=1,          # Specifies title font size
             inner.margins=c(0.06,0.10,0.10,0.08), # Sets map margins with respect to frame
@@ -763,6 +764,8 @@ covid_economic_map
 ```
 
 ### Dynamic Map Summary Script
+
+The script below reproduces the dynamic web map generated in Section 4.7. The map created by the script uses a light green to dark green color scheme to show variation in the index, with lighter shades of green representing lower values of the mean economic policy intervention index, and darker shades of green representing higher values of the index. Oceans in the dynamic map are shown in gray (a lighter shade of gray than what is used for countries without data), and the vertically-oriented legend with discrete class breaks is located on the top-right of the map (above and to the right of Russia). The plus/minus buttons on the top-left of the map can be used to zoom in and out of the map.  
 
 ```{r, message=FALSE, warning=FALSE, echo=c(-1,-2)}
 tmap_mode("plot")
@@ -785,7 +788,7 @@ covid_data_economic$Economic_Measures<-as.numeric(covid_data_economic$Economic_M
 
 # Calculates Country-Level Averages for "Economic_Measures" Index, and then assigns this dataset of country-level averages to a new object called "covid_data_economic_avg". 
 covid_data_economic_avg<-covid_data_economic %>% group_by(iso) %>% 
-                                                summarize(mean_economic=mean(Economic_Measures, na.rm=FALSE))
+                                                summarize(mean_economic=mean(Economic_Measures, na.rm=TRUE))
 
 # Joins dataset containing information on country-level means for "Economic_Measures" index (in "covid_data_economic" object) to spatial dataset of world boundaries (in "country_boundaries" object), based on common 3-Digit ISO Codes and assigns the dataset that results from this join to "covid_economic_spatial_dataset"
 covid_economic_spatial_dataset<-full_join(country_boundaries, covid_data_economic_avg, by=c("iso_a3"="iso")) %>% 
