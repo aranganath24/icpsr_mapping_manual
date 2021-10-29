@@ -303,14 +303,14 @@ There are of many possibilities, but let's choose to go ahead and map the countr
 ```{r, message=FALSE}
 # Creates new dataset of country-level averages for "Economic_Measures" index, and then assigns this new dataset to a  new object that is named "covid_data_economic_avg". 
 covid_data_economic_avg<-covid_data_economic %>% group_by(iso) %>% 
-                                                summarize(mean_economic=mean(Economic_Measures, na.rm=FALSE))
+                                                summarize(mean_economic=mean(Economic_Measures, na.rm=TRUE))
 ```
 
 Let's unpack the code above, starting with the expression that's to the right of the assignment operator. 
 
 * We start by calling the ```covid_data_economic``` object, which establishes that this is essentially the "base" dataset we wish to modify. 
 * Then (recall that the ``` %>% ``` is used to chain together code by taking the output on the left and passing it as input into the code to its right), we call the ```group_by``` function, and pass ```iso``` as an argument to this function; this stipulates that all observations with the same ISO code are to be considered a group, and that any subsequent calculations will therefore be performed at the country level. This step ensures that when we calculate the mean of the "Economic_Measures" variable, the function will return the mean value of this index for each individual country, rather than the mean value for the dataset as a whole. 
-* After setting the grouping variable and using another pipe (``` %>% ```) to establish that we are passing the newly grouped dataset as an input into the subsequent code, we call the ```summarize``` function. This function is used to create a new dataset that summarizes an existing dataset with relevant summary statistics (such as the mean or standard deviation). In particular, within the ```summarize``` function, we first need to create a name for the column that will contain the country-level averages for the "Economic_Measures" index in the new dataset. We'll call this variable "mean_economic", which corresponds to the very first part of the argument to the ```summarize``` function. We then set this variable equal to an expression that passes the "Economic_Measures" variable to the ```mean``` function. In essence, this expression calculates the mean of the "Economic_Measures" variable for each country (it calculates the country-level mean because we specified the grouping function, ```group_by(iso)```, in the previous line of code), and creates a column in the newly created dataset named "mean_economic" to store this information. The code that reads ```na.rm=FALSE``` simply stipulates that missing data should be ignored in the calculation of the mean value of the "Economic_Measures" index. 
+* After setting the grouping variable and using another pipe (``` %>% ```) to establish that we are passing the newly grouped dataset as an input into the subsequent code, we call the ```summarize``` function. This function is used to create a new dataset that summarizes an existing dataset with relevant summary statistics (such as the mean or standard deviation). In particular, within the ```summarize``` function, we first need to create a name for the column that will contain the country-level averages for the "Economic_Measures" index in the new dataset. We'll call this variable "mean_economic", which corresponds to the very first part of the argument to the ```summarize``` function. We then set this variable equal to an expression that passes the "Economic_Measures" variable to the ```mean``` function. In essence, this expression calculates the mean of the "Economic_Measures" variable for each country (it calculates the country-level mean because we specified the grouping function, ```group_by(iso)```, in the previous line of code), and creates a column in the newly created dataset named "mean_economic" to store this information. The code that reads ```na.rm=TRUE``` simply stipulates that missing data should be ignored in the calculation of the mean value of the "Economic_Measures" index. 
 * Finally, this new dataset, consisting of two columns (one column containing ISO codes, and the other, named "mean_economic" containing the corresponding country-level mean of the "Economic_Measures" variable) is assigned to a new object called ```covid_data_economic_avg```. 
 
 We can translate the above code as follows: "Take the existing ```covid_data_economic``` dataset, and then group this dataset by the ISO country codes; then, generate a new dataset, containing one column with ISO country codes, and another column, named "mean_economic", that contains information on the country-level mean of the 'Economic_Measures' index from the ```covid_data_economic``` dataset. Finally, assign this new dataset to an object called ```covid_data_economic_avg```". 
@@ -727,7 +727,7 @@ covid_data_economic$Economic_Measures<-as.numeric(covid_data_economic$Economic_M
 
 # Calculates Country-Level Averages for "Economic_Measures" Index, and then assigns this dataset of country-level averages to a new object called "covid_data_economic_avg". 
 covid_data_economic_avg<-covid_data_economic %>% group_by(iso) %>% 
-                                                summarize(mean_economic=mean(Economic_Measures, na.rm=FALSE))
+                                                summarize(mean_economic=mean(Economic_Measures, na.rm=TRUE))
 
 # Joins dataset containing information on country-level means for "Economic_Measures" index (in "covid_data_economic" object) to spatial dataset of world boundaries (in "country_boundaries" object), based on common 3-Digit ISO Codes and assigns the dataset that results from this join to "covid_economic_spatial_dataset"
 covid_economic_spatial_dataset<-full_join(country_boundaries, covid_data_economic_avg, by=c("iso_a3"="iso"))
@@ -788,7 +788,7 @@ covid_data_economic$Economic_Measures<-as.numeric(covid_data_economic$Economic_M
 
 # Calculates Country-Level Averages for "Economic_Measures" Index, and then assigns this dataset of country-level averages to a new object called "covid_data_economic_avg". 
 covid_data_economic_avg<-covid_data_economic %>% group_by(iso) %>% 
-                                                summarize(mean_economic=mean(Economic_Measures, na.rm=FALSE))
+                                                summarize(mean_economic=mean(Economic_Measures, na.rm=TRUE))
 
 # Joins dataset containing information on country-level means for "Economic_Measures" index (in "covid_data_economic" object) to spatial dataset of world boundaries (in "country_boundaries" object), based on common 3-Digit ISO Codes and assigns the dataset that results from this join to "covid_economic_spatial_dataset"
 covid_economic_spatial_dataset<-full_join(country_boundaries, covid_data_economic_avg, by=c("iso_a3"="iso")) %>% 

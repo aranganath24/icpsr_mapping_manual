@@ -65,7 +65,7 @@ covid_data_public_health$Rigidity_Public_Health<-as.numeric(covid_data_public_he
 
 # Calculates country-level averages for "Rigidity_Public_Health" index, and then assigns this dataset of country-level averages to a new object called "covid_data_PH_avg". 
 covid_data_PH_avg<-covid_data_public_health %>% group_by(iso) %>% 
-                                            summarize(mean_public_health=mean(Rigidity_Public_Health, na.rm=FALSE))
+                                            summarize(mean_public_health=mean(Rigidity_Public_Health, na.rm=TRUE))
 
 # Join dataset with country-level means for "Rigidity_Public_Health" index ("covid_data_PH_avg" ) to spatial dataset of world boundaries ("country_boundaries"), based on common 3-Digit ISO Codes; then relocate "name" and "mean_economic" fields to the beginning of the dataset so that they're displayed on the map
 worldmap_covid_data_PH<-full_join(country_boundaries, covid_data_PH_avg, by=c("iso_a3"="iso")) %>% 
