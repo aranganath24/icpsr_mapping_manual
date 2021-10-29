@@ -151,7 +151,7 @@ If you're unfamiliar with the concept of file paths, the easiest way to set your
 
 The graphic below demonstrates the process of setting one's working directory through R Studio's menus: 
 
-```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='Setting Working Directory Via Menus', fig.alt='R Studio window open, with the Session menu selected and red boxes drawn around the Set Working Directory and Choose Directory buttons within the Session menu'    }
+```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='Setting Working Directory Via Menus', fig.alt='Screenshot of R Studio window open, with the Session menu selected and red boxes drawn around the Set Working Directory and Choose Directory buttons within the Session menu'    }
 knitr::include_graphics('images/setting_wd_revised.png')
 ```
 
