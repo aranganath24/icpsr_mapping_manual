@@ -73,7 +73,10 @@ worldmap_covid_data_PH<-full_join(country_boundaries, covid_data_PH_avg, by=c("i
 
 # Make map and assign to new object called "covid_PH_webmap"
 covid_PH_webmap<-tm_shape(worldmap_covid_data_PH)+
-                  tm_polygons(col="mean_public_health", n=5, style="jenks", palette="Oranges")
+                  tm_polygons(col="mean_public_health", 
+                              n=5, 
+                              style="jenks", 
+                              palette="Oranges")
 
 # Set tmap mode to "view"
 tmap_mode("view")

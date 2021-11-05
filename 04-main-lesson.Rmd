@@ -393,7 +393,10 @@ Recall that as with with virtually anything else in R, we can assign maps create
 tmap_mode("plot")
 # Creates map based on the data contained within the "mean_economic" field of "covid_economic"spatial_dataset", and assigns this map to a new object called "covid_economic_map"
 covid_economic_map<-tm_shape(covid_economic_spatial_dataset)+
-                      tm_polygons(col="mean_economic", n=8, style="jenks", palette="BuGn")
+                      tm_polygons(col="mean_economic", 
+                                  n=8, 
+                                  style="jenks", 
+                                  palette="BuGn")
 ```
 
 Above, in the expression that is to the right of the assignment operator, we first use *tmap's* ```tm_shape``` function to specify the spatial dataset whose features we'd like to display. Within *tmap*, chaining together functions requires a ```+``` sign, so we add a ```+``` before moving to another function on the next line. This is the ```tm_polygons``` function, which we use because our spatial dataset of country boundaries represents those boundaries as polygons. Previously, we did not specify arguments to the ```tm_polygons``` function, but this function can take a variety of arguments that can help us to customize our map's appearance; we'll introduce a few more arguments below, but recall that if we want to see the full range of possible arguments, they are presented in the function's documentation (```?tm_polygons```). 
@@ -423,7 +426,10 @@ Before we work on the legend, let's see how to change certain features of the ma
 tmap_mode("plot")
 # Modifies the appearance of "covid_economic_map" and assigns this modified map to a new object named "covid_economic_map_alternative"
 covid_economic_map_alternative<-tm_shape(covid_economic_spatial_dataset)+
-                                  tm_polygons(col="mean_economic", n=5, style="equal", palette="YlOrRd")
+                                  tm_polygons(col="mean_economic", 
+                                              n=5, 
+                                              style="equal",
+                                              palette="YlOrRd")
 ```
 
 Let's display this map and view its appearance; notice the change in color, the fewer number of classes, and the equal intervals in the legend: 
@@ -440,7 +446,10 @@ Also, that depending on our preferences, we can easily remove the map frame, by 
 tmap_mode("plot")
 # Removes frame from "covid_economic_map_alternative" map
 covid_economic_map_alternative<-tm_shape(covid_economic_spatial_dataset)+
-                                 tm_polygons(col="mean_economic", n=5, style="equal", palette="YlOrRd")+
+                                 tm_polygons(col="mean_economic", 
+                                             n=5, 
+                                             style="equal", 
+                                             palette="YlOrRd")+
                                  tm_layout(frame=FALSE)
 
 # Displays amended contents of "covid_economic_map_alternative" object (i.e. map without a frame)
@@ -455,7 +464,10 @@ The biggest issue with the rough drafts of our map from the previous subsection 
 tmap_mode("plot")
 # Shifts legend position using the "tm_legend" function, and assigns amended map to "covid_economic_map"
 covid_economic_map<-tm_shape(covid_economic_spatial_dataset)+
-                      tm_polygons(col="mean_economic", n=8, style="jenks", palette="BuGn")+
+                      tm_polygons(col="mean_economic", 
+                                  n=8, 
+                                  style="jenks", 
+                                  palette="BuGn")+
                       tm_layout(frame=FALSE)+
                       tm_legend(position=c("left", "bottom"))
 
@@ -469,7 +481,9 @@ Currently, our legend is discrete, but we may want to try using a continuous leg
 tmap_mode("plot")
 # Changes "style" argument parameter within "tm_polygons" function to "cont" to make continuous legend and assigns amended map to "covid_economic_map" (thereby overwriting the previous contents of "covid_economic_map)
 covid_economic_map<-tm_shape(covid_economic_spatial_dataset)+
-                      tm_polygons(col="mean_economic", style="cont", palette="BuGn")+
+                      tm_polygons(col="mean_economic", 
+                                  style="cont", 
+                                  palette="BuGn")+
                       tm_layout(frame=FALSE)+
                       tm_legend(position=c("left", "bottom"))
 
@@ -659,7 +673,10 @@ To build such a dynamic map, simply  build a map in tmap (just as we would build
 
 # Make map and assign it to an object named "covid_economic_webmap" (Same procedure as for static map)
 covid_economic_webmap<-tm_shape(covid_economic_spatial_dataset)+
-                        tm_polygons(col="mean_economic", n=5, style="jenks", palette="BuGn")
+                        tm_polygons(col="mean_economic", 
+                                    n=5, 
+                                    style="jenks", 
+                                    palette="BuGn")
 # Set tmap mode to "view
 tmap_mode("view")
 
@@ -796,7 +813,10 @@ covid_economic_spatial_dataset<-full_join(country_boundaries, covid_data_economi
 
 # Makes map and assigns it to an object called "covid_economic_webmap"
 covid_economic_webmap<-tm_shape(covid_economic_spatial_dataset)+
-                        tm_polygons(col="mean_economic", n=5, style="jenks", palette="BuGn")
+                        tm_polygons(col="mean_economic", 
+                                    n=5, 
+                                    style="jenks", 
+                                    palette="BuGn")
 
 # Sets tmap mode to "view
 tmap_mode("view")
