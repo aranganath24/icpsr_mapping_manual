@@ -24,7 +24,7 @@
 <meta name="author" content="Aditya Ranganath" />
 
 
-<meta name="date" content="2021-11-06" />
+<meta name="date" content="2021-11-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -282,26 +282,26 @@ Figure 6.2: Map Based on Variable in ICPSR Dataset
 <p>Frazier, Melanie. “R Color Cheatsheet.” Accessed September 28, 2021. <a href="https://www.nceas.ucsb.edu/sites/default/files/2020-04/colorPaletteCheatsheet.pdf" class="uri">https://www.nceas.ucsb.edu/sites/default/files/2020-04/colorPaletteCheatsheet.pdf</a>.</p>
 <p>Grolemund, Garrett. <em>Hands-on Programming With R</em>. <a href="https://rstudio-education.github.io/hopr/.">https://rstudio-education.github.io/hopr/</a></p>
 <p>Haley, Danielle F., Stephen A. Matthews, Hannah LF Cooper, Regine Haardorfer, Adaora A. Adimora, Gina M. Wingood, and Michael R. Kramer. 2016. “Confidentiality Considerations for Social Spatial Data on the Social Determinants of Health: Sexual and Reproductive Health Case Study.” <em>Soc Sci Med</em> 166: 49-56. <a href="10.1016/j.socscimed.2016.08.009">10.1016/j.socscimed.2016.08.009</a>.</p>
-<p>Lovelace, Robin, Jakub Nowosad, and Jannes Muenchow. 2021 <em>Geocomputation With R</em>. <a href="https://geocompr.robinlovelace.net/">https://geocompr.robinlovelace.net/</a>.</p>
+<p>Lovelace, Robin, Jakub Nowosad, and Jannes Muenchow. 2021. <em>Geocomputation With R</em>. <a href="https://geocompr.robinlovelace.net/">https://geocompr.robinlovelace.net/</a>.</p>
 <p>Mullen, Lincoln A. and Jordan Bratt. 2018. “USAboundaries: Historical and Contemporary Boundaries of the United States of America.” <em>Journal of Open Source Software</em> 3(23): 314. doi: <a href="10.21105/joss.00314">10.21105/joss.00314</a>.</p>
 <p>Pebesma, Edzer. 2018. “Simple Features for R: Standardized Support for Spatial Vector Data.” <em>The R Journal</em> 10(1): 439-446. <a href="https://doi.org/10.32614/RJ-2018-009">https://doi.org/10.32614/RJ-2018-009</a>.</p>
 <p>Porcher, Simon. 2020. “Governments’ Responses to COVID-19 (Response2covid19)”. Ann Arbor, MI: Inter-university Consortium for Political and Social Research [distributor]. <a href="https://doi.org/10.3886/E119061V6">https://doi.org/10.3886/E119061V6</a>.</p>
 <p>“R For Social Scientists: Setup.” 2018-2021. <em>Data Carpentry</em>. <a href="https://datacarpentry.org/r-socialsci/setup.html" class="uri">https://datacarpentry.org/r-socialsci/setup.html</a>.</p>
 <p>South, Andy. 2017. “rnaturalearth: World Map Data from Natural Earth.” <em>R Package Version 0.1.0</em> <a href="https://CRAN.R-project.org/package=rnaturalearth">https://CRAN.R-project.org/package=rnaturalearth</a></p>
-<p>South, Andy. 2017."rnaturalearthdata: World Vector Map Data from Natural Earth Used in ‘rnaturalearth.’ <em>R Package version 0.1.0.</em> <a href="0.1.0.%20https://CRAN.R-project.org/package=rnaturalearthdata">0.1.0. https://CRAN.R-project.org/package=rnaturalearthdata</a>.</p>
+<p>South, Andy. 2017.”rnaturalearthdata: World Vector Map Data from Natural Earth Used in ‘rnaturalearth.’ <em>R Package version 0.1.0.</em> <a href="0.1.0.%20https://CRAN.R-project.org/package=rnaturalearthdata">0.1.0. https://CRAN.R-project.org/package=rnaturalearthdata</a>.</p>
 <p>Tennekes, Martijn. 2018. “tmap: Thematic Maps in R.” <em>Journal of Statistical Software</em> 84(6): 1-39. <a href="https://doi.org/10.18637/jss.v084.i06">https://doi.org/10.18637/jss.v084.i06</a>.</p>
 <p>Wickham, Hadley and Jennifer Bryan. 2019. “readxl: Read Excel Files.” <em>R Package version 1.3.1</em> <a href="https://CRAN.R-project.org/package=readxl">https://CRAN.R-project.org/package=readxl</a></p>
 <p>Wickham, Hadley, Romain Francois, and Lionel Henry. 2020. “dplyr: A Grammar of Data Manipulation.” <em>R Package version 1.0.2.</em> <a href="https://CRAN.R-project.org/package=dplyr">https://CRAN.R-project.org/package=dplyr</a>.</p>
 
 </div>
 </div>
-
-
-
-
-
-
-
+<div class="footnotes footnotes-end-of-document">
+<hr />
+<ol>
+<li id="fn1"><p>If we were to instead type <code>filter(iso_a3=="ATA)</code>, the function would <em>only</em> select the Antarctica row from the dataset and discard everything else.<a href="tutorial.html#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>It’s worth noting that when we are joining a tabular dataset to a spatial dataset with a view towards visualizing the information within the tabular data on a map, the spatial dataset should be listed before the tabular dataset. If we reverse this order, we’ll have to take some additional steps to get the joined dataset ready to map, and this is best avoided.<a href="tutorial.html#fnref2" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
             </section>
 
           </div>

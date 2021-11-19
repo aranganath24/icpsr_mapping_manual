@@ -47,7 +47,7 @@ Grolemund, Garrett. *Hands-on Programming With R*. [https://rstudio-education.gi
 
 Haley, Danielle F., Stephen A. Matthews, Hannah LF Cooper, Regine Haardorfer, Adaora A. Adimora, Gina M. Wingood, and Michael R. Kramer. 2016. "Confidentiality Considerations for Social Spatial Data on the Social Determinants of Health: Sexual and Reproductive Health Case Study." *Soc Sci Med* 166: 49-56. [10.1016/j.socscimed.2016.08.009](10.1016/j.socscimed.2016.08.009). 
 
-Lovelace, Robin, Jakub Nowosad, and Jannes Muenchow. 2021 *Geocomputation With R*. [https://geocompr.robinlovelace.net/](https://geocompr.robinlovelace.net/). 
+Lovelace, Robin, Jakub Nowosad, and Jannes Muenchow. 2021. *Geocomputation With R*. [https://geocompr.robinlovelace.net/](https://geocompr.robinlovelace.net/). 
 
 Mullen, Lincoln A. and Jordan Bratt. 2018. "USAboundaries: Historical and Contemporary Boundaries of the United States of America." *Journal of Open Source Software* 3(23): 314. doi: [10.21105/joss.00314](10.21105/joss.00314). 
 
