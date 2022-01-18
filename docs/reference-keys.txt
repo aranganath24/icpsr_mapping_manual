@@ -12,10 +12,8 @@ fig:unnamed-chunk-42
 fig:unnamed-chunk-47
 fig:unnamed-chunk-53
 fig:unnamed-chunk-54
-fig:unnamed-chunk-56
-fig:unnamed-chunk-58
-fig:unnamed-chunk-65
-fig:unnamed-chunk-66
+fig:unnamed-chunk-59
+fig:unnamed-chunk-60
 preface
 introduction
 motivation
@@ -48,10 +46,8 @@ final-map-code
 export-map
 export-map-using-tmap
 export-map-through-gui
-make-a-dynamic-map
 summary
 print-map-summary-script
-dynamic-map-summary-script
 practice-exercises
 practice-exercise-1
 practice-exercise-2

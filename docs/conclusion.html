@@ -24,7 +24,7 @@
 <meta name="author" content="Aditya Ranganath" />
 
 
-<meta name="date" content="2021-11-18" />
+<meta name="date" content="2022-01-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -53,7 +53,7 @@
 
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
-<script src="libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
 <link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
 <script src="libs/leaflet-1.3.1/leaflet.js"></script>
 <link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
@@ -194,11 +194,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.6.1" data-path="tutorial.html"><a href="tutorial.html#export-map-using-tmap"><i class="fa fa-check"></i><b>4.6.1</b> Export Map Using <em>tmap</em></a></li>
 <li class="chapter" data-level="4.6.2" data-path="tutorial.html"><a href="tutorial.html#export-map-through-gui"><i class="fa fa-check"></i><b>4.6.2</b> Export Map Through GUI</a></li>
 </ul></li>
-<li class="chapter" data-level="4.7" data-path="tutorial.html"><a href="tutorial.html#make-a-dynamic-map"><i class="fa fa-check"></i><b>4.7</b> Make a Dynamic Map</a></li>
-<li class="chapter" data-level="4.8" data-path="tutorial.html"><a href="tutorial.html#summary"><i class="fa fa-check"></i><b>4.8</b> Summary</a>
+<li class="chapter" data-level="4.7" data-path="tutorial.html"><a href="tutorial.html#summary"><i class="fa fa-check"></i><b>4.7</b> Summary</a>
 <ul>
-<li class="chapter" data-level="4.8.1" data-path="tutorial.html"><a href="tutorial.html#print-map-summary-script"><i class="fa fa-check"></i><b>4.8.1</b> Print Map Summary Script</a></li>
-<li class="chapter" data-level="4.8.2" data-path="tutorial.html"><a href="tutorial.html#dynamic-map-summary-script"><i class="fa fa-check"></i><b>4.8.2</b> Dynamic Map Summary Script</a></li>
+<li class="chapter" data-level="4.7.1" data-path="tutorial.html"><a href="tutorial.html#print-map-summary-script"><i class="fa fa-check"></i><b>4.7.1</b> Print Map Summary Script</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="practice-exercises.html"><a href="practice-exercises.html"><i class="fa fa-check"></i><b>5</b> Practice Exercises</a>
@@ -245,14 +243,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="wrapping-up" class="section level2" number="6.1">
 <h2><span class="header-section-number">6.1</span> Wrapping Up</h2>
 <p>We started the tutorial with a tabular dataset archived on ICPSR. That dataset provides crossnational information on governments’ public health and economic policies in response to the Covid-19 pandemic. When we first opened the dataset after downloading it from the ICPSR landing page, it looked something like this:</p>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-65"></span>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-59"></span>
 <img src="images/excel_dataset.png" alt="Screenshot of original ICPSR dataset displayed in spreadsheet software with the dataset tab open and showing rows and columns of data" width="100%" />
 <p class="caption">
 Figure 6.1: The Original ICSPR Dataset in Excel
 </p>
 </div>
 <p>There were no maps or visualizations provided with the original ICPSR dataset, but with a bit of work in R Studio, we used the information in the dataset to generate and export a choropleth map that looked something like this:</p>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-66"></span>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-60"></span>
 <img src="images/covid_economic_map_export.png" alt="Screenshot of map created and exported in tutorial; the appearance of the map is identical to the one generated in Section 4.5.4 of the tutorial. It is a choropleth world map showing variation in the country-level average of the covid economic intervention index; green color scheme ranging from lighter shades of green to represent lower values of the index and darker shades of green to represent higher values; countries without data are filled in with gray The map legend is a horizontal bar that displays values using a continuous color gradient with custom-chosen numbers arrayed below the gradient to help inform the viewer about the data distribution. The legend is displayed on the bottom-left of the map below and to the left of South America and is titled 'Mean of Covid Economic Intervention Index (1/1/2020 to 10/1/2020)'; the legend title is in bold and placed over the horizontal legend bar. There is no map frame surrounding the map. The map's title is 'Scope of National Economic Support Measures in Response to the Covid-19 Pandemic', which is split into two lines and centered at the top of the map above the northern-most countries. The map credits are split across four lines, and printed on the bottom-right of the map below Australia and New Zealand." width="100%" />
 <p class="caption">
 Figure 6.2: Map Based on Variable in ICPSR Dataset

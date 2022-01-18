@@ -663,62 +663,9 @@ It's also possible to export our map in the desired file format by using the "Ex
 knitr::include_graphics('images/exportalt.png')
 ```
 
-## Make a Dynamic Map 
-
-So far, we've been making static print maps, which are a powerful tool of visualization; however, it's also possible to make "dynamic" (or interactive) maps where you can pan across the map and zoom into areas of interest. Dynamic maps can therefore be a very useful tool for exploratory data analysis. In addition, *tmap* produces these dynamic maps as html output, which means we can embed these maps within web pages, which can be useful if a project involves a web-hosting component. 
-
-To build such a dynamic map, simply  build a map in tmap (just as we would build a static map) and assign it to an object. Then, use the ```tmap_mode``` function to set *tmap* to ```view``` mode. At this point, if we  display  the map object by printing its name, *tmap* will generate and display a dynamic map. As with the static maps created above, the dynamic map created by the code below uses a light green to dark green color scheme to show variation in the index, with lighter shades of green representing lower values of the mean economic policy intervention index, and darker shades of green representing higher values of the index. Oceans in the dynamic map are shown in gray (a lighter shade of gray than what is used for countries without data), and the vertically-oriented legend with discrete class breaks is located on the top-right of the map (above and to the right of Russia). The plus/minus buttons on the top-left of the map can be used to zoom in and out of the map.  
-
-```{r, message=FALSE, warning=FALSE}
-
-# Make map and assign it to an object named "covid_economic_webmap" (Same procedure as for static map)
-covid_economic_webmap<-tm_shape(covid_economic_spatial_dataset)+
-                        tm_polygons(col="mean_economic", 
-                                    n=5, 
-                                    style="jenks", 
-                                    palette="BuGn")
-# Set tmap mode to "view
-tmap_mode("view")
-
-# display "covid_economic_webmap" in view mode
-covid_economic_webmap
-```
-\
-Within our R Studio interface, the dynamic map appears in the "Viewer" tab on the bottom-left window. To open the interactive map up in a larger window, click "Zoom". Note that when we click on a country, the mean value of the index will pop out; we can also pan around the map and zoom into and out of areas of interest by clicking the large "+" and "-" buttons:
-
-```{r, echo=FALSE, results='asis', out.width='100%', fig.cap='Dynamic Map Within R Studio Interace', fig.alt='Screenshot that demonstrates how to view and zoom in/out of dynamic maps within R Studio interface; the viewer button that opens the window in which dynamic maps can be displayed, as well as the zoom button that allows one to zoom in and out are highlighted in red on the bottom-right of the R Studio window' }
-knitr::include_graphics('images/dynamic.png')
-```
-
-It's possible to customize dynamic maps to some degree, but not to the same extent as static maps. Consult *tmap's* documentation for additional guidance. 
-
-It's possible to export dynamic maps as html files. To do so, we use the same ```tmap_save``` function as before, but instead specify an html extension. The html file will be written to our working directory:
-
-```{r, message=FALSE, eval=FALSE}
-# Writes contents of "covid_economic_webmap" (i.e. the dynamic map) to working directory as html file
-tmap_save(covid_economic_webmap, "covid_economic_webmap.html")
-```
-
-Once it's been saved, we can open up the interactive map in a web browser of choice:
-
-```{r, echo=FALSE, results='asis', out.width='100%', fig.cap="Saved Interactive Map Open in Browser", fig.alt="Screenshot of webmap exported as html opened up in browser; cursor is over the United States, which opens up a dialog box showing the USA's value for the average covid economic index, which is 0.71. The map uses a light green to dark green color scheme to show variation in the index, with lighter shades of green representing lower values of the index, and darker shades of green representing higher values of the index. The legend is vertically oriented and positioned on the top-right of the map, with discrete class breaks."}
-knitr::include_graphics('images/webmap_browser.png')
-```
-
-We can switch back to "plot" mode, at which point *tmap* will go back to making static maps.  
-
-```{r, message=FALSE, warning=FALSE }
-# Switch back to plot mode
-tmap_mode("plot")
-```
-
-We can toggle back and forth between "plot" mode and "view" mode as necessary, depending on whether we want to make a static or dynamic map.
-
 ## Summary 
 
-After working through the tutorial, it can be useful to see the essential steps required to generate our final print (i.e. static) and interactive maps in separate, self-contained scripts that summarize all of the steps we took above. Section 4.8.1. presents a summary version of our print map script, while 4.8.2. presents an analogous script that summarizes the code to make an interactive map (Note that many of the steps involved in making a dynamic map are exactly the same as the steps involved in making a print map). 
-
-Note that the summary scripts below presuppose that we are in the correct working directory (i.e. the working directory which contains the ICPSR data we downloaded as an Excel file; see Section 3.6), and that all the required libraries are loaded (see Section 3.5)
+After working through the tutorial, it can be useful to see the essential steps required to generate our final map a in a self-contained script that summarize all of the steps we took above. Section 4.8.1. presents a summary version of our  map script. Note that the summary script below presupposes that we are in the correct working directory (i.e. the working directory which contains the ICPSR data we downloaded as an Excel file; see Section 3.6), and that all the required libraries are loaded (see Section 3.5)
 
 ### Print Map Summary Script
 
@@ -779,54 +726,6 @@ tm_shape(covid_economic_spatial_dataset)+ # Specifies Spatial Dataset containing
 covid_economic_map
 
 ```
-
-### Dynamic Map Summary Script
-
-The script below reproduces the dynamic web map generated in Section 4.7. The map created by the script uses a light green to dark green color scheme to show variation in the index, with lighter shades of green representing lower values of the mean economic policy intervention index, and darker shades of green representing higher values of the index. Oceans in the dynamic map are shown in gray (a lighter shade of gray than what is used for countries without data), and the vertically-oriented legend with discrete class breaks is located on the top-right of the map (above and to the right of Russia). The plus/minus buttons on the top-left of the map can be used to zoom in and out of the map.  
-
-```{r, message=FALSE, warning=FALSE, echo=c(-1,-2)}
-tmap_mode("plot")
-setwd("/Users/adityaranganath/Documents/git_repositories/icpsr_mapping_manual/tutorial_data")
-# Imports "Dataset" sheet from ICPSR Excel file into R Studio, and assigns the dataset to an object called "covid_data"
-covid_data<-read_excel("Gov_Responses2Covid19_last.xlsx", sheet="Dataset")
-
-# Brings spatial dataset of country boundaries into R environment using the rnaturalearth package and assigns it to object named "country_boundaries"
-country_boundaries<-ne_countries(scale="medium", returnclass="sf")
-
-# Deletes Antarctica from "country_boundaries" object
-country_boundaries<-country_boundaries %>% filter(iso_a3 !="ATA")
-
-# Selects "iso" and "Economic_Measures" variables from ICPSR Dataset, and assigns this new dataset to object named "covid_data_economic" 
-covid_data_economic<-covid_data %>% 
-                      select(iso, Economic_Measures) 
-
-# Changes class of "Economic_Measures" field in "covid_data_economic" object from character to numeric
-covid_data_economic$Economic_Measures<-as.numeric(covid_data_economic$Economic_Measures)
-
-# Calculates Country-Level Averages for "Economic_Measures" Index, and then assigns this dataset of country-level averages to a new object called "covid_data_economic_avg". 
-covid_data_economic_avg<-covid_data_economic %>% group_by(iso) %>% 
-                                                summarize(mean_economic=mean(Economic_Measures, na.rm=TRUE))
-
-# Joins dataset containing information on country-level means for "Economic_Measures" index (in "covid_data_economic" object) to spatial dataset of world boundaries (in "country_boundaries" object), based on common 3-Digit ISO Codes and assigns the dataset that results from this join to "covid_economic_spatial_dataset"
-covid_economic_spatial_dataset<-full_join(country_boundaries, covid_data_economic_avg, by=c("iso_a3"="iso")) %>% 
-                                  relocate(name, mean_economic)
-
-# Makes map and assigns it to an object called "covid_economic_webmap"
-covid_economic_webmap<-tm_shape(covid_economic_spatial_dataset)+
-                        tm_polygons(col="mean_economic", 
-                                    n=5, 
-                                    style="jenks", 
-                                    palette="BuGn")
-
-# Sets tmap mode to "view
-tmap_mode("view")
-
-# displays covid_economic_webmap in view mode
-covid_economic_webmap
-
-```
-
-
 
 
 
