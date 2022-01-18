@@ -14,7 +14,7 @@ What spatial patterns do you notice in this map? Are there any patterns of clust
 
 ## Practice Exercise 2
 
-Use the same dataset we used in Section 4, but this time please make an interactive map of the country-level average of the "Rigidity_Public_Health" variable. 
+Use the same dataset we used in Section 4, but this time please make a map of the country-level average of the "Rigidity_Public_Health" variable. 
 
 What spatial patterns do you notice in this map? Are there any patterns of clustering or dispersion that you find interesting? Do you notice anything surprising or unexpected? And, what future research questions might this map suggest? 
 
@@ -72,17 +72,27 @@ worldmap_covid_data_PH<-full_join(country_boundaries, covid_data_PH_avg, by=c("i
                                   relocate(name, mean_public_health)
 
 # Make map and assign to new object called "covid_PH_webmap"
-covid_PH_webmap<-tm_shape(worldmap_covid_data_PH)+
+covid_public_health<-tm_shape(worldmap_covid_data_PH)+
                   tm_polygons(col="mean_public_health", 
                               n=5, 
                               style="jenks", 
-                              palette="Oranges")
-
-# Set tmap mode to "view"
-tmap_mode("view")
+                              palette="Oranges",
+                              textNA="No Data",
+                              title="Mean of Covid \nPublic Health Intervention Index\n(1/1/2020 to\n10/1/2020)")+
+                  tm_layout(frame=FALSE,
+                            legend.outside=TRUE,        # Puts legend outside map frame
+                            legend.outside.position=c("bottom"),
+                            main.title="Stringency of Public Health Interventions to Combat Covid-19",
+                            main.title.size=1,
+                            main.title.position="center",
+                            inner.margins=c(0.06,0.10,0.10,0.08),
+                            attr.outside=TRUE)+
+                tm_credits("Map Author: YOUR_NAME\nDataset Author: Simon Porcher\nCRS: WGS1984\nSource: ICPSR", # Sets text for map credits
+             position=c(0.78,0), # Specifies location of map credits
+             size=0.38)          # Specifies font size of credits text
 
 # display map object in view mode
-covid_PH_webmap
+covid_public_health
 ```
 
 ### Sample Code for Exercise 3
