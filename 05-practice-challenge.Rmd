@@ -71,7 +71,7 @@ covid_data_PH_avg<-covid_data_public_health %>% group_by(iso) %>%
 worldmap_covid_data_PH<-full_join(country_boundaries, covid_data_PH_avg, by=c("iso_a3"="iso")) %>% 
                                   relocate(name, mean_public_health)
 
-# Make map and assign to new object called "covid_PH_webmap"
+# Make map and assign to new object called "covid_public_health"
 covid_public_health<-tm_shape(worldmap_covid_data_PH)+
                   tm_polygons(col="mean_public_health", 
                               n=5, 
@@ -91,7 +91,7 @@ covid_public_health<-tm_shape(worldmap_covid_data_PH)+
              position=c(0.78,0), # Specifies location of map credits
              size=0.38)          # Specifies font size of credits text
 
-# display map object in view mode
+# print map object
 covid_public_health
 ```
 
