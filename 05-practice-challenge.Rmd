@@ -41,7 +41,7 @@ library(readxl)
 library(dplyr)
 ```
 
-The code below results in a dynamic webmap that represents cross-national variation in the scope of countries' public health interventions (as measured by cross-national variation country-level average of the "Rigidity_Public_Health" variable), during the January to October 2020 time frame. The map uses a light orange to dark red color scheme in which lighter shades of orange represent low values of the index, and progressively darker shades of orange and red represent higher values of the index. Oceans in the dynamic map are represented with the color gray (a lighter shade of gray than what is used for countries without data), and the legend is located on the top-right of the map (above and to the right of Russia). The plus/minus buttons located on the top-left of the map can be used to zoom in and out of the map. 
+The code below results in a map that represents cross-national variation in the scope of countries' public health interventions (as measured by cross-national variation country-level average of the "Rigidity_Public_Health" variable), during the January to October 2020 time frame. The map uses a light orange to dark red color scheme in which lighter shades of orange represent low values of the index, and progressively darker shades of orange and red represent higher values of the index. 
 
 ```{r, message=FALSE, warning=FALSE, echo=c(-1,-2)}
 tmap_mode("plot")
